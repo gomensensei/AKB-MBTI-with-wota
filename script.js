@@ -2,7 +2,6 @@
    2026 AKB48 粉絲深度性格鑑定 (無後端・多語言終極版)
    ========================================= */
 
-// 1. 全局變數
 let membersDB = [];
 let i18nData = {};
 let currentLang = "zh-HK";
@@ -13,20 +12,17 @@ const questionsPerPage = 10;
 let userPerc = {};
 let userMbtiStr = "";
 let myRadarChart = null; 
-let matchResultsGlobal = []; // 儲存計算後的結果以便切換語言時重繪
+let matchResultsGlobal = []; 
 
-// 2. 初始化與載入資料庫
 document.addEventListener('DOMContentLoaded', async () => {
-    // 同步 Fetch 兩個 JSON 檔案
     try {
         const [memRes, langRes] = await Promise.all([
-            fetch('members.json'),
-            fetch('langs.json')
+            fetch('./members.json'),
+            fetch('./langs.json')
         ]);
         membersDB = await memRes.json();
         i18nData = await langRes.json();
         
-        // 載入 localStorage 進度
         const saved = localStorage.getItem('akb_answers');
         if (saved) {
             userAnswers = JSON.parse(saved);
@@ -36,30 +32,34 @@ document.addEventListener('DOMContentLoaded', async () => {
             else currentPage = Math.floor(ansCount / 10);
         }
 
-        // 綁定語言切換器
-        document.getElementById('lang-switcher').addEventListener('change', (e) => {
-            currentLang = e.target.value;
-            applyLanguage(currentLang);
-        });
+        // 防呆寫法：確保有 lang-switcher 先綁定
+        const langBtn = document.getElementById('lang-switcher');
+        if(langBtn) {
+            langBtn.addEventListener('change', (e) => {
+                currentLang = e.target.value;
+                applyLanguage(currentLang);
+            });
+        }
 
-        // 首次套用語言 (預設 zh-HK)
         applyLanguage(currentLang);
 
     } catch (e) {
-        console.error("載入 JSON 失敗！請確保你使用 Live Server (Localhost) 或已上傳至 GitHub Pages 運行。", e);
-        alert("資料庫載入失敗，請在 Server 環境下開啟。");
+        console.error("載入 JSON 失敗:", e);
     }
 
-    // 綁定按鈕事件
-    document.getElementById('start-btn').addEventListener('click', () => {
-        document.getElementById('page-landing').classList.add('hidden');
-        document.getElementById('page-quiz').classList.remove('hidden');
-        renderQuiz();
-        setTimeout(updateUI, 50); 
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
+    // 防呆寫法：確保有 start-btn 先綁定
+    const startBtn = document.getElementById('start-btn');
+    if(startBtn) {
+        startBtn.addEventListener('click', () => {
+            document.getElementById('page-landing').classList.add('hidden');
+            document.getElementById('page-quiz').classList.remove('hidden');
+            renderQuiz();
+            setTimeout(updateUI, 50); 
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        });
+    }
 
-    document.getElementById('prev-btn').addEventListener('click', () => {
+    document.getElementById('prev-btn')?.addEventListener('click', () => {
         if (currentPage > 0) {
             currentPage--;
             updateUI();
@@ -67,7 +67,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         }
     });
 
-    document.getElementById('next-btn').addEventListener('click', () => {
+    document.getElementById('next-btn')?.addEventListener('click', () => {
         if (!document.getElementById('next-btn').disabled) {
             if (currentPage < totalPages - 1) {
                 currentPage++;
@@ -79,42 +79,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         }
     });
-
-    // 綁定返回 Best 3 按鈕
-    document.getElementById('back-to-best3-btn')?.addEventListener('click', () => {
-        document.getElementById('oshi-select').value = "";
-        document.getElementById('oshi-select').dispatchEvent(new Event('change'));
-        window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-
-    // 一鍵下載
-    document.getElementById('download-btn')?.addEventListener('click', () => {
-        const card = document.getElementById('export-card');
-        const originalBg = card.style.background;
-        const originalShadow = card.style.boxShadow;
-        
-        card.style.background = 'linear-gradient(135deg, #fdfcfb, #f0e6ea)';
-        card.style.backdropFilter = 'none';
-        card.style.boxShadow = 'none'; 
-
-        setTimeout(() => {
-            html2canvas(card, { scale: 2, useCORS: true, backgroundColor: "#ffffff" }).then(canvas => {
-                let link = document.createElement('a');
-                link.download = 'AKB48_Personality.png';
-                link.href = canvas.toDataURL();
-                link.click();
-                
-                card.style.background = originalBg;
-                card.style.backdropFilter = 'blur(12px)';
-                card.style.boxShadow = originalShadow;
-            });
-        }, 100);
-    });
 });
 
-// 3. 多語言切換引擎
 function applyLanguage(lang) {
-    // 更新帶有 data-i18n 的靜態 HTML 元素
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
         if (i18nData.ui[key] && i18nData.ui[key][lang]) {
@@ -122,7 +89,6 @@ function applyLanguage(lang) {
         }
     });
 
-    // 如果在測驗頁面，只更新文字，不重新 Render (避免洗走 Slider 動畫狀態)
     if (!document.getElementById('page-quiz').classList.contains('hidden')) {
         for(let i=1; i<=60; i++) {
             const qTextEl = document.getElementById(`qtext-${i}`);
@@ -133,16 +99,14 @@ function applyLanguage(lang) {
         document.querySelectorAll('.slider-labels').forEach(el => {
             el.innerHTML = `<span>${i18nData.ui.slider_disagree[lang]}</span><span>${i18nData.ui.slider_neutral[lang]}</span><span>${i18nData.ui.slider_agree[lang]}</span>`;
         });
-        updateUI(); // 更新按鈕文字
+        updateUI(); 
     }
 
-    // 如果在結果頁面，全面重新 Render
     if (!document.getElementById('page-result').classList.contains('hidden') && matchResultsGlobal.length > 0) {
         renderResultPage(matchResultsGlobal);
     }
 }
 
-// 4. 渲染測驗頁面
 function renderQuiz() {
     const track = document.getElementById('quiz-track');
     track.innerHTML = '';
@@ -187,7 +151,6 @@ function renderQuiz() {
     track.addEventListener('input', handleSlider);
     track.addEventListener('change', handleSlider);
 
-    // 解鎖第一題或者上一條未答的題
     let firstUnanswered = 1;
     for(let i=1; i<=60; i++) {
         if(userAnswers[i] === undefined) { firstUnanswered = i; break; }
@@ -255,13 +218,6 @@ function updateUI() {
     if (firstQ && userAnswers[currentPage * 10 + 1] === undefined) firstQ.classList.add('active');
 }
 
-function updateProgress() {
-    const count = Object.keys(userAnswers).length;
-    document.getElementById('progress-text').textContent = `${count}/60`;
-    document.getElementById('progress-bar').style.width = `${(count / 60) * 100}%`;
-}
-
-// 5. 神級計算引擎 (高斯分佈)
 function calculateResults() {
     let scores = { E: 0, S: 0, T: 0, J: 0, A: 0 };
     for (let i = 1; i <= 60; i++) {
@@ -293,12 +249,11 @@ function calculateResults() {
     });
 
     matchResults.sort((a, b) => b.comp - a.comp);
-    matchResultsGlobal = matchResults; // 存入 Global
-    localStorage.removeItem('akb_answers'); // 測完清空進度
+    matchResultsGlobal = matchResults; 
+    localStorage.removeItem('akb_answers'); 
     renderResultPage(matchResults);
 }
 
-// 動態推色外框
 function getConicGradient(colors) {
     if(!colors || colors.length === 0) return '#FF1493';
     if(colors.length === 1) return colors[0];
@@ -306,7 +261,6 @@ function getConicGradient(colors) {
     if(colors.length >= 3) return `conic-gradient(${colors[0]} 0deg 120deg, ${colors[1]} 120deg 240deg, ${colors[2]} 240deg 360deg)`;
 }
 
-// 6. 渲染結果頁 (最終終極版：支援多語言 + 𝕏 Share 自動偵測)
 function renderResultPage(allMembers) {
     document.getElementById('page-quiz').classList.add('hidden');
     const resPage = document.getElementById('page-result');
@@ -314,7 +268,6 @@ function renderResultPage(allMembers) {
 
     let b1 = allMembers[0], b2 = allMembers[1], b3 = allMembers[2];
     
-    // 讀取語言包資料
     let b1_lang = i18nData.members_analysis[b1.id];
     let b2_lang = i18nData.members_analysis[b2.id];
     let b3_lang = i18nData.members_analysis[b3.id];
@@ -415,7 +368,6 @@ function renderResultPage(allMembers) {
         </div>
     `;
 
-    // 繪製雷達圖
     if(myRadarChart) myRadarChart.destroy();
     const ctx = document.getElementById('radarChart').getContext('2d');
     myRadarChart = new Chart(ctx, {
@@ -432,7 +384,6 @@ function renderResultPage(allMembers) {
         options: { scales: { r: { angleLines: { color: 'rgba(0,0,0,0.1)' }, suggestedMin: 0, suggestedMax: 100 } }, plugins: { legend: { display: false } } }
     });
 
-    // 事件重綁定
     document.getElementById('oshi-select').addEventListener('change', (e) => {
         const oshiId = e.target.value;
         const b3Sec = document.getElementById('best3-section');
@@ -471,35 +422,60 @@ function renderResultPage(allMembers) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // 下載功能
     document.getElementById('download-btn').addEventListener('click', () => {
         const card = document.getElementById('export-card');
-        html2canvas(card, { scale: 2, useCORS: true }).then(canvas => {
-            let link = document.createElement('a');
-            link.download = `AKB48_Result_${userMbtiStr}.png`;
-            link.href = canvas.toDataURL();
-            link.click();
-        });
+        const originalBg = card.style.background;
+        const originalShadow = card.style.boxShadow;
+        
+        card.style.background = 'linear-gradient(135deg, #fdfcfb, #f0e6ea)';
+        card.style.backdropFilter = 'none';
+        card.style.boxShadow = 'none'; 
+
+        setTimeout(() => {
+            html2canvas(card, { scale: 2, useCORS: true, backgroundColor: "#ffffff" }).then(canvas => {
+                let link = document.createElement('a');
+                link.download = `AKB48_Result_${userMbtiStr}.png`;
+                link.href = canvas.toDataURL();
+                link.click();
+                
+                card.style.background = originalBg;
+                card.style.backdropFilter = 'blur(12px)';
+                card.style.boxShadow = originalShadow;
+            });
+        }, 100);
     });
 
-    // 𝕏 Share 功能
     document.getElementById('share-x-btn').addEventListener('click', async () => {
         const card = document.getElementById('export-card');
+        const originalBg = card.style.background;
+        const originalShadow = card.style.boxShadow;
+        
+        card.style.background = 'linear-gradient(135deg, #fdfcfb, #f0e6ea)';
+        card.style.backdropFilter = 'none';
+        card.style.boxShadow = 'none'; 
+
         const tweetText = `${ui.result_subtitle[currentLang]} | ${userMbtiStr} ${userTitle}\n#AKB48 #MBTI #AKB48性格鑑定`;
         const shareUrl = window.location.href;
 
-        const canvas = await html2canvas(card, { scale: 2, useCORS: true });
-        canvas.toBlob(async (blob) => {
-            const file = new File([blob], "result.png", { type: "image/png" });
-            if (navigator.canShare && navigator.canShare({ files: [file] })) {
-                try {
-                    await navigator.share({ files: [file], title: 'AKB48 Personality Test', text: tweetText });
-                } catch (err) { console.error("Share failed:", err); }
-            } else {
-                const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=${encodeURIComponent(shareUrl)}`;
-                window.open(twitterUrl, '_blank');
-                alert(currentLang === 'zh-HK' ? "請手動附加剛剛下載的圖片！" : "Please attach the image manually!");
-            }
-        }, 'image/png');
+        setTimeout(async () => {
+            const canvas = await html2canvas(card, { scale: 2, useCORS: true, backgroundColor: "#ffffff" });
+            
+            card.style.background = originalBg;
+            card.style.backdropFilter = 'blur(12px)';
+            card.style.boxShadow = originalShadow;
+
+            canvas.toBlob(async (blob) => {
+                const file = new File([blob], "result.png", { type: "image/png" });
+                if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                    try {
+                        await navigator.share({ files: [file], title: 'AKB48 Personality Test', text: tweetText });
+                    } catch (err) { console.error("Share failed:", err); }
+                } else {
+                    const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=${encodeURIComponent(shareUrl)}`;
+                    window.open(twitterUrl, '_blank');
+                    alert(currentLang === 'zh-HK' ? "請手動附加剛剛下載的圖片！" : "Please attach the image manually!");
+                }
+            }, 'image/png');
+        }, 100);
     });
 }
