@@ -170,10 +170,15 @@ function handleSlider(e) {
         updateProgress();
 
         const nextBox = document.getElementById(`qbox-${qId + 1}`);
-        if (nextBox && !nextBox.classList.contains('active')) {
+        if (nextBox) {
+            // 1. 無論如何都強制為下一題加入 active 解鎖狀態
             nextBox.classList.add('active');
-            if (e.type === 'change') { 
-                nextBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            
+            // 2. 當用戶放開滑桿 (change 事件) 時，強制畫面平滑捲動到下一題
+            if (e.type === 'change') {
+                setTimeout(() => {
+                    nextBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }, 50); // 加入 50 毫秒緩衝，確保畫面順暢不卡頓
             }
         }
     }
@@ -479,3 +484,4 @@ function renderResultPage(allMembers) {
         }, 100);
     });
 }
+
