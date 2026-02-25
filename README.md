@@ -1,4 +1,5 @@
 🌸 2026 AKB48成員與粉絲深度性格鑑定
+
 繁體中文 | 日本語 | English
 
 🇭🇰 繁體中文
@@ -69,3 +70,4 @@ members.json: Member database (Colors, MBTI).
 langs.json: Trilingual dictionary and Q&A.
 
 Developed with 💖 for AKB48.
+
