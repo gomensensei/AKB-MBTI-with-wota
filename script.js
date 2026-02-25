@@ -161,24 +161,33 @@ function renderQuiz() {
 
 function handleSlider(e) {
     if (e.target.tagName === 'INPUT' && e.target.type === 'range') {
-        e.target.classList.add('touched');
-        const qId = parseInt(e.target.id.replace('q', ''));
-        userAnswers[qId] = parseInt(e.target.value);
+        const slider = e.target;
+        slider.classList.add('touched');
+        const qId = parseInt(slider.id.replace('q', ''));
+        
+        // 儲存答案
+        userAnswers[qId] = parseInt(slider.value);
         localStorage.setItem('akb_answers', JSON.stringify(userAnswers));
         
-        checkPageCompletion();
         updateProgress();
+        checkPageCompletion();
 
+        // 強制解鎖並亮起下一題
         const nextBox = document.getElementById(`qbox-${qId + 1}`);
         if (nextBox) {
-            // 1. 無論如何都強制為下一題加入 active 解鎖狀態
             nextBox.classList.add('active');
-            
-            // 2. 當用戶放開滑桿 (change 事件) 時，強制畫面平滑捲動到下一題
-            if (e.type === 'change') {
+            // 直接強制修改樣式，防止 CSS 鎖死
+            nextBox.style.opacity = "1";
+            nextBox.style.pointerEvents = "auto";
+            nextBox.style.filter = "none";
+        }
+
+        // 當用戶放開手 (change 事件) 時自動捲動
+        if (e.type === 'change') {
+            if (nextBox) {
                 setTimeout(() => {
                     nextBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 50); // 加入 50 毫秒緩衝，確保畫面順暢不卡頓
+                }, 100); // 延遲 100ms 讓觸覺反饋更自然
             }
         }
     }
@@ -484,4 +493,5 @@ function renderResultPage(allMembers) {
         }, 100);
     });
 }
+
 
