@@ -306,7 +306,7 @@ function getConicGradient(colors) {
     if(colors.length >= 3) return `conic-gradient(${colors[0]} 0deg 120deg, ${colors[1]} 120deg 240deg, ${colors[2]} 240deg 360deg)`;
 }
 
-// 6. 渲染結果頁
+// 6. 渲染結果頁 (最終終極版：支援多語言 + 𝕏 Share 自動偵測)
 function renderResultPage(allMembers) {
     document.getElementById('page-quiz').classList.add('hidden');
     const resPage = document.getElementById('page-result');
@@ -355,4 +355,151 @@ function renderResultPage(allMembers) {
                 <div style="background: rgba(255,255,255,0.8); border-radius: 12px; padding: 15px; margin-bottom: 15px;">
                     <div style="display:flex; align-items:center; margin-bottom: 10px;">
                         <div style="width: 60px; height: 60px; border-radius: 50%; padding: 3px; background: ${getConicGradient(b2.colors)}; flex-shrink:0;">
-                            <img crossorigin="anonymous" src="${b2.image}" style="width: 100%; height: 100
+                            <img crossorigin="anonymous" src="${b2.image}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid white;">
+                        </div>
+                        <div style="margin-left: 15px;">
+                            <div style="font-size: 14px; color: #888;">${ui.partner_title[currentLang]} (${b2.comp}%)</div>
+                            <div style="font-size: 16px; font-weight:bold;">${b2.name_ja} <span style="font-size:12px;color:var(--cyber-pink);">${b2.mbti_type}</span></div>
+                        </div>
+                    </div>
+                    <ul style="font-size: 12px; color: #555; line-height: 1.5; padding-left: 15px; margin-top: 5px;">
+                        ${b2_lang.traits[currentLang].map(t => `<li style="margin-bottom:4px;">${t}</li>`).join('')}
+                    </ul>
+                </div>
+
+                <div style="background: rgba(255,255,255,0.8); border-radius: 12px; padding: 15px;">
+                    <div style="display:flex; align-items:center; margin-bottom: 10px;">
+                        <div style="width: 60px; height: 60px; border-radius: 50%; padding: 3px; background: ${getConicGradient(b3.colors)}; flex-shrink:0;">
+                            <img crossorigin="anonymous" src="${b3.image}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid white;">
+                        </div>
+                        <div style="margin-left: 15px;">
+                            <div style="font-size: 14px; color: #888;">${ui.rival_title[currentLang]} (${b3.comp}%)</div>
+                            <div style="font-size: 16px; font-weight:bold;">${b3.name_ja} <span style="font-size:12px;color:var(--cyber-pink);">${b3.mbti_type}</span></div>
+                        </div>
+                    </div>
+                    <ul style="font-size: 12px; color: #555; line-height: 1.5; padding-left: 15px; margin-top: 5px;">
+                        ${b3_lang.traits[currentLang].map(t => `<li style="margin-bottom:4px;">${t}</li>`).join('')}
+                    </ul>
+                </div>
+            </div>
+
+            <div id="oshi-analysis-section" style="display:none; background: rgba(255,255,255,0.9); border-radius: 16px; padding: 20px; text-align: center; border: 2px solid var(--cyber-pink); margin-top:15px;">
+                <div style="font-size: 18px; font-weight:bold; margin-bottom: 15px;">${ui.oshi_analysis_title[currentLang]}</div>
+                <div id="oshi-avatar-container" style="width: 110px; height: 110px; border-radius: 50%; padding: 4px; margin: 0 auto 10px auto;">
+                    <img id="oshi-img" crossorigin="anonymous" src="" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid white;">
+                </div>
+                <h3 id="oshi-name" style="font-size: 20px;"></h3>
+                <p id="oshi-comp" style="color: var(--cyber-pink); font-weight: bold; font-size: 18px; margin: 5px 0;"></p>
+                <div id="oshi-badge" class="dark-badge"></div>
+                
+                <ul id="oshi-traits" style="font-size: 13px; color: #444; line-height: 1.6; text-align:left; margin-top:15px; padding-left:20px; list-style-type: disc;"></ul>
+                <div id="oshi-deep-analysis" style="font-size: 13px; color: #444; line-height: 1.6; text-align:left; margin-top: 15px; padding: 12px; background: rgba(255, 20, 147, 0.05); border-left: 4px solid var(--cyber-pink); border-radius: 4px;"></div>
+            </div>
+        </div>
+
+        <div style="margin-top: 25px; background: white; border-radius: 16px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+            <h4 style="margin-bottom: 10px; text-align:center;">${ui.select_oshi_label[currentLang]}</h4>
+            <select id="oshi-select" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-family: var(--font-jp); font-size:16px;">
+                <option value="">${ui.select_oshi_default[currentLang]}</option>
+                ${allMembers.sort((a,b)=>a.ki.localeCompare(b.ki)).map(m => `<option value="${m.id}">${m.name_ja} (${m.ki})</option>`).join('')}
+            </select>
+        </div>
+
+        <div id="back-to-best3-container" style="display: none; margin-top: 15px;">
+            <button id="back-to-best3-btn" class="cyber-btn" style="background: #e0e0e0; color: #333; box-shadow: none;">${ui.btn_back_best3[currentLang]}</button>
+        </div>
+
+        <div class="result-actions" style="display: flex; gap: 10px; margin-top: 20px;">
+            <button id="download-btn" class="cyber-btn" style="flex: 1; background: #2d3436;">${ui.btn_download[currentLang]}</button>
+            <button id="share-x-btn" class="cyber-btn" style="flex: 1; background: #000; color: #fff;">𝕏 Share</button>
+        </div>
+    `;
+
+    // 繪製雷達圖
+    if(myRadarChart) myRadarChart.destroy();
+    const ctx = document.getElementById('radarChart').getContext('2d');
+    myRadarChart = new Chart(ctx, {
+        type: 'radar',
+        data: {
+            labels: ui.radar_labels[currentLang],
+            datasets: [{
+                label: ui.radar_user_label[currentLang],
+                data: [userPerc.E, userPerc.S, userPerc.T, userPerc.J, userPerc.A],
+                backgroundColor: 'rgba(255, 20, 147, 0.4)',
+                borderColor: '#FF1493', borderWidth: 2, pointBackgroundColor: '#FF1493'
+            }]
+        },
+        options: { scales: { r: { angleLines: { color: 'rgba(0,0,0,0.1)' }, suggestedMin: 0, suggestedMax: 100 } }, plugins: { legend: { display: false } } }
+    });
+
+    // 事件重綁定
+    document.getElementById('oshi-select').addEventListener('change', (e) => {
+        const oshiId = e.target.value;
+        const b3Sec = document.getElementById('best3-section');
+        const oshiSec = document.getElementById('oshi-analysis-section');
+        const backBtnCont = document.getElementById('back-to-best3-container');
+        
+        if (!oshiId) { 
+            b3Sec.style.display = 'block'; oshiSec.style.display = 'none'; backBtnCont.style.display = 'none';
+            if(myRadarChart.data.datasets.length > 1) { myRadarChart.data.datasets.pop(); myRadarChart.update(); }
+            return; 
+        }
+        
+        const oshi = allMembers.find(m => m.id === oshiId);
+        const oshiLang = i18nData.members_analysis[oshiId];
+        b3Sec.style.display = 'none'; oshiSec.style.display = 'block'; backBtnCont.style.display = 'block';
+        
+        document.getElementById('oshi-avatar-container').style.background = getConicGradient(oshi.colors);
+        document.getElementById('oshi-img').src = oshi.image;
+        document.getElementById('oshi-name').innerHTML = `${oshi.name_ja} <span style="font-size:14px;">(${oshi.mbti_type})</span>`;
+        document.getElementById('oshi-comp').innerText = `${ui.compatibility_label[currentLang]}${oshi.comp}%`;
+        document.getElementById('oshi-badge').innerText = oshiLang.title[currentLang];
+        document.getElementById('oshi-traits').innerHTML = oshiLang.traits[currentLang].map(t => `<li style="margin-bottom:6px;">${t}</li>`).join('');
+        document.getElementById('oshi-deep-analysis').innerHTML = `<strong>${ui.deep_analysis_label[currentLang]}</strong>${oshiLang.analysis[currentLang]}`;
+
+        myRadarChart.data.datasets[1] = {
+            label: oshi.name_ja, data: [oshi.mbti_scores.E, oshi.mbti_scores.S, oshi.mbti_scores.T, oshi.mbti_scores.J, oshi.mbti_scores.A || 50],
+            backgroundColor: 'rgba(0, 206, 209, 0.2)', borderColor: '#00CED1', borderWidth: 2, borderDash: [5, 5], pointBackgroundColor: '#00CED1'
+        };
+        myRadarChart.update();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    document.getElementById('back-to-best3-btn').addEventListener('click', () => {
+        document.getElementById('oshi-select').value = "";
+        document.getElementById('oshi-select').dispatchEvent(new Event('change'));
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
+    // 下載功能
+    document.getElementById('download-btn').addEventListener('click', () => {
+        const card = document.getElementById('export-card');
+        html2canvas(card, { scale: 2, useCORS: true }).then(canvas => {
+            let link = document.createElement('a');
+            link.download = `AKB48_Result_${userMbtiStr}.png`;
+            link.href = canvas.toDataURL();
+            link.click();
+        });
+    });
+
+    // 𝕏 Share 功能
+    document.getElementById('share-x-btn').addEventListener('click', async () => {
+        const card = document.getElementById('export-card');
+        const tweetText = `${ui.result_subtitle[currentLang]} | ${userMbtiStr} ${userTitle}\n#AKB48 #MBTI #AKB48性格鑑定`;
+        const shareUrl = window.location.href;
+
+        const canvas = await html2canvas(card, { scale: 2, useCORS: true });
+        canvas.toBlob(async (blob) => {
+            const file = new File([blob], "result.png", { type: "image/png" });
+            if (navigator.canShare && navigator.canShare({ files: [file] })) {
+                try {
+                    await navigator.share({ files: [file], title: 'AKB48 Personality Test', text: tweetText });
+                } catch (err) { console.error("Share failed:", err); }
+            } else {
+                const twitterUrl = `https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=${encodeURIComponent(shareUrl)}`;
+                window.open(twitterUrl, '_blank');
+                alert(currentLang === 'zh-HK' ? "請手動附加剛剛下載的圖片！" : "Please attach the image manually!");
+            }
+        }, 'image/png');
+    });
+}
