@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="zh-HK">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>2026 AKB48粉絲深度性格鑑定</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+<body>
+    <div id="custom-cursor"></div>
+
+    <div id="app-container">
+        
+        <section id="page-landing" class="glass-panel active">
+            <div class="landing-header">
+                <span class="subtitle">2026 世代交替</span>
+                <h1>AKB48<br><span class="highlight">粉絲深度性格鑑定</span></h1>
+            </div>
+            <p class="description">
+                結合 MBTI 理論與飯圈文化，<br>
+                精準測出你的「追星人格」與「靈魂相性成員」。<br>
+                尋找名残り桜下，與你最契合的那個她。
+            </p>
+            <button id="start-btn" class="cyber-btn">開始鑑定 (共60題)</button>
+        </section>
+
+        <section id="page-quiz" class="hidden">
+            <div class="progress-container glass-panel-top">
+                <div class="progress-text">進度：<span id="progress-text">0/60</span></div>
+                <div class="progress-bar-bg">
+                    <div id="progress-bar" class="progress-bar-fill"></div>
+                </div>
+            </div>
+
+            <div class="quiz-viewport">
+                <div id="quiz-track" class="quiz-track">
+                    </div>
+            </div>
+
+            <div class="quiz-nav glass-panel-bottom">
+                <button id="prev-btn" class="nav-btn disabled">上一頁</button>
+                <button id="next-btn" class="nav-btn cyber-btn">下一頁</button>
+            </div>
+        </section>
+
+        <section id="page-result" class="hidden glass-panel">
+            <div id="result-content">
+                </div>
+        </section>
+
+    </div>
+
+    <script src="script.js"></script>
+    
+<script>
+    /* =========================================
+       鼠標、點擊波浪 與 櫻花飄落特效
+       ========================================= */
+    const cursor = document.getElementById('custom-cursor');
+    document.addEventListener('mousemove', (e) => {
+        cursor.style.left = e.clientX + 'px';
+        cursor.style.top = e.clientY + 'px';
+    });
+
+    // 真實櫻花花瓣 SVG Path (底部尖，頂部微凹)
+    const sakuraPetalPath = 'M10,0 C12,5 20,8 18,15 C16,22 12,18 10,16 C8,18 4,22 2,15 C0,8 8,5 10,0 Z';
+    const sakuraShape = confetti.shapeFromPath({ path: sakuraPetalPath });
+    const sakuraColors = ['#F5A9CB', '#F08CB5', '#EFA5C8'];
+
+    // 1. 點擊時嘅水滴與少量櫻花爆發
+    document.addEventListener('click', (e) => {
+        // 水滴波浪效果
+        const ripple = document.createElement('div');
+        ripple.className = 'ripple-effect';
+        ripple.style.left = e.clientX + 'px';
+        ripple.style.top = e.clientY + 'px';
+        document.body.appendChild(ripple);
+        setTimeout(() => ripple.remove(), 600);
+
+        // 點擊處輕柔飄出櫻花
+        confetti({
+            particleCount: 4,
+            spread: 120,
+            startVelocity: 8,
+            gravity: 0.15,
+            ticks: 400,
+            shapes: [sakuraShape],    
+            colors: sakuraColors, 
+            scalar: 1.2,
+            origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight },
+            disableForReducedMotion: true,
+            zIndex: 9999
+        });
+    });
+
+    // 2. 背景持續慢速飄落櫻花 (名残り桜 氛圍)
+    function randomInRange(min, max) {
+        return Math.random() * (max - min) + min;
+    }
+
+    function continuousSakura() {
+        confetti({
+            particleCount: 10,           // 每次只跌一塊，保持畫面乾淨
+            startVelocity: 0,           // 冇初速度，純粹向下掉
+            gravity: 0.08,              // 地心吸力極弱，慢慢飄
+            ticks: 600,                 // 停留時間極長，慢慢跌出畫面
+            shapes: [sakuraShape],
+            colors: sakuraColors,
+            scalar: randomInRange(0.8, 1.4), // 大小隨機，增加立體感
+            origin: {
+                x: Math.random(),       // X 軸隨機 (全螢幕闊度)
+                y: -0.1                 // Y 軸從螢幕頂部少少對上開始跌，確保自然
+            },
+            disableForReducedMotion: true,
+            zIndex: 0                   // 放喺背景，唔好遮住問題卡片
+        });
+        
+        // 隨機隔 80ms 到 200ms 再跌下一塊
+        setTimeout(continuousSakura, randomInRange(800, 2000));
+    }
+
+    // 啟動持續飄櫻花
+    continuousSakura();
+</script>
+</body>
+</html>
