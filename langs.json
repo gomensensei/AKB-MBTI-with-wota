@@ -123,7 +123,6 @@
   },
 
 
-{
   "questions": {
     "1": {"dim": "E", "rev": false, "text": {
       "zh-HK": "在交收生寫真時，我會主動與對方交流近期的推し情報。",
@@ -664,12 +663,12 @@
       "en": "I firmly believe that my own actions are the key to determining the direction of my life (or the results of my stanning).",
       "th": "ฉันเชื่อมั่นว่าการกระทำของตัวเองคือกุญแจสำคัญที่กำหนดทิศทางชีวิต (หรือผลลัพธ์ของการติ่ง) ของฉัน",
       "id": "Saya sangat yakin bahwa tindakan saya sendirilah yang menjadi kunci penentu arah hidup (atau hasil dari kegiatan nge-stan) saya."
-    }}
-  }
 }
+  }
+},
 
 
-"members_analysis": {
+"members_analysis": { 
     "01": {
       "title": {
         "zh-HK": "【劇場體制的理性守護者】", "zh-CN": "【剧场体制的理性守护者】", "ja": "【劇場体制の理性的な守護者】", "ko": "【극장 체제의 이성적인 수호자】", "en": "【The Rational Guardian of the Theater】", "th": "【ผู้พิทักษ์แห่งเธียเตอร์ผู้มีเหตุผล】", "id": "【Penjaga Rasional Sistem Teater】"
@@ -1037,7 +1036,7 @@
         "th": "โอรินเป็นเมมเบอร์ที่เต็มเปี่ยมไปด้วยความรู้สึก เธอมีความผูกพันอย่างลึกซึ้งต่อประวัติศาสตร์ของวงและสายใยระหว่างเมมเบอร์ มักจะหลั่งน้ำตาที่มาจากใจจริงในงานแกรดหรือการแสดงสำคัญๆ เธอยกย่องเกียรติยศของวงเหนือเรื่องส่วนตัว แสดงให้เห็นถึงความเห็นอกเห็นใจที่แข็งแกร่งและจิตสำนึกในการสืบทอดเจตนารมณ์ของวง",
         "id": "Orin adalah member yang sangat emosional. Ia memiliki rasa identifikasi yang mendalam dengan sejarah grup dan ikatan antar member, sering kali meneteskan air mata tulus saat kelulusan member atau pertunjukan penting. Ia menempatkan kehormatan grup di atas dirinya sendiri, menampilkan kemampuan empati yang kuat dan kesadaran untuk meneruskan warisan."
       }
-    }
+    },
 
 "17": {
       "title": {
@@ -1406,7 +1405,7 @@
         "th": "ยูเมมิเป็นนักฝันที่ทำตามสัญชาตญาณทางความรู้สึก เวลาที่ต้องตัดสินใจ เธอจะเชื่อลางสังหรณ์ของตัวเองเป็นอย่างมาก และเลือกที่จะฟังเสียงหัวใจมากกว่าการใช้เหตุผลล้วนๆ",
         "id": "Yumemi adalah seorang pemimpi yang mengikuti intuisi emosionalnya. Saat membuat pilihan, ia sangat bergantung pada insting emosional, lebih memilih mendengarkan suara hatinya daripada alasan logis murni."
       }
-    }
+    },
 
 "33": {
       "title": {
@@ -1779,3 +1778,4 @@
   }
 
 }
+
