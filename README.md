@@ -34,4 +34,14 @@
  ┣ 📜 style.css       # 視覺設計、RWD 手機優先排版、微動畫與櫻花 CSS
  ┣ 📜 script.js       # 核心大腦：處理 Fetch、計分邏輯、DOM 操作與雷達圖繪製
  ┣ 📜 members.json    # 輕量資料庫：存放 48 位成員基本屬性 (ID, 應援色, 圖片, MBTI分數)
+
  ┗ 📜 langs.json      # 巨型多語言字典：存放所有需要翻譯的文字、60 題題庫及深度解析
+
+📝 授權與聲明 (Disclaimer)
+本專案為粉絲自製企劃 (Fan-made Project)，與 AKB48 官方營運團隊無關。
+
+專案內使用的成員圖片及相關資訊僅供交流與娛樂用途。
+
+開源代碼歡迎社群 Fork 並改造成其他偶像團體的版本，但請保留原作者 Credit。
+
+Developed with ゴメン先生 for AKB48 20th/21st Anniversary.
