@@ -301,3 +301,74 @@ input[type=range].custom-range::-webkit-slider-runnable-track {
 }
 .loader-text { font-family: var(--font-jp); font-weight: bold; font-size: 1.2rem; color: var(--cyber-pink); letter-spacing: 2px; }
 
+/* =======================================
+   UI 美學改進：成員頭像「閃卡反光」效果
+   ======================================= */
+
+/* 1. 確保頭像容器具備基準定位與遮罩 */
+.result-avatar {
+    position: relative; /* 基準定位予 pseudo-element */
+    overflow: hidden;    /* 關鍵：確保反光不會超出圓圈 */
+    /* 為了流暢度，建議加上這行硬件加速 */
+    transform: translateZ(0); 
+}
+
+/* 2. 建立光影遮罩 (::after Pseudo-element) */
+.result-avatar::after {
+    content: "";
+    position: absolute;
+    top: -50%;   /* 放大尺寸以覆蓋旋轉後的角落 */
+    left: -150%; /* 初始位置在左側畫面外 */
+    width: 80%;  /* 光束寬度 */
+    height: 200%;
+    
+    /* 漸變光束：透明 -> 半透明白 -> 透明 */
+    background: linear_gradient(
+        90deg, 
+        rgba(255, 255, 255, 0) 0%, 
+        rgba(255, 255, 255, 0.1) 20%, /* 稍微帶點光暈 */
+        rgba(255, 255, 255, 0.6) 50%, /* 最亮處 */
+        rgba(255, 255, 255, 0.1) 80%,
+        rgba(255, 255, 255, 0) 100%
+    );
+    
+    /* 傾斜角度 */
+    transform: rotate(30deg);
+    
+    /* 基礎透明度 (靜止時) */
+    opacity: 0;
+    
+    /* 延遲 3 秒後播放 1.2 秒，無限循環 (總共 4.2 秒一個循環) */
+    animation: shine-sweep 4.2s infinite;
+    
+    pointer-events: none; /* 不影響滑鼠點擊圖片 */
+    z-index: 2;            /* 浮在 img (z-index: 1) 上方 */
+}
+
+/* 3. 定義掃過動畫 Keyframes */
+@keyframes shine-sweep {
+    0% { 
+        left: -150%; 
+        opacity: 0; 
+    }
+    
+    /* 靜止 70% 時間 (大約 3秒)，讓它看起來像定期閃一下 */
+    70% { 
+        left: -150%; 
+        opacity: 0; 
+    } 
+    
+    /* 開始出現 */
+    71% { 
+        left: -150%; 
+        opacity: 1; 
+    }
+    
+    /* 用 30% 時間 (大約 1.2秒) 快速掃過 */
+    100% { 
+        left: 150%; 
+        opacity: 1; 
+    }
+}
+
+
