@@ -1,5 +1,5 @@
 /* =========================================
-   2026 AKB48 粉絲深度性格鑑定 - 演算法與視覺終極版
+   2026 AKB48 粉絲深度性格鑑定 - 演算法與視覺極致版
    ========================================= */
 
 let membersDB = [];
@@ -83,7 +83,8 @@ function applyLanguage(lang) {
     if (!document.getElementById('page-quiz').classList.contains('hidden')) {
         for(let i=1; i<=60; i++) {
             const qTextEl = document.getElementById(`qtext-${i}`);
-            if(qTextEl && i18nData.questions[i]) qTextEl.innerHTML = `${i}. ${i18nData.questions[i].text[lang]}`; // 支援 <br> 換行
+            // 使用 innerHTML 支援換行標籤 <br>
+            if(qTextEl && i18nData.questions[i]) qTextEl.innerHTML = `${i}. ${i18nData.questions[i].text[lang]}`;
         }
         document.querySelectorAll('.slider-labels').forEach(el => {
             el.innerHTML = `<span>${i18nData.ui.slider_disagree[lang]}</span><span>${i18nData.ui.slider_neutral[lang]}</span><span>${i18nData.ui.slider_agree[lang]}</span>`;
@@ -194,8 +195,7 @@ function updateProgress() {
 }
 
 // ==========================================
-// 核心升級：MBTI 餘弦波 (Cosine) 演算法
-// 完美解決中間值成員霸榜，並極大化獎勵「極端互補」
+// 核心升級：餘弦波加權演算法 (Cosine Weighted Model)
 // ==========================================
 function calculateResults() {
     let scores = { E: 0, S: 0, T: 0, J: 0, A: 0 };
@@ -217,19 +217,24 @@ function calculateResults() {
         let diffT = Math.abs(userPerc.T - M.T);
         let diffJ = Math.abs(userPerc.J - M.J);
 
-        // 使用餘弦波函數 (Cosine Wave)：y = 75 + 25 * cos(diff * π / 50)
-        // 效果：差距 0 = 100分，差距 100 = 100分，差距 50 = 50分 (精準懲罰半桶水)
-        let matchE = 75 + 25 * Math.cos(diffE * Math.PI / 50);
-        let matchT = 75 + 25 * Math.cos(diffT * Math.PI / 50);
-        let matchJ = 75 + 25 * Math.cos(diffJ * Math.PI / 50);
+        // 1. Cosine 波函數計算 E, T, J (完美解決邊界跳躍，並嚴懲 50 分尷尬區)
+        // 數學原理: cos(0)=1(滿分), cos(pi/2)=0(最低分), cos(pi)=1(極端互補滿分)
+        let matchE = 70 + 30 * Math.cos(diffE * Math.PI / 50); // E/I 差距極大或極小都有高分
+        let matchT = 75 + 25 * Math.cos(diffT * Math.PI / 50); // T/F 差距
+        let matchJ = 75 + 25 * Math.cos(diffJ * Math.PI / 50); // J/P 差距
         
-        // S/N 認知功能必須相近才能溝通，保持直線衰減
-        let matchS = 100 - diffS; 
+        // 2. S/N 直線計算 (不允許互補，差距越大越扣分)
+        let matchS = 100 - (diffS * 0.8);
 
-        // 總分計算 (S/N 權重略高，因為世界觀不同最容易吵架)
-        let baseComp = (matchE + matchS * 1.5 + matchT + matchJ) / 4.5;
+        // 3. 維度權重 (S/N 權重最高 2.5 倍，T/F 1.5 倍)
+        let baseComp = (matchE * 1.0 + matchS * 2.5 + matchT * 1.5 + matchJ * 1.0) / 6.0;
         
-        // A/T (堅韌度) 互補加成
+        // 4. 天花板限制 (S/N 差距超過 40 代表雞同鴨講，強制鎖死最高分)
+        if (diffS > 40) {
+            baseComp = Math.min(baseComp, 82); 
+        }
+
+        // 5. A/T 堅韌度互補加成
         if (userPerc.A < 50 && (M.A !== undefined && M.A >= 65)) baseComp += 3;
         
         return { 
@@ -258,12 +263,13 @@ function getDimDetail(diff, dimKey, isShortLabel = false) {
     
     let status = "neutral";
     if (diff <= 25) status = "sim"; 
-    // 大於 70 視為極端互補 (除了 S 維度)
+    // 大於 70 視為極端互補 (S 維度除外，因為 S 不會互補)
     else if (dimKey !== 'S' && diff >= 70) status = "comp"; 
     
     return isShortLabel ? data[status][currentLang] : data[status].desc[currentLang];
 }
 
+// 視覺優化版面：擴大寬度，消滅留白
 function renderMainDisplay(member, titleLabel) {
     const mLang = i18nData.members_analysis[member.id];
     const ui = i18nData.ui;
