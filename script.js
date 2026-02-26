@@ -133,7 +133,7 @@ function renderQuiz() {
     if (targetBox) targetBox.classList.add('active');
 }
 
-// 修正：確保滑動時即時更新進度條與解鎖下一題
+// 修正：確保滑動時即時更新進度條與解鎖下一題，並修復跨頁捲動 Bug
 function handleSlider(e) {
     if (e.target.tagName === 'INPUT' && e.target.type === 'range') {
         const slider = e.target;
@@ -148,8 +148,13 @@ function handleSlider(e) {
         const nextBox = document.getElementById(`qbox-${qId + 1}`);
         if (nextBox) {
             nextBox.classList.add('active'); // 即時解鎖亮起下一題
+            
             if (e.type === 'change') { 
-                setTimeout(() => nextBox.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
+                // 【核心修復】：如果下一題不是新一頁的開頭 (即 qId 不是 10, 20, 30...) 才自動捲動
+                // 這樣就能強迫用戶在每頁底端點擊「下一頁」按鈕，確保系統頁數正確更新
+                if (qId % 10 !== 0) {
+                    setTimeout(() => nextBox.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
+                }
             }
         }
     }
@@ -415,3 +420,4 @@ function renderResultPage(allMembers) {
         }, 100);
     });
 }
+
