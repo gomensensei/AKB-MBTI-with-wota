@@ -136,24 +136,25 @@
                 
 function continuousSakura() {
     confetti({
-        particleCount: 1,           // 每次只產 1 片，但高頻率產生
-        startVelocity: 0,
-        gravity: randomInRange(0.05, 0.12),
-        ticks: 800,
+        particleCount: 1,          // 每次產 1 片，但用極高頻率去 Call，效果最自然
+        startVelocity: 0,          // 唔好有噴射感，要直接跌落黎
+        gravity: randomInRange(0.04, 0.08), // 隨機跌落速度
+        ticks: 800,                // 花瓣喺畫面生存耐啲
         shapes: [sakuraShape],
         colors: sakuraColors,
-        scalar: randomInRange(0.6, 1.3),
+        scalar: randomInRange(0.6, 1.3), // 隨機大細
         origin: { 
-            x: Math.random(),       // 橫向隨機
-            y: randomInRange(-0.3, -0.1) // 縱向隨機起點，防止所有花瓣同時在同一高度出現
+            x: Math.random(),      // 0-1 隨機橫向位置
+            y: randomInRange(-0.4, -0.1) // 喺螢幕上方唔同高度開始跌，唔好齊排排
         },
-        drift: randomInRange(-0.4, 0.4), // 增加左右擺動
+        drift: randomInRange(-0.5, 0.5), // 【關鍵】隨機左右飄移，增加隨機感
         disableForReducedMotion: false,
         zIndex: 1
     });
     
-    // 每 200 到 500 毫秒產生一片，這會讓背景始終有 10-20 片花瓣在飄
-    setTimeout(continuousSakura, randomInRange(200, 500));
+    // 【產量控制】原本係 500-1500，而家改快一倍：
+    // 每 150 到 400 毫秒就跌一片，背景就會有好多花。
+    setTimeout(continuousSakura, randomInRange(150, 400)); 
 }
                 
                 continuousSakura();
@@ -164,6 +165,7 @@ function continuousSakura() {
     </script>
 </body>
 </html>
+
 
 
 
