@@ -83,7 +83,7 @@ function applyLanguage(lang) {
     if (!document.getElementById('page-quiz').classList.contains('hidden')) {
         for(let i=1; i<=60; i++) {
             const qTextEl = document.getElementById(`qtext-${i}`);
-            if(qTextEl && i18nData.questions[i]) qTextEl.innerText = `${i}. ${i18nData.questions[i].text[lang]}`;
+            if(qTextEl && i18nData.questions[i]) qTextEl.innerHTML = `${i}. ${i18nData.questions[i].text[lang]}`;
         }
         document.querySelectorAll('.slider-labels').forEach(el => {
             el.innerHTML = `<span>${i18nData.ui.slider_disagree[lang]}</span><span>${i18nData.ui.slider_neutral[lang]}</span><span>${i18nData.ui.slider_agree[lang]}</span>`;
@@ -488,3 +488,4 @@ function renderResultPage(allMembers) {
         window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`, '_blank');
     });
 }
+
