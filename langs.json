@@ -117,10 +117,166 @@
       "th": ["สังคม(E)", "สุนทรียภาพ(S)", "ตรรกะ(T)", "แผนงาน(J)", "ความอดทน(A)"],
       "id": ["Sosial(E)", "Estetika(S)", "Logika(T)", "Rencana(J)", "Ketahanan(A)"]
     },
-    "radar_user_label": {
+"radar_user_label": {
       "zh-HK": "你", "zh-CN": "你", "ja": "あなた", "ko": "당신", "en": "You", "th": "คุณ", "id": "Kamu"
     }
   },
+
+  "dim_analysis": {
+    "E": {
+      "sim": { 
+        "zh-HK": "🤝 社交同頻", "zh-CN": "🤝 社交同频", "ja": "🤝 社交共鳴", "ko": "🤝 사교 주파수 일치", "en": "🤝 Social Sync", "th": "🤝 จังหวะสังคมตรงกัน", "id": "🤝 Frekuensi Sosial Sama",
+        "desc": { 
+          "zh-HK": "你們社交節奏一致，無需言語就能理解對方的能量狀態。", 
+          "zh-CN": "你们社交节奏一致，无需言语就能理解对方的能量状态。", 
+          "ja": "社交的なリズムが似ており、言葉がなくても互いの状態を理解し合えます。", 
+          "ko": "사교적인 리듬이 비슷하여, 말하지 않아도 서로의 에너지 상태를 이해할 수 있습니다.", 
+          "en": "You share a similar social rhythm, understanding each other's energy without words.", 
+          "th": "จังหวะการเข้าสังคมตรงกัน เข้าใจพลังงานของอีกฝ่ายได้โดยไม่ต้องพูด", 
+          "id": "Ritme sosial kalian selaras, bisa memahami energi satu sama lain tanpa kata-kata." 
+        } 
+      },
+      "comp": { 
+        "zh-HK": "✨ 社交互補", "zh-CN": "✨ 社交互补", "ja": "✨ 社交補完", "ko": "✨ 사교적 보완", "en": "✨ Social Complement", "th": "✨ เติมเต็มทางสังคม", "id": "✨ Pelengkap Sosial",
+        "desc": { 
+          "zh-HK": "她是你在閃光燈下的引路人，而你是她回到後台後的避風港。", 
+          "zh-CN": "她是你在闪光灯下的引路人，而你是她回到后台后的避风港。", 
+          "ja": "彼女はスポットライト下の導き手であり、あなたは彼女の安らぎの場所です。", 
+          "ko": "그녀는 스포트라이트 아래서 당신의 길잡이이며, 당신은 무대 뒤 그녀의 안식처입니다.", 
+          "en": "She guides you in the spotlight, while you are her safe haven backstage.", 
+          "th": "เธอคือผู้นำทางใต้แสงสปอตไลต์ ส่วนคุณคือที่พึ่งพิงหลังเวทีของเธอ", 
+          "id": "Dia adalah pemandumu di bawah sorotan, dan kamu adalah tempat amannya di belakang panggung." 
+        } 
+      },
+      "neutral": { 
+        "zh-HK": "🌱 社交平衡", "zh-CN": "🌱 社交平衡", "ja": "🌱 社交バランス", "ko": "🌱 사교 밸런스", "en": "🌱 Social Balance", "th": "🌱 ความสมดุลทางสังคม", "id": "🌱 Keseimbangan Sosial",
+        "desc": { 
+          "zh-HK": "你們在社交表現上各有所長，能平衡團隊的氣氛。", 
+          "zh-CN": "你们在社交表现上各有所长，能平衡团队的气氛。", 
+          "ja": "社交面でそれぞれの強みがあり、グループの空気をうまく調整できます。", 
+          "ko": "사교적인 면에서 각자의 장점이 있어 그룹의 분위기를 균형 있게 맞춥니다.", 
+          "en": "You both have different social strengths, balancing the group atmosphere.", 
+          "th": "ต่างคนต่างมีจุดเด่นในการเข้าสังคม ช่วยสร้างสมดุลให้กับบรรยากาศกลุ่ม", 
+          "id": "Kalian punya kelebihan masing-masing dalam kehidupan sosial, menyeimbangkan suasana grup." 
+        } 
+      }
+    },
+    "S": {
+      "sim": { 
+        "zh-HK": "🤝 認知共鳴", "zh-CN": "🤝 认知共鸣", "ja": "🤝 認知共鳴", "ko": "🤝 인식의 공명", "en": "🤝 Perception Sync", "th": "🤝 มุมมองประสานกัน", "id": "🤝 Resonansi Persepsi",
+        "desc": { 
+          "zh-HK": "你們眼中的世界極其相似，對細節與質感的追求不謀而合。", 
+          "zh-CN": "你们眼中的世界极其相似，对细节与质感的追求不谋而合。", 
+          "ja": "世界の見え方が非常に近く、細部や質感へのこだわりが一致しています。", 
+          "ko": "세상을 바라보는 시선이 매우 비슷하며, 디테일과 질감에 대한 추구가 일치합니다.", 
+          "en": "You see the world similarly, sharing a passion for detail and quality.", 
+          "th": "มองโลกในมุมที่คล้ายกันมาก และมีความใส่ใจในรายละเอียดที่ตรงกัน", 
+          "id": "Kalian melihat dunia dengan cara yang sangat mirip, selaras dalam mengejar detail dan kualitas." 
+        } 
+      },
+      "comp": { 
+        "zh-HK": "✨ 視角互補", "zh-CN": "✨ 视角互补", "ja": "✨ 視点補完", "ko": "✨ 시각의 보완", "en": "✨ Perspective Complement", "th": "✨ เติมเต็มมุมมอง", "id": "✨ Pelengkap Perspektif",
+        "desc": { 
+          "zh-HK": "這是一場「現實」與「夢想」的碰撞，為彼此打開新世界。", 
+          "zh-CN": "这是一场「现实」与「梦想」的碰撞，为彼此打开新世界。", 
+          "ja": "「現実」と「夢」が交差する関係で、互いに新しい世界を見せ合えます。", 
+          "ko": "'현실'과 '꿈'의 충돌로, 서로에게 새로운 세계를 열어주는 관계입니다.", 
+          "en": "A collision of reality and dreams, opening new worlds for each other.", 
+          "th": "การปะทะกันของ 'ความจริง' และ 'ความฝัน' ที่ช่วยเปิดโลกใบใหม่ให้กันและกัน", 
+          "id": "Ini adalah perpaduan antara 'realitas' dan 'mimpi', membuka dunia baru satu sama lain." 
+        } 
+      },
+      "neutral": { 
+        "zh-HK": "🌱 多元觀點", "zh-CN": "🌱 多元观点", "ja": "🌱 多元視点", "ko": "🌱 다양한 관점", "en": "🌱 Diverse Viewpoints", "th": "🌱 มุมมองที่หลากหลาย", "id": "🌱 Sudut Pandang Beragam",
+        "desc": { 
+          "zh-HK": "你們看待事物的方式略有不同，正好可以互補長短。", 
+          "zh-CN": "你们看待事物的方式略有不同，正好可以互补长短。", 
+          "ja": "物事の捉え方が少し異なり、お互いの短所を補い合える関係です。", 
+          "ko": "사물을 보는 방식이 조금 달라, 서로의 장단점을 잘 보완해 줍니다.", 
+          "en": "Your ways of seeing things differ slightly, allowing you to complement each other.", 
+          "th": "มองสิ่งต่างๆ ต่างกันเล็กน้อย ซึ่งช่วยอุดช่องโหว่ให้กันได้พอดี", 
+          "id": "Cara kalian memandang sesuatu sedikit berbeda, pas untuk saling melengkapi kekurangan." 
+        } 
+      }
+    },
+    "T": {
+      "sim": { 
+        "zh-HK": "🤝 邏輯契合", "zh-CN": "🤝 逻辑契合", "ja": "🤝 論理一致", "ko": "🤝 논리의 일치", "en": "🤝 Logic Match", "th": "🤝 ตรรกะตรงกัน", "id": "🤝 Kecocokan Logika",
+        "desc": { 
+          "zh-HK": "你們的決策邏輯高度重合，能快速達成共識，減少誤解。", 
+          "zh-CN": "你们的决策逻辑高度重合，能快速达成共识，减少误解。", 
+          "ja": "意思決定のロジックが近く、誤解が少なくスムーズに共感し合えます。", 
+          "ko": "의사결정 방식이 매우 비슷해 빠르게 합의점을 찾고 오해를 줄일 수 있습니다.", 
+          "en": "Your decision-making logic aligns highly, reducing misunderstandings.", 
+          "th": "วิธีการตัดสินใจคล้ายกันมาก ทำให้เข้าใจกันเร็วและลดความเข้าใจผิดได้ดี", 
+          "id": "Logika pengambilan keputusan kalian sangat cocok, bisa cepat sepakat dan minim salah paham." 
+        } 
+      },
+      "comp": { 
+        "zh-HK": "✨ 性情互補", "zh-CN": "✨ 性情互补", "ja": "✨ 性格補完", "ko": "✨ 성향적 보완", "en": "✨ Temperament Complement", "th": "✨ อุปนิสัยเติมเต็ม", "id": "✨ Pelengkap Temperamen",
+        "desc": { 
+          "zh-HK": "你是她的理性導航儀，她是你的情感溫度計，相得益彰。", 
+          "zh-CN": "你是她的理性导航仪，她是你的情感温度计，相得益彰。", 
+          "ja": "あなたは彼女の論理的なナビであり、彼女はあなたの心の温度計です。", 
+          "ko": "당신은 그녀의 이성적인 내비게이터, 그녀는 당신의 감정 온도계로 환상의 짝꿍입니다.", 
+          "en": "You are her rational navigator, and she is your emotional thermometer.", 
+          "th": "คุณคือระบบนำทางด้วยเหตุผลของเธอ และเธอคือเทอร์โมมิเตอร์วัดอารมณ์ของคุณ เข้ากันได้ดีเยี่ยม", 
+          "id": "Kamu adalah navigator rasionilnya, dan dia adalah termometer emosionalmu. Saling melengkapi dengan baik." 
+        } 
+      },
+      "neutral": { 
+        "zh-HK": "🌱 情感平衡", "zh-CN": "🌱 情感平衡", "ja": "🌱 感情バランス", "ko": "🌱 이성과 감정의 조화", "en": "🌱 Emotional Balance", "th": "🌱 ความสมดุลทางอารมณ์", "id": "🌱 Keseimbangan Emosi",
+        "desc": { 
+          "zh-HK": "在處理事情時，你們能同時從事實與情感兩個角度切入。", 
+          "zh-CN": "在处理事情时，你们能同时从事实与情感两个角度切入。", 
+          "ja": "物事に対処する際、事実と感情の両面からアプローチできる関係です。", 
+          "ko": "일을 처리할 때 사실과 감정이라는 두 가지 측면에서 균형 있게 접근합니다.", 
+          "en": "When handling matters, you can approach from both fact and feeling.", 
+          "th": "เวลาจัดการปัญหา สามารถมองได้ทั้งจากมุมของข้อเท็จจริงและอารมณ์ความรู้สึก", 
+          "id": "Saat menangani masalah, kalian bisa mendekatinya dari sudut pandang fakta sekaligus perasaan." 
+        } 
+      }
+    },
+    "J": {
+      "sim": { 
+        "zh-HK": "🤝 步調一致", "zh-CN": "🤝 步调一致", "ja": "🤝 ペース一致", "ko": "🤝 라이프스타일 동기화", "en": "🤝 Pace Match", "th": "🤝 จังหวะชีวิตตรงกัน", "id": "🤝 Ritme Sepadan",
+        "desc": { 
+          "zh-HK": "你們的生活節奏完全同步，不管是計畫還是應變都很有默契。", 
+          "zh-CN": "你们的生活节奏完全同步，不管是计划还是应变都很有默契。", 
+          "ja": "生活のリズムが完全に同期しており、計画もアドリブも息がぴったりです。", 
+          "ko": "생활 리듬이 완전히 같아서 계획을 짤 때나 돌발 상황에 대처할 때 호흡이 잘 맞습니다.", 
+          "en": "Your life rhythms are perfectly synced, whether in planning or improvising.", 
+          "th": "จังหวะชีวิตซิงค์กันสุดๆ ไม่ว่าจะวางแผนหรือแก้ปัญหาเฉพาะหน้าก็เข้าขากันดี", 
+          "id": "Ritme hidup kalian sepenuhnya sinkron, baik dalam merencanakan maupun berimprovisasi." 
+        } 
+      },
+      "comp": { 
+        "zh-HK": "✨ 節奏互補", "zh-CN": "✨ 节奏互补", "ja": "✨ リズム補完", "ko": "✨ 리듬 보완", "en": "✨ Rhythm Complement", "th": "✨ เติมเต็มจังหวะชีวิต", "id": "✨ Pelengkap Ritme",
+        "desc": { 
+          "zh-HK": "她為你帶來秩序與安穩，你為她注入驚喜與靈感。", 
+          "zh-CN": "她为你带来秩序与安稳，你为她注入惊喜与灵感。", 
+          "ja": "彼女はあなたに秩序を、あなたは彼女に驚きとインスピレーションを与えます。", 
+          "ko": "그녀는 당신에게 질서와 안정을, 당신은 그녀에게 서프라이즈와 영감을 불어넣어 줍니다.", 
+          "en": "She brings you order and stability, while you bring her surprises and inspiration.", 
+          "th": "เธอนำระเบียบและความมั่นคงมาให้คุณ ส่วนคุณก็เติมความเซอร์ไพรส์และแรงบันดาลใจให้เธอ", 
+          "id": "Dia memberimu keteraturan dan stabilitas, sementara kamu memberinya kejutan dan inspirasi." 
+        } 
+      },
+      "neutral": { 
+        "zh-HK": "🌱 靈活應對", "zh-CN": "🌱 灵活应对", "ja": "🌱 柔軟対応", "ko": "🌱 유연한 대처", "en": "🌱 Flexible Response", "th": "🌱 การรับมือที่ยืดหยุ่น", "id": "🌱 Respons Fleksibel",
+        "desc": { 
+          "zh-HK": "你們在規劃與執行上各具彈性，讓生活充滿層次感。", 
+          "zh-CN": "你们在规划与执行上各具弹性，让生活充满层次感。", 
+          "ja": "計画と実行のバランスが絶妙で、生活に豊かな彩りが生まれます。", 
+          "ko": "계획과 실행에 있어 각자의 유연함이 돋보여, 삶을 더욱 다채롭게 만듭니다.", 
+          "en": "You both have flexibility in planning and execution, adding depth to life.", 
+          "th": "มีความยืดหยุ่นในการวางแผนและการลงมือทำ ทำให้ชีวิตมีมิติและสีสัน", 
+          "id": "Kalian sama-sama fleksibel dalam perencanaan dan eksekusi, membuat hidup penuh warna." 
+        } 
+      }
+    }
+  },
+
   "mbti_titles": {
     "ENFP": { "zh-HK": "劇場的閃耀火花", "zh-CN": "剧场的闪耀火花", "ja": "劇場の輝く火花", "ko": "극장의 빛나는 불꽃", "en": "The Shining Spark of the Theater", "th": "ประกายไฟอันเจิดจรัสแห่งเธียเตอร์", "id": "Percikan Bersinar di Teater" },
     "ISTP": { "zh-HK": "神級 Fancam 的冷靜職人", "zh-CN": "神级 Fancam 的冷静职人", "ja": "神Fancamの冷静な職人", "ko": "레전드 직캠의 냉정한 장인", "en": "The Calm Master of God-tier Fancams", "th": "ช่างฝีมือผู้เยือกเย็นแห่งแฟนแคมระดับเทพ", "id": "Ahli Tenang Fancam Tingkat Dewa" },
@@ -1796,5 +1952,6 @@
   }
 
 }
+
 
 
