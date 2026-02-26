@@ -90,15 +90,16 @@
             ripple.style.top = e.clientY + 'px';
             document.body.appendChild(ripple);
             setTimeout(() => ripple.remove(), 600);
-            confetti({ particleCount: 4, spread: 120, startVelocity: 8, gravity: 0.15, ticks: 400, shapes: [sakuraShape], colors: sakuraColors, scalar: 1.2, origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight }, disableForReducedMotion: true, zIndex: 9999 });
+            confetti({ particleCount: 4, spread: 120, startVelocity: 8, gravity: 0.15, ticks: 400, shapes: [sakuraShape], colors: sakuraColors, scalar: 1.2, origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight }, disableForReducedMotion: false, zIndex: 9999 });
         });
 
         function randomInRange(min, max) { return Math.random() * (max - min) + min; }
         function continuousSakura() {
-            confetti({ particleCount: 10, startVelocity: 0, gravity: 0.08, ticks: 600, shapes: [sakuraShape], colors: sakuraColors, scalar: randomInRange(0.8, 1.4), origin: { x: Math.random(), y: -0.1 }, disableForReducedMotion: true, zIndex: 0 });
+            confetti({ particleCount: 10, startVelocity: 0, gravity: 0.08, ticks: 600, shapes: [sakuraShape], colors: sakuraColors, scalar: randomInRange(0.8, 1.4), origin: { x: Math.random(), y: -0.1 }, disableForReducedMotion: false, zIndex: 0 });
             setTimeout(continuousSakura, randomInRange(800, 2000));
         }
         continuousSakura();
     </script>
 </body>
 </html>
+
