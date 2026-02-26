@@ -181,3 +181,15 @@ input[type=range].custom-range { cursor: pointer; }
     .quiz-viewport { padding-top: 35px; }
 }
 
+
+/* 預設隱藏標籤，只在匯出時透過 JS 可能顯示或配合 class 控制 */
+.export-only { display: none; }
+
+/* 網頁顯示時，圖片專用標籤隱藏 */
+#export-card .export-only { display: none; }
+
+/* 這是下載圖片時的關鍵控制 */
+.html2canvas-container .web-only { display: none !important; }
+.html2canvas-container .export-only { display: grid !important; }
+
+}
