@@ -9,7 +9,7 @@
     --glass-border: rgba(255, 255, 255, 0.4);
     --text-main: #2D3436;
     --text-muted: #636E72;
-    --font-jp: 'Noto Sans JP', sans-serif;
+    --font-jp: 'Noto Sans JP', 'PingFang HK', 'PingFang SC', 'Microsoft YaHei', 'SimHei', sans-serif;
     --font-en: 'Inter', sans-serif;
 }
 
@@ -229,5 +229,6 @@ input[type=range].custom-range::-webkit-slider-runnable-track {
 .html2canvas-container .export-only { display: grid !important; }
 
 }
+
 
 
