@@ -1,5 +1,5 @@
 /* =========================================
-   2026 AKB48 粉絲深度性格鑑定 - 9:16 IG Story 完美版
+   2026 AKB48 粉絲深度性格鑑定 - 演算法與視覺終極版
    ========================================= */
 
 let membersDB = [];
@@ -83,7 +83,7 @@ function applyLanguage(lang) {
     if (!document.getElementById('page-quiz').classList.contains('hidden')) {
         for(let i=1; i<=60; i++) {
             const qTextEl = document.getElementById(`qtext-${i}`);
-            if(qTextEl && i18nData.questions[i]) qTextEl.innerHTML = `${i}. ${i18nData.questions[i].text[lang]}`;
+            if(qTextEl && i18nData.questions[i]) qTextEl.innerHTML = `${i}. ${i18nData.questions[i].text[lang]}`; // 支援 <br> 換行
         }
         document.querySelectorAll('.slider-labels').forEach(el => {
             el.innerHTML = `<span>${i18nData.ui.slider_disagree[lang]}</span><span>${i18nData.ui.slider_neutral[lang]}</span><span>${i18nData.ui.slider_agree[lang]}</span>`;
@@ -193,6 +193,10 @@ function updateProgress() {
     document.getElementById('progress-bar').style.width = `${(count / 60) * 100}%`;
 }
 
+// ==========================================
+// 核心升級：MBTI 餘弦波 (Cosine) 演算法
+// 完美解決中間值成員霸榜，並極大化獎勵「極端互補」
+// ==========================================
 function calculateResults() {
     let scores = { E: 0, S: 0, T: 0, J: 0, A: 0 };
     for (let i = 1; i <= 60; i++) {
@@ -213,12 +217,19 @@ function calculateResults() {
         let diffT = Math.abs(userPerc.T - M.T);
         let diffJ = Math.abs(userPerc.J - M.J);
 
-        let matchE = 100 - Math.min(diffE, 100 - diffE) * 1.5;
-        let matchT = 100 - Math.min(diffT, 100 - diffT) * 1.2;
-        let matchJ = 100 - Math.min(diffJ, 100 - diffJ) * 1.2;
+        // 使用餘弦波函數 (Cosine Wave)：y = 75 + 25 * cos(diff * π / 50)
+        // 效果：差距 0 = 100分，差距 100 = 100分，差距 50 = 50分 (精準懲罰半桶水)
+        let matchE = 75 + 25 * Math.cos(diffE * Math.PI / 50);
+        let matchT = 75 + 25 * Math.cos(diffT * Math.PI / 50);
+        let matchJ = 75 + 25 * Math.cos(diffJ * Math.PI / 50);
+        
+        // S/N 認知功能必須相近才能溝通，保持直線衰減
         let matchS = 100 - diffS; 
 
-        let baseComp = (matchE + matchS * 2 + matchT + matchJ) / 5;
+        // 總分計算 (S/N 權重略高，因為世界觀不同最容易吵架)
+        let baseComp = (matchE + matchS * 1.5 + matchT + matchJ) / 4.5;
+        
+        // A/T (堅韌度) 互補加成
         if (userPerc.A < 50 && (M.A !== undefined && M.A >= 65)) baseComp += 3;
         
         return { 
@@ -247,6 +258,7 @@ function getDimDetail(diff, dimKey, isShortLabel = false) {
     
     let status = "neutral";
     if (diff <= 25) status = "sim"; 
+    // 大於 70 視為極端互補 (除了 S 維度)
     else if (dimKey !== 'S' && diff >= 70) status = "comp"; 
     
     return isShortLabel ? data[status][currentLang] : data[status].desc[currentLang];
@@ -258,40 +270,33 @@ function renderMainDisplay(member, titleLabel) {
     const cb = `?v=${new Date().getTime()}`;
 
     return `
-        <div style="font-size: 18px; font-weight:bold; margin-bottom: 12px; color: var(--cyber-pink);">${titleLabel}</div>
-        <div style="width: 110px; height: 110px; border-radius: 50%; padding: 4px; background: ${getConicGradient(member.colors)}; margin: 0 auto 10px auto;">
+        <div style="font-size: 18px; font-weight:bold; margin-bottom: 15px; color: var(--cyber-pink);">${titleLabel}</div>
+        <div style="width: 120px; height: 120px; border-radius: 50%; padding: 4px; background: ${getConicGradient(member.colors)}; margin: 0 auto 12px auto;">
             <img crossorigin="anonymous" src="${member.image}${cb}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid white;">
         </div>
-        <h3 style="font-size: 20px;">${member.name_ja} <span style="font-size:14px; opacity:0.7;">(${member.mbti_type})</span></h3>
-        <p style="color: var(--cyber-pink); font-weight: 800; font-size: 22px; margin: 5px 0;">${ui.compatibility_label[currentLang] || ''} ${member.comp}%</p>
-        <div class="dark-badge">${mLang.title[currentLang]}</div>
+        <h3 style="font-size: 22px; margin-bottom: 5px;">${member.name_ja} <span style="font-size:14px; opacity:0.7;">(${member.mbti_type})</span></h3>
+        <p style="color: var(--cyber-pink); font-weight: 800; font-size: 24px; margin: 5px 0 10px 0;">${ui.compatibility_label[currentLang] || ''} ${member.comp}%</p>
+        <div class="dark-badge" style="font-size: 14px; padding: 8px 15px;">${mLang.title[currentLang]}</div>
         
-        <div class="export-only" style="display: none; grid-template-columns: 1fr 1fr; gap: 8px; margin-top: 15px;">
-            <div style="background: #fdf2f7; color: #d63384; padding: 6px; border-radius: 8px; font-size: 12px; font-weight: bold;">${getDimDetail(member.diffs.E, 'E', true)}</div>
-            <div style="background: #fdf2f7; color: #d63384; padding: 6px; border-radius: 8px; font-size: 12px; font-weight: bold;">${getDimDetail(member.diffs.S, 'S', true)}</div>
-            <div style="background: #fdf2f7; color: #d63384; padding: 6px; border-radius: 8px; font-size: 12px; font-weight: bold;">${getDimDetail(member.diffs.T, 'T', true)}</div>
-            <div style="background: #fdf2f7; color: #d63384; padding: 6px; border-radius: 8px; font-size: 12px; font-weight: bold;">${getDimDetail(member.diffs.J, 'J', true)}</div>
+        <div class="export-only" style="display: none; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px;">
+            <div style="background: #fdf2f7; color: #d63384; padding: 8px; border-radius: 8px; font-size: 13px; font-weight: bold;">${getDimDetail(member.diffs.E, 'E', true)}</div>
+            <div style="background: #fdf2f7; color: #d63384; padding: 8px; border-radius: 8px; font-size: 13px; font-weight: bold;">${getDimDetail(member.diffs.S, 'S', true)}</div>
+            <div style="background: #fdf2f7; color: #d63384; padding: 8px; border-radius: 8px; font-size: 13px; font-weight: bold;">${getDimDetail(member.diffs.T, 'T', true)}</div>
+            <div style="background: #fdf2f7; color: #d63384; padding: 8px; border-radius: 8px; font-size: 13px; font-weight: bold;">${getDimDetail(member.diffs.J, 'J', true)}</div>
         </div>
 
-        <div class="web-only" style="text-align: left; margin-top: 15px; font-size: 13px; color: #444; border-top: 1px solid #eee; padding-top: 15px;">
-            <p style="margin-bottom:10px;"><strong>E/I:</strong> <span style="color: var(--cyber-pink); font-weight:bold;">${getDimDetail(member.diffs.E, 'E', true)}</span> - ${getDimDetail(member.diffs.E, 'E', false)}</p>
-            <p style="margin-bottom:10px;"><strong>S/N:</strong> <span style="color: var(--cyber-pink); font-weight:bold;">${getDimDetail(member.diffs.S, 'S', true)}</span> - ${getDimDetail(member.diffs.S, 'S', false)}</p>
-            <p style="margin-bottom:10px;"><strong>T/F:</strong> <span style="color: var(--cyber-pink); font-weight:bold;">${getDimDetail(member.diffs.T, 'T', true)}</span> - ${getDimDetail(member.diffs.T, 'T', false)}</p>
+        <div class="web-only" style="text-align: left; margin-top: 20px; font-size: 14px; color: #444; border-top: 1px solid #eee; padding-top: 15px; line-height: 1.6;">
+            <p style="margin-bottom:12px;"><strong>E/I:</strong> <span style="color: var(--cyber-pink); font-weight:bold;">${getDimDetail(member.diffs.E, 'E', true)}</span> - ${getDimDetail(member.diffs.E, 'E', false)}</p>
+            <p style="margin-bottom:12px;"><strong>S/N:</strong> <span style="color: var(--cyber-pink); font-weight:bold;">${getDimDetail(member.diffs.S, 'S', true)}</span> - ${getDimDetail(member.diffs.S, 'S', false)}</p>
+            <p style="margin-bottom:12px;"><strong>T/F:</strong> <span style="color: var(--cyber-pink); font-weight:bold;">${getDimDetail(member.diffs.T, 'T', true)}</span> - ${getDimDetail(member.diffs.T, 'T', false)}</p>
             <p style="margin-bottom:15px;"><strong>J/P:</strong> <span style="color: var(--cyber-pink); font-weight:bold;">${getDimDetail(member.diffs.J, 'J', true)}</span> - ${getDimDetail(member.diffs.J, 'J', false)}</p>
             
-            <div style="background: rgba(255, 20, 147, 0.05); border-left: 4px solid var(--cyber-pink); border-radius: 4px; padding: 12px;">
-                <strong>${ui.deep_analysis_label[currentLang]}</strong>${mLang.analysis[currentLang]}
+            <div style="background: rgba(255, 20, 147, 0.05); border-left: 4px solid var(--cyber-pink); border-radius: 4px; padding: 15px;">
+                <strong>${ui.deep_analysis_label[currentLang]}</strong><br>${mLang.analysis[currentLang]}
             </div>
         </div>
     `;
 }
-
-/* =========================================
-   2026 AKB48 粉絲深度性格鑑定 - 視覺與分享強化版
-   ========================================= */
-
-// [前段變數、初始化、語言偵測、handleSlider 代碼保持原樣...]
-// (為節省長度，此處由 renderResultPage 開始提供完整代碼)
 
 function renderResultPage(allMembers) {
     document.getElementById('page-quiz').classList.add('hidden');
@@ -307,20 +312,20 @@ function renderResultPage(allMembers) {
 
     const content = document.getElementById('result-content');
     content.innerHTML = `
-        <div id="export-container" style="background: linear-gradient(135deg, #fdfcfb, #f0e6ea); width: 100%; max-width: 480px; margin: 0 auto; overflow: hidden; border-radius: 20px;">
-            <div id="export-card" style="padding: 40px 25px; position: relative; display: flex; flex-direction: column; align-items: center; min-height: 800px; justify-content: space-between;">
+        <div id="export-container" style="background: linear-gradient(135deg, #fdfcfb, #f0e6ea); width: 100%; max-width: 540px; margin: 0 auto; overflow: hidden; border-radius: 20px;">
+            <div id="export-card" style="padding: 40px 15px; position: relative; display: flex; flex-direction: column; align-items: center; min-height: 850px; justify-content: space-around;">
                 
                 <div class="landing-header" style="text-align:center; width: 100%;">
                     <span class="subtitle" style="font-size: 16px; letter-spacing: 3px;">${ui.result_subtitle[currentLang]}</span>
-                    <h2 style="font-size: 48px; color: var(--cyber-pink); margin: 10px 0 0 0; line-height: 1;">${userMbtiStr}</h2>
-                    <h3 style="font-size: 20px; color: var(--text-main); margin-top: 5px;">${userTitle}</h3>
+                    <h2 style="font-size: 52px; color: var(--cyber-pink); margin: 10px 0 0 0; line-height: 1;">${userMbtiStr}</h2>
+                    <h3 style="font-size: 22px; color: var(--text-main); margin-top: 8px;">${userTitle}</h3>
                 </div>
                 
-                <div id="radar-wrapper" style="position: relative; width: 300px; margin: 20px auto;">
+                <div id="radar-wrapper" style="position: relative; width: 320px; margin: 20px auto;">
                     <canvas id="radarChart"></canvas>
                 </div>
 
-                <div id="main-display-section" style="background: white; border: 2px solid var(--sakura-light); border-radius: 24px; padding: 25px; text-align: center; box-shadow: 0 15px 35px rgba(255,20,147,0.12); width: 100%;">
+                <div id="main-display-section" style="background: white; border: 2px solid var(--sakura-light); border-radius: 24px; padding: 25px 20px; text-align: center; box-shadow: 0 15px 35px rgba(255,20,147,0.12); width: 92%; max-width: 480px;">
                     ${renderMainDisplay(b1, ui.soulmate_title[currentLang])}
                 </div>
 
@@ -362,7 +367,6 @@ function renderResultPage(allMembers) {
         </div>
     `;
 
-    // 重新繪製雷達圖 - 加入數值參考線
     if(myRadarChart) myRadarChart.destroy();
     const ctx = document.getElementById('radarChart').getContext('2d');
     myRadarChart = new Chart(ctx, {
@@ -383,13 +387,7 @@ function renderResultPage(allMembers) {
                 r: { 
                     angleLines: { color: 'rgba(0,0,0,0.1)' }, 
                     grid: { color: 'rgba(0,0,0,0.08)' },
-                    ticks: { 
-                        display: true, // 顯示數字參考
-                        stepSize: 20, 
-                        backdropColor: 'transparent',
-                        color: '#999',
-                        font: { size: 10 }
-                    }, 
+                    ticks: { display: true, stepSize: 20, backdropColor: 'transparent', color: '#999', font: { size: 10 } }, 
                     suggestedMin: 0, 
                     suggestedMax: 100 
                 } 
@@ -398,7 +396,6 @@ function renderResultPage(allMembers) {
         }
     });
 
-    // 選擇神推事件
     document.getElementById('oshi-select').addEventListener('change', (e) => {
         const oshiId = e.target.value;
         const bestList = document.getElementById('web-best-list');
@@ -439,7 +436,6 @@ function renderResultPage(allMembers) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // 完美 9:16 高清截圖邏輯
     document.getElementById('download-btn').addEventListener('click', async () => {
         const container = document.getElementById('export-container');
         const webOnly = document.querySelectorAll('.web-only');
@@ -452,7 +448,6 @@ function renderResultPage(allMembers) {
         const oldHeight = container.style.height;
         const oldPos = container.style.position;
         
-        // 強制鎖定 9:16 並放大適配
         container.style.width = "540px";
         container.style.height = "960px";
         container.style.position = "fixed";
@@ -463,14 +458,7 @@ function renderResultPage(allMembers) {
         window.scrollTo(0, 0);
 
         try {
-            const canvas = await html2canvas(container, { 
-                scale: 2, 
-                useCORS: true, 
-                backgroundColor: "#fdfcfb",
-                width: 540,
-                height: 960
-            });
-
+            const canvas = await html2canvas(container, { scale: 2, useCORS: true, backgroundColor: "#fdfcfb", width: 540, height: 960 });
             const link = document.createElement('a');
             link.download = `AKB48_${userMbtiStr}_Result.png`;
             link.href = canvas.toDataURL("image/png");
@@ -484,7 +472,6 @@ function renderResultPage(allMembers) {
         }
     });
 
-    // 𝕏 Share 強化版：加入名字 Hashtag
     document.getElementById('share-x-btn').addEventListener('click', () => {
         const shareTexts = {
             'zh-HK': { mbti: "我的追星人格：", soulmate: "我的靈魂伴侶：", oshi: "我的神推相性：", check: "測測你的 AKB48 靈魂成員：" },
@@ -500,9 +487,7 @@ function renderResultPage(allMembers) {
         const shareUrl = window.location.href;
         const isOshi = currentDisplayMember.id !== b1.id;
         
-        // 處理名字 Hashtag：消除所有空格
         const memberHash = `#${currentDisplayMember.name_ja.replace(/\s+/g, '')}`;
-        
         const relationTitle = isOshi ? st.oshi : st.soulmate;
         const mbtiLine = `【${st.mbti}${userMbtiStr} ${userTitle}】`;
         const matchLine = `💖 ${relationTitle}${currentDisplayMember.name_ja} (${currentDisplayMember.comp}%)`;
