@@ -159,39 +159,67 @@ function renderQuiz() {
     if (targetBox) targetBox.classList.add('active');
 }
 
+// 修正 handleSlider：確保進度條即時更新 + 題目亮起
 function handleSlider(e) {
     if (e.target.tagName === 'INPUT' && e.target.type === 'range') {
         const slider = e.target;
         slider.classList.add('touched');
         const qId = parseInt(slider.id.replace('q', ''));
         
-        // 儲存答案
+        // 1. 存入答案
         userAnswers[qId] = parseInt(slider.value);
         localStorage.setItem('akb_answers', JSON.stringify(userAnswers));
         
+        // 2. 立即更新進度條與文字 (解決進度條沒計算的問題)
         updateProgress();
         checkPageCompletion();
 
-        // 強制解鎖並亮起下一題
+        // 3. 強制解鎖下一題 (CSS 會處理亮起動畫)
         const nextBox = document.getElementById(`qbox-${qId + 1}`);
         if (nextBox) {
             nextBox.classList.add('active');
-            // 直接強制修改樣式，防止 CSS 鎖死
-            nextBox.style.opacity = "1";
-            nextBox.style.pointerEvents = "auto";
-            nextBox.style.filter = "none";
         }
 
-        // 當用戶放開手 (change 事件) 時自動捲動
+        // 4. 當放開滑桿時捲動
         if (e.type === 'change') {
             if (nextBox) {
                 setTimeout(() => {
                     nextBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                }, 100); // 延遲 100ms 讓觸覺反饋更自然
+                }, 100);
             }
         }
     }
 }
+
+/* --- 修改後的鼠標控制邏輯 (包含手機淡出) --- */
+const cursor = document.getElementById('custom-cursor');
+
+document.addEventListener('mousemove', (e) => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+    // 移動時恢復顯示
+    cursor.classList.remove('hidden');
+});
+
+document.addEventListener('click', (e) => {
+    // 點擊後顯示水滴效果... (保留原本代碼)
+    
+    // 點擊後鼠標點淡出，直至下次點擊或移動
+    setTimeout(() => {
+        cursor.classList.add('hidden');
+    }, 600); // 反應完畢後淡出
+});
+
+// 手機觸碰時也適用
+document.addEventListener('touchstart', () => {
+    cursor.classList.remove('hidden');
+});
+
+document.addEventListener('touchend', () => {
+    setTimeout(() => {
+        cursor.classList.add('hidden');
+    }, 1000);
+});
 
 function checkPageCompletion() {
     const startIndex = currentPage * 10 + 1;
@@ -493,5 +521,6 @@ function renderResultPage(allMembers) {
         }, 100);
     });
 }
+
 
 
