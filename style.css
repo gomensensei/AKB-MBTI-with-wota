@@ -166,9 +166,39 @@ input[type=range].custom-range.touched::-webkit-slider-thumb { background: var(-
     padding-top: 15px; 
 }
 
-/* 解決 Slider 偶然拉不動的問題 (優化點擊穿透) */
-.slider-container { touch-action: pan-y; }
-input[type=range].custom-range { cursor: pointer; }
+/* =======================================
+   終極修復：滑桿拖曳卡頓與無法拉動問題
+   ======================================= */
+
+.slider-container {
+    /* 防止滑鼠拖曳時不小心反白到文字，導致中斷滑動 */
+    user-select: none;
+    -webkit-user-select: none;
+}
+
+input[type=range].custom-range {
+    /* 強制將滑桿本體推到最上層 */
+    position: relative;
+    z-index: 100;
+    cursor: pointer;
+}
+
+input[type=range].custom-range::-webkit-slider-thumb {
+    /* 確保拖曳把手能 100% 接收到滑鼠事件 */
+    position: relative;
+    z-index: 101;
+    pointer-events: auto;
+}
+
+input[type=range].custom-range::-webkit-slider-runnable-track {
+    pointer-events: auto;
+}
+
+/* 確保 App 容器在櫻花之上 */
+#app-container {
+    position: relative;
+    z-index: 10;
+}
 
 /* Footer 樣式 */
 .site-footer {
@@ -199,4 +229,5 @@ input[type=range].custom-range { cursor: pointer; }
 .html2canvas-container .export-only { display: grid !important; }
 
 }
+
 
