@@ -151,3 +151,33 @@ input[type=range].custom-range.touched::-webkit-slider-thumb { background: var(-
     #custom-cursor { display: none; } /* 手機版直接隱藏鼠標點 */
 }
 
+/* =======================================
+   修復：進度條遮擋、Slider 卡頓與 Footer
+   ======================================= */
+
+/* 解決第一條問題被進度條遮擋 */
+.quiz-viewport { 
+    padding-top: 15px; 
+}
+
+/* 解決 Slider 偶然拉不動的問題 (優化點擊穿透) */
+.slider-container { touch-action: pan-y; }
+input[type=range].custom-range { cursor: pointer; }
+
+/* Footer 樣式 */
+.site-footer {
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-muted);
+    margin-top: 30px;
+    padding-top: 15px;
+    border-top: 1px solid rgba(0,0,0,0.05);
+    line-height: 1.5;
+    opacity: 0.8;
+}
+
+@media (max-width: 768px) {
+    /* 手機版進度條避開選單後，增加下方留白 */
+    .quiz-viewport { padding-top: 35px; }
+}
+
