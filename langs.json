@@ -318,11 +318,11 @@
       "id": "Saat COD/tukar photocard, <br>saya yang lebih dulu mengajak ngobrol tentang update oshi."
     }},
     "2": {"dim": "E", "rev": true, "text": {
-      "zh-HK": "一想到要加入新的 WhatsApp/Telegram 應援群組並在裡面發言，我會感到心生怯意。",
+      "zh-HK": "一想到要加入新的 WhatsApp/Telegram/SNS 應援群組並在裡面發言，我會感到心生怯意。",
       "zh-CN": "一想到要加入新的微信/QQ应援群并在里面发言，我会感到心生怯意。",
-      "ja": "新しい応援グループチャット（LINE等）に入って発言することを考えると、少し気が引ける。",
+      "ja": "新しい応援SNS（LINE等）に入って発言することを考えると、少し気が引ける。",
       "ko": "새로운 덕질 단톡방(오픈채팅)에 들어가서 발언해야 한다고 생각하면 겁부터 난다.",
-      "en": "The thought of joining a new fandom group chat (Discord/Telegram) and speaking up makes me feel intimidated.",
+      "en": "The thought of joining a new fandom group chat (Discord/Telegram/SNS) and speaking up makes me feel intimidated.",
       "th": "แค่คิดว่าจะต้องเข้ากลุ่มไลน์แฟนคลับใหม่และเริ่มพูดคุย ฉันก็รู้สึกประหม่าแล้ว",
       "id": "Membayangkan harus masuk ke grup chat fandom baru dan mulai berbicara membuat saya merasa ciut."
     }},
@@ -363,7 +363,7 @@
       "id": "Setelah nonton konser, secapek apa pun saya tetap ingin pergi ke after-party makan malam dan ngobrol panjang lebar dengan sesama fans."
     }},
     "7": {"dim": "E", "rev": true, "text": {
-      "zh-HK": "我不太在意自己在香港飯圈（如 IG 或 Threads）給人留下什麼印象。",
+      "zh-HK": "我不太在意自己在飯圈（如 IG 或 Threads）給人留下什麼印象。",
       "zh-CN": "我不太在意自己在饭圈（如微博或超话）给人留下什么印象。",
       "ja": "界隈のSNS（Xや掲示板など）で、自分が周りからどう思われているかはあまり気にしない。",
       "ko": "팬덤 커뮤니티(트위터나 갤러리 등)에서 내가 어떤 이미지로 보이는지 별로 신경 쓰지 않는다.",
@@ -543,7 +543,7 @@
       "id": "Saat ikut undian tiket konser atau membeli tiket meet-and-greet, saya menghitung anggaran dan probabilitas menang dengan ketat; saya jarang kalap dan overbudget secara buta."
     }},
     "27": {"dim": "T", "rev": false, "text": {
-      "zh-HK": "有意見分歧時，我更重視證明自己的觀點，<br>而不是顧全香港飯圈其他人的感受。",
+      "zh-HK": "有意見分歧時，我更重視證明自己的觀點，<br>而不是顧全飯圈其他人的感受。",
       "zh-CN": "有意见分歧时，我更重视证明自己的观点，<br>而不是顾全饭圈其他人的感受。",
       "ja": "界隈内で意見の対立があった場合、周りのオタクの感情を気遣うよりも、自分の正しさを証明することを重視する。",
       "ko": "팬덤 내에서 의견 충돌이 있을 때, 다른 사람들의 기분을 배려하기보다는 내 관점을 증명하는 것을 더 중시한다.",
@@ -1961,6 +1961,7 @@
     }
 }
 }
+
 
 
 
