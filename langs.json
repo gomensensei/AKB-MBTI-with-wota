@@ -1,5 +1,17 @@
 {
 "ui": {
+
+    "ui": {
+    "app_title": {
+      "zh-HK": "AKB48 粉絲深度性格鑑定",
+      "zh-CN": "AKB48 粉丝深度性格鉴定",
+      "ja": "AKB48 ファン深度性格診断",
+      "ko": "AKB48 팬 심층 성격 테스트",
+      "en": "AKB48 Fan Personality Test",
+      "th": "แบบทดสอบบุคลิกภาพแฟนคลับ AKB48",
+      "id": "Tes Kepribadian Fan AKB48"
+    },
+    
     "title_sub": {
       "zh-HK": "2026 世代交替",
       "zh-CN": "2026 世代交替",
@@ -1952,6 +1964,7 @@
   }
 
 }
+
 
 
 
