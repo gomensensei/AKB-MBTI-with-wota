@@ -80,59 +80,87 @@
         </footer>
     </div>
 
-    <script src="script.js"></script>
+<script src="script.js"></script>
     <script>
-        const cursor = document.getElementById('custom-cursor');
-        document.addEventListener('mousemove', (e) => {
-            if(window.innerWidth > 768) {
-                cursor.classList.remove('hidden-cursor');
-                cursor.style.left = e.clientX + 'px';
-                cursor.style.top = e.clientY + 'px';
-            }
-        });
-        const sakuraPetalPath = 'M10,0 C12,5 20,8 18,15 C16,22 12,18 10,16 C8,18 4,22 2,15 C0,8 8,5 10,0 Z';
-        const sakuraShape = confetti.shapeFromPath({ path: sakuraPetalPath });
-        const sakuraColors = ['#F5A9CB', '#F08CB5', '#EFA5C8'];
-
-        document.addEventListener('click', (e) => {
-            if(window.innerWidth > 768) {
-                cursor.classList.add('hidden-cursor');
-                setTimeout(() => cursor.classList.remove('hidden-cursor'), 500);
-            }
-            const ripple = document.createElement('div');
-            ripple.className = 'ripple-effect';
-            ripple.style.left = e.clientX + 'px';
-            ripple.style.top = e.clientY + 'px';
-            document.body.appendChild(ripple);
-            setTimeout(() => ripple.remove(), 600);
-            confetti({ particleCount: 4, spread: 120, startVelocity: 8, gravity: 0.15, ticks: 400, shapes: [sakuraShape], colors: sakuraColors, scalar: 1.2, origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight }, disableForReducedMotion: false, zIndex: 9999 });
-        });
-
-// 2. 背景持續慢速飄落櫻花 (名残り桜 氛圍)
-        function randomInRange(min, max) { return Math.random() * (max - min) + min; }
-        
-        function continuousSakura() {
-            confetti({
-                particleCount: 12,          // 稍微增加數量
-                startVelocity: 0,
-                gravity: 0.08,
-                ticks: 600,
-                shapes: [sakuraShape],
-                colors: sakuraColors,
-                scalar: randomInRange(0.8, 1.4),
-                origin: { x: Math.random(), y: -0.1 },
-                disableForReducedMotion: false,
-                zIndex: 1                   // 【關鍵修復】：改為 1，確保浮在背景之上，但在卡片(z-index: 10)之下
-            });
+        // 使用 window.onload 確保外部程式庫 (Confetti) 已經完全載入
+        window.onload = function() {
+            const cursor = document.getElementById('custom-cursor');
             
-            // 縮短間隔時間，讓電腦版寬螢幕也能明顯看到櫻花飄落
-            setTimeout(continuousSakura, randomInRange(500, 1500));
-        }
-        
-        continuousSakura();
+            // 1. 鼠標移動邏輯
+            document.addEventListener('mousemove', (e) => {
+                if(window.innerWidth > 768) {
+                    cursor.classList.remove('hidden-cursor');
+                    cursor.style.left = e.clientX + 'px';
+                    cursor.style.top = e.clientY + 'px';
+                }
+            });
+
+            // 🌸 櫻花參數設定
+            const sakuraPetalPath = 'M10,0 C12,5 20,8 18,15 C16,22 12,18 10,16 C8,18 4,22 2,15 C0,8 8,5 10,0 Z';
+            const sakuraColors = ['#F5A9CB', '#F08CB5', '#EFA5C8'];
+
+            // 確保 confetti 存在才執行
+            if (typeof confetti !== 'undefined') {
+                const sakuraShape = confetti.shapeFromPath({ path: sakuraPetalPath });
+
+                // 2. 點擊噴發櫻花
+                document.addEventListener('click', (e) => {
+                    if(window.innerWidth > 768) {
+                        cursor.classList.add('hidden-cursor');
+                        setTimeout(() => cursor.classList.remove('hidden-cursor'), 500);
+                    }
+                    
+                    const ripple = document.createElement('div');
+                    ripple.className = 'ripple-effect';
+                    ripple.style.left = e.clientX + 'px';
+                    ripple.style.top = e.clientY + 'px';
+                    document.body.appendChild(ripple);
+                    setTimeout(() => ripple.remove(), 600);
+
+                    confetti({ 
+                        particleCount: 5, 
+                        spread: 120, 
+                        startVelocity: 10, 
+                        gravity: 0.15, 
+                        ticks: 400, 
+                        shapes: [sakuraShape], 
+                        colors: sakuraColors, 
+                        scalar: 1.2, 
+                        origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight }, 
+                        zIndex: 9999 
+                    });
+                });
+
+                // 3. 背景持續慢速飄落櫻花
+                function randomInRange(min, max) { return Math.random() * (max - min) + min; }
+                
+                function continuousSakura() {
+                    confetti({
+                        particleCount: 1, // 每次產生一個會更像自然的落花
+                        startVelocity: 0,
+                        gravity: randomInRange(0.04, 0.08), // 更輕盈的重力
+                        ticks: 600,
+                        shapes: [sakuraShape],
+                        colors: sakuraColors,
+                        scalar: randomInRange(0.8, 1.4),
+                        origin: { x: Math.random(), y: -0.1 },
+                        disableForReducedMotion: false,
+                        zIndex: 1 // 確保在背景之上，內容之下
+                    });
+                    
+                    // 每 400-1000 毫秒產生一片花瓣
+                    setTimeout(continuousSakura, randomInRange(400, 1000));
+                }
+                
+                continuousSakura();
+            } else {
+                console.error("櫻花庫載入失敗，請檢查網路連線或 CDN 網址。");
+            }
+        };
     </script>
 </body>
 </html>
+
 
 
 
