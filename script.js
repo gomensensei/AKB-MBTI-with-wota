@@ -516,7 +516,7 @@ function showLoadingAndReveal(bestCompScore) {
             window.scrollTo({ top: 0, behavior: 'smooth' });
             
             // 【解決問題 4】：巨型愛心與漫天櫻花爆發
-            if (bestCompScore >= 95) {
+            if (bestCompScore >= 85) {
                 const giantHeart = document.getElementById('giant-heart-overlay');
                 giantHeart.classList.remove('hidden');
                 giantHeart.style.opacity = '1';
@@ -626,6 +626,7 @@ function triggerPinkParticles(element) {
         colors: ['#FF1493', '#FFB6C1', '#FFFFFF'], ticks: 36, origin: { x, y }, zIndex: 2147483647
     });
 }
+
 
 
 
