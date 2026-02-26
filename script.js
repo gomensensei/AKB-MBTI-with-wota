@@ -1,5 +1,5 @@
 /* =========================================
-   2026 AKB48 粉絲深度性格鑑定 - 演算法與視覺極致版
+   2026 AKB48 粉絲深度性格鑑定 - 緣分與演算法最終版
    ========================================= */
 
 let membersDB = [];
@@ -83,7 +83,6 @@ function applyLanguage(lang) {
     if (!document.getElementById('page-quiz').classList.contains('hidden')) {
         for(let i=1; i<=60; i++) {
             const qTextEl = document.getElementById(`qtext-${i}`);
-            // 使用 innerHTML 支援換行標籤 <br>
             if(qTextEl && i18nData.questions[i]) qTextEl.innerHTML = `${i}. ${i18nData.questions[i].text[lang]}`;
         }
         document.querySelectorAll('.slider-labels').forEach(el => {
@@ -195,7 +194,7 @@ function updateProgress() {
 }
 
 // ==========================================
-// 核心升級：餘弦波加權演算法 (Cosine Weighted Model)
+// 核心升級：MBTI 餘弦波加權相性模型 + 緣分因子
 // ==========================================
 function calculateResults() {
     let scores = { E: 0, S: 0, T: 0, J: 0, A: 0 };
@@ -217,29 +216,30 @@ function calculateResults() {
         let diffT = Math.abs(userPerc.T - M.T);
         let diffJ = Math.abs(userPerc.J - M.J);
 
-        // 1. Cosine 波函數計算 E, T, J (完美解決邊界跳躍，並嚴懲 50 分尷尬區)
-        // 數學原理: cos(0)=1(滿分), cos(pi/2)=0(最低分), cos(pi)=1(極端互補滿分)
-        let matchE = 70 + 30 * Math.cos(diffE * Math.PI / 50); // E/I 差距極大或極小都有高分
-        let matchT = 75 + 25 * Math.cos(diffT * Math.PI / 50); // T/F 差距
-        let matchJ = 75 + 25 * Math.cos(diffJ * Math.PI / 50); // J/P 差距
+        // 1. Cosine 波函數：獎勵相似 (diff=0) 與 互補 (diff=100)
+        let matchE = 75 + 25 * Math.cos(diffE * Math.PI / 50);
+        let matchT = 75 + 25 * Math.cos(diffT * Math.PI / 50);
+        let matchJ = 75 + 25 * Math.cos(diffJ * Math.PI / 50);
         
-        // 2. S/N 直線計算 (不允許互補，差距越大越扣分)
+        // 2. S/N 直線計算 (越近越好，確保基礎溝通頻率)
         let matchS = 100 - (diffS * 0.8);
 
-        // 3. 維度權重 (S/N 權重最高 2.5 倍，T/F 1.5 倍)
+        // 3. 維度權重 (S/N 最重要，權重 2.5)
         let baseComp = (matchE * 1.0 + matchS * 2.5 + matchT * 1.5 + matchJ * 1.0) / 6.0;
         
-        // 4. 天花板限制 (S/N 差距超過 40 代表雞同鴨講，強制鎖死最高分)
-        if (diffS > 40) {
-            baseComp = Math.min(baseComp, 82); 
-        }
+        // 4. 天花板限制 (S/N 差距過大，強制封頂)
+        if (diffS > 40) { baseComp = Math.min(baseComp, 82); }
 
         // 5. A/T 堅韌度互補加成
         if (userPerc.A < 50 && (M.A !== undefined && M.A >= 65)) baseComp += 3;
+
+        // 6. 緣分浮動機制 (隨機增加 0-5% 分數，增加成員曝光多樣性)
+        const luckFactor = Math.random() * 5; 
+        let finalComp = baseComp + luckFactor;
         
         return { 
             ...m, 
-            comp: parseFloat(Math.max(0, Math.min(99.9, baseComp)).toFixed(1)),
+            comp: parseFloat(Math.max(0, Math.min(99.9, finalComp)).toFixed(1)),
             diffs: { E: diffE, S: diffS, T: diffT, J: diffJ }
         };
     });
@@ -260,21 +260,16 @@ function getConicGradient(colors) {
 function getDimDetail(diff, dimKey, isShortLabel = false) {
     const data = i18nData.dim_analysis?.[dimKey];
     if (!data) return ""; 
-    
     let status = "neutral";
     if (diff <= 25) status = "sim"; 
-    // 大於 70 視為極端互補 (S 維度除外，因為 S 不會互補)
     else if (dimKey !== 'S' && diff >= 70) status = "comp"; 
-    
     return isShortLabel ? data[status][currentLang] : data[status].desc[currentLang];
 }
 
-// 視覺優化版面：擴大寬度，消滅留白
 function renderMainDisplay(member, titleLabel) {
     const mLang = i18nData.members_analysis[member.id];
     const ui = i18nData.ui;
     const cb = `?v=${new Date().getTime()}`;
-
     return `
         <div style="font-size: 18px; font-weight:bold; margin-bottom: 15px; color: var(--cyber-pink);">${titleLabel}</div>
         <div style="width: 120px; height: 120px; border-radius: 50%; padding: 4px; background: ${getConicGradient(member.colors)}; margin: 0 auto 12px auto;">
@@ -283,20 +278,17 @@ function renderMainDisplay(member, titleLabel) {
         <h3 style="font-size: 22px; margin-bottom: 5px;">${member.name_ja} <span style="font-size:14px; opacity:0.7;">(${member.mbti_type})</span></h3>
         <p style="color: var(--cyber-pink); font-weight: 800; font-size: 24px; margin: 5px 0 10px 0;">${ui.compatibility_label[currentLang] || ''} ${member.comp}%</p>
         <div class="dark-badge" style="font-size: 14px; padding: 8px 15px;">${mLang.title[currentLang]}</div>
-        
         <div class="export-only" style="display: none; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px;">
             <div style="background: #fdf2f7; color: #d63384; padding: 8px; border-radius: 8px; font-size: 13px; font-weight: bold;">${getDimDetail(member.diffs.E, 'E', true)}</div>
             <div style="background: #fdf2f7; color: #d63384; padding: 8px; border-radius: 8px; font-size: 13px; font-weight: bold;">${getDimDetail(member.diffs.S, 'S', true)}</div>
             <div style="background: #fdf2f7; color: #d63384; padding: 8px; border-radius: 8px; font-size: 13px; font-weight: bold;">${getDimDetail(member.diffs.T, 'T', true)}</div>
             <div style="background: #fdf2f7; color: #d63384; padding: 8px; border-radius: 8px; font-size: 13px; font-weight: bold;">${getDimDetail(member.diffs.J, 'J', true)}</div>
         </div>
-
         <div class="web-only" style="text-align: left; margin-top: 20px; font-size: 14px; color: #444; border-top: 1px solid #eee; padding-top: 15px; line-height: 1.6;">
             <p style="margin-bottom:12px;"><strong>E/I:</strong> <span style="color: var(--cyber-pink); font-weight:bold;">${getDimDetail(member.diffs.E, 'E', true)}</span> - ${getDimDetail(member.diffs.E, 'E', false)}</p>
             <p style="margin-bottom:12px;"><strong>S/N:</strong> <span style="color: var(--cyber-pink); font-weight:bold;">${getDimDetail(member.diffs.S, 'S', true)}</span> - ${getDimDetail(member.diffs.S, 'S', false)}</p>
             <p style="margin-bottom:12px;"><strong>T/F:</strong> <span style="color: var(--cyber-pink); font-weight:bold;">${getDimDetail(member.diffs.T, 'T', true)}</span> - ${getDimDetail(member.diffs.T, 'T', false)}</p>
             <p style="margin-bottom:15px;"><strong>J/P:</strong> <span style="color: var(--cyber-pink); font-weight:bold;">${getDimDetail(member.diffs.J, 'J', true)}</span> - ${getDimDetail(member.diffs.J, 'J', false)}</p>
-            
             <div style="background: rgba(255, 20, 147, 0.05); border-left: 4px solid var(--cyber-pink); border-radius: 4px; padding: 15px;">
                 <strong>${ui.deep_analysis_label[currentLang]}</strong><br>${mLang.analysis[currentLang]}
             </div>
@@ -308,36 +300,28 @@ function renderResultPage(allMembers) {
     document.getElementById('page-quiz').classList.add('hidden');
     const resPage = document.getElementById('page-result');
     resPage.classList.remove('hidden');
-
     let b1 = allMembers[0], b2 = allMembers[1], b3 = allMembers[2];
     currentDisplayMember = b1; 
-
     let userTitle = i18nData.mbti_titles[userMbtiStr]?.[currentLang] || userMbtiStr;
     let ui = i18nData.ui;
     const cb = `?v=${new Date().getTime()}`;
-
     const content = document.getElementById('result-content');
     content.innerHTML = `
         <div id="export-container" style="background: linear-gradient(135deg, #fdfcfb, #f0e6ea); width: 100%; max-width: 540px; margin: 0 auto; overflow: hidden; border-radius: 20px;">
             <div id="export-card" style="padding: 40px 15px; position: relative; display: flex; flex-direction: column; align-items: center; min-height: 850px; justify-content: space-around;">
-                
                 <div class="landing-header" style="text-align:center; width: 100%;">
                     <span class="subtitle" style="font-size: 16px; letter-spacing: 3px;">${ui.result_subtitle[currentLang]}</span>
                     <h2 style="font-size: 52px; color: var(--cyber-pink); margin: 10px 0 0 0; line-height: 1;">${userMbtiStr}</h2>
                     <h3 style="font-size: 22px; color: var(--text-main); margin-top: 8px;">${userTitle}</h3>
                 </div>
-                
                 <div id="radar-wrapper" style="position: relative; width: 320px; margin: 20px auto;">
                     <canvas id="radarChart"></canvas>
                 </div>
-
                 <div id="main-display-section" style="background: white; border: 2px solid var(--sakura-light); border-radius: 24px; padding: 25px 20px; text-align: center; box-shadow: 0 15px 35px rgba(255,20,147,0.12); width: 92%; max-width: 480px;">
                     ${renderMainDisplay(b1, ui.soulmate_title[currentLang])}
                 </div>
-
             </div>
         </div>
-
         <div id="web-best-list" class="web-only" style="margin-top: 20px;">
             <div style="background: rgba(255,255,255,0.7); border: 1px dashed var(--sakura-light); padding: 15px; border-radius: 12px; margin-bottom: 10px; display: flex; align-items: center;">
                 <img crossorigin="anonymous" src="${b2.image}${cb}" style="width:55px; height:55px; border-radius:50%; margin-right:15px; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
@@ -354,7 +338,6 @@ function renderResultPage(allMembers) {
                 </div>
             </div>
         </div>
-
         <div class="web-only" style="margin-top: 25px; background: white; border-radius: 16px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
             <h4 style="margin-bottom: 10px; text-align:center;">${ui.select_oshi_label[currentLang]}</h4>
             <select id="oshi-select" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size:16px;">
@@ -362,122 +345,61 @@ function renderResultPage(allMembers) {
                 ${[...allMembers].sort((a,b)=>a.ki.localeCompare(b.ki)).map(m => `<option value="${m.id}">${m.name_ja} (${m.ki})</option>`).join('')}
             </select>
         </div>
-
         <div id="back-to-best3-container" class="web-only" style="display: none; margin-top: 15px;">
             <button id="back-to-best3-btn" class="cyber-btn" style="background: #e0e0e0; color: #333; box-shadow: none;">${ui.btn_back_best3[currentLang]}</button>
         </div>
-
         <div class="web-only result-actions" style="display: flex; gap: 10px; margin-top: 20px;">
             <button id="download-btn" class="cyber-btn" style="flex: 1; background: #2d3436;">${ui.btn_download[currentLang]}</button>
             <button id="share-x-btn" class="cyber-btn" style="flex: 1; background: #000; color: #fff;">分享到 𝕏</button>
         </div>
     `;
-
     if(myRadarChart) myRadarChart.destroy();
     const ctx = document.getElementById('radarChart').getContext('2d');
     myRadarChart = new Chart(ctx, {
         type: 'radar',
         data: {
             labels: ui.radar_labels[currentLang],
-            datasets: [{ 
-                data: [userPerc.E, userPerc.S, userPerc.T, userPerc.J, userPerc.A], 
-                backgroundColor: 'rgba(255, 20, 147, 0.4)', 
-                borderColor: '#FF1493', 
-                borderWidth: 3, 
-                pointRadius: 4,
-                pointBackgroundColor: '#FF1493'
-            }]
+            datasets: [{ data: [userPerc.E, userPerc.S, userPerc.T, userPerc.J, userPerc.A], backgroundColor: 'rgba(255, 20, 147, 0.4)', borderColor: '#FF1493', borderWidth: 3, pointRadius: 4, pointBackgroundColor: '#FF1493' }]
         },
-        options: { 
-            scales: { 
-                r: { 
-                    angleLines: { color: 'rgba(0,0,0,0.1)' }, 
-                    grid: { color: 'rgba(0,0,0,0.08)' },
-                    ticks: { display: true, stepSize: 20, backdropColor: 'transparent', color: '#999', font: { size: 10 } }, 
-                    suggestedMin: 0, 
-                    suggestedMax: 100 
-                } 
-            }, 
-            plugins: { legend: { display: false } } 
-        }
+        options: { scales: { r: { angleLines: { color: 'rgba(0,0,0,0.1)' }, grid: { color: 'rgba(0,0,0,0.08)' }, ticks: { display: true, stepSize: 20, backdropColor: 'transparent', color: '#999', font: { size: 10 } }, suggestedMin: 0, suggestedMax: 100 } }, plugins: { legend: { display: false } } }
     });
-
     document.getElementById('oshi-select').addEventListener('change', (e) => {
         const oshiId = e.target.value;
         const bestList = document.getElementById('web-best-list');
         const backBtnCont = document.getElementById('back-to-best3-container');
         const mainSection = document.getElementById('main-display-section');
-        
         if (!oshiId) { 
-            currentDisplayMember = b1;
-            mainSection.innerHTML = renderMainDisplay(b1, ui.soulmate_title[currentLang]);
-            bestList.style.display = 'block'; 
-            backBtnCont.style.display = 'none';
+            currentDisplayMember = b1; mainSection.innerHTML = renderMainDisplay(b1, ui.soulmate_title[currentLang]);
+            bestList.style.display = 'block'; backBtnCont.style.display = 'none';
             if(myRadarChart.data.datasets.length > 1) { myRadarChart.data.datasets.pop(); myRadarChart.update(); }
             return; 
         }
-        
         const oshi = allMembers.find(m => m.id === oshiId);
-        currentDisplayMember = oshi;
-        mainSection.innerHTML = renderMainDisplay(oshi, ui.oshi_analysis_title[currentLang]);
-        bestList.style.display = 'none'; 
-        backBtnCont.style.display = 'block';
-        
-        myRadarChart.data.datasets[1] = { 
-            label: oshi.name_ja, 
-            data: [oshi.mbti_scores.E, oshi.mbti_scores.S, oshi.mbti_scores.T, oshi.mbti_scores.J, oshi.mbti_scores.A || 50], 
-            backgroundColor: 'rgba(0, 206, 209, 0.15)', 
-            borderColor: '#00CED1', 
-            borderWidth: 2, 
-            borderDash: [5, 5], 
-            pointRadius: 3 
-        };
-        myRadarChart.update();
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        currentDisplayMember = oshi; mainSection.innerHTML = renderMainDisplay(oshi, ui.oshi_analysis_title[currentLang]);
+        bestList.style.display = 'none'; backBtnCont.style.display = 'block';
+        myRadarChart.data.datasets[1] = { label: oshi.name_ja, data: [oshi.mbti_scores.E, oshi.mbti_scores.S, oshi.mbti_scores.T, oshi.mbti_scores.J, oshi.mbti_scores.A || 50], backgroundColor: 'rgba(0, 206, 209, 0.15)', borderColor: '#00CED1', borderWidth: 2, borderDash: [5, 5], pointRadius: 3 };
+        myRadarChart.update(); window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-
     document.getElementById('back-to-best3-btn').addEventListener('click', () => {
-        document.getElementById('oshi-select').value = "";
-        document.getElementById('oshi-select').dispatchEvent(new Event('change'));
+        document.getElementById('oshi-select').value = ""; document.getElementById('oshi-select').dispatchEvent(new Event('change'));
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
-
     document.getElementById('download-btn').addEventListener('click', async () => {
         const container = document.getElementById('export-container');
-        const webOnly = document.querySelectorAll('.web-only');
-        const exportOnly = document.querySelectorAll('.export-only');
-        
-        webOnly.forEach(el => el.style.display = 'none');
-        exportOnly.forEach(el => el.style.display = 'grid'); 
-
-        const oldWidth = container.style.width;
-        const oldHeight = container.style.height;
-        const oldPos = container.style.position;
-        
-        container.style.width = "540px";
-        container.style.height = "960px";
-        container.style.position = "fixed";
-        container.style.top = "0";
-        container.style.left = "0";
-        container.style.zIndex = "9999";
-        
+        const webOnly = document.querySelectorAll('.web-only'); const exportOnly = document.querySelectorAll('.export-only');
+        webOnly.forEach(el => el.style.display = 'none'); exportOnly.forEach(el => el.style.display = 'grid'); 
+        const oldWidth = container.style.width; const oldHeight = container.style.height; const oldPos = container.style.position;
+        container.style.width = "540px"; container.style.height = "960px"; container.style.position = "fixed";
+        container.style.top = "0"; container.style.left = "0"; container.style.zIndex = "9999";
         window.scrollTo(0, 0);
-
         try {
             const canvas = await html2canvas(container, { scale: 2, useCORS: true, backgroundColor: "#fdfcfb", width: 540, height: 960 });
-            const link = document.createElement('a');
-            link.download = `AKB48_${userMbtiStr}_Result.png`;
-            link.href = canvas.toDataURL("image/png");
-            link.click();
+            const link = document.createElement('a'); link.download = `AKB48_${userMbtiStr}_Result.png`; link.href = canvas.toDataURL("image/png"); link.click();
         } finally {
-            webOnly.forEach(el => el.style.display = 'block');
-            exportOnly.forEach(el => el.style.display = 'none');
-            container.style.width = oldWidth;
-            container.style.height = oldHeight;
-            container.style.position = oldPos;
+            webOnly.forEach(el => el.style.display = 'block'); exportOnly.forEach(el => el.style.display = 'none');
+            container.style.width = oldWidth; container.style.height = oldHeight; container.style.position = oldPos;
         }
     });
-
     document.getElementById('share-x-btn').addEventListener('click', () => {
         const shareTexts = {
             'zh-HK': { mbti: "我的追星人格：", soulmate: "我的靈魂伴侶：", oshi: "我的神推相性：", check: "測測你的 AKB48 靈魂成員：" },
@@ -488,18 +410,10 @@ function renderResultPage(allMembers) {
             'th': { mbti: "บุคลิกการติ่งของฉัน:", soulmate: "โซลเมตของฉัน:", oshi: "ความเข้ากันได้กับคามิโอชิ:", check: "ค้นหาโซลเมต AKB48 ของคุณ:" },
             'id': { mbti: "Kepribadian Stan Saya:", soulmate: "Belahan Jiwaku:", oshi: "Kecocokan Kami-Oshi Saya:", check: "Temukan soulmate AKB48 kamu:" }
         };
-        
-        const st = shareTexts[currentLang] || shareTexts['en'];
-        const shareUrl = window.location.href;
-        const isOshi = currentDisplayMember.id !== b1.id;
-        
+        const st = shareTexts[currentLang] || shareTexts['en']; const shareUrl = window.location.href; const isOshi = currentDisplayMember.id !== b1.id;
         const memberHash = `#${currentDisplayMember.name_ja.replace(/\s+/g, '')}`;
         const relationTitle = isOshi ? st.oshi : st.soulmate;
-        const mbtiLine = `【${st.mbti}${userMbtiStr} ${userTitle}】`;
-        const matchLine = `💖 ${relationTitle}${currentDisplayMember.name_ja} (${currentDisplayMember.comp}%)`;
-        const tags = `#AKB48 #MBTI ${memberHash} #性格鑑定`;
-        
-        const tweetText = `${mbtiLine}\n${matchLine}\n\n${st.check}\n👇 ${shareUrl}\n\n${tags}`;
+        const tweetText = `【${st.mbti}${userMbtiStr} ${userTitle}】\n💖 ${relationTitle}${currentDisplayMember.name_ja} (${currentDisplayMember.comp}%)\n\n${st.check}\n👇 ${shareUrl}\n\n#AKB48 #MBTI ${memberHash} #性格鑑定`;
         window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`, '_blank');
     });
 }
