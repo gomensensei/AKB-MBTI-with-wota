@@ -134,23 +134,27 @@
                 // 3. 背景持續慢速飄落櫻花
                 function randomInRange(min, max) { return Math.random() * (max - min) + min; }
                 
-                function continuousSakura() {
-                    confetti({
-                        particleCount: 1, // 每次產生一個會更像自然的落花
-                        startVelocity: 0,
-                        gravity: randomInRange(0.04, 0.08), // 更輕盈的重力
-                        ticks: 600,
-                        shapes: [sakuraShape],
-                        colors: sakuraColors,
-                        scalar: randomInRange(0.8, 1.4),
-                        origin: { x: Math.random(), y: -0.1 },
-                        disableForReducedMotion: false,
-                        zIndex: 1 // 確保在背景之上，內容之下
-                    });
-                    
-                    // 每 400-1000 毫秒產生一片花瓣
-                    setTimeout(continuousSakura, randomInRange(400, 1000));
-                }
+function continuousSakura() {
+    confetti({
+        particleCount: 1,           // 每次只產 1 片，但高頻率產生
+        startVelocity: 0,
+        gravity: randomInRange(0.05, 0.12),
+        ticks: 800,
+        shapes: [sakuraShape],
+        colors: sakuraColors,
+        scalar: randomInRange(0.6, 1.3),
+        origin: { 
+            x: Math.random(),       // 橫向隨機
+            y: randomInRange(-0.3, -0.1) // 縱向隨機起點，防止所有花瓣同時在同一高度出現
+        },
+        drift: randomInRange(-0.4, 0.4), // 增加左右擺動
+        disableForReducedMotion: false,
+        zIndex: 1
+    });
+    
+    // 每 200 到 500 毫秒產生一片，這會讓背景始終有 10-20 片花瓣在飄
+    setTimeout(continuousSakura, randomInRange(200, 500));
+}
                 
                 continuousSakura();
             } else {
@@ -160,6 +164,7 @@
     </script>
 </body>
 </html>
+
 
 
 
