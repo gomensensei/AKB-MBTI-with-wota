@@ -1,5 +1,5 @@
 {
-  "ui": {
+"ui": {
     "title_sub": {
       "zh-HK": "2026 世代交替",
       "zh-CN": "2026 世代交替",
@@ -8,6 +8,24 @@
       "en": "2026 Generation Change",
       "th": "2026 การเปลี่ยนผ่านเจเนอเรชัน",
       "id": "2026 Pergantian Generasi"
+    },
+    "desc_extra": {
+      "zh-HK": "追星時的性格可能與日常的你有所不同。這 60 題能更精準地測出你的隱藏屬性（※ 本測驗僅供粉絲娛樂，非專業心理學診斷）。",
+      "zh-CN": "追星时的性格可能与日常的你有所不同。这 60 题能更精准地测出你的隐藏属性（※ 本测验仅供粉丝娱乐，非专业心理学诊断）。",
+      "ja": "推し活中のあなたは、普段の性格とは少し違うかもしれません。この60問であなたの隠れた属性をより正確に診断します（※ ファン向けのエンタメであり、専門的な心理診断ではありません）。",
+      "ko": "덕질할 때의 성격은 평소의 당신과 다를 수 있습니다. 이 60문항은 당신의 숨겨진 속성을 더 정확하게 찾아줍니다 (※ 팬들을 위한 오락용이며 전문 심리 진단이 아닙니다).",
+      "en": "Your stan personality might differ from your everyday self. These 60 questions will accurately reveal your hidden traits (* For fan entertainment only, not a professional diagnosis).",
+      "th": "บุคลิกตอนติ่งอาจจะต่างจากตัวตนปกติของคุณ 60 คำถามนี้จะช่วยเปิดเผยคุณลักษณะที่ซ่อนอยู่อย่างแม่นยำ (* แบบทดสอบนี้ทำขึ้นเพื่อความบันเทิงของแฟนคลับเท่านั้น ไม่ใช่การวินิจฉัยทางจิตวิทยา)",
+      "id": "Kepribadian stan kamu mungkin berbeda dari diri kamu sehari-hari. 60 pertanyaan ini akan secara akurat mengungkap sifat tersembunyimu (* Hanya untuk hiburan penggemar, bukan diagnosis profesional)."
+    },
+    "footer_text": {
+      "zh-HK": "本測驗由粉絲 ゴメン先生 (gomensensei) 製作，與 AKB48 官方無任何關聯。<br>圖片及相關資料版權歸原屬公司所有。",
+      "zh-CN": "本测验由粉丝 ゴメン先生 (gomensensei) 制作，与 AKB48 官方无任何关联。<br>图片及相关资料版权归原属公司所有。",
+      "ja": "本サイトはファンである ゴメン先生 (gomensensei) が作成した非公式のものであり、AKB48運営とは一切関係ありません。<br>画像等の著作権は各権利者に帰属します。",
+      "ko": "이 테스트는 팬 ゴメン先生(gomensensei)가 제작한 비공식 사이트이며, AKB48 공식 운영과 무관합니다.<br>이미지 및 관련 자료의 저작권은 원권리자에게 있습니다.",
+      "en": "Created by fan Gomensensei. This is an unofficial site not affiliated with AKB48.<br>All image copyrights belong to their respective owners.",
+      "th": "จัดทำโดยแฟนคลับ ゴメン先生 (gomensensei) เว็บไซต์นี้ไม่เป็นทางการและไม่มีส่วนเกี่ยวข้องกับ AKB48<br>ลิขสิทธิ์ภาพทั้งหมดเป็นของเจ้าของที่เกี่ยวข้อง",
+      "id": "Dibuat oleh penggemar Gomensensei. Ini adalah situs tidak resmi dan tidak berafiliasi dengan AKB48.<br>Hak cipta gambar adalah milik masing-masing pemiliknya."
     },
     "title_main": {
       "zh-HK": "AKB48<br><span class='highlight'>粉絲深度性格鑑定</span>",
@@ -1778,4 +1796,5 @@
   }
 
 }
+
 
