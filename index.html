@@ -14,33 +14,23 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
 </head>
 <body>
-<div id="custom-cursor"></div>
+    <div id="custom-cursor"></div>
 
-<div id="lang-switcher-container">
-    <select id="lang-switcher">
-        <option value="zh-HK">繁體中文</option>
-        <option value="zh-CN">简体中文</option>
-        <option value="ja">日本語</option>
-        <option value="ko">한국어</option>
-        <option value="en">English</option>
-        <option value="th">ภาษาไทย</option>
-        <option value="id">Bahasa Indonesia</option>
-    </select>
-</div>
-
-<section id="page-landing" class="glass-panel active">
-    <div class="landing-header">
-        <span class="subtitle" data-i18n="title_sub">2026 世代交替</span>
-        <h1 data-i18n="title_main">AKB48<br><span class="highlight">粉絲深度性格鑑定</span></h1>
-    </div>
-    <p class="description" data-i18n="desc">
-        結合 MBTI 理論與飯圈文化，<br>
-        精準測出你的「追星人格」與「靈魂相性成員」。<br>
-        尋找名残り桜下，與你最契合的那個她。
-    </p>
-    <button id="start-btn" class="cyber-btn" data-i18n="start_btn">開始鑑定 (共60題)</button>
-</section>
+    <div id="app-container">
         
+        <section id="page-landing" class="glass-panel active">
+            <div class="landing-header">
+                <span class="subtitle">2026 世代交替</span>
+                <h1>AKB48<br><span class="highlight">粉絲深度性格鑑定</span></h1>
+            </div>
+            <p class="description">
+                結合 MBTI 理論與飯圈文化，<br>
+                精準測出你的「追星人格」與「靈魂相性成員」。<br>
+                尋找名残り桜下，與你最契合的那個她。
+            </p>
+            <button id="start-btn" class="cyber-btn">開始鑑定 (共60題)</button>
+        </section>
+
         <section id="page-quiz" class="hidden">
             <div class="progress-container glass-panel-top">
                 <div class="progress-text">進度：<span id="progress-text">0/60</span></div>
@@ -140,7 +130,4 @@
     continuousSakura();
 </script>
 </body>
-
 </html>
-
-
