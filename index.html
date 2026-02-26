@@ -4,10 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>2026 AKB48粉絲深度性格鑑定</title>
-    
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
-    
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
@@ -28,7 +26,6 @@
     </div>
 
     <div id="app-container">
-        
         <section id="page-landing" class="glass-panel active">
             <div class="landing-header">
                 <span class="subtitle" data-i18n="title_sub">2026 世代交替</span>
@@ -39,6 +36,7 @@
                 精準測出你的「追星人格」與「靈魂相性成員」。<br>
                 尋找名残り桜下，與你最契合的那個她。
             </p>
+            <p class="description" style="font-size: 12px; margin-top: -20px; background: rgba(255,20,147,0.05); padding: 10px; border-radius: 8px;" data-i18n="desc_extra"></p>
             <button id="start-btn" class="cyber-btn" data-i18n="start_btn">開始鑑定 (共60題)</button>
         </section>
 
@@ -49,11 +47,9 @@
                     <div id="progress-bar" class="progress-bar-fill"></div>
                 </div>
             </div>
-
             <div class="quiz-viewport">
                 <div id="quiz-track" class="quiz-track"></div>
             </div>
-
             <div class="quiz-nav glass-panel-bottom">
                 <button id="prev-btn" class="nav-btn disabled" data-i18n="btn_prev">上一頁</button>
                 <button id="next-btn" class="nav-btn cyber-btn" data-i18n="btn_next">下一頁</button>
@@ -64,50 +60,45 @@
             <div id="result-content"></div>
         </section>
 
+        <footer class="site-footer">
+            <p data-i18n="footer_text"></p>
+        </footer>
     </div>
 
     <script src="script.js"></script>
-    
-<script>
-    // 櫻花與鼠標特效
-    const cursor = document.getElementById('custom-cursor');
-    
-    // 鼠標移動時顯示 (解決淡出後不見的問題)
-    document.addEventListener('mousemove', (e) => {
-        if(window.innerWidth > 768) {
-            cursor.classList.remove('hidden-cursor');
-            cursor.style.left = e.clientX + 'px';
-            cursor.style.top = e.clientY + 'px';
+    <script>
+        const cursor = document.getElementById('custom-cursor');
+        document.addEventListener('mousemove', (e) => {
+            if(window.innerWidth > 768) {
+                cursor.classList.remove('hidden-cursor');
+                cursor.style.left = e.clientX + 'px';
+                cursor.style.top = e.clientY + 'px';
+            }
+        });
+        const sakuraPetalPath = 'M10,0 C12,5 20,8 18,15 C16,22 12,18 10,16 C8,18 4,22 2,15 C0,8 8,5 10,0 Z';
+        const sakuraShape = confetti.shapeFromPath({ path: sakuraPetalPath });
+        const sakuraColors = ['#F5A9CB', '#F08CB5', '#EFA5C8'];
+
+        document.addEventListener('click', (e) => {
+            if(window.innerWidth > 768) {
+                cursor.classList.add('hidden-cursor');
+                setTimeout(() => cursor.classList.remove('hidden-cursor'), 500);
+            }
+            const ripple = document.createElement('div');
+            ripple.className = 'ripple-effect';
+            ripple.style.left = e.clientX + 'px';
+            ripple.style.top = e.clientY + 'px';
+            document.body.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 600);
+            confetti({ particleCount: 4, spread: 120, startVelocity: 8, gravity: 0.15, ticks: 400, shapes: [sakuraShape], colors: sakuraColors, scalar: 1.2, origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight }, disableForReducedMotion: true, zIndex: 9999 });
+        });
+
+        function randomInRange(min, max) { return Math.random() * (max - min) + min; }
+        function continuousSakura() {
+            confetti({ particleCount: 10, startVelocity: 0, gravity: 0.08, ticks: 600, shapes: [sakuraShape], colors: sakuraColors, scalar: randomInRange(0.8, 1.4), origin: { x: Math.random(), y: -0.1 }, disableForReducedMotion: true, zIndex: 0 });
+            setTimeout(continuousSakura, randomInRange(800, 2000));
         }
-    });
-
-    const sakuraPetalPath = 'M10,0 C12,5 20,8 18,15 C16,22 12,18 10,16 C8,18 4,22 2,15 C0,8 8,5 10,0 Z';
-    const sakuraShape = confetti.shapeFromPath({ path: sakuraPetalPath });
-    const sakuraColors = ['#F5A9CB', '#F08CB5', '#EFA5C8'];
-
-    document.addEventListener('click', (e) => {
-        // 點擊後鼠標短暫隱藏 (解決干擾問題)
-        if(window.innerWidth > 768) {
-            cursor.classList.add('hidden-cursor');
-            setTimeout(() => cursor.classList.remove('hidden-cursor'), 500);
-        }
-
-        const ripple = document.createElement('div');
-        ripple.className = 'ripple-effect';
-        ripple.style.left = e.clientX + 'px';
-        ripple.style.top = e.clientY + 'px';
-        document.body.appendChild(ripple);
-        setTimeout(() => ripple.remove(), 600);
-
-        confetti({ particleCount: 4, spread: 120, startVelocity: 8, gravity: 0.15, ticks: 400, shapes: [sakuraShape], colors: sakuraColors, scalar: 1.2, origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight }, disableForReducedMotion: true, zIndex: 9999 });
-    });
-
-    function randomInRange(min, max) { return Math.random() * (max - min) + min; }
-    function continuousSakura() {
-        confetti({ particleCount: 10, startVelocity: 0, gravity: 0.08, ticks: 600, shapes: [sakuraShape], colors: sakuraColors, scalar: randomInRange(0.8, 1.4), origin: { x: Math.random(), y: -0.1 }, disableForReducedMotion: true, zIndex: 0 });
-        setTimeout(continuousSakura, randomInRange(800, 2000));
-    }
-    continuousSakura();
-</script>
+        continuousSakura();
+    </script>
 </body>
 </html>
