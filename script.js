@@ -1,8 +1,7 @@
 /* =========================================
-   2026 AKB48 粉絲深度性格鑑定 - 終極完美版
+   2026 AKB48 粉絲深度性格鑑定 - 9:16 IG Story 完美版
    ========================================= */
 
-// 1. 全局變數
 let membersDB = [];
 let i18nData = {};
 let currentLang = "zh-HK";
@@ -13,9 +12,8 @@ let userPerc = {};
 let userMbtiStr = "";
 let myRadarChart = null; 
 let matchResultsGlobal = []; 
-let currentDisplayMember = null; // 用於追蹤當前顯示的成員（Top 1 或神推），以便分享到 X
+let currentDisplayMember = null; 
 
-// 2. 自動偵測語言
 function detectLanguage() {
     const lang = navigator.language || navigator.userLanguage;
     const lowerLang = lang.toLowerCase();
@@ -28,7 +26,6 @@ function detectLanguage() {
     return 'en';
 }
 
-// 3. 初始化
 document.addEventListener('DOMContentLoaded', async () => {
     try {
         const [memRes, langRes] = await Promise.all([ fetch('members.json'), fetch('langs.json') ]);
@@ -77,7 +74,6 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 });
 
-// 4. 語言套用與渲染
 function applyLanguage(lang) {
     document.querySelectorAll('[data-i18n]').forEach(el => {
         const key = el.getAttribute('data-i18n');
@@ -155,7 +151,6 @@ function handleSlider(e) {
         const nextBox = document.getElementById(`qbox-${qId + 1}`);
         if (nextBox) {
             nextBox.classList.add('active'); 
-            // 修復跨頁滾動 Bug：只有在不是每頁最後一題 (10, 20, 30...) 時才自動向下滑動
             if (e.type === 'change' && qId % 10 !== 0) { 
                 setTimeout(() => nextBox.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
             }
@@ -198,7 +193,6 @@ function updateProgress() {
     document.getElementById('progress-bar').style.width = `${(count / 60) * 100}%`;
 }
 
-// 5. 新演算法：相似與互補雙軌制
 function calculateResults() {
     let scores = { E: 0, S: 0, T: 0, J: 0, A: 0 };
     for (let i = 1; i <= 60; i++) {
@@ -219,15 +213,12 @@ function calculateResults() {
         let diffT = Math.abs(userPerc.T - M.T);
         let diffJ = Math.abs(userPerc.J - M.J);
 
-        // 新演算法：E/I, T/F, J/P 極端相似或完全互補皆為高分；S/N 認知功能差異大容易誤解，需極度相似
         let matchE = 100 - Math.min(diffE, 100 - diffE) * 1.5;
         let matchT = 100 - Math.min(diffT, 100 - diffT) * 1.2;
         let matchJ = 100 - Math.min(diffJ, 100 - diffJ) * 1.2;
         let matchS = 100 - diffS; 
 
         let baseComp = (matchE + matchS * 2 + matchT + matchJ) / 5;
-        
-        // 堅韌度互補加成
         if (userPerc.A < 50 && (M.A !== undefined && M.A >= 65)) baseComp += 3;
         
         return { 
@@ -250,23 +241,21 @@ function getConicGradient(colors) {
     if(colors.length >= 3) return `conic-gradient(${colors[0]} 0deg 120deg, ${colors[1]} 120deg 240deg, ${colors[2]} 240deg 360deg)`;
 }
 
-// 6. 維度文字分析器
 function getDimDetail(diff, dimKey, isShortLabel = false) {
     const data = i18nData.dim_analysis?.[dimKey];
-    if (!data) return ""; // 防呆
+    if (!data) return ""; 
     
     let status = "neutral";
-    if (diff <= 25) status = "sim"; // 差距小 = 相似共鳴
-    else if (dimKey !== 'S' && diff >= 70) status = "comp"; // 差距大 = 完美互補 (除了S)
+    if (diff <= 25) status = "sim"; 
+    else if (dimKey !== 'S' && diff >= 70) status = "comp"; 
     
     return isShortLabel ? data[status][currentLang] : data[status].desc[currentLang];
 }
 
-// 7. 動態生成主視圖 (共用給 Best 1 與神推)
 function renderMainDisplay(member, titleLabel) {
     const mLang = i18nData.members_analysis[member.id];
     const ui = i18nData.ui;
-    const cb = `?v=${new Date().getTime()}`; // 解決圖片 CORS 快取問題
+    const cb = `?v=${new Date().getTime()}`;
 
     return `
         <div style="font-size: 18px; font-weight:bold; margin-bottom: 12px; color: var(--cyber-pink);">${titleLabel}</div>
@@ -297,14 +286,13 @@ function renderMainDisplay(member, titleLabel) {
     `;
 }
 
-// 8. 總成與渲染頁面
 function renderResultPage(allMembers) {
     document.getElementById('page-quiz').classList.add('hidden');
     const resPage = document.getElementById('page-result');
     resPage.classList.remove('hidden');
 
     let b1 = allMembers[0], b2 = allMembers[1], b3 = allMembers[2];
-    currentDisplayMember = b1; // 預設顯示 Top 1
+    currentDisplayMember = b1; 
 
     let userTitle = i18nData.mbti_titles[userMbtiStr]?.[currentLang] || userMbtiStr;
     let ui = i18nData.ui;
@@ -312,21 +300,23 @@ function renderResultPage(allMembers) {
 
     const content = document.getElementById('result-content');
     content.innerHTML = `
-        <div id="export-container" style="background: linear-gradient(135deg, #fdfcfb, #f0e6ea); width: 100%; max-width: 400px; margin: 0 auto; overflow: hidden; border-radius: 16px;">
-            <div id="export-card" style="padding: 30px 20px; position: relative;">
-                <div class="landing-header" style="text-align:center; margin-bottom: 20px;">
+        <div id="export-container" style="background: linear-gradient(135deg, #fdfcfb, #f0e6ea); width: 100%; max-width: 440px; margin: 0 auto; overflow: hidden; border-radius: 16px;">
+            <div id="export-card" style="padding: 30px 20px; position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100%;">
+                
+                <div class="landing-header" style="text-align:center; margin-bottom: 20px; width: 100%;">
                     <span class="subtitle">${ui.result_subtitle[currentLang]}</span>
                     <h2 style="font-size: 32px; color: var(--cyber-pink); margin-top:5px; margin-bottom:0;">${userMbtiStr}</h2>
                     <h3 style="font-size: 16px; color: var(--text-main); margin-top:0;">${userTitle}</h3>
                 </div>
                 
-                <div style="position: relative; width: 220px; margin: 0 auto 10px auto;">
+                <div id="radar-wrapper" style="position: relative; width: 220px; margin: 0 auto 10px auto;">
                     <canvas id="radarChart"></canvas>
                 </div>
 
-                <div id="main-display-section" style="background: white; border: 2px solid var(--sakura-light); border-radius: 20px; padding: 20px; text-align: center; box-shadow: 0 10px 25px rgba(255,20,147,0.1);">
+                <div id="main-display-section" style="background: white; border: 2px solid var(--sakura-light); border-radius: 20px; padding: 20px; text-align: center; box-shadow: 0 10px 25px rgba(255,20,147,0.1); width: 100%; max-width: 360px;">
                     ${renderMainDisplay(b1, ui.soulmate_title[currentLang])}
                 </div>
+
             </div>
         </div>
 
@@ -365,7 +355,6 @@ function renderResultPage(allMembers) {
         </div>
     `;
 
-    // 繪製雷達圖
     if(myRadarChart) myRadarChart.destroy();
     const ctx = document.getElementById('radarChart').getContext('2d');
     myRadarChart = new Chart(ctx, {
@@ -377,7 +366,6 @@ function renderResultPage(allMembers) {
         options: { scales: { r: { angleLines: { display: false }, ticks: { display: false }, suggestedMin: 0, suggestedMax: 100 } }, plugins: { legend: { display: false } } }
     });
 
-    // 選擇神推事件
     document.getElementById('oshi-select').addEventListener('change', (e) => {
         const oshiId = e.target.value;
         const bestList = document.getElementById('web-best-list');
@@ -385,7 +373,6 @@ function renderResultPage(allMembers) {
         const mainSection = document.getElementById('main-display-section');
         
         if (!oshiId) { 
-            // 恢復顯示 Top 1
             currentDisplayMember = b1;
             mainSection.innerHTML = renderMainDisplay(b1, ui.soulmate_title[currentLang]);
             bestList.style.display = 'block'; 
@@ -394,7 +381,6 @@ function renderResultPage(allMembers) {
             return; 
         }
         
-        // 切換為神推分析
         const oshi = allMembers.find(m => m.id === oshiId);
         currentDisplayMember = oshi;
         mainSection.innerHTML = renderMainDisplay(oshi, ui.oshi_analysis_title[currentLang]);
@@ -412,55 +398,93 @@ function renderResultPage(allMembers) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // 完美 4:5 匯出截圖功能
+    // 解決 Crop 走問題，強制 9:16 (540x960)
     document.getElementById('download-btn').addEventListener('click', async () => {
         const container = document.getElementById('export-container');
         const webOnly = document.querySelectorAll('.web-only');
         const exportOnly = document.querySelectorAll('.export-only');
         
-        // 儲存原始 display 狀態，然後切換
         const webOriginals = Array.from(webOnly).map(el => el.style.display);
         webOnly.forEach(el => el.style.display = 'none');
-        exportOnly.forEach(el => el.style.display = 'grid'); // 顯示簡約標籤
+        exportOnly.forEach(el => el.style.display = 'grid'); 
         
-        // 強制鎖定 4:5 (400px x 500px)
+        // 保存原屬性
         const oldWidth = container.style.width;
         const oldHeight = container.style.height;
-        container.style.width = "400px";
-        container.style.height = "500px";
+        const oldPos = container.style.position;
+        const oldTop = container.style.top;
+        const oldLeft = container.style.left;
+        const oldZ = container.style.zIndex;
+        const oldRadius = container.style.borderRadius;
+        const oldMaxWidth = container.style.maxWidth;
+
+        // 強制鎖定 9:16 IG Story Size (540x960) 並絕對定位避開 Scroll Crop
+        container.style.width = "540px";
+        container.style.height = "960px";
+        container.style.maxWidth = "none";
+        container.style.position = "absolute";
+        container.style.top = "0";
+        container.style.left = "0";
+        container.style.zIndex = "9999";
+        container.style.borderRadius = "0";
+        document.getElementById('radar-wrapper').style.width = "260px"; // 稍微放大雷達圖適應大版面
         
-        const canvas = await html2canvas(container, { 
-            scale: 3, 
-            useCORS: true, 
-            backgroundColor: "#fdfcfb",
-            width: 400,
-            height: 500
-        });
+        window.scrollTo(0, 0); // 回到最頂，徹底解決 html2canvas 切邊 Bug
 
-        // 恢復網頁原狀
-        webOnly.forEach((el, i) => el.style.display = webOriginals[i]);
-        exportOnly.forEach(el => el.style.display = 'none');
-        container.style.width = oldWidth;
-        container.style.height = oldHeight;
+        try {
+            const canvas = await html2canvas(container, { 
+                scale: 2, // 2倍縮放，即輸出 1080x1920 高清直長圖
+                useCORS: true, 
+                backgroundColor: "#fdfcfb",
+                width: 540,
+                height: 960,
+                scrollY: 0,
+                scrollX: 0
+            });
 
-        const link = document.createElement('a');
-        link.download = `AKB48_${userMbtiStr}_Result.png`;
-        link.href = canvas.toDataURL();
-        link.click();
+            const link = document.createElement('a');
+            link.download = `AKB48_${userMbtiStr}_Result.png`;
+            link.href = canvas.toDataURL("image/png");
+            link.click();
+        } finally {
+            // 恢復所有樣式
+            webOnly.forEach((el, i) => el.style.display = webOriginals[i]);
+            exportOnly.forEach(el => el.style.display = 'none');
+            
+            container.style.width = oldWidth;
+            container.style.height = oldHeight;
+            container.style.maxWidth = oldMaxWidth;
+            container.style.position = oldPos;
+            container.style.top = oldTop;
+            container.style.left = oldLeft;
+            container.style.zIndex = oldZ;
+            container.style.borderRadius = oldRadius;
+            document.getElementById('radar-wrapper').style.width = "220px";
+        }
     });
 
-    // 𝕏 Share 功能 (動態帶入目前顯示的成員名稱與契合度)
+    // 𝕏 Share 內文支援多語言字典
     document.getElementById('share-x-btn').addEventListener('click', () => {
+        const shareTexts = {
+            'zh-HK': { mbti: "我的追星人格：", soulmate: "我的靈魂伴侶：", oshi: "我的神推相性：", check: "測測你的 AKB48 靈魂成員：" },
+            'zh-CN': { mbti: "我的追星人格：", soulmate: "我的灵魂伴侣：", oshi: "我的神推相性：", check: "测测你的 AKB48 灵魂成员：" },
+            'ja': { mbti: "私のオタク人格：", soulmate: "運命のパートナー：", oshi: "神推しとの相性：", check: "あなたのAKB48ソウルメイトを診断：" },
+            'ko': { mbti: "나의 덕질 성격:", soulmate: "나의 소울메이트:", oshi: "나의 카미오시 상성:", check: "나의 AKB48 소울메이트 테스트:" },
+            'en': { mbti: "My Stan Personality:", soulmate: "My Soulmate:", oshi: "My Kami-Oshi Compatibility:", check: "Find your AKB48 soulmate:" },
+            'th': { mbti: "บุคลิกการติ่งของฉัน:", soulmate: "โซลเมตของฉัน:", oshi: "ความเข้ากันได้กับคามิโอชิ:", check: "ค้นหาโซลเมต AKB48 ของคุณ:" },
+            'id': { mbti: "Kepribadian Stan Saya:", soulmate: "Belahan Jiwaku:", oshi: "Kecocokan Kami-Oshi Saya:", check: "Temukan soulmate AKB48 kamu:" }
+        };
+        
+        const st = shareTexts[currentLang] || shareTexts['en'];
         const shareUrl = window.location.href;
         const isOshi = currentDisplayMember.id !== b1.id;
         
-        // 根據目前畫面是看 Top 1 還是看神推，給予不同的宣傳語
-        const relationTitle = isOshi ? "我的神推相性是" : "我的靈魂伴侶是";
-        const mbtiLine = `【我的追星人格：${userMbtiStr} ${userTitle}】`;
-        const matchLine = `💖 ${relationTitle}：${currentDisplayMember.name_ja} (${currentDisplayMember.comp}% 契合度)`;
+        const relationTitle = isOshi ? st.oshi : st.soulmate;
+        const mbtiLine = `【${st.mbti}${userMbtiStr} ${userTitle}】`;
+        const matchLine = `💖 ${relationTitle}${currentDisplayMember.name_ja} (${currentDisplayMember.comp}%)`;
         const tags = `#AKB48 #MBTI #性格鑑定`;
         
-        const tweetText = `${mbtiLine}\n${matchLine}\n\n測測你的 AKB48 靈魂成員：\n👇 ${shareUrl}\n\n${tags}`;
+        const tweetText = `${mbtiLine}\n${matchLine}\n\n${st.check}\n👇 ${shareUrl}\n\n${tags}`;
         window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`, '_blank');
     });
 }
