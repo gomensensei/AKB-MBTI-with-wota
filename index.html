@@ -141,35 +141,31 @@
                         colors: sakuraColors, 
                         scalar: 1.2, 
                         origin: { x: e.clientX / window.innerWidth, y: e.clientY / window.innerHeight }, 
-                        zIndex: 9999 
+                        zIndex: 2147483647 
                     });
                 });
 
                 // 3. 背景持續慢速飄落櫻花
                 function randomInRange(min, max) { return Math.random() * (max - min) + min; }
                 
+// 【解決問題 8】：背景櫻花參數加強 (增加大小、飄移度、數量)
 function continuousSakura() {
     confetti({
-        particleCount: 1,          // 每次產 1 片，但用極高頻率去 Call，效果最自然
-        startVelocity: 0,          // 唔好有噴射感，要直接跌落黎
-        gravity: randomInRange(0.04, 0.08), // 隨機跌落速度
-        ticks: 800,                // 花瓣喺畫面生存耐啲
+        particleCount: window.innerWidth < 768 ? 2 : 3, // 手機也明顯可見
+        startVelocity: 0,
+        gravity: randomInRange(0.04, 0.1),
+        ticks: 800,
         shapes: [sakuraShape],
         colors: sakuraColors,
-        scalar: randomInRange(0.6, 1.3), // 隨機大細
-        origin: { 
-            x: Math.random(),      // 0-1 隨機橫向位置
-            y: randomInRange(-0.4, -0.1) // 喺螢幕上方唔同高度開始跌，唔好齊排排
-        },
-        drift: randomInRange(-0.5, 0.5), // 【關鍵】隨機左右飄移，增加隨機感
+        scalar: randomInRange(1.0, 1.8), // 放大花瓣
+        origin: { x: Math.random(), y: randomInRange(-0.2, 0) },
+        drift: randomInRange(-1, 1),     // 增加風吹飄移感
         disableForReducedMotion: false,
-        zIndex: 1
+        zIndex: 0 // 放在背景
     });
-    
-    // 【產量控制】原本係 500-1500，而家改快一倍：
-    // 每 150 到 400 毫秒就跌一片，背景就會有好多花。
-    setTimeout(continuousSakura, randomInRange(150, 400)); 
+    setTimeout(continuousSakura, randomInRange(150, 300)); // 頻率調快
 }
+                
                 
                 continuousSakura();
             } else {
@@ -179,6 +175,7 @@ function continuousSakura() {
     </script>
 </body>
 </html>
+
 
 
 
