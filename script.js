@@ -66,10 +66,17 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (currentPage > 0) { currentPage--; updateUI(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
     });
 
-    document.getElementById('next-btn')?.addEventListener('click', () => {
+document.getElementById('next-btn')?.addEventListener('click', () => {
         if (!document.getElementById('next-btn').disabled) {
-            if (currentPage < totalPages - 1) { currentPage++; updateUI(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
-            else { calculateResults(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+            if (currentPage < totalPages - 1) { 
+                currentPage++; 
+                updateUI(); 
+                window.scrollTo({ top: 0, behavior: 'smooth' }); 
+            } else { 
+                // 當是最後一頁時，執行計算
+                calculateResults(); 
+                // 注意：這裡移除了 window.scrollTo，因為 Loading 畫面通常是固定在螢幕正中央的
+            }
         }
     });
 });
@@ -247,7 +254,12 @@ function calculateResults() {
     matchResults.sort((a, b) => b.comp - a.comp);
     matchResultsGlobal = matchResults; 
     localStorage.removeItem('akb_answers'); 
-    renderResultPage(matchResults);
+    
+    // 取得第一名 (Soulmate) 的相性分數
+    const topCompScore = matchResultsGlobal[0].comp;
+
+    // 呼叫 Loading 動畫 (我們把 renderResultPage 移到這裡面執行)
+    showLoadingAndReveal(topCompScore);
 }
 
 function getConicGradient(colors) {
@@ -270,20 +282,33 @@ function renderMainDisplay(member, titleLabel) {
     const mLang = i18nData.members_analysis[member.id];
     const ui = i18nData.ui;
     const cb = `?v=${new Date().getTime()}`;
+    
+    // 判斷是否為超神推 (95%+) 來決定要不要加愛心
+    const isSuperMatch = member.comp >= 95;
+    const heartHtml = isSuperMatch ? `<span class="match-heart" style="display:inline-block; margin-left: 5px;">💖</span>` : '';
+
     return `
         <div style="font-size: 18px; font-weight:bold; margin-bottom: 15px; color: var(--cyber-pink);">${titleLabel}</div>
-        <div style="width: 120px; height: 120px; border-radius: 50%; padding: 4px; background: ${getConicGradient(member.colors)}; margin: 0 auto 12px auto;">
+        
+        <div class="result-avatar" style="width: 120px; height: 120px; border-radius: 50%; padding: 4px; background: ${getConicGradient(member.colors)}; margin: 0 auto 12px auto; transition: all 0.3s ease;">
             <img crossorigin="anonymous" src="${member.image}${cb}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid white;">
         </div>
+        
         <h3 style="font-size: 22px; margin-bottom: 5px;">${member.name_ja} <span style="font-size:14px; opacity:0.7;">(${member.mbti_type})</span></h3>
-        <p style="color: var(--cyber-pink); font-weight: 800; font-size: 24px; margin: 5px 0 10px 0;">${ui.compatibility_label[currentLang] || ''} ${member.comp}%</p>
+        
+        <p style="color: var(--cyber-pink); font-weight: 800; font-size: 24px; margin: 5px 0 10px 0;">
+            ${ui.compatibility_label[currentLang] || ''} <span class="comp-score">${member.comp}%</span>${heartHtml}
+        </p>
+        
         <div class="dark-badge" style="font-size: 14px; padding: 8px 15px;">${mLang.title[currentLang]}</div>
+        
         <div class="export-only" style="display: none; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px;">
             <div style="background: #fdf2f7; color: #d63384; padding: 8px; border-radius: 8px; font-size: 13px; font-weight: bold;">${getDimDetail(member.diffs.E, 'E', true)}</div>
             <div style="background: #fdf2f7; color: #d63384; padding: 8px; border-radius: 8px; font-size: 13px; font-weight: bold;">${getDimDetail(member.diffs.S, 'S', true)}</div>
             <div style="background: #fdf2f7; color: #d63384; padding: 8px; border-radius: 8px; font-size: 13px; font-weight: bold;">${getDimDetail(member.diffs.T, 'T', true)}</div>
             <div style="background: #fdf2f7; color: #d63384; padding: 8px; border-radius: 8px; font-size: 13px; font-weight: bold;">${getDimDetail(member.diffs.J, 'J', true)}</div>
         </div>
+        
         <div class="web-only" style="text-align: left; margin-top: 20px; font-size: 14px; color: #444; border-top: 1px solid #eee; padding-top: 15px; line-height: 1.6;">
             <p style="margin-bottom:12px;"><strong>E/I:</strong> <span style="color: var(--cyber-pink); font-weight:bold;">${getDimDetail(member.diffs.E, 'E', true)}</span> - ${getDimDetail(member.diffs.E, 'E', false)}</p>
             <p style="margin-bottom:12px;"><strong>S/N:</strong> <span style="color: var(--cyber-pink); font-weight:bold;">${getDimDetail(member.diffs.S, 'S', true)}</span> - ${getDimDetail(member.diffs.S, 'S', false)}</p>
@@ -459,17 +484,22 @@ function showLoadingAndReveal(bestCompScore) {
             loader.classList.add('hidden');
             loader.style.opacity = '1'; // 恢復透明度供下次使用
             
-            // 💡 這裡放你原本切換頁面的代碼
+            // ==========================================
+            // 🚨 真正的切換畫面與渲染結果在這裡執行 🚨
+            // ==========================================
             document.getElementById('page-quiz').classList.add('hidden');
             document.getElementById('page-result').classList.remove('hidden');
             
-            // 觸發所有分數、頭像和背景動畫
+            // 呼叫你原本的渲染函數
+            renderResultPage(matchResultsGlobal);
+            
+            // 畫面生成完畢後，觸發數字跳動、發光與心跳動畫
             runResultAnimations(bestCompScore);
+            
         }, 500);
         
     }, 1500);
 }
-
 // 2. 觸發結果頁面的各種發光與特效
 function runResultAnimations(topCompScore) {
     // 讓雷達圖容器發光
@@ -558,3 +588,4 @@ function triggerMoreSakura() {
         if (Date.now() < end) requestAnimationFrame(frame);
     }());
 }
+
