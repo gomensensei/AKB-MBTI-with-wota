@@ -10,13 +10,13 @@
       "id": "2026 Pergantian Generasi"
     },
     "desc_extra": {
-      "zh-HK": "追星時的性格可能與日常的你有所不同。這 60 題能更精準地測出你的隱藏屬性（※ 本測驗僅供粉絲娛樂，非專業心理學診斷）。",
-      "zh-CN": "追星时的性格可能与日常的你有所不同。这 60 题能更精准地测出你的隐藏属性（※ 本测验仅供粉丝娱乐，非专业心理学诊断）。",
-      "ja": "推し活中のあなたは、普段の性格とは少し違うかもしれません。この60問であなたの隠れた属性をより正確に診断します（※ ファン向けのエンタメであり、専門的な心理診断ではありません）。",
-      "ko": "덕질할 때의 성격은 평소의 당신과 다를 수 있습니다. 이 60문항은 당신의 숨겨진 속성을 더 정확하게 찾아줍니다 (※ 팬들을 위한 오락용이며 전문 심리 진단이 아닙니다).",
-      "en": "Your stan personality might differ from your everyday self. These 60 questions will accurately reveal your hidden traits (* For fan entertainment only, not a professional diagnosis).",
-      "th": "บุคลิกตอนติ่งอาจจะต่างจากตัวตนปกติของคุณ 60 คำถามนี้จะช่วยเปิดเผยคุณลักษณะที่ซ่อนอยู่อย่างแม่นยำ (* แบบทดสอบนี้ทำขึ้นเพื่อความบันเทิงของแฟนคลับเท่านั้น ไม่ใช่การวินิจฉัยทางจิตวิทยา)",
-      "id": "Kepribadian stan kamu mungkin berbeda dari diri kamu sehari-hari. 60 pertanyaan ini akan secara akurat mengungkap sifat tersembunyimu (* Hanya untuk hiburan penggemar, bukan diagnosis profesional)."
+      "zh-HK": "追星時的性格可能與日常的你有所不同。<br>這 60 題能更精準地測出你的隱藏屬性<br>（※ 本測驗僅供粉絲娛樂，非專業心理學診斷）。",
+      "zh-CN": "追星时的性格可能与日常的你有所不同。<br>这 60 题能更精准地测出你的隐藏属性<br>（※ 本测验仅供粉丝娱乐，非专业心理学诊断）。",
+      "ja": "推し活中のあなたは、普段の性格とは少し違うかもしれません。<br>この60問であなたの隠れた属性をより正確に診断します<br>（※ ファン向けのエンタメであり、専門的な心理診断ではありません）。",
+      "ko": "덕질할 때의 성격은 평소의 당신과 다를 수 있습니다.<br> 이 60문항은 당신의 숨겨진 속성을 더 정확하게 찾아줍니다<br> (※ 팬들을 위한 오락용이며 전문 심리 진단이 아닙니다).",
+      "en": "Your stan personality might differ from your everyday self.<br> These 60 questions will accurately reveal your hidden traits<br> (* For fan entertainment only, not a professional diagnosis).",
+      "th": "บุคลิกตอนติ่งอาจจะต่างจากตัวตนปกติของคุณ <br>60 คำถามนี้จะช่วยเปิดเผยคุณลักษณะที่ซ่อนอยู่อย่างแม่นยำ<br> (* แบบทดสอบนี้ทำขึ้นเพื่อความบันเทิงของแฟนคลับเท่านั้น ไม่ใช่การวินิจฉัยทางจิตวิทยา)",
+      "id": "Kepribadian stan kamu mungkin berbeda dari diri kamu sehari-hari.<br> 60 pertanyaan ini akan secara akurat mengungkap sifat tersembunyimu<br> (* Hanya untuk hiburan penggemar, bukan diagnosis profesional)."
     },
     "footer_text": {
       "zh-HK": "本測驗由粉絲 ゴメン先生 (gomensensei) 製作，與 AKB48 官方無任何關聯。<br>圖片及相關資料版權歸原屬公司所有。",
@@ -299,13 +299,13 @@
 
   "questions": {
     "1": {"dim": "E", "rev": false, "text": {
-      "zh-HK": "在交收生寫真時，我會主動與對方交流近期的推し情報。",
-      "zh-CN": "在面交生写时，我会主动与对方交流近期的推情报。",
-      "ja": "生写真を交換する際、自分から相手に推しの最近の話題を振る。",
-      "ko": "포토카드를 직거래할 때, 상대방에게 오시(최애)의 최근 소식을 먼저 이야기한다.",
-      "en": "When trading photocards in person, I take the initiative to chat about my oshi's recent updates.",
+      "zh-HK": "在交收生寫真時，<br>我會主動與對方交流近期的推し情報。",
+      "zh-CN": "在面交生写时，<br>我会主动与对方交流近期的推情报。",
+      "ja": "生写真を交換する際、<br>自分から相手に推しの最近の話題を振る。",
+      "ko": "포토카드를 직거래할 때, <br>상대방에게 오시(최애)의 최근 소식을 먼저 이야기한다.",
+      "en": "When trading photocards in person, <br>I take the initiative to chat about my oshi's recent updates.",
       "th": "เวลาแลกเปลี่ยนรูปสุ่ม ฉันมักจะเริ่มคุยเรื่องโอชิของฉันก่อน",
-      "id": "Saat COD/tukar photocard, saya yang lebih dulu mengajak ngobrol tentang update oshi."
+      "id": "Saat COD/tukar photocard, <br>saya yang lebih dulu mengajak ngobrol tentang update oshi."
     }},
     "2": {"dim": "E", "rev": true, "text": {
       "zh-HK": "一想到要加入新的 WhatsApp/Telegram 應援群組並在裡面發言，我會感到心生怯意。",
@@ -317,17 +317,17 @@
       "id": "Membayangkan harus masuk ke grup chat fandom baru dan mulai berbicara membuat saya merasa ciut."
     }},
     "3": {"dim": "E", "rev": false, "text": {
-      "zh-HK": "比起獨自在屋企看直播，我更熱衷於參與飯聚，並從集體討論中獲得活力。",
-      "zh-CN": "比起独自在家看直播，我更热衷于参与饭聚，并从集体讨论中获得活力。",
-      "ja": "家で一人で配信を見るより、オタ会に参加して皆で語り合う方がエネルギーをもらえる。",
-      "ko": "집에서 혼자 라방을 보는 것보다, 오프라인 팬모임에 참여해 다 같이 떠드는 것에서 활력을 얻는다.",
-      "en": "Rather than watching streams alone at home, I prefer joining fan meetups and get energized by group discussions.",
+      "zh-HK": "比起獨自在屋企看直播，我更熱衷於參與飯聚，<br>並從集體討論中獲得活力。",
+      "zh-CN": "比起独自在家看直播，我更热衷于参与饭聚，<br>并从集体讨论中获得活力。",
+      "ja": "家で一人で配信を見るより、<br>オタ会に参加して皆で語り合う方がエネルギーをもらえる。",
+      "ko": "집에서 혼자 라방을 보는 것보다, <br>오프라인 팬모임에 참여해 다 같이 떠드는 것에서 활력을 얻는다.",
+      "en": "Rather than watching streams alone at home, <br>I prefer joining fan meetups and get energized by group discussions.",
       "th": "แทนที่จะดูไลฟ์คนเดียวที่บ้าน ฉันชอบไปงานมีตติ้งแฟนคลับและได้พลังจากการพูดคุยกับคนอื่นๆ มากกว่า",
-      "id": "Daripada nonton live streaming sendirian di rumah, saya lebih suka ikut fan-meet dan mendapat energi dari obrolan bareng."
+      "id": "Daripada nonton live streaming sendirian di rumah, <br>saya lebih suka ikut fan-meet dan mendapat energi dari obrolan bareng."
     }},
     "4": {"dim": "E", "rev": true, "text": {
-      "zh-HK": "在飯聚或連番時，我通常會等待別人先開口自我介紹。",
-      "zh-CN": "在饭聚或排队连番时，我通常会等待别人先开口自我介绍。",
+      "zh-HK": "在飯聚或連番時，<br>我通常會等待別人先開口自我介紹。",
+      "zh-CN": "在饭聚或排队连番时，<br>我通常会等待别人先开口自我介绍。",
       "ja": "オタ会や連番の際、いつも自分からは話しかけず、相手が自己紹介するのを待つ。",
       "ko": "팬모임이나 연석(동행) 시, 보통 상대방이 먼저 자기소개를 할 때까지 기다린다.",
       "en": "At fan gatherings or when sitting together, I usually wait for others to introduce themselves first.",
@@ -335,8 +335,8 @@
       "id": "Di acara kumpul fans atau saat antre bareng, saya biasanya menunggu orang lain memperkenalkan diri duluan."
     }},
     "5": {"dim": "E", "rev": false, "text": {
-      "zh-HK": "只要在場外見到拿著同樣成員應援物的同好，我便會毫不吝嗇地上前主動搭話。",
-      "zh-CN": "只要在场外见到拿着同样成员应援物的同好，我便会毫不吝啬地上前主动搭话。",
+      "zh-HK": "只要在場外見到拿著同樣成員應援物的同好，<br>我便會毫不吝嗇地上前主動搭話。",
+      "zh-CN": "只要在场外见到拿着同样成员应援物的同好，<br>我便会毫不吝啬地上前主动搭话。",
       "ja": "会場外で同じ推しのグッズを持っている人を見かけたら、ためらわずに話しかける。",
       "ko": "공연장 밖에서 같은 오시의 굿즈를 든 팬을 발견하면, 망설임 없이 먼저 다가가 말을 건다.",
       "en": "If I see someone with the same member's merch outside the venue, I won't hesitate to walk up and say hi.",
@@ -362,8 +362,8 @@
       "id": "Saya tidak terlalu peduli dengan kesan atau image saya di komunitas fandom (seperti X atau Reddit)."
     }},
     "8": {"dim": "E", "rev": true, "text": {
-      "zh-HK": "相較於嘈雜熱鬧的集體應援，我對能讓自己安靜沉浸的獨自應援更有獨鍾。",
-      "zh-CN": "相较于嘈杂热闹的集体应援，我对能让自己安静沉浸的独自应援更情有独钟。",
+      "zh-HK": "相較於嘈雜熱鬧的集體應援，<br>我對能讓自己安靜沉浸的獨自應援更有獨鍾。",
+      "zh-CN": "相较于嘈杂热闹的集体应援，<br>我对能让自己安静沉浸的独自应援更情有独钟。",
       "ja": "大人数で騒ぐ応援スタイルよりも、一人で静かに推し事（オタ活）に浸る方が好きだ。",
       "ko": "시끌벅적한 단체 덕질보다는, 조용히 몰입할 수 있는 혼자만의 덕질을 더 선호한다.",
       "en": "Compared to loud and lively group cheering, I prefer a quiet, immersive solo fan experience.",
@@ -371,8 +371,8 @@
       "id": "Dibandingkan dengan fanchant grup yang ramai dan bising, saya lebih suka nge-fangirl/fanboy sendirian dengan tenang."
     }},
     "9": {"dim": "E", "rev": false, "text": {
-      "zh-HK": "在握手會或 Online Talk 時，我能敏銳感知到成員當下的情感氛圍。",
-      "zh-CN": "在握手会或 Online Talk 时，我能敏锐感知到成员当下的情感氛围。",
+      "zh-HK": "在握手會或 Online Talk 時，<br>我能敏銳感知到成員當下的情感氛圍。",
+      "zh-CN": "在握手会或 Online Talk 时，<br>我能敏锐感知到成员当下的情感氛围。",
       "ja": "お話し会や握手会の際、メンバーのその時の感情や雰囲気を敏感に察知できる。",
       "ko": "영통팬싸나 대면 팬싸에서, 멤버의 현재 감정이나 분위기를 예민하게 눈치채는 편이다.",
       "en": "During meet-and-greets or online talks, I can keenly sense the member's current emotional vibe.",
@@ -380,8 +380,8 @@
       "id": "Saat meet-and-greet atau online talk, saya bisa merasakan suasana hati member saat itu dengan peka."
     }},
     "10": {"dim": "E", "rev": false, "text": {
-      "zh-HK": "我向來樂於廣結善緣，對在結交新飯友一事樂此不疲。",
-      "zh-CN": "我向来乐于广结善缘，对结交新饭友一事乐此不疲。",
+      "zh-HK": "我向來樂於廣結善緣，<br>對在結交新飯友一事樂此不疲。",
+      "zh-CN": "我向来乐于广结善缘，<br>对结交新饭友一事乐此不疲。",
       "ja": "もともと交友関係を広げるのが好きで、新しいオタク友達を作るのが楽しい。",
       "ko": "원래 사람 사귀는 것을 좋아해서, 새로운 덕메(덕질 메이트)를 만드는 일에 즐거움을 느낀다.",
       "en": "I always enjoy networking and find great pleasure in making new fan friends locally.",
@@ -461,8 +461,8 @@
       "id": "Saya suka sekadar mengoleksi merch resmi dan photocard, dan tidak terlalu tertarik membayangkan 'fanfic shipping' atau 'alternate universe' member di kepala saya."
     }},
     "19": {"dim": "S", "rev": false, "text": {
-      "zh-HK": "我能精準識別成員在舞台上瞬間流露出的疲態或小表情。",
-      "zh-CN": "我能精准识别成员在舞台上瞬间流露出的疲态或小表情。",
+      "zh-HK": "我能精準識別成員在舞台上<br>瞬間流露出的疲態或小表情。",
+      "zh-CN": "我能精准识别成员在舞台上<br>瞬间流露出的疲态或小表情。",
       "ja": "ステージ上でメンバーが一瞬見せる疲れや、細かな表情の変化を的確に見抜くことができる。",
       "ko": "무대 위에서 멤버가 순간적으로 드러내는 피곤함이나 미세한 표정 변화를 정확하게 포착할 수 있다.",
       "en": "I can accurately spot momentary signs of fatigue or subtle micro-expressions on a member's face during a performance.",
@@ -470,8 +470,8 @@
       "id": "Saya bisa dengan tepat mengenali raut kelelahan atau ekspresi mikro sesaat yang ditunjukkan member di atas panggung."
     }},
     "20": {"dim": "S", "rev": false, "text": {
-      "zh-HK": "我認為與其思考抽象的偶像哲學（如「偶像的意義」），不如多看兩場公演。",
-      "zh-CN": "我认为与其思考抽象的偶像哲学（如「偶像的意义」），不如多看两场公演。",
+      "zh-HK": "我認為與其思考抽象的偶像哲學<br>（如「偶像的意義」），不如多看兩場公演。",
+      "zh-CN": "我认为与其思考抽象的偶像哲学<br>（如「偶像的意义」），不如多看两场公演。",
       "ja": "「アイドルの意義とは」といった抽象的な哲学を考えるくらいなら、劇場公演を2回多く見た方がいいと思う。",
       "ko": "'아이돌의 의미'와 같은 추상적인 철학을 고민하느니, 차라리 극장 공연을 두 번 더 보는 게 낫다고 생각한다.",
       "en": "I believe that rather than pondering abstract idol philosophies (like 'the meaning of being an idol'), it's better to just watch a couple more theater shows.",
@@ -479,8 +479,8 @@
       "id": "Menurut saya, daripada memikirkan filosofi abstrak (seperti 'makna menjadi idola'), lebih baik menonton dua pertunjukan teater lagi."
     }},
     "21": {"dim": "S", "rev": true, "text": {
-      "zh-HK": "我盡情享受著探索那些別出心裁、不熟悉的成員應援觀點。",
-      "zh-CN": "我尽情享受着探索那些别出心裁、不熟悉的成员应援观点。",
+      "zh-HK": "我盡情享受著探索那些別出心裁、<br>不熟悉的成員應援觀點。",
+      "zh-CN": "我尽情享受着探索那些别出心裁、<br>不熟悉的成员应援观点。",
       "ja": "斬新で、これまで知らなかった推し活の価値観や考察を探求することを心から楽しんでいる。",
       "ko": "기발하고 익숙하지 않은 멤버의 매력이나 덕질 관점을 탐구하는 것을 진심으로 즐긴다.",
       "en": "I thoroughly enjoy exploring unconventional and unfamiliar perspectives on supporting members.",
@@ -497,8 +497,8 @@
       "id": "Dibandingkan dengan posisi dan sumber daya member saat ini, saya lebih mudah tertarik oleh transisi masa depan mereka atau 'potensi' mereka di industri hiburan dalam beberapa tahun ke depan."
     }},
     "23": {"dim": "S", "rev": false, "text": {
-      "zh-HK": "對於有關創意作品多元解讀的探討，我常感到缺乏興趣。",
-      "zh-CN": "对于有关创意作品多元解读的探讨，我常感到缺乏兴趣。",
+      "zh-HK": "對於有關創意作品多元解讀的探討，<br>我常感到缺乏興趣。",
+      "zh-CN": "对于有关创意作品多元解读的探讨，<br>我常感到缺乏兴趣。",
       "ja": "楽曲やMVの多様な解釈や考察についての議論には、あまり興味を持てないことが多い。",
       "ko": "창작물에 대한 다양한 해석이나 고찰에 관한 토론에는 종종 흥미를 느끼지 못한다.",
       "en": "I often find myself lacking interest in discussions about diverse interpretations of creative works.",
@@ -506,8 +506,8 @@
       "id": "Saya sering merasa kurang tertarik dengan diskusi tentang beragam interpretasi dari karya kreatif."
     }},
     "24": {"dim": "S", "rev": true, "text": {
-      "zh-HK": "我深信對於未來宏偉目標有清晰的藍圖，對成員來說非常重要。",
-      "zh-CN": "我深信对于未来宏伟目标有清晰的蓝图，对成员来说非常重要。",
+      "zh-HK": "我深信對於未來宏偉目標有清晰的藍圖，<br>對成員來說非常重要。",
+      "zh-CN": "我深信对于未来宏伟目标有清晰的蓝图，<br>对成员来说非常重要。",
       "ja": "将来の壮大な目標に対する明確なビジョン（青写真）を持つことが、メンバーにとって非常に重要だと確信している。",
       "ko": "미래의 거대한 목표에 대한 명확한 청사진을 갖는 것이 멤버에게 매우 중요하다고 굳게 믿는다.",
       "en": "I firmly believe that having a clear blueprint for grand future goals is very important for a member.",
@@ -533,8 +533,8 @@
       "id": "Saat ikut undian tiket konser atau membeli tiket meet-and-greet, saya menghitung anggaran dan probabilitas menang dengan ketat; saya jarang kalap dan overbudget secara buta."
     }},
     "27": {"dim": "T", "rev": false, "text": {
-      "zh-HK": "有意見分歧時，我更重視證明自己的觀點，而不是顧全香港飯圈其他人的感受。",
-      "zh-CN": "有意见分歧时，我更重视证明自己的观点，而不是顾全饭圈其他人的感受。",
+      "zh-HK": "有意見分歧時，我更重視證明自己的觀點，<br>而不是顧全香港飯圈其他人的感受。",
+      "zh-CN": "有意见分歧时，我更重视证明自己的观点，<br>而不是顾全饭圈其他人的感受。",
       "ja": "界隈内で意見の対立があった場合、周りのオタクの感情を気遣うよりも、自分の正しさを証明することを重視する。",
       "ko": "팬덤 내에서 의견 충돌이 있을 때, 다른 사람들의 기분을 배려하기보다는 내 관점을 증명하는 것을 더 중시한다.",
       "en": "When there's a disagreement, I focus more on proving my point rather than sparing the feelings of others in the fandom.",
@@ -542,8 +542,8 @@
       "id": "Saat ada perbedaan pendapat, saya lebih mementingkan membuktikan argumen saya daripada menjaga perasaan orang lain di fandom."
     }},
     "28": {"dim": "T", "rev": true, "text": {
-      "zh-HK": "在與同好相處時，我優先考慮善解人意，而不是直截了當地指出對方的錯誤。",
-      "zh-CN": "在与同好相处时，我优先考虑善解人意，而不是直截了当地指出对方的错误。",
+      "zh-HK": "在與同好相處時，我優先考慮善解人意，<br>而不是直截了當地指出對方的錯誤。",
+      "zh-CN": "在与同好相处时，我优先考虑善解人意，<br>而不是直截了当地指出对方的错误。",
       "ja": "オタク仲間と接する際、相手の間違いを単刀直入に指摘するよりも、共感や配慮を優先する。",
       "ko": "덕메들과 지낼 때, 상대방의 잘못을 단도직입적으로 지적하기보다는 이해하고 배려하는 것을 우선시한다.",
       "en": "When interacting with fellow fans, I prioritize being empathetic rather than bluntly pointing out their mistakes.",
@@ -551,8 +551,8 @@
       "id": "Saat berinteraksi dengan sesama fans, saya lebih mengutamakan empati daripada secara blak-blakan menunjukkan kesalahan mereka."
     }},
     "29": {"dim": "T", "rev": true, "text": {
-      "zh-HK": "當現實考量與對成員的情感互相拉扯，我往往會義無反顧地選擇跟隨內心聲音。",
-      "zh-CN": "当现实考量与对成员的情感互相拉扯，我往往会义无反顾地选择跟随内心声音。",
+      "zh-HK": "當現實考量與對成員的情感互相拉扯，<br>我往往會義無反顧地選擇跟隨內心聲音。",
+      "zh-CN": "当现实考量与对成员的情感互相拉扯，<br>我往往会义无反顾地选择跟随内心声音。",
       "ja": "現実的な事情と推しへの感情がぶつかり合った時、迷わず自分の心の声（感情）に従うことが多い。",
       "ko": "현실적인 제약과 멤버를 향한 감정이 충돌할 때, 나는 보통 망설임 없이 내 마음의 소리(감정)를 따르는 편이다.",
       "en": "When practical considerations clash with my feelings for a member, I invariably choose to follow my heart without hesitation.",
@@ -587,8 +587,8 @@
       "id": "Ketika melihat ada yang mengkritik oshi saya secara jahat di internet, saya biasanya terpancing oleh insting melindungi yang kuat dan membalas secara emosional, alih-alih dengan tenang memberikan bukti untuk membantahnya."
     }},
     "33": {"dim": "T", "rev": true, "text": {
-      "zh-HK": "為避免在應援群組中產生衝突，我常常委曲求全，假意贊同他人。",
-      "zh-CN": "为避免在应援群组中产生冲突，我常常委曲求全，假意赞同他人。",
+      "zh-HK": "為避免在應援群組中產生衝突，我常常委曲求全，<br>假意贊同他人。",
+      "zh-CN": "为避免在应援群组中产生冲突，我常常委曲求全，<br>假意赞同他人。",
       "ja": "オプチャや界隈内での対立を避けるために、自分の意見を曲げて他人に同調するフリをすることがよくある。",
       "ko": "덕질 톡방에서 갈등이 생기는 것을 피하기 위해, 종종 내 의견을 굽히고 남들에게 동조하는 척한다.",
       "en": "To avoid conflicts in fandom group chats, I often compromise myself and pretend to agree with others.",
@@ -596,8 +596,8 @@
       "id": "Untuk menghindari konflik di grup fandom, saya sering mengalah dan berpura-pura setuju dengan orang lain."
     }},
     "34": {"dim": "T", "rev": true, "text": {
-      "zh-HK": "我在做重要追星決定時（如畢業後的打算），完全依據個人價值觀，絲毫不顧他人期望。",
-      "zh-CN": "我在做重要追星决定时（如推毕业后的打算），完全依据个人价值观，丝毫不顾他人期望。",
+      "zh-HK": "我在做重要追星決定時（如畢業後的打算），<br>完全依據個人價值觀，絲毫不顧他人期望。",
+      "zh-CN": "我在做重要追星决定时（如推毕业后的打算），<br>完全依据个人价值观，丝毫不顾他人期望。",
       "ja": "推しの卒業後の身の振り方など、重要なオタ活の決断をする際、他人の期待は一切気にせず、完全に個人の価値観に基づいている。",
       "ko": "오시의 졸업 이후 행보 등 중요한 덕질 결정을 내릴 때, 타인의 기대는 전혀 신경 쓰지 않고 전적으로 내 개인적인 가치관에 따른다.",
       "en": "When making major fandom decisions (like what to do after graduation), I rely entirely on my personal values and completely disregard others' expectations.",
@@ -605,8 +605,8 @@
       "id": "Saat membuat keputusan penting dalam nge-stan (seperti apa yang akan dilakukan setelah oshi lulus), saya sepenuhnya bergantung pada nilai pribadi saya, tanpa memedulikan ekspektasi orang lain."
     }},
     "35": {"dim": "T", "rev": false, "text": {
-      "zh-HK": "在面對感性、缺乏理性的情緒化論點時，我始終保持冷靜的頭腦。",
-      "zh-CN": "在面对感性、缺乏理性的情绪化论点时，我始终保持冷静的头脑。",
+      "zh-HK": "在面對感性、缺乏理性的情緒化論點時，<br>我始終保持冷靜的頭腦。",
+      "zh-CN": "在面对感性、缺乏理性的情绪化论点时，<br>我始终保持冷静的头脑。",
       "ja": "感情的で理性の欠けた主張に直面しても、常に冷静な頭脳を保つことができる。",
       "ko": "감정적이고 이성적이지 못한 주장을 마주할 때도, 나는 항상 냉정한 머리를 유지한다.",
       "en": "When faced with highly emotional and irrational arguments, I always keep a cool head.",
@@ -614,8 +614,8 @@
       "id": "Saat berhadapan dengan argumen yang sangat emosional dan tidak logis, saya selalu menjaga pikiran tetap dingin."
     }},
     "36": {"dim": "T", "rev": false, "text": {
-      "zh-HK": "我在抉擇行事之道時，優先考慮事實而不是人們的感受。",
-      "zh-CN": "我在抉择行事之道时，优先考虑事实而不是人们的感受。",
+      "zh-HK": "我在抉擇行事之道時，<br>優先考慮事實而不是人們的感受。",
+      "zh-CN": "我在抉择行事之道时，<br>优先考虑事实而不是人们的感受。",
       "ja": "行動を決断する際、人々の感情よりも事実を優先して考慮する。",
       "ko": "어떻게 행동할지 결정할 때, 사람들의 감정보다는 사실을 우선적으로 고려한다.",
       "en": "When choosing a course of action, I prioritize facts over people's feelings.",
@@ -623,8 +623,8 @@
       "id": "Saat memilih tindakan, saya memprioritaskan fakta daripada perasaan orang-orang."
     }},
     "37": {"dim": "J", "rev": false, "text": {
-      "zh-HK": "我善於提前數月謀劃遠征行程，有條不紊地進行優先級劃分與規劃。",
-      "zh-CN": "我善于提前数月谋划远征行程，有条不紊地进行优先级划分与规划。",
+      "zh-HK": "我善於提前數月謀劃遠征行程，<br>有條不紊地進行優先級劃分與規劃。",
+      "zh-CN": "我善于提前数月谋划远征行程，<br>有条不紊地进行优先级划分与规划。",
       "ja": "数ヶ月前から遠征のスケジュールを練り、優先順位をつけて計画的に進めるのが得意だ。",
       "ko": "몇 달 전부터 원정 일정을 계획하고, 체계적으로 우선순위를 나누어 준비하는 것에 능숙하다.",
       "en": "I am good at planning expedition trips months in advance, methodically prioritizing and organizing.",
@@ -641,8 +641,8 @@
       "id": "Saya sering bersikap spontan, membiarkan hari di Tokyo berlalu dengan bebas tanpa jadwal apa pun."
     }},
     "39": {"dim": "J", "rev": false, "text": {
-      "zh-HK": "我的生寫冊與周邊牆總是窗明几淨、井井有條，擺放整齊劃一。",
-      "zh-CN": "我的生写册与周边墙总是窗明几净、井井有条，摆放整齐划一。",
+      "zh-HK": "我的生寫冊與周邊牆總是窗明几淨、井井有條，<br>擺放整齊劃一。",
+      "zh-CN": "我的生写册与周边墙总是窗明几净、井井有条，<br>摆放整齐划一。",
       "ja": "自分の生写真ファイルやグッズの祭壇は、常にチリひとつなく、規則正しく綺麗に整理整頓されている。",
       "ko": "내 포카 바인더와 굿즈존은 항상 먼지 하나 없이 깔끔하고, 일정한 규칙에 맞춰 정렬되어 있다.",
       "en": "My photocard binders and merch displays are always spotless, methodical, and uniformly organized.",
@@ -659,8 +659,8 @@
       "id": "Saya antusias menggunakan alat manajemen seperti Notion atau Google Calendar untuk mengatur tugas-tugas nge-stan saya."
     }},
     "41": {"dim": "J", "rev": true, "text": {
-      "zh-HK": "我不喜歡每天都有一份待辦事項清單，這讓我感到受束縛。",
-      "zh-CN": "我不喜欢每天都有一份待办事项清单，这让我感到受束缚。",
+      "zh-HK": "我不喜歡每天都有一份待辦事項清單，<br>這讓我感到受束縛。",
+      "zh-CN": "我不喜欢每天都有一份待办事项清单，<br>这让我感到受束缚。",
       "ja": "毎日のToDoリスト（やるべきことリスト）があるのは好きではない。縛られているように感じるからだ。",
       "ko": "매일같이 처리해야 할 체크리스트가 있는 것을 좋아하지 않는다. 얽매여 있는 기분이 들기 때문이다.",
       "en": "I dislike having a daily to-do list; it makes me feel constrained.",
@@ -668,8 +668,8 @@
       "id": "Saya tidak suka memiliki daftar tugas harian; hal itu membuat saya merasa terkekang."
     }},
     "42": {"dim": "J", "rev": true, "text": {
-      "zh-HK": "我時常事到臨頭才匆忙行動，例如見面會券截止前才臨陣磨槍地去填寫。",
-      "zh-CN": "我时常事到临头才匆忙行动，例如见面会券截止前才临阵磨枪地去填写。",
+      "zh-HK": "我時常事到臨頭才匆忙行動，<br>例如見面會券截止前才臨陣磨槍地去填寫。",
+      "zh-CN": "我时常事到临头才匆忙行动，<br>例如见面会券截止前才临阵磨枪地去填写。",
       "ja": "いつも締め切りギリギリになってから慌てて行動する（例：ミーグリの申込みを締切数分前に滑り込むなど）。",
       "ko": "항상 닥쳐서야 서둘러 행동한다 (예: 팬싸인회 응모 마감 직전에 허둥지둥 결제하기).",
       "en": "I often act at the very last minute, such as rushing to fill out meet-and-greet applications right before the deadline.",
@@ -686,8 +686,8 @@
       "id": "Kebiasaan stan saya cukup spontan; alih-alih rutin menonton konten setiap hari, saya lebih sering tiba-tiba ingin dan maraton menonton konten lama berbulan-bulan semalaman."
     }},
     "44": {"dim": "J", "rev": false, "text": {
-      "zh-HK": "一旦計畫（如演唱會取消）被意外打斷，我會馬不停蹄採取行動，渴望快速回歸正軌。",
-      "zh-CN": "一旦计划（如演唱会取消）被意外打断，我会马不停蹄采取行动，渴望快速回归正轨。",
+      "zh-HK": "一旦計畫（如演唱會取消）被意外打斷，<br>我會馬不停蹄採取行動，渴望快速回歸正軌。",
+      "zh-CN": "一旦计划（如演唱会取消）被意外打断，<br>我会马不停蹄采取行动，渴望快速回归正轨。",
       "ja": "ライブの中止などで予定が狂った場合、すぐに代替案を探すなど迅速に行動し、早く計画通りの軌道に戻したいと思う。",
       "ko": "콘서트 취소 등 계획이 뜻대로 되지 않으면, 즉시 대안을 찾아 빠르게 정상 궤도로 복구하고 싶어 한다.",
       "en": "Once a plan (like a concert cancellation) is unexpectedly disrupted, I take immediate action, eager to quickly get back on track.",
@@ -695,8 +695,8 @@
       "id": "Jika rencana (seperti konser batal) terganggu secara tak terduga, saya akan segera mengambil tindakan, ingin cepat-cepat kembali ke jalur yang benar."
     }},
     "45": {"dim": "J", "rev": true, "text": {
-      "zh-HK": "我的應援風格宛如瞬間點燃的熊熊火焰，更依賴於短期的高強度精力爆發。",
-      "zh-CN": "我的应援风格宛如瞬间点燃的熊熊火焰，更依赖于短期的高强度精力爆发。",
+      "zh-HK": "我的應援風格宛如瞬間點燃的熊熊火焰，<br>更依賴於短期的高強度精力爆發。",
+      "zh-CN": "我的应援风格宛如瞬间点燃的熊熊火焰，<br>更依赖于短期的高强度精力爆发。",
       "ja": "私の応援スタイルは、一瞬で燃え上がる炎のように、短期間での高密度なエネルギー爆発（短期集中型のオタ活）に依存している。",
       "ko": "나의 덕질 스타일은 순식간에 타오르는 불꽃처럼, 단기간에 에너지를 폭발시키는 벼락치기형에 가깝다.",
       "en": "My cheering style is like a sudden burst of flames; it relies more on short-term, high-intensity bursts of energy.",
@@ -713,8 +713,8 @@
       "id": "Saat menghadapi kendala tak terduga (seperti member absen dari pertunjukan), saya selalu bisa berimprovisasi dan menyesuaikan rencana dengan mudah."
     }},
     "47": {"dim": "J", "rev": false, "text": {
-      "zh-HK": "我向來精益求精，往往反覆斟酌給成員的信件，直到滿意才肯寄出。",
-      "zh-CN": "我向来精益求精，往往反复斟酌给成员的信件，直到满意才肯寄出。",
+      "zh-HK": "我向來精益求精，往往反覆斟酌給成員的信件，<br>直到滿意才肯寄出。",
+      "zh-CN": "我向来精益求精，往往反复斟酌给成员的信件，<br>直到满意才肯寄出。",
       "ja": "常に完璧を求めており、推しへのファンレターは何度も推敲し、納得いくまで出さない。",
       "ko": "항상 완벽을 추구하며, 멤버에게 보내는 편지는 마음에 들 때까지 몇 번이고 수정하여 보낸다.",
       "en": "I always strive for perfection, often repeatedly editing my fan letters to members until I am completely satisfied before sending them.",
@@ -731,8 +731,8 @@
       "id": "Saya menyelesaikan berbagai hal selangkah demi selangkah, tidak pernah melewatkan prosedur apa pun."
     }},
     "49": {"dim": "A", "rev": false, "text": {
-      "zh-HK": "即便面臨如山般沉重的壓力（如成員被曝醜聞），我也常能處變不驚，保持泰然自若。",
-      "zh-CN": "即便面临如山般沉重的压力（如成员被曝丑闻），我也常能处变不惊，保持泰然自若。",
+      "zh-HK": "即便面臨如山般沉重的壓力（如成員被曝醜聞），<br>我也常能處變不驚，保持泰然自若。",
+      "zh-CN": "即便面临如山般沉重的压力（如成员被曝丑闻），<br>我也常能处变不惊，保持泰然自若。",
       "ja": "推しのスキャンダルなど、山のような重圧やショックに直面しても、冷静さを失わず泰然自若としていることが多い。",
       "ko": "멤버의 스캔들 등 산더미 같은 압박이나 충격을 마주하더라도, 나는 대개 평정심을 유지하며 의연하게 대처한다.",
       "en": "Even when facing immense pressure (like a member's scandal breaking out), I often remain unfazed and keep my composure.",
@@ -785,8 +785,8 @@
       "id": "Saya sangat jarang merasa terganggu oleh perasaan tidak aman atau cemas."
     }},
     "55": {"dim": "A", "rev": false, "text": {
-      "zh-HK": "在遭受失望（如落選）時，我總能迅速調整，當機立斷地從困境中恢復過來。",
-      "zh-CN": "在遭受失望（如落选）时，我总能迅速调整，当机立断地从困境中恢复过来。",
+      "zh-HK": "在遭受失望（如落選）時，我總能迅速調整，<br>當機立斷地從困境中恢復過來。",
+      "zh-CN": "在遭受失望（如落选）时，我总能迅速调整，<br>当机立断地从困境中恢复过来。",
       "ja": "落選などの失望を味わった時も、すぐに気持ちを切り替え、迅速に立ち直ることができる。",
       "ko": "티켓 낙선 등 실망스러운 상황을 겪어도, 나는 항상 빠르게 마음을 추스르고 단호하게 털어낸다.",
       "en": "When faced with disappointment (like losing a ticket lottery), I can always adjust quickly and decisively recover from the setback.",
@@ -794,8 +794,8 @@
       "id": "Saat mengalami kekecewaan (seperti kalah undian tiket), saya selalu bisa menyesuaikan diri dengan cepat dan bangkit secara tegas dari keterpurukan."
     }},
     "56": {"dim": "A", "rev": false, "text": {
-      "zh-HK": "我胸有成竹，深信諸事順遂，一切應援活動都會如我所願地發展。",
-      "zh-CN": "我胸有成竹，深信诸事顺遂，一切应援活动都会如我所愿地发展。",
+      "zh-HK": "我胸有成竹，深信諸事順遂，<br>一切應援活動都會如我所願地發展。",
+      "zh-CN": "我胸有成竹，深信诸事顺遂，<br>一切应援活动都会如我所愿地发展。",
       "ja": "自信に満ちており、万事順調に進み、すべてのオタ活が自分の思い通りに展開すると固く信じている。",
       "ko": "나는 자신감이 넘치며, 모든 일이 순조롭게 풀리고 모든 덕질 활동이 내가 원하는 대로 될 것이라고 굳게 믿는다.",
       "en": "I am confident and firmly believe that everything will go smoothly and all my fan activities will unfold exactly as I wish.",
@@ -803,8 +803,8 @@
       "id": "Saya sangat percaya diri dan yakin bahwa semuanya akan lancar, dan semua aktivitas stan akan berjalan sesuai keinginan saya."
     }},
     "57": {"dim": "A", "rev": false, "text": {
-      "zh-HK": "經歷重大挫折後（如推し畢業），我很快就能重拾動力去支持其他成員。",
-      "zh-CN": "经历重大挫折后（如推毕业），我很快就能重拾动力去支持其他成员。",
+      "zh-HK": "經歷重大挫折後（如推し畢業），<br>我很快就能重拾動力去支持其他成員。",
+      "zh-CN": "经历重大挫折后（如推毕业），<br>我很快就能重拾动力去支持其他成员。",
       "ja": "推しの卒業などの大きな挫折を経験した後でも、すぐにモチベーションを取り戻し、他のメンバーを応援できる。",
       "ko": "오시의 졸업 등 큰 시련을 겪은 후에도, 금방 동력을 되찾아 다른 멤버를 응원할 수 있다.",
       "en": "After experiencing a major setback (like my oshi graduating), I can quickly regain my motivation to support other members.",
@@ -812,8 +812,8 @@
       "id": "Setelah mengalami pukulan berat (seperti oshi lulus), saya bisa dengan cepat mendapatkan kembali motivasi untuk mendukung member lain."
     }},
     "58": {"dim": "A", "rev": true, "text": {
-      "zh-HK": "每當有人對我給予極高讚譽時，我會暗自思忖，擔心自己其實並沒做得那麼好。",
-      "zh-CN": "每当有人对我给予极高赞誉时，我会暗自思忖，担心自己其实并没做得那么好。",
+      "zh-HK": "每當有人對我給予極高讚譽時，我會暗自思忖，<br>擔心自己其實並沒做得那麼好。",
+      "zh-CN": "每当有人对我给予极高赞誉时，我会暗自思忖，<br>担心自己其实并没做得那么好。",
       "ja": "誰かから極めて高い称賛を受けた時、「自分は本当はそこまでよくやっていないのではないか」と密かに心配になる。",
       "ko": "누군가 나에게 극찬을 해줄 때면, '사실 내가 그 정도로 잘한 건 아닌데'라며 속으로 걱정하곤 한다.",
       "en": "Whenever someone gives me very high praise, I secretly wonder and worry that I actually didn't do that well.",
@@ -821,8 +821,8 @@
       "id": "Setiap kali seseorang memberi saya pujian tinggi, saya diam-diam bertanya-tanya, khawatir bahwa saya sebenarnya tidak melakukannya sebaik itu."
     }},
     "59": {"dim": "A", "rev": false, "text": {
-      "zh-HK": "即便直面批評（如在討論區被狙），我對自身能力的認可依舊泰然自若。",
-      "zh-CN": "即便直面批评（如在讨论区被狙），我对自身能力的认可依旧泰然自若。",
+      "zh-HK": "即便直面批評（如在討論區被狙），<br>我對自身能力的認可依舊泰然自若。",
+      "zh-CN": "即便直面批评（如在讨论区被狙），<br>我对自身能力的认可依旧泰然自若。",
       "ja": "掲示板で晒されるなど直接的な批判を受けても、自分の能力に対する自己評価が揺らぐことはなく、冷静でいられる。",
       "ko": "커뮤니티에서 저격을 당하는 등 직접적인 비판에 직면해도, 내 자신의 능력에 대한 인정은 여전히 흔들림 없이 의연하다.",
       "en": "Even when facing direct criticism (like being targeted on a forum), my self-acknowledgment of my own abilities remains completely unshakeable.",
@@ -830,9 +830,9 @@
       "id": "Bahkan ketika dihadapkan pada kritik langsung (seperti di-spill di forum), pengakuan saya atas kemampuan diri sendiri tetap teguh dan tenang."
     }},
     "60": {"dim": "A", "rev": false, "text": {
-      "zh-HK": "我深信自己的行為是決定人生（或追星成果）走向的關鍵。",
-      "zh-CN": "我深信自己的行为是决定人生（或追星成果）走向的关键。",
-      "ja": "自分の行動こそが、人生（またはオタ活の成果）の方向を決定づける鍵だと深く信じている。",
+      "zh-HK": "我深信自己的行為是決定追星成果走向的關鍵。",
+      "zh-CN": "我深信自己的行为是决定追星成果走向的关键。",
+      "ja": "自分の行動こそが、オタ活の成果の方向を決定づける鍵だと深く信じている。",
       "ko": "내 행동이야말로 인생(혹은 덕질의 성과)의 방향을 결정하는 핵심이라고 굳게 믿는다.",
       "en": "I firmly believe that my own actions are the key to determining the direction of my life (or the results of my stanning).",
       "th": "ฉันเชื่อมั่นว่าการกระทำของตัวเองคือกุญแจสำคัญที่กำหนดทิศทางชีวิต (หรือผลลัพธ์ของการติ่ง) ของฉัน",
@@ -1952,6 +1952,7 @@
   }
 
 }
+
 
 
 
