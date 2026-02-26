@@ -130,3 +130,24 @@ input[type=range].custom-range.touched::-webkit-slider-thumb { background: var(-
     background: #2D3436; color: white; padding: 6px 12px; border-radius: 6px;
     font-size: 13px; font-weight: bold; display: inline-block; margin-bottom: 10px;
 }
+
+/* =======================================
+   新增修正：語言選單、手機版優化與狀態亮起
+   ======================================= */
+
+/* 語言選單樣式 */
+#lang-switcher-container { position: absolute; top: 20px; right: 20px; z-index: 1000; }
+.glass-select { padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(255,20,147,0.5); background: rgba(255,255,255,0.8); backdrop-filter: blur(5px); color: var(--cyber-pink); font-weight: bold; cursor: pointer; outline: none; }
+
+/* 鼠標淡出狀態 */
+#custom-cursor { transition: opacity 0.3s ease; }
+#custom-cursor.hidden-cursor { opacity: 0 !important; }
+
+/* 手機版排版修正 (解決選單遮擋與首頁太高) */
+@media (max-width: 768px) {
+    #lang-switcher-container { position: fixed; top: 10px; right: 10px; }
+    .progress-container { top: 55px !important; } /* 避開選單 */
+    #page-landing { justify-content: center; padding-top: 40px; min-height: 85vh; }
+    #custom-cursor { display: none; } /* 手機版直接隱藏鼠標點 */
+}
+
