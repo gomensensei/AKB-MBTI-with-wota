@@ -100,7 +100,7 @@
       "zh-HK": "🔙 返回查看 Best 3 結果", "zh-CN": "🔙 返回查看 Best 3 结果", "ja": "🔙 Best 3 の結果に戻る", "ko": "🔙 Best 3 결과로 돌아가기", "en": "🔙 Back to Best 3 Results", "th": "🔙 กลับไปดูผลลัพธ์ Best 3", "id": "🔙 Kembali ke Hasil Best 3"
     },
     "btn_download": {
-      "zh-HK": "📸 下載 IG Story 結果圖", "zh-CN": "📸 下载 IG Story 结果图", "ja": "📸 結果画像（IGストーリー用）を保存", "ko": "📸 인스타 스토리용 결과 이미지 저장", "en": "📸 Download IG Story Result Image", "th": "📸 ดาวน์โหลดรูปผลลัพธ์สำหรับ IG Story", "id": "📸 Unduh Gambar Hasil untuk IG Story"
+      "zh-HK": "📸 下載結果圖", "zh-CN": "📸 下载结果图", "ja": "📸 結果画像を保存", "ko": "📸 결과 이미지 저장", "en": "📸 DownloadResult Image", "th": "📸 ดาวน์โหลดรูปผลลัพธ์สำหรับ", "id": "📸 Unduh Gambar Hasil untuk"
     },
     "compatibility_label": {
       "zh-HK": "契合度: ", "zh-CN": "契合度: ", "ja": "相性度: ", "ko": "적합도: ", "en": "Compatibility: ", "th": "ระดับความเข้ากันได้: ", "id": "Tingkat Kecocokan: "
@@ -1952,6 +1952,7 @@
   }
 
 }
+
 
 
 
