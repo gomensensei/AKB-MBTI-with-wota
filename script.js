@@ -286,6 +286,13 @@ function renderMainDisplay(member, titleLabel) {
     `;
 }
 
+/* =========================================
+   2026 AKB48 粉絲深度性格鑑定 - 視覺與分享強化版
+   ========================================= */
+
+// [前段變數、初始化、語言偵測、handleSlider 代碼保持原樣...]
+// (為節省長度，此處由 renderResultPage 開始提供完整代碼)
+
 function renderResultPage(allMembers) {
     document.getElementById('page-quiz').classList.add('hidden');
     const resPage = document.getElementById('page-result');
@@ -300,20 +307,20 @@ function renderResultPage(allMembers) {
 
     const content = document.getElementById('result-content');
     content.innerHTML = `
-        <div id="export-container" style="background: linear-gradient(135deg, #fdfcfb, #f0e6ea); width: 100%; max-width: 440px; margin: 0 auto; overflow: hidden; border-radius: 16px;">
-            <div id="export-card" style="padding: 30px 20px; position: relative; display: flex; flex-direction: column; justify-content: center; align-items: center; min-height: 100%;">
+        <div id="export-container" style="background: linear-gradient(135deg, #fdfcfb, #f0e6ea); width: 100%; max-width: 480px; margin: 0 auto; overflow: hidden; border-radius: 20px;">
+            <div id="export-card" style="padding: 40px 25px; position: relative; display: flex; flex-direction: column; align-items: center; min-height: 800px; justify-content: space-between;">
                 
-                <div class="landing-header" style="text-align:center; margin-bottom: 20px; width: 100%;">
-                    <span class="subtitle">${ui.result_subtitle[currentLang]}</span>
-                    <h2 style="font-size: 32px; color: var(--cyber-pink); margin-top:5px; margin-bottom:0;">${userMbtiStr}</h2>
-                    <h3 style="font-size: 16px; color: var(--text-main); margin-top:0;">${userTitle}</h3>
+                <div class="landing-header" style="text-align:center; width: 100%;">
+                    <span class="subtitle" style="font-size: 16px; letter-spacing: 3px;">${ui.result_subtitle[currentLang]}</span>
+                    <h2 style="font-size: 48px; color: var(--cyber-pink); margin: 10px 0 0 0; line-height: 1;">${userMbtiStr}</h2>
+                    <h3 style="font-size: 20px; color: var(--text-main); margin-top: 5px;">${userTitle}</h3>
                 </div>
                 
-                <div id="radar-wrapper" style="position: relative; width: 220px; margin: 0 auto 10px auto;">
+                <div id="radar-wrapper" style="position: relative; width: 300px; margin: 20px auto;">
                     <canvas id="radarChart"></canvas>
                 </div>
 
-                <div id="main-display-section" style="background: white; border: 2px solid var(--sakura-light); border-radius: 20px; padding: 20px; text-align: center; box-shadow: 0 10px 25px rgba(255,20,147,0.1); width: 100%; max-width: 360px;">
+                <div id="main-display-section" style="background: white; border: 2px solid var(--sakura-light); border-radius: 24px; padding: 25px; text-align: center; box-shadow: 0 15px 35px rgba(255,20,147,0.12); width: 100%;">
                     ${renderMainDisplay(b1, ui.soulmate_title[currentLang])}
                 </div>
 
@@ -322,16 +329,16 @@ function renderResultPage(allMembers) {
 
         <div id="web-best-list" class="web-only" style="margin-top: 20px;">
             <div style="background: rgba(255,255,255,0.7); border: 1px dashed var(--sakura-light); padding: 15px; border-radius: 12px; margin-bottom: 10px; display: flex; align-items: center;">
-                <img crossorigin="anonymous" src="${b2.image}${cb}" style="width:50px; height:50px; border-radius:50%; margin-right:15px; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                <img crossorigin="anonymous" src="${b2.image}${cb}" style="width:55px; height:55px; border-radius:50%; margin-right:15px; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
                 <div>
-                    <div style="font-size:12px; color: #888;">${ui.partner_title[currentLang]} (${b2.comp}%)</div>
+                    <div style="font-size:12px; color: #888;">2nd Match (${b2.comp}%)</div>
                     <div style="font-size:16px; font-weight:bold;">${b2.name_ja} <span style="font-size:12px; color:var(--cyber-pink);">${b2.mbti_type}</span></div>
                 </div>
             </div>
             <div style="background: rgba(255,255,255,0.7); border: 1px dashed var(--sakura-light); padding: 15px; border-radius: 12px; display: flex; align-items: center;">
-                <img crossorigin="anonymous" src="${b3.image}${cb}" style="width:50px; height:50px; border-radius:50%; margin-right:15px; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
+                <img crossorigin="anonymous" src="${b3.image}${cb}" style="width:55px; height:55px; border-radius:50%; margin-right:15px; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
                 <div>
-                    <div style="font-size:12px; color: #888;">${ui.rival_title[currentLang]} (${b3.comp}%)</div>
+                    <div style="font-size:12px; color: #888;">3rd Match (${b3.comp}%)</div>
                     <div style="font-size:16px; font-weight:bold;">${b3.name_ja} <span style="font-size:12px; color:var(--cyber-pink);">${b3.mbti_type}</span></div>
                 </div>
             </div>
@@ -339,7 +346,7 @@ function renderResultPage(allMembers) {
 
         <div class="web-only" style="margin-top: 25px; background: white; border-radius: 16px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
             <h4 style="margin-bottom: 10px; text-align:center;">${ui.select_oshi_label[currentLang]}</h4>
-            <select id="oshi-select" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-family: var(--font-jp); font-size:16px;">
+            <select id="oshi-select" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size:16px;">
                 <option value="">${ui.select_oshi_default[currentLang]}</option>
                 ${[...allMembers].sort((a,b)=>a.ki.localeCompare(b.ki)).map(m => `<option value="${m.id}">${m.name_ja} (${m.ki})</option>`).join('')}
             </select>
@@ -351,21 +358,47 @@ function renderResultPage(allMembers) {
 
         <div class="web-only result-actions" style="display: flex; gap: 10px; margin-top: 20px;">
             <button id="download-btn" class="cyber-btn" style="flex: 1; background: #2d3436;">${ui.btn_download[currentLang]}</button>
-            <button id="share-x-btn" class="cyber-btn" style="flex: 1; background: #000; color: #fff;">𝕏 Share</button>
+            <button id="share-x-btn" class="cyber-btn" style="flex: 1; background: #000; color: #fff;">分享到 𝕏</button>
         </div>
     `;
 
+    // 重新繪製雷達圖 - 加入數值參考線
     if(myRadarChart) myRadarChart.destroy();
     const ctx = document.getElementById('radarChart').getContext('2d');
     myRadarChart = new Chart(ctx, {
         type: 'radar',
         data: {
             labels: ui.radar_labels[currentLang],
-            datasets: [{ label: 'You', data: [userPerc.E, userPerc.S, userPerc.T, userPerc.J, userPerc.A], backgroundColor: 'rgba(255, 20, 147, 0.4)', borderColor: '#FF1493', borderWidth: 2, pointRadius: 0 }]
+            datasets: [{ 
+                data: [userPerc.E, userPerc.S, userPerc.T, userPerc.J, userPerc.A], 
+                backgroundColor: 'rgba(255, 20, 147, 0.4)', 
+                borderColor: '#FF1493', 
+                borderWidth: 3, 
+                pointRadius: 4,
+                pointBackgroundColor: '#FF1493'
+            }]
         },
-        options: { scales: { r: { angleLines: { display: false }, ticks: { display: false }, suggestedMin: 0, suggestedMax: 100 } }, plugins: { legend: { display: false } } }
+        options: { 
+            scales: { 
+                r: { 
+                    angleLines: { color: 'rgba(0,0,0,0.1)' }, 
+                    grid: { color: 'rgba(0,0,0,0.08)' },
+                    ticks: { 
+                        display: true, // 顯示數字參考
+                        stepSize: 20, 
+                        backdropColor: 'transparent',
+                        color: '#999',
+                        font: { size: 10 }
+                    }, 
+                    suggestedMin: 0, 
+                    suggestedMax: 100 
+                } 
+            }, 
+            plugins: { legend: { display: false } } 
+        }
     });
 
+    // 選擇神推事件
     document.getElementById('oshi-select').addEventListener('change', (e) => {
         const oshiId = e.target.value;
         const bestList = document.getElementById('web-best-list');
@@ -387,7 +420,15 @@ function renderResultPage(allMembers) {
         bestList.style.display = 'none'; 
         backBtnCont.style.display = 'block';
         
-        myRadarChart.data.datasets[1] = { label: oshi.name_ja, data: [oshi.mbti_scores.E, oshi.mbti_scores.S, oshi.mbti_scores.T, oshi.mbti_scores.J, oshi.mbti_scores.A || 50], backgroundColor: 'rgba(0, 206, 209, 0.1)', borderColor: '#00CED1', borderWidth: 2, borderDash: [5, 5], pointBackgroundColor: '#00CED1' };
+        myRadarChart.data.datasets[1] = { 
+            label: oshi.name_ja, 
+            data: [oshi.mbti_scores.E, oshi.mbti_scores.S, oshi.mbti_scores.T, oshi.mbti_scores.J, oshi.mbti_scores.A || 50], 
+            backgroundColor: 'rgba(0, 206, 209, 0.15)', 
+            borderColor: '#00CED1', 
+            borderWidth: 2, 
+            borderDash: [5, 5], 
+            pointRadius: 3 
+        };
         myRadarChart.update();
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
@@ -398,48 +439,36 @@ function renderResultPage(allMembers) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // 解決 Crop 走問題，強制 9:16 (540x960)
+    // 完美 9:16 高清截圖邏輯
     document.getElementById('download-btn').addEventListener('click', async () => {
         const container = document.getElementById('export-container');
         const webOnly = document.querySelectorAll('.web-only');
         const exportOnly = document.querySelectorAll('.export-only');
         
-        const webOriginals = Array.from(webOnly).map(el => el.style.display);
         webOnly.forEach(el => el.style.display = 'none');
         exportOnly.forEach(el => el.style.display = 'grid'); 
-        
-        // 保存原屬性
+
         const oldWidth = container.style.width;
         const oldHeight = container.style.height;
         const oldPos = container.style.position;
-        const oldTop = container.style.top;
-        const oldLeft = container.style.left;
-        const oldZ = container.style.zIndex;
-        const oldRadius = container.style.borderRadius;
-        const oldMaxWidth = container.style.maxWidth;
-
-        // 強制鎖定 9:16 IG Story Size (540x960) 並絕對定位避開 Scroll Crop
+        
+        // 強制鎖定 9:16 並放大適配
         container.style.width = "540px";
         container.style.height = "960px";
-        container.style.maxWidth = "none";
-        container.style.position = "absolute";
+        container.style.position = "fixed";
         container.style.top = "0";
         container.style.left = "0";
         container.style.zIndex = "9999";
-        container.style.borderRadius = "0";
-        document.getElementById('radar-wrapper').style.width = "260px"; // 稍微放大雷達圖適應大版面
         
-        window.scrollTo(0, 0); // 回到最頂，徹底解決 html2canvas 切邊 Bug
+        window.scrollTo(0, 0);
 
         try {
             const canvas = await html2canvas(container, { 
-                scale: 2, // 2倍縮放，即輸出 1080x1920 高清直長圖
+                scale: 2, 
                 useCORS: true, 
                 backgroundColor: "#fdfcfb",
                 width: 540,
-                height: 960,
-                scrollY: 0,
-                scrollX: 0
+                height: 960
             });
 
             const link = document.createElement('a');
@@ -447,23 +476,15 @@ function renderResultPage(allMembers) {
             link.href = canvas.toDataURL("image/png");
             link.click();
         } finally {
-            // 恢復所有樣式
-            webOnly.forEach((el, i) => el.style.display = webOriginals[i]);
+            webOnly.forEach(el => el.style.display = 'block');
             exportOnly.forEach(el => el.style.display = 'none');
-            
             container.style.width = oldWidth;
             container.style.height = oldHeight;
-            container.style.maxWidth = oldMaxWidth;
             container.style.position = oldPos;
-            container.style.top = oldTop;
-            container.style.left = oldLeft;
-            container.style.zIndex = oldZ;
-            container.style.borderRadius = oldRadius;
-            document.getElementById('radar-wrapper').style.width = "220px";
         }
     });
 
-    // 𝕏 Share 內文支援多語言字典
+    // 𝕏 Share 強化版：加入名字 Hashtag
     document.getElementById('share-x-btn').addEventListener('click', () => {
         const shareTexts = {
             'zh-HK': { mbti: "我的追星人格：", soulmate: "我的靈魂伴侶：", oshi: "我的神推相性：", check: "測測你的 AKB48 靈魂成員：" },
@@ -479,13 +500,15 @@ function renderResultPage(allMembers) {
         const shareUrl = window.location.href;
         const isOshi = currentDisplayMember.id !== b1.id;
         
+        // 處理名字 Hashtag：消除所有空格
+        const memberHash = `#${currentDisplayMember.name_ja.replace(/\s+/g, '')}`;
+        
         const relationTitle = isOshi ? st.oshi : st.soulmate;
         const mbtiLine = `【${st.mbti}${userMbtiStr} ${userTitle}】`;
         const matchLine = `💖 ${relationTitle}${currentDisplayMember.name_ja} (${currentDisplayMember.comp}%)`;
-        const tags = `#AKB48 #MBTI #性格鑑定`;
+        const tags = `#AKB48 #MBTI ${memberHash} #性格鑑定`;
         
         const tweetText = `${mbtiLine}\n${matchLine}\n\n${st.check}\n👇 ${shareUrl}\n\n${tags}`;
         window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`, '_blank');
     });
 }
-
