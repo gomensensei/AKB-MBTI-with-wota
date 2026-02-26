@@ -8,11 +8,23 @@ let currentLang = "zh-HK";
 let userAnswers = {};
 let currentPage = 0;
 const totalPages = 6;
-const questionsPerPage = 10;
 let userPerc = {};
 let userMbtiStr = "";
 let myRadarChart = null; 
 let matchResultsGlobal = []; 
+
+// 自動偵測瀏覽器語言
+function detectLanguage() {
+    const lang = navigator.language || navigator.userLanguage;
+    const lowerLang = lang.toLowerCase();
+    if (lowerLang.includes('zh-hk') || lowerLang.includes('zh-tw')) return 'zh-HK';
+    if (lowerLang.includes('zh')) return 'zh-CN';
+    if (lowerLang.includes('ja')) return 'ja';
+    if (lowerLang.includes('ko')) return 'ko';
+    if (lowerLang.includes('th')) return 'th';
+    if (lowerLang.includes('id')) return 'id';
+    return 'en';
+}
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
@@ -23,6 +35,7 @@ document.addEventListener('DOMContentLoaded', async () => {
         membersDB = await memRes.json();
         i18nData = await langRes.json();
         
+        // 載入 localStorage 進度與語言
         const saved = localStorage.getItem('akb_answers');
         if (saved) {
             userAnswers = JSON.parse(saved);
@@ -32,29 +45,28 @@ document.addEventListener('DOMContentLoaded', async () => {
             else currentPage = Math.floor(ansCount / 10);
         }
 
+        currentLang = localStorage.getItem('akb_lang') || detectLanguage();
+        
         const langBtn = document.getElementById('lang-switcher');
         if(langBtn) {
+            langBtn.value = currentLang; // 讓選單顯示正確語言
             langBtn.addEventListener('change', (e) => {
                 currentLang = e.target.value;
+                localStorage.setItem('akb_lang', currentLang);
                 applyLanguage(currentLang);
             });
         }
         applyLanguage(currentLang);
 
-    } catch (e) {
-        console.error("載入 JSON 失敗:", e);
-    }
+    } catch (e) { console.error("載入 JSON 失敗:", e); }
 
-    const startBtn = document.getElementById('start-btn');
-    if(startBtn) {
-        startBtn.addEventListener('click', () => {
-            document.getElementById('page-landing').classList.add('hidden');
-            document.getElementById('page-quiz').classList.remove('hidden');
-            renderQuiz();
-            updateUI(); 
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-        });
-    }
+    document.getElementById('start-btn')?.addEventListener('click', () => {
+        document.getElementById('page-landing').classList.add('hidden');
+        document.getElementById('page-quiz').classList.remove('hidden');
+        renderQuiz();
+        updateUI(); 
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
 
     document.getElementById('prev-btn')?.addEventListener('click', () => {
         if (currentPage > 0) { currentPage--; updateUI(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
@@ -123,7 +135,6 @@ function renderQuiz() {
         }
         track.appendChild(pageDiv);
     }
-
     track.addEventListener('input', handleSlider);
     track.addEventListener('change', handleSlider);
 
@@ -133,7 +144,6 @@ function renderQuiz() {
     if (targetBox) targetBox.classList.add('active');
 }
 
-// 修正：確保滑動時即時更新進度條與解鎖下一題，並修復跨頁捲動 Bug
 function handleSlider(e) {
     if (e.target.tagName === 'INPUT' && e.target.type === 'range') {
         const slider = e.target;
@@ -142,19 +152,14 @@ function handleSlider(e) {
         userAnswers[qId] = parseInt(slider.value);
         localStorage.setItem('akb_answers', JSON.stringify(userAnswers));
         
-        updateProgress(); // 即時更新進度條
+        updateProgress(); 
         checkPageCompletion();
 
         const nextBox = document.getElementById(`qbox-${qId + 1}`);
         if (nextBox) {
-            nextBox.classList.add('active'); // 即時解鎖亮起下一題
-            
-            if (e.type === 'change') { 
-                // 【核心修復】：如果下一題不是新一頁的開頭 (即 qId 不是 10, 20, 30...) 才自動捲動
-                // 這樣就能強迫用戶在每頁底端點擊「下一頁」按鈕，確保系統頁數正確更新
-                if (qId % 10 !== 0) {
-                    setTimeout(() => nextBox.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
-                }
+            nextBox.classList.add('active'); 
+            if (e.type === 'change' && qId % 10 !== 0) { 
+                setTimeout(() => nextBox.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
             }
         }
     }
@@ -232,7 +237,6 @@ function getConicGradient(colors) {
     if(colors.length >= 3) return `conic-gradient(${colors[0]} 0deg 120deg, ${colors[1]} 120deg 240deg, ${colors[2]} 240deg 360deg)`;
 }
 
-// 修正：補全斷層的 renderResultPage 函數
 function renderResultPage(allMembers) {
     document.getElementById('page-quiz').classList.add('hidden');
     const resPage = document.getElementById('page-result');
@@ -244,6 +248,9 @@ function renderResultPage(allMembers) {
     let b3_lang = i18nData.members_analysis[b3.id];
     let userTitle = i18nData.mbti_titles[userMbtiStr]?.[currentLang] || userMbtiStr;
     let ui = i18nData.ui;
+
+    // 添加時間戳強行避開瀏覽器的 CORS 快取錯誤
+    const cb = `?v=${new Date().getTime()}`;
 
     const content = document.getElementById('result-content');
     content.innerHTML = `
@@ -260,7 +267,7 @@ function renderResultPage(allMembers) {
                 <div style="background: rgba(255,255,255,0.8); border: 2px solid var(--sakura-light); border-radius: 16px; padding: 20px; text-align: center; margin-bottom: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
                     <div style="font-size: 20px; font-weight:bold; margin-bottom: 15px;">${ui.soulmate_title[currentLang]}</div>
                     <div style="width: 110px; height: 110px; border-radius: 50%; padding: 4px; background: ${getConicGradient(b1.colors)}; margin: 0 auto 10px auto;">
-                        <img crossorigin="anonymous" src="${b1.image}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid white;">
+                        <img crossorigin="anonymous" src="${b1.image}${cb}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid white;">
                     </div>
                     <h3 style="font-size: 20px;">${b1.name_ja} (${b1.mbti_type})</h3>
                     <p style="color: var(--cyber-pink); font-weight: bold; font-size: 18px; margin: 5px 0;">${ui.compatibility_label[currentLang]}${b1.comp}%</p>
@@ -275,7 +282,7 @@ function renderResultPage(allMembers) {
                 <div style="background: rgba(255,255,255,0.8); border-radius: 12px; padding: 15px; margin-bottom: 15px;">
                     <div style="display:flex; align-items:center; margin-bottom: 10px;">
                         <div style="width: 60px; height: 60px; border-radius: 50%; padding: 3px; background: ${getConicGradient(b2.colors)}; flex-shrink:0;">
-                            <img crossorigin="anonymous" src="${b2.image}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid white;">
+                            <img crossorigin="anonymous" src="${b2.image}${cb}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid white;">
                         </div>
                         <div style="margin-left: 15px;">
                             <div style="font-size: 14px; color: #888;">${ui.partner_title[currentLang]} (${b2.comp}%)</div>
@@ -289,7 +296,7 @@ function renderResultPage(allMembers) {
                 <div style="background: rgba(255,255,255,0.8); border-radius: 12px; padding: 15px;">
                     <div style="display:flex; align-items:center; margin-bottom: 10px;">
                         <div style="width: 60px; height: 60px; border-radius: 50%; padding: 3px; background: ${getConicGradient(b3.colors)}; flex-shrink:0;">
-                            <img crossorigin="anonymous" src="${b3.image}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid white;">
+                            <img crossorigin="anonymous" src="${b3.image}${cb}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 2px solid white;">
                         </div>
                         <div style="margin-left: 15px;">
                             <div style="font-size: 14px; color: #888;">${ui.rival_title[currentLang]} (${b3.comp}%)</div>
@@ -361,7 +368,7 @@ function renderResultPage(allMembers) {
         b3Sec.style.display = 'none'; oshiSec.style.display = 'block'; backBtnCont.style.display = 'block';
         
         document.getElementById('oshi-avatar-container').style.background = getConicGradient(oshi.colors);
-        document.getElementById('oshi-img').src = oshi.image;
+        document.getElementById('oshi-img').src = oshi.image + cb;
         document.getElementById('oshi-name').innerHTML = `${oshi.name_ja} <span style="font-size:14px;">(${oshi.mbti_type})</span>`;
         document.getElementById('oshi-comp').innerText = `${ui.compatibility_label[currentLang]}${oshi.comp}%`;
         document.getElementById('oshi-badge').innerText = oshiLang.title[currentLang];
@@ -402,8 +409,9 @@ function renderResultPage(allMembers) {
         card.style.backdropFilter = 'none';
         card.style.boxShadow = 'none'; 
 
-        const tweetText = `${ui.result_subtitle[currentLang]} | ${userMbtiStr} ${userTitle}\n#AKB48 #MBTI #AKB48性格鑑定`;
         const shareUrl = window.location.href;
+        // 分享文字加入連結
+        const tweetText = `${ui.result_subtitle[currentLang]} | ${userMbtiStr} ${userTitle}\n#AKB48 #MBTI #AKB48性格鑑定\n\n👇 ${shareUrl}`;
 
         setTimeout(async () => {
             const canvas = await html2canvas(card, { scale: 2, useCORS: true, backgroundColor: "#ffffff" });
@@ -413,11 +421,10 @@ function renderResultPage(allMembers) {
                 if (navigator.canShare && navigator.canShare({ files: [file] })) {
                     try { await navigator.share({ files: [file], title: 'AKB48 Personality Test', text: tweetText }); } catch (err) { console.error("Share failed:", err); }
                 } else {
-                    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}&url=${encodeURIComponent(shareUrl)}`, '_blank');
+                    window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`, '_blank');
                     alert(currentLang === 'zh-HK' ? "請手動附加剛剛下載的圖片！" : "Please attach the image manually!");
                 }
             }, 'image/png');
         }, 100);
     });
 }
-
