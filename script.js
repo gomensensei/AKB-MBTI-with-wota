@@ -361,7 +361,14 @@ function renderResultPage(allMembers) {
             labels: ui.radar_labels[currentLang],
             datasets: [{ data: [userPerc.E, userPerc.S, userPerc.T, userPerc.J, userPerc.A], backgroundColor: 'rgba(255, 20, 147, 0.4)', borderColor: '#FF1493', borderWidth: 3, pointRadius: 4, pointBackgroundColor: '#FF1493' }]
         },
-        options: { scales: { r: { angleLines: { color: 'rgba(0,0,0,0.1)' }, grid: { color: 'rgba(0,0,0,0.08)' }, ticks: { display: true, stepSize: 20, backdropColor: 'transparent', color: '#999', font: { size: 10 } }, suggestedMin: 0, suggestedMax: 100 } }, plugins: { legend: { display: false } } }
+        options: {
+           animation: {
+                duration: 2500,           // 動畫持續 2.5 秒
+                easing: 'easeOutQuart'    // 絲滑的減速效果
+            },
+           scales: {
+              r: {
+                 angleLines: { color: 'rgba(0,0,0,0.1)' }, grid: { color: 'rgba(0,0,0,0.08)' }, ticks: { display: true, stepSize: 20, backdropColor: 'transparent', color: '#999', font: { size: 10 } }, suggestedMin: 0, suggestedMax: 100 } }, plugins: { legend: { display: false } } }
     });
     document.getElementById('oshi-select').addEventListener('change', (e) => {
         const oshiId = e.target.value;
@@ -416,4 +423,138 @@ function renderResultPage(allMembers) {
         const tweetText = `【${st.mbti}${userMbtiStr} ${userTitle}】\n💖 ${relationTitle}${currentDisplayMember.name_ja} (${currentDisplayMember.comp}%)\n\n${st.check}\n👇 ${shareUrl}\n\n#AKB48 #MBTI ${memberHash} #性格鑑定`;
         window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`, '_blank');
     });
+}
+
+// ==========================================
+// 動畫與特效引擎區
+// ==========================================
+
+// 1. Loading 圓圈與爆開展示
+function showLoadingAndReveal(bestCompScore) {
+    const loader = document.getElementById('loading-overlay');
+    loader.style.display = 'flex';
+    loader.classList.remove('hidden');
+    
+    const progressCircle = loader.querySelector('.progress');
+    // 重置進度條
+    progressCircle.style.transition = 'none';
+    progressCircle.style.strokeDashoffset = '283';
+    
+    // 強制瀏覽器重繪
+    void progressCircle.offsetWidth;
+    
+    // 開始跑 1.5 秒進度條
+    progressCircle.style.transition = 'stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
+    progressCircle.style.strokeDashoffset = '0';
+    
+    setTimeout(() => {
+        // 進度條滿了，爆開 Confetti
+        if (typeof confetti !== 'undefined') {
+            confetti({ particleCount: 120, spread: 160, startVelocity: 30, origin: {y: 0.6}, zIndex: 10001 });
+        }
+        
+        // 隱藏 Loader
+        loader.style.opacity = '0';
+        setTimeout(() => {
+            loader.classList.add('hidden');
+            loader.style.opacity = '1'; // 恢復透明度供下次使用
+            
+            // 💡 這裡放你原本切換頁面的代碼
+            document.getElementById('page-quiz').classList.add('hidden');
+            document.getElementById('page-result').classList.remove('hidden');
+            
+            // 觸發所有分數、頭像和背景動畫
+            runResultAnimations(bestCompScore);
+        }, 500);
+        
+    }, 1500);
+}
+
+// 2. 觸發結果頁面的各種發光與特效
+function runResultAnimations(topCompScore) {
+    // 讓雷達圖容器發光
+    const radarContainer = document.getElementById('radar-chart-container'); // 請確保你的 canvas 容器有 ID
+    if(radarContainer) radarContainer.classList.add('pulse-glow');
+
+    const avatars = document.querySelectorAll('.result-avatar'); 
+    const compTexts = document.querySelectorAll('.comp-score'); 
+    const hearts = document.querySelectorAll('.match-heart'); 
+
+    // 全部加上基礎呼吸光暈
+    avatars.forEach(avatar => avatar.classList.add('pulse-border'));
+
+    // 處理數字 Count Up 與 0.6秒粉色粒子
+    compTexts.forEach(text => {
+        text.classList.add('pulse-text');
+        const finalValue = parseFloat(text.innerText); 
+        if(!isNaN(finalValue)) {
+            animateCountUp(text, finalValue);
+        }
+    });
+
+    // 處理 90% 以上的特殊動畫 (只針對第一名 Soulmate 觸發)
+    if (topCompScore >= 90 && topCompScore < 95) {
+        if(avatars[0]) avatars[0].classList.add('thick-pulse-border');
+        if(compTexts[0]) compTexts[0].classList.add('burst-light-anim');
+        triggerMoreSakura();
+    } else if (topCompScore >= 95) {
+        if(avatars[0]) avatars[0].classList.add('thick-pulse-border');
+        if(compTexts[0]) compTexts[0].classList.add('burst-light-anim');
+        if(hearts[0]) hearts[0].classList.add('heartbeat-anim'); // 中間心跳 3 次
+        triggerMoreSakura(); // 背景櫻花狂暴
+    }
+}
+
+// 3. 數字慢慢跳動，結束時散開粉色粒子
+function animateCountUp(element, finalValue) {
+    let duration = 1500; // 跑 1.5 秒
+    let startTimestamp = null;
+    element.innerText = "0.0%"; 
+
+    const step = (timestamp) => {
+        if (!startTimestamp) startTimestamp = timestamp;
+        const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+        const easeOut = progress * (2 - progress); // 減速效果
+        
+        element.innerText = (easeOut * finalValue).toFixed(1) + '%';
+        
+        if (progress < 1) {
+            window.requestAnimationFrame(step);
+        } else {
+            element.innerText = finalValue.toFixed(1) + '%';
+            // 結束時觸發 0.6 秒粒子
+            triggerPinkParticles(element);
+        }
+    };
+    window.requestAnimationFrame(step);
+}
+
+// 4. 粉色粒子散開 (從數字位置爆發)
+function triggerPinkParticles(element) {
+    if (typeof confetti === 'undefined') return;
+    const rect = element.getBoundingClientRect();
+    // 取得數字在螢幕上的 XY 座標比例 (0~1)
+    const x = (rect.left + rect.width / 2) / window.innerWidth;
+    const y = (rect.top + rect.height / 2) / window.innerHeight;
+    
+    confetti({
+        particleCount: 30, 
+        spread: 70, 
+        startVelocity: 15,
+        colors: ['#FF1493', '#FFB6C1', '#FFFFFF'], // 櫻花粉色系
+        ticks: 36, // 大約 0.6 秒結束 (60fps * 0.6 = 36)
+        origin: { x, y }, 
+        zIndex: 9999
+    });
+}
+
+// 5. 90% 以上觸發「背景飄更多櫻花」
+function triggerMoreSakura() {
+    if (typeof confetti === 'undefined') return;
+    const end = Date.now() + 2500; // 狂暴 2.5 秒
+    (function frame() {
+        confetti({ particleCount: 3, angle: 60, spread: 55, origin: { x: 0, y: 0.6 }, colors: ['#FFB6C1', '#FFC0CB'] });
+        confetti({ particleCount: 3, angle: 120, spread: 55, origin: { x: 1, y: 0.6 }, colors: ['#FFB6C1', '#FFC0CB'] });
+        if (Date.now() < end) requestAnimationFrame(frame);
+    }());
 }
