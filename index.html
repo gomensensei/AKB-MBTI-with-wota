@@ -27,7 +27,15 @@
 </head>
 <body>
     <div id="custom-cursor"></div>
-
+<div id="loading-overlay" class="hidden">
+        <div class="loader-circle">
+            <svg viewBox="0 0 100 100">
+                <circle class="bg" cx="50" cy="50" r="45"></circle>
+                <circle class="progress" cx="50" cy="50" r="45"></circle>
+            </svg>
+            <div class="loader-text" data-i18n="loading_text">Calculating...</div>
+        </div>
+    </div>
     <div id="lang-switcher-container">
         <select id="lang-switcher" class="glass-select">
             <option value="zh-HK">繁體中文</option>
@@ -165,6 +173,7 @@ function continuousSakura() {
     </script>
 </body>
 </html>
+
 
 
 
