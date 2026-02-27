@@ -787,16 +787,16 @@ document.addEventListener('mousedown', function(e) {
         const yPercent = e.clientY / window.innerHeight;
 
         confetti({
-            particleCount: 3,                // 每次 3 塊
-            spread: 90,                      
-            startVelocity: 6,                // 柔和初速
-            gravity: 0.25,                   // 輕盈飄落
+            particleCount: 3,                // 每次 5 塊
+            spread: 120,                      
+            startVelocity: 8,                // 柔和初速
+            gravity: 0.15,                   // 輕盈飄落
             drift: randomInRange(-0.8, 0.8), // 微風左右吹
             colors: ['#FFB7C5', '#FFC0CB', '#F8C8DC'], // 柔和櫻花色
             shapes: [petalShape],       
             
             // 🌸 3. 【修復關鍵】：加大最終顯示比例，確保肉眼清晰可見
-            scalar: randomInRange(1.0, 1.8), 
+            scalar: randomInRange(0.5, 0.8), 
             
             origin: { x: xPercent, y: yPercent }, 
             zIndex: 99999,              
@@ -804,6 +804,7 @@ document.addEventListener('mousedown', function(e) {
         });
     }
 });
+
 
 
 
