@@ -450,28 +450,28 @@ a, button, input, select, .question-item, label, .slider-ticks span {
     justify-content: flex-start !important; /* 對齊頂部 */
     
     /* 1. 將整體的頂部 padding 大幅減少，讓內容往上移 */
-    padding-top: 0px !important; 
+    padding-top: -15px !important; 
 }
 
 /* 2. 標題區塊與下方雷達圖的距離縮到最小 */
 .exporting-mode .landing-header { 
     width: 100% !important; /* 撐開 100% 寬度 */
     text-align: center !important; /* 🌟 內容文字置中 */
-    margin-bottom: -45px !important; /* 負值往上拉 */
-    transform: scale(1.0); /* 稍微縮小標題節省空間 */
+    margin-bottom: -55px !important; /* 負值往上拉 */
+    transform: scale(1.2); 
 }
 .exporting-mode .landing-header h2 {
     font-size: 46px !important;
-    margin-top: 2px !important;
+    margin-top: -5px !important;
 }
 
 /* 3. 雷達圖容器：利用 margin: 0 auto 置中 */
 .exporting-mode #radar-wrapper {
-    width: 420px !important; /* 你想要嘅大尺寸 */
+    width: 520px !important; /* 你想要嘅大尺寸 */
     margin-left: auto !important;  /* 🌟 自動邊距實現水平置中 */
     margin-right: auto !important; /* 🌟 自動邊距實現水平置中 */
-    margin-top: -15 !important;
-    margin-bottom: -15 !important;
+    margin-top: -25 !important;
+    margin-bottom: -35 !important;
     display: block !important;
 }
 /* 確保雷達圖入面粒 canvas 唔會歪咗 */
@@ -482,7 +482,7 @@ a, button, input, select, .question-item, label, .slider-ticks span {
 /* 4. 將成員分析卡片緊貼雷達圖 */
 .exporting-mode #main-display-section {
     width: 98% !important;
-    margin-top: -25px !important; 
+    margin-top: -35px !important; 
     padding: 9px 15px 15px 15px !important; /* 減少內部留白 */
     transform: scale(0.95); 
     transform-origin: top center;
@@ -491,7 +491,7 @@ a, button, input, select, .question-item, label, .slider-ticks span {
 
 /* 5. 確保 4 個 Tag 的間距緊密 */
 .exporting-mode .export-only {
-    margin-top: 4px !important; /* 縮小與上方文字的距離 */
+    margin-top: 0px !important; /* 縮小與上方文字的距離 */
     gap: 6px !important;
 }
 
@@ -502,6 +502,7 @@ a, button, input, select, .question-item, label, .slider-ticks span {
     padding: 8px !important;
     line-height: 1.4 !important; /* 縮減行距 */
 }
+
 
 
 
