@@ -749,18 +749,19 @@ function randomInRange(min, max) {
 }
 
 // ==========================================
-// 全局點擊水波回饋
+// 全局點擊水波與櫻花噴發回饋 (只限左鍵)
 // ==========================================
 document.addEventListener('mousedown', function(e) {
     if (e.button !== 0) return; // 只限滑鼠左鍵
 
+    // --- 1. 產生水波漣漪 ---
     const existingRipples = document.querySelectorAll('.ripple-effect');
     existingRipples.forEach(r => r.remove());
 
     let ripple = document.createElement('div');
     ripple.className = 'ripple-effect';
     
-    const size = 30; 
+    const size = 15; // 你之前設定嘅縮小版尺寸
     const offset = size / 2;
     
     ripple.style.width = size + 'px';
@@ -773,6 +774,30 @@ document.addEventListener('mousedown', function(e) {
     setTimeout(() => {
         if(ripple.parentNode) ripple.remove();
     }, 600);
+
+    // --- 2. 點擊噴發櫻花 (依賴 canvas-confetti) ---
+    if (typeof confetti !== 'undefined') {
+        // 定義櫻花花瓣形狀 (SVG Path)
+        const petalPath = 'M167 72c19,-38 37,-56 75,-56 42,0 76,33 76,75 0,76 -76,151 -151,227 -76,-76 -151,-151 -151,-227 0,-42 33,-75 75,-75 38,0 57,18 76,56z';
+        const petalShape = confetti.shapeFromPath({ path: petalPath, matrix: [0.033, 0, 0, 0.033, -5, -5] });
+
+        // 將滑鼠的像素座標轉換為 confetti 需要的百分比座標 (0 ~ 1)
+        const xPercent = e.clientX / window.innerWidth;
+        const yPercent = e.clientY / window.innerHeight;
+
+        // 觸發小型櫻花爆發
+        confetti({
+            particleCount: 5,           // 每次點擊噴幾多塊花瓣 (5塊剛剛好，唔會太密)
+            spread: 60,                 // 散開嘅角度
+            startVelocity: 15,          // 噴發力度
+            shapes: [petalShape],       // 使用花瓣形狀
+            colors: ['#FFB6C1', '#FF69B4', '#FFF0F5'], // 櫻花粉色系
+            scalar: randomInRange(0.6, 1.0), // 隨機大細
+            origin: { x: xPercent, y: yPercent }, // 噴發原點 = 滑鼠點擊位置
+            zIndex: 99999,              // 確保喺最面層
+            ticks: 100                  // 花瓣存活時間
+        });
+    }
 });
 
 
