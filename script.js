@@ -790,26 +790,38 @@ function triggerPinkParticles(element) {
 }
 
 
-// 全局點擊水波回饋
-document.addEventListener('click', function(e) {
+// 全局點擊水波回饋 (單一且精準置中)
+document.addEventListener('mousedown', function(e) {
+    // 1. 先清除舊的漣漪，防止出現多個
+    const existingRipples = document.querySelectorAll('.ripple-effect');
+    existingRipples.forEach(r => r.remove());
+
+    // 2. 創建新漣漪
     let ripple = document.createElement('div');
     ripple.className = 'ripple-effect';
-    ripple.style.width = '20px';
-    ripple.style.height = '20px';
-    ripple.style.left = (e.clientX - 10) + 'px';
-    ripple.style.top = (e.clientY - 10) + 'px';
+    
+    // 設定大小，並計算偏移量以確保置中
+    const size = 30; 
+    const offset = size / 2;
+    
+    ripple.style.width = size + 'px';
+    ripple.style.height = size + 'px';
+    // 鼠標位置減去一半大小，才能確保中心點對齊鼠標尖端
+    ripple.style.left = (e.clientX - offset) + 'px';
+    ripple.style.top = (e.clientY - offset) + 'px';
     
     document.body.appendChild(ripple);
     
+    // 3. 動畫結束後移除
     setTimeout(() => {
-        ripple.remove();
+        if(ripple.parentNode) ripple.remove();
     }, 600);
 });
-
 
 // 輔助工具：生成指定範圍內的隨機數 (畀神推心心動畫用)
 function randomInRange(min, max) {
     return Math.random() * (max - min) + min;
 }
+
 
 
