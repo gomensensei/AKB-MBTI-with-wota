@@ -455,7 +455,7 @@ a, button, input, select, .question-item, label, .slider-ticks span {
 
 /* 2. 標題區塊與下方雷達圖的距離縮到最小 */
 .exporting-mode .landing-header { 
-    margin-bottom: -15px !important; /* 負值往上拉 */
+    margin-bottom: -25px !important; /* 負值往上拉 */
     transform: scale(0.95); /* 稍微縮小標題節省空間 */
 }
 .exporting-mode .landing-header h2 {
@@ -466,30 +466,31 @@ a, button, input, select, .question-item, label, .slider-ticks span {
 /* 3. 雷達圖大小適中，並強制拉近與上下元素的距離 */
 .exporting-mode #radar-wrapper {
     width: 320px !important; 
-    margin: 0 auto -20px auto !important; /* 底部負 margin 讓卡片貼上來 */
+    margin: 0 auto -25px auto !important; /* 底部負 margin 讓卡片貼上來 */
 }
 
 /* 4. 將成員分析卡片緊貼雷達圖 */
 .exporting-mode #main-display-section {
-    width: 92% !important;
-    margin-top: 0px !important; 
-    padding: 12px 15px 15px 15px !important; /* 減少內部留白 */
+    width: 94% !important;
+    margin-top: -5px !important; 
+    padding: 9px 15px 15px 15px !important; /* 減少內部留白 */
     transform: scale(0.95); 
     transform-origin: top center;
-    box-shadow: none !important; /* 截圖去除陰影更乾淨 */
     border: 3px solid #ffb7c5 !important;
 }
 
 /* 5. 確保 4 個 Tag 的間距緊密 */
 .exporting-mode .export-only {
-    margin-top: 10px !important; /* 縮小與上方文字的距離 */
-    gap: 8px !important;
+    margin-top: 5px !important; /* 縮小與上方文字的距離 */
+    gap: 6px !important;
 }
 
 /* 6. 深度分析文字縮小並靠近 Tag */
 .exporting-mode #deep-analysis-box {
-    font-size: 13px !important;
-    margin-top: 10px !important;
-    padding: 10px !important;
+    font-size: 12px !important;
+    margin-top: 8px !important;
+    padding: 8px !important;
+    line-height: 1.4 !important; /* 縮減行距 */
 }
+
 
