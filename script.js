@@ -177,8 +177,20 @@ function renderQuiz() {
         }
         track.appendChild(pageDiv);
     }
-    track.addEventListener('input', handleSlider);
+track.addEventListener('input', handleSlider);
     track.addEventListener('change', handleSlider);
+    
+    // 🌟 新增：解決中立位置無法直接點擊的問題
+    track.addEventListener('mousedown', (e) => {
+        if (e.target.tagName === 'INPUT' && e.target.type === 'range') {
+            e.target.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+    });
+    track.addEventListener('touchstart', (e) => {
+        if (e.target.tagName === 'INPUT' && e.target.type === 'range') {
+            e.target.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+    }, { passive: true });
 
     let firstUnanswered = 1;
     for(let i=1; i<=60; i++) { if(userAnswers[i] === undefined) { firstUnanswered = i; break; } }
@@ -475,20 +487,43 @@ function renderResultPage(allMembers) {
     `;
     if(myRadarChart) myRadarChart.destroy();
     const ctx = document.getElementById('radarChart').getContext('2d');
-    myRadarChart = new Chart(ctx, {
+myRadarChart = new Chart(ctx, {
         type: 'radar',
         data: {
             labels: ui.radar_labels[currentLang],
             datasets: [{ data: [userPerc.E, userPerc.S, userPerc.T, userPerc.J, userPerc.A], backgroundColor: 'rgba(255, 20, 147, 0.4)', borderColor: '#FF1493', borderWidth: 3, pointRadius: 4, pointBackgroundColor: '#FF1493' }]
         },
         options: {
-           animation: {
+            // 🌟 【新增 1】：畫布四周加 Padding，確保最邊緣嘅字唔會出界被 Crop
+            layout: {
+                padding: {
+                    left: 25,
+                    right: 25,
+                    top: 20,
+                    bottom: 20
+                }
+            },
+            animation: {
                 duration: 2500,           // 動畫持續 2.5 秒
                 easing: 'easeOutQuart'    // 絲滑的減速效果
             },
-           scales: {
-              r: {
-                 angleLines: { color: 'rgba(0,0,0,0.1)' }, grid: { color: 'rgba(0,0,0,0.08)' }, ticks: { display: true, stepSize: 20, backdropColor: 'transparent', color: '#999', font: { size: 10 } }, suggestedMin: 0, suggestedMax: 100 } }, plugins: { legend: { display: false } } }
+            scales: {
+                r: {
+                    angleLines: { color: 'rgba(0,0,0,0.1)' },
+                    grid: { color: 'rgba(0,0,0,0.08)' },
+                    ticks: { display: true, stepSize: 20, backdropColor: 'transparent', color: '#999', font: { size: 10 } },
+                    suggestedMin: 0, 
+                    suggestedMax: 100,
+                    // 🌟 【新增 2】：加大外圍文字 (例如"審美(S)") 同雷達網角位嘅距離
+                    pointLabels: {
+                        padding: 10
+                    }
+                } 
+            }, 
+            plugins: { 
+                legend: { display: false } 
+            } 
+        }
     });
    
 // 1. 選擇神推的選單事件 (加入了動畫觸發)
@@ -541,21 +576,53 @@ function renderResultPage(allMembers) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // 3. 下載按鈕事件 (👇 這裡完全保留你原本的代碼，一字不漏 👇)
+    // 3. 下載按鈕事件 (已加入防 Crop 底與深度分析顯示邏輯)
     document.getElementById('download-btn').addEventListener('click', async () => {
         const container = document.getElementById('export-container');
-        const webOnly = document.querySelectorAll('.web-only'); const exportOnly = document.querySelectorAll('.export-only');
-        webOnly.forEach(el => el.style.display = 'none'); exportOnly.forEach(el => el.style.display = 'grid'); 
-        const oldWidth = container.style.width; const oldHeight = container.style.height; const oldPos = container.style.position;
-        container.style.width = "540px"; container.style.height = "960px"; container.style.position = "fixed";
-        container.style.top = "0"; container.style.left = "0"; container.style.zIndex = "9999";
+        const webOnly = document.querySelectorAll('.web-only'); 
+        const exportOnly = document.querySelectorAll('.export-only');
+        
+        // 隱藏網頁專用元素，顯示匯出專用元素
+        webOnly.forEach(el => el.style.display = 'none'); 
+        exportOnly.forEach(el => el.style.display = 'grid'); 
+        
+        // 🌟 新增：套用截圖專用排版 (縮細雷達、顯示深度分析)
+        container.classList.add('exporting-mode');
+
+        const oldWidth = container.style.width; 
+        const oldHeight = container.style.height; 
+        const oldPos = container.style.position;
+        
+        container.style.width = "540px"; 
+        container.style.height = "auto"; // 改用 auto 讓內容自然撐開
+        container.style.position = "absolute"; // 改用 absolute 避免 fixed 帶來的滾動截斷問題
+        container.style.top = "0"; 
+        container.style.left = "0"; 
+        container.style.zIndex = "-1"; // 移到背景層避免遮擋
+        
         window.scrollTo(0, 0);
+        
         try {
-            const canvas = await html2canvas(container, { scale: 2, useCORS: true, backgroundColor: "#fdfcfb", width: 540, height: 960 });
-            const link = document.createElement('a'); link.download = `AKB48_${userMbtiStr}_Result.png`; link.href = canvas.toDataURL("image/png"); link.click();
+            // 使用 windowWidth 確保 html2canvas 擷取完整寬度
+            const canvas = await html2canvas(container, { 
+                scale: 2, 
+                useCORS: true, 
+                backgroundColor: "#fdfcfb",
+                windowWidth: 540
+            });
+            const link = document.createElement('a'); 
+            link.download = `AKB48_${userMbtiStr}_Result.png`; 
+            link.href = canvas.toDataURL("image/png"); 
+            link.click();
         } finally {
-            webOnly.forEach(el => el.style.display = 'block'); exportOnly.forEach(el => el.style.display = 'none');
-            container.style.width = oldWidth; container.style.height = oldHeight; container.style.position = oldPos;
+            // 恢復原本排版
+            webOnly.forEach(el => el.style.display = 'block'); 
+            exportOnly.forEach(el => el.style.display = 'none');
+            container.classList.remove('exporting-mode');
+            container.style.width = oldWidth; 
+            container.style.height = oldHeight; 
+            container.style.position = oldPos;
+            container.style.zIndex = "";
         }
     });
    
@@ -723,7 +790,26 @@ function triggerPinkParticles(element) {
 }
 
 
+// 全局點擊水波回饋
+document.addEventListener('click', function(e) {
+    let ripple = document.createElement('div');
+    ripple.className = 'ripple-effect';
+    ripple.style.width = '20px';
+    ripple.style.height = '20px';
+    ripple.style.left = (e.clientX - 10) + 'px';
+    ripple.style.top = (e.clientY - 10) + 'px';
+    
+    document.body.appendChild(ripple);
+    
+    setTimeout(() => {
+        ripple.remove();
+    }, 600);
+});
 
 
+// 輔助工具：生成指定範圍內的隨機數 (畀神推心心動畫用)
+function randomInRange(min, max) {
+    return Math.random() * (max - min) + min;
+}
 
 
