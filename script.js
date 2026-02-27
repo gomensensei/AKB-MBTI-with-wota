@@ -362,11 +362,20 @@ function calculateResults() {
     showLoadingAndReveal(finalTopCompScore);
 }
 
+// ==========================================
+// 替換原本的 getConicGradient (兼容 html2canvas 截圖)
+// ==========================================
 function getConicGradient(colors) {
-    if(!colors || colors.length === 0) return '#FF1493';
-    if(colors.length === 1) return colors[0];
-    if(colors.length === 2) return `conic-gradient(${colors[0]} 0deg 180deg, ${colors[1]} 180deg 360deg)`;
-    if(colors.length >= 3) return `conic-gradient(${colors[0]} 0deg 120deg, ${colors[1]} 120deg 240deg, ${colors[2]} 240deg 360deg)`;
+    if(!colors || colors.length === 0) return '#FF1493'; // 預設單色
+    if(colors.length === 1) return colors[0]; // 單推色
+    
+    // 🌟 將 conic-gradient 改為 linear-gradient，確保截圖可以完美擷取
+    if(colors.length === 2) {
+        return `linear-gradient(135deg, ${colors[0]} 50%, ${colors[1]} 50%)`;
+    }
+    if(colors.length >= 3) {
+        return `linear-gradient(135deg, ${colors[0]} 33%, ${colors[1]} 33% 66%, ${colors[2]} 66%)`;
+    }
 }
 
 function getDimDetail(diff, dimKey, isShortLabel = false) {
@@ -763,4 +772,5 @@ document.addEventListener('mousedown', function(e) {
         if(ripple.parentNode) ripple.remove();
     }, 600);
 });
+
 
