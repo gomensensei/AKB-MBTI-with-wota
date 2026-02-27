@@ -781,13 +781,13 @@ document.addEventListener('mousedown', function(e) {
         const petalPath = 'M15 0 Q 30 15 15 40 Q 0 15 15 0 Z';
         
         // 🌸 2. 【修復關鍵】：將縮放倍數由 0.04 改為 0.5，並將偏移量改為置中
-        const petalShape = confetti.shapeFromPath({ path: petalPath, matrix: [0.5, 0, 0, 0.5, -7.5, -10] });
+        const petalShape = confetti.shapeFromPath({ path: petalPath, matrix: [0.2, 0, 0, 0.2, -7.5, -10] });
 
         const xPercent = e.clientX / window.innerWidth;
         const yPercent = e.clientY / window.innerHeight;
 
         confetti({
-            particleCount: 3,                // 每次 5 塊
+            particleCount: 10,                // 每次 5 塊
             spread: 120,                      
             startVelocity: 8,                // 柔和初速
             gravity: 0.15,                   // 輕盈飄落
@@ -804,6 +804,7 @@ document.addEventListener('mousedown', function(e) {
         });
     }
 });
+
 
 
 
