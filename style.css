@@ -506,6 +506,26 @@ a, button, input, select, .question-item, label, .slider-ticks span {
 
 
 
+/* ==================================
+   截圖專用：關閉所有動畫與陰影
+   ================================== */
+.exporting-mode .result-avatar {
+    /* 強制關閉呼吸動畫 */
+    animation: none !important; 
+    
+    /* 強制移除外圍發光陰影，保證邊緣乾淨 */
+    box-shadow: none !important; 
+    
+    /* 如果你覺得冇咗陰影之後，個框太單調，可以加返少少實線 border 托底 */
+    border: 1px solid rgba(255, 105, 180, 0.2) !important;
+}
+
+/* 如果你嘅閃動效果寫喺 img 標籤或者其他 class 上面，一併關閉 */
+.exporting-mode .pulse-border, 
+.exporting-mode .thick-pulse-border {
+    animation: none !important;
+    box-shadow: none !important;
+}
 
 
 
