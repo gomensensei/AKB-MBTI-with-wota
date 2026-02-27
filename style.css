@@ -420,4 +420,7 @@ a, button, input[type="range"], select {
     line-height: 1.4;
 }
 
-
+/* 強制選單使用支援日文的字體 */
+#oshi-select, #oshi-select option {
+    font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif !important;
+}
