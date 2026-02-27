@@ -775,36 +775,36 @@ document.addEventListener('mousedown', function(e) {
         if(ripple.parentNode) ripple.remove();
     }, 600);
 
-    // --- 2. 點擊飄落櫻花 (改良版) ---
+// --- 2. 點擊飄落櫻花 (唯美微風版 - 修復隱形問題) ---
     if (typeof confetti !== 'undefined') {
-        // 🌸 1. 形狀改良：棄用心形，改用純粹嘅「水滴/花瓣」形狀 SVG
+        // 🌸 1. 花瓣 SVG (約 30x40 尺寸)
         const petalPath = 'M15 0 Q 30 15 15 40 Q 0 15 15 0 Z';
-        const petalShape = confetti.shapeFromPath({ path: petalPath, matrix: [0.04, 0, 0, 0.04, -0.6, -0.8] });
+        
+        // 🌸 2. 【修復關鍵】：將縮放倍數由 0.04 改為 0.5，並將偏移量改為置中
+        const petalShape = confetti.shapeFromPath({ path: petalPath, matrix: [0.5, 0, 0, 0.5, -7.5, -10] });
 
         const xPercent = e.clientX / window.innerWidth;
         const yPercent = e.clientY / window.innerHeight;
 
         confetti({
-            // 🌸 2. 物理動態改良：去除禮炮感，變得輕柔
-            particleCount: 3,                // 每次只飄出 3 塊，感覺更隨意
-            spread: 90,                      // 散開角度收窄
-            startVelocity: 6,                // 大幅降低噴發初速 (由 15 減到 6)
-            gravity: 0.25,                   // 減低重力，令花瓣好似羽毛咁慢慢飄落
-            drift: randomInRange(-0.8, 0.8), // 加入隨機風向，左右微飄
-            
-            // 🌸 3. 顏色改良：統一柔和粉色系，去除白色及高對比鮮粉紅
-            colors: ['#FFB7C5', '#FFC0CB', '#F8C8DC'], 
-            
+            particleCount: 3,                // 每次 3 塊
+            spread: 90,                      
+            startVelocity: 6,                // 柔和初速
+            gravity: 0.25,                   // 輕盈飄落
+            drift: randomInRange(-0.8, 0.8), // 微風左右吹
+            colors: ['#FFB7C5', '#FFC0CB', '#F8C8DC'], // 柔和櫻花色
             shapes: [petalShape],       
-            scalar: randomInRange(0.5, 0.8), // 隨機大細
+            
+            // 🌸 3. 【修復關鍵】：加大最終顯示比例，確保肉眼清晰可見
+            scalar: randomInRange(1.0, 1.8), 
+            
             origin: { x: xPercent, y: yPercent }, 
             zIndex: 99999,              
-            
-            // 🌸 4. 存活時間改良：等佢慢慢飄走，唔好閃退
-            ticks: 350                       // 存活時間增加 3.5 倍，飄到底先消失
+            ticks: 350                       // 存活時間
         });
     }
 });
+
 
 
 
