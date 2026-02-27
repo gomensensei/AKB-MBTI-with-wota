@@ -176,42 +176,65 @@ function renderQuiz() {
         track.appendChild(pageDiv);
     }
     
-    track.addEventListener('input', handleSlider);
-    track.addEventListener('change', handleSlider);
+
+    track.addEventListener('input', handleSliderInput);   // 拖曳中或點擊瞬間：只更新數值與UI
+    track.addEventListener('change', handleSliderChange); // 放開瞬間：跳下一題
     
-    // 解決中立位置無法直接點擊的問題
+    // 解決中立位置點擊無反應（點擊瞬間觸發 input 記錄答案，放開時觸發 change 跳下一題）
     track.addEventListener('mousedown', (e) => {
         if (e.target.tagName === 'INPUT' && e.target.type === 'range') {
+            // 點下去的瞬間強制更新一次值
+            e.target.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+    });
+    track.addEventListener('mouseup', (e) => {
+        if (e.target.tagName === 'INPUT' && e.target.type === 'range') {
+            // 放開的瞬間觸發跳轉
             e.target.dispatchEvent(new Event('change', { bubbles: true }));
         }
     });
     track.addEventListener('touchstart', (e) => {
         if (e.target.tagName === 'INPUT' && e.target.type === 'range') {
-            e.target.dispatchEvent(new Event('change', { bubbles: true }));
+            e.target.dispatchEvent(new Event('input', { bubbles: true }));
         }
     }, { passive: true });
+    track.addEventListener('touchend', (e) => {
+        if (e.target.tagName === 'INPUT' && e.target.type === 'range') {
+            e.target.dispatchEvent(new Event('change', { bubbles: true }));
+        }
+    });
 
     let firstUnanswered = 1;
     for(let i=1; i<=60; i++) { if(userAnswers[i] === undefined) { firstUnanswered = i; break; } }
     const targetBox = document.getElementById(`qbox-${firstUnanswered}`);
     if (targetBox) targetBox.classList.add('active');
-}
+} // renderQuiz 結束
 
-function handleSlider(e) {
+// 拆分出來的函數 1：只負責記錄分數和變色 (不跳轉)
+function handleSliderInput(e) {
     if (e.target.tagName === 'INPUT' && e.target.type === 'range') {
         const slider = e.target;
-        slider.classList.add('touched');
+        slider.classList.add('touched'); // 變成粉紅色
         const qId = parseInt(slider.id.replace('q', ''));
-        userAnswers[qId] = parseInt(slider.value);
+        userAnswers[qId] = parseInt(slider.value); // 記錄分數
         localStorage.setItem('akb_answers', JSON.stringify(userAnswers));
         
         updateProgress(); 
         checkPageCompletion();
+    }
+}
 
+// 拆分出來的函數 2：只負責跳到下一題
+function handleSliderChange(e) {
+    if (e.target.tagName === 'INPUT' && e.target.type === 'range') {
+        const slider = e.target;
+        const qId = parseInt(slider.id.replace('q', ''));
+        
         const nextBox = document.getElementById(`qbox-${qId + 1}`);
         if (nextBox) {
             nextBox.classList.add('active'); 
-            if (e.type === 'change' && qId % 10 !== 0) { 
+            // 如果不是該頁的最後一題，才平滑捲動到下一題
+            if (qId % 10 !== 0) { 
                 setTimeout(() => nextBox.scrollIntoView({ behavior: 'smooth', block: 'center' }), 100);
             }
         }
@@ -740,3 +763,4 @@ document.addEventListener('mousedown', function(e) {
         if(ripple.parentNode) ripple.remove();
     }, 600);
 });
+
