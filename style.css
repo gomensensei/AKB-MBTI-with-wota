@@ -450,7 +450,7 @@ a, button, input, select, .question-item, label, .slider-ticks span {
     justify-content: flex-start !important; /* 對齊頂部 */
     
     /* 1. 將整體的頂部 padding 大幅減少，讓內容往上移 */
-    padding-top: 15px !important; 
+    padding-top: 10px !important; 
 }
 
 /* 2. 標題區塊與下方雷達圖的距離縮到最小 */
@@ -492,5 +492,6 @@ a, button, input, select, .question-item, label, .slider-ticks span {
     padding: 8px !important;
     line-height: 1.4 !important; /* 縮減行距 */
 }
+
 
 
