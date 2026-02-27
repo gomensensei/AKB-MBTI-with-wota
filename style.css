@@ -244,7 +244,7 @@ input[type=range].custom-range::-webkit-slider-runnable-track {
 
 /* 頭像推色外框呼吸 */
 @keyframes pulse-border {
-    0%, 80% { box-shadow: 0 0 8px var(--cyber-pink), inset 0 0 4px var(--cyber-pink); }
+    0%, 100% { box-shadow: 0 0 8px var(--cyber-pink), inset 0 0 4px var(--cyber-pink); }
     50% { box-shadow: 0 0 20px var(--cyber-pink), inset 0 0 10px var(--cyber-pink); }
 }
 .pulse-border { animation: pulse-border 2.5s infinite ease-in-out; border-radius: 50%; transition: all 0.5s; }
@@ -254,14 +254,14 @@ input[type=range].custom-range::-webkit-slider-runnable-track {
 
 /* 相性數字呼吸與爆光 */
 @keyframes pulse-text {
-    0%, 80% { text-shadow: 0 0 5px rgba(255, 20, 147, 0.4); }
+    0%, 100% { text-shadow: 0 0 5px rgba(255, 20, 147, 0.4); }
     50% { text-shadow: 0 0 15px rgba(255, 20, 147, 0.9); }
 }
 .pulse-text { animation: pulse-text 2.5s infinite ease-in-out; }
 @keyframes burst-light {
     0% { filter: brightness(1) drop-shadow(0 0 0px #fff); transform: scale(1); }
     50% { filter: brightness(1.5) drop-shadow(0 0 20px #FF1493); transform: scale(1.2); }
-    80% { filter: brightness(1) drop-shadow(0 0 5px #FF1493); transform: scale(1); }
+    100% { filter: brightness(1) drop-shadow(0 0 5px #FF1493); transform: scale(1); }
 }
 .burst-light-anim { animation: burst-light 0.8s ease-out forwards; display: inline-block; }
 
@@ -274,11 +274,11 @@ input[type=range].custom-range::-webkit-slider-runnable-track {
 
 .giant-heart {
     /* 1. 改大粒心：由 180px 加大到 300px (甚至 350px)，確保夠闊夠高 */
-    font-size: 320px; 
+    font-size: 380px; 
     
     /* 2. 調整位置：加 margin-top 逼佢向下移，遮住頭像區塊。
           (如果發覺太低，可以將 15vh 改細做 10vh；如果唔夠低就改做 20vh) */
-    margin-top: 15vh; 
+    margin-top: 17vh; 
     
     filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.8));
     animation: giant-heartbeat 1.5s ease-in-out infinite;
@@ -401,14 +401,21 @@ a, button, input, select, .question-item, label, .slider-ticks span {
     border-radius: 50%;
     transform: scale(0);
     transform-origin: center center;
-    animation: ripple-anim 600ms ease-out forwards;
-    background-color: rgba(255, 105, 180, 0.4);
+    
+    /* 1️⃣ 調整大細：由原本嘅 30px 改細做 15px 托底 */
+    width: 15px !important; 
+    height: 15px !important; 
+    
+    background-color: rgba(255, 105, 180, 0.4); /* 粉色，保持半透明 */
     pointer-events: none;
-    z-index: 99999;
+    z-index: 99999; /* 確保疊在最上層 */
+    animation: ripple-anim 600ms ease-out forwards;
 }
+
 @keyframes ripple-anim {
     0% { transform: scale(0); opacity: 1; }
-    100% { transform: scale(3.5); opacity: 0; }
+    /* 2️⃣ 調整放大倍數：原本 3.5 倍太大，改做 2.5 倍 (即係最高峰係 15px * 2.5 = 37.5px) */
+    100% { transform: scale(2.0); opacity: 0; }
 }
 
 /* 3. 截圖專用模式 (縮細雷達、顯示深度分析、防 Crop 底) */
@@ -466,7 +473,7 @@ a, button, input, select, .question-item, label, .slider-ticks span {
 .exporting-mode .landing-header { 
     width: 100% !important; /* 撐開 100% 寬度 */
     text-align: center !important; /* 🌟 內容文字置中 */
-    margin-bottom: -5px !important; /* 負值往上拉 */
+    margin-bottom: -35px !important; /* 負值往上拉 */
     transform: scale(1.2); 
 }
 .exporting-mode .landing-header h2 {
@@ -480,8 +487,8 @@ a, button, input, select, .question-item, label, .slider-ticks span {
     
     margin-left: auto !important;  /* 🌟 自動邊距實現水平置中 */
     margin-right: auto !important; /* 🌟 自動邊距實現水平置中 */
-    margin-top: 0px !important;
-    margin-bottom: 0px !important;
+    margin-top: -25px !important;
+    margin-bottom: -25px !important;
     display: block !important;
 }
 /* 確保雷達圖入面粒 canvas 唔會歪咗 */
@@ -538,6 +545,38 @@ a, button, input, select, .question-item, label, .slider-ticks span {
 
 
 
+/* =======================================
+   新增：背景櫻花花瓣飄落動畫 (由頂飄到底)
+   ======================================= */
+.sakura-petal {
+    position: fixed;
+    top: -10%; /* 確保由螢幕頂部外面開始 */
+    z-index: 1; /* 放在背景層 */
+    pointer-events: none; /* 唔阻礙點擊 */
+    animation: fall linear infinite;
+    /* 預設花瓣樣式 (可以配合 JS 生成) */
+    background-color: rgba(255, 182, 193, 0.6); 
+    border-radius: 15px 0px 15px 0px; 
+}
+
+@keyframes fall {
+    0% {
+        top: -10%;
+        transform: translateX(0) rotate(0deg);
+        opacity: 0;
+    }
+    10% {
+        opacity: 1; /* 慢慢浮現 */
+    }
+    90% {
+        opacity: 1;
+    }
+    100% {
+        top: 110%; /* 🌟 關鍵：確保飄到螢幕底部外面 (大於 100vh) */
+        transform: translateX(100px) rotate(360deg);
+        opacity: 0; /* 消失 */
+    }
+}
 
 
 
