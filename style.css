@@ -424,3 +424,29 @@ a, button, input[type="range"], select {
 #oshi-select, #oshi-select option {
     font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif !important;
 }
+
+/* ================================== */
+/* 截圖專用排版 (只在按下載時生效)      */
+/* ================================== */
+.exporting-mode {
+    padding-bottom: 40px !important; /* 確保框底有足夠空間 */
+}
+
+/* 縮小雷達圖，將空間讓給深度分析 */
+.exporting-mode #radar-wrapper {
+    transform: scale(0.7) !important;
+    margin-top: -30px !important;
+    margin-bottom: -30px !important;
+}
+
+/* 將深度分析的字體稍微縮小，以免爆框 */
+.exporting-mode #deep-analysis-box {
+    font-size: 12px !important;
+    margin-top: 15px !important;
+}
+
+/* 白色卡片內距微調 */
+.exporting-mode #main-display-section {
+    padding: 15px 15px 25px 15px !important;
+    margin-bottom: 20px !important;
+}
