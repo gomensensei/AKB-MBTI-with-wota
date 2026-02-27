@@ -363,18 +363,20 @@ function calculateResults() {
 }
 
 // ==========================================
-// 替換原本的 getConicGradient (兼容 html2canvas 截圖)
+// 專為 html2canvas 截圖防呆的背景生成器
 // ==========================================
-function getConicGradient(colors) {
-    if(!colors || colors.length === 0) return '#FF1493'; // 預設單色
-    if(colors.length === 1) return colors[0]; // 單推色
+function getAvatarBgStyle(colors) {
+    if (!colors || colors.length === 0) return 'background-color: #FF1493;'; // 預設單色粉紅
+    if (colors.length === 1) return `background-color: ${colors[0]};`; // 單推色
     
-    // 🌟 將 conic-gradient 改為 linear-gradient，確保截圖可以完美擷取
-    if(colors.length === 2) {
-        return `linear-gradient(135deg, ${colors[0]} 50%, ${colors[1]} 50%)`;
+    // 雙推色：明確寫出 0%-50% 和 50%-100%，並使用 background-image
+    if (colors.length === 2) {
+        return `background-image: linear-gradient(135deg, ${colors[0]} 0%, ${colors[0]} 50%, ${colors[1]} 50%, ${colors[1]} 100%);`;
     }
-    if(colors.length >= 3) {
-        return `linear-gradient(135deg, ${colors[0]} 33%, ${colors[1]} 33% 66%, ${colors[2]} 66%)`;
+    
+    // 三推色：明確寫出 33.3% 區間
+    if (colors.length >= 3) {
+        return `background-image: linear-gradient(135deg, ${colors[0]} 0%, ${colors[0]} 33.3%, ${colors[1]} 33.3%, ${colors[1]} 66.6%, ${colors[2]} 66.6%, ${colors[2]} 100%);`;
     }
 }
 
@@ -395,7 +397,7 @@ function renderMainDisplay(member, titleLabel) {
     return `
         <div style="font-size: 18px; font-weight:bold; margin-bottom: 15px; color: var(--cyber-pink);">${titleLabel}</div>
         
-        <div class="result-avatar" style="width: 120px; height: 120px; border-radius: 50%; padding: 4px; background: ${getConicGradient(member.colors)}; margin: 0 auto 12px auto; transition: all 0.3s ease;">
+<div class="result-avatar" style="width: 120px; height: 120px; border-radius: 50%; padding: 4px; ${getAvatarBgStyle(member.colors)} margin: 0 auto 12px auto; transition: all 0.3s ease;">
             <img crossorigin="anonymous" src="${member.image}${cb}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid white;">
         </div>
         
@@ -772,5 +774,6 @@ document.addEventListener('mousedown', function(e) {
         if(ripple.parentNode) ripple.remove();
     }, 600);
 });
+
 
 
