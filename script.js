@@ -749,7 +749,7 @@ function randomInRange(min, max) {
 }
 
 // ==========================================
-// 全局點擊水波與櫻花噴發回饋 (只限左鍵)
+// 全局點擊水波與櫻花噴發回饋 (溫和微風版)
 // ==========================================
 document.addEventListener('mousedown', function(e) {
     if (e.button !== 0) return; // 只限滑鼠左鍵
@@ -761,7 +761,7 @@ document.addEventListener('mousedown', function(e) {
     let ripple = document.createElement('div');
     ripple.className = 'ripple-effect';
     
-    const size = 15; // 你之前設定嘅縮小版尺寸
+    const size = 15; 
     const offset = size / 2;
     
     ripple.style.width = size + 'px';
@@ -775,27 +775,33 @@ document.addEventListener('mousedown', function(e) {
         if(ripple.parentNode) ripple.remove();
     }, 600);
 
-    // --- 2. 點擊噴發櫻花 (依賴 canvas-confetti) ---
+    // --- 2. 點擊飄落櫻花 (改良版) ---
     if (typeof confetti !== 'undefined') {
-        // 定義櫻花花瓣形狀 (SVG Path)
-        const petalPath = 'M167 72c19,-38 37,-56 75,-56 42,0 76,33 76,75 0,76 -76,151 -151,227 -76,-76 -151,-151 -151,-227 0,-42 33,-75 75,-75 38,0 57,18 76,56z';
-        const petalShape = confetti.shapeFromPath({ path: petalPath, matrix: [0.033, 0, 0, 0.033, -5, -5] });
+        // 🌸 1. 形狀改良：棄用心形，改用純粹嘅「水滴/花瓣」形狀 SVG
+        const petalPath = 'M15 0 Q 30 15 15 40 Q 0 15 15 0 Z';
+        const petalShape = confetti.shapeFromPath({ path: petalPath, matrix: [0.04, 0, 0, 0.04, -0.6, -0.8] });
 
-        // 將滑鼠的像素座標轉換為 confetti 需要的百分比座標 (0 ~ 1)
         const xPercent = e.clientX / window.innerWidth;
         const yPercent = e.clientY / window.innerHeight;
 
-        // 觸發小型櫻花爆發
         confetti({
-            particleCount: 5,           // 每次點擊噴幾多塊花瓣 (5塊剛剛好，唔會太密)
-            spread: 60,                 // 散開嘅角度
-            startVelocity: 15,          // 噴發力度
-            shapes: [petalShape],       // 使用花瓣形狀
-            colors: ['#FFB6C1', '#FF69B4', '#FFF0F5'], // 櫻花粉色系
-            scalar: randomInRange(0.6, 1.0), // 隨機大細
-            origin: { x: xPercent, y: yPercent }, // 噴發原點 = 滑鼠點擊位置
-            zIndex: 99999,              // 確保喺最面層
-            ticks: 100                  // 花瓣存活時間
+            // 🌸 2. 物理動態改良：去除禮炮感，變得輕柔
+            particleCount: 3,                // 每次只飄出 3 塊，感覺更隨意
+            spread: 90,                      // 散開角度收窄
+            startVelocity: 6,                // 大幅降低噴發初速 (由 15 減到 6)
+            gravity: 0.25,                   // 減低重力，令花瓣好似羽毛咁慢慢飄落
+            drift: randomInRange(-0.8, 0.8), // 加入隨機風向，左右微飄
+            
+            // 🌸 3. 顏色改良：統一柔和粉色系，去除白色及高對比鮮粉紅
+            colors: ['#FFB7C5', '#FFC0CB', '#F8C8DC'], 
+            
+            shapes: [petalShape],       
+            scalar: randomInRange(0.5, 0.8), // 隨機大細
+            origin: { x: xPercent, y: yPercent }, 
+            zIndex: 99999,              
+            
+            // 🌸 4. 存活時間改良：等佢慢慢飄走，唔好閃退
+            ticks: 350                       // 存活時間增加 3.5 倍，飄到底先消失
         });
     }
 });
