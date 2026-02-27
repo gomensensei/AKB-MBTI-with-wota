@@ -639,14 +639,24 @@ function showLoadingAndReveal(bestCompScore) {
             
             window.scrollTo({ top: 0, behavior: 'smooth' });
             
-            if (bestCompScore >= 85) {
+if (bestCompScore >= 85) {
                 const giantHeart = document.getElementById('giant-heart-overlay');
+                
+                // 🌟 1. 動畫開始：鎖死畫面，防止使用者往下捲動 🌟
+                document.body.style.overflow = 'hidden'; 
+                
                 giantHeart.classList.remove('hidden');
                 giantHeart.style.opacity = '1';
                 
                 setTimeout(() => {
                     giantHeart.style.opacity = '0';
-                    setTimeout(() => giantHeart.classList.add('hidden'), 500);
+                    setTimeout(() => {
+                        giantHeart.classList.add('hidden');
+                        
+                        // 🌟 2. 動畫結束 (心心淡出後)：解鎖畫面，恢復捲動 🌟
+                        document.body.style.overflow = ''; 
+                        
+                    }, 500);
                     
                     if (typeof confetti !== 'undefined') {
                         confetti({ particleCount: 200, spread: 360, startVelocity: 40, origin: {y: 0.4}, zIndex: 2147483647, ticks: 150 });
@@ -804,6 +814,7 @@ document.addEventListener('mousedown', function(e) {
         });
     }
 });
+
 
 
 
