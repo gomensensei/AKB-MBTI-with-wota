@@ -57,7 +57,7 @@
     "colors": ["#FFFFFF", "#800080"],
     "image": "https://d2r1lkk9i7row.cloudfront.net/mobile/member/83100838.jpg",
     "mbti_type": "INFJ",
-    "mbti_scores": {"E": 10, "S": 10, "T": 48, "J": 90}
+    "mbti_scores": {"E": 30, "S": 30, "T": 45, "J": 70}
   },
   {
     "id": "07",
@@ -77,7 +77,7 @@
     "colors": ["#00CED1", "#FF0000"],
     "image": "https://d2r1lkk9i7row.cloudfront.net/mobile/member/83100814.jpg",
     "mbti_type": "INFP",
-    "mbti_scores": {"E": 25, "S": 25, "T": 10, "J": 45}
+    "mbti_scores": {"E": 35, "S": 35, "T": 30, "J": 45}
   },
   {
     "id": "09",
@@ -87,7 +87,7 @@
     "colors": ["#FF69B4", "#0000FF"],
     "image": "https://d2r1lkk9i7row.cloudfront.net/mobile/member/83100993.jpg",
     "mbti_type": "INFJ",
-    "mbti_scores": {"E": 20, "S": 48, "T": 20, "J": 60}
+    "mbti_scores": {"E": 35, "S": 45, "T": 35, "J": 65}
   },
   {
     "id": "10",
@@ -137,7 +137,7 @@
     "colors": ["#FF0000", "#FF0000"],
     "image": "https://d2r1lkk9i7row.cloudfront.net/mobile/member/83100941.jpg",
     "mbti_type": "ISFP",
-    "mbti_scores": {"E": 10, "S": 95, "T": 10, "J": 45}
+    "mbti_scores": {"E": 30, "S": 70, "T": 30, "J": 45}
   },
   {
     "id": "15",
@@ -177,7 +177,7 @@
     "colors": ["#FFFFFF", "#FFB6C1"],
     "image": "https://d2r1lkk9i7row.cloudfront.net/mobile/member/83100964.jpg",
     "mbti_type": "ENFP",
-    "mbti_scores": {"E": 80, "S": 20, "T": 48, "J": 20}
+    "mbti_scores": {"E": 70, "S": 30, "T": 45, "J": 30}
   },
   {
     "id": "19",
@@ -197,7 +197,7 @@
     "colors": ["#FF0000", "#FFFF00"],
     "image": "https://d2r1lkk9i7row.cloudfront.net/mobile/member/83101001.jpg",
     "mbti_type": "INFP",
-   "mbti_scores": {"E": 48, "S": 48, "T": 48, "J": 48}
+   "mbti_scores": {"E": 45, "S": 45, "T": 45, "J": 45}
   },
   {
     "id": "21",
@@ -227,7 +227,7 @@
     "colors": ["#00FFFF", "#FF69B4"],
     "image": "https://d2r1lkk9i7row.cloudfront.net/mobile/member/83101007.jpg",
     "mbti_type": "INFJ",
-    "mbti_scores": {"E": 32, "S": 38, "T": 35, "J": 78}
+    "mbti_scores": {"E": 45, "S": 30, "T": 45, "J": 70}
   },
   {
     "id": "24",
@@ -237,7 +237,7 @@
     "colors": ["#FFFFFF", "#FFFFFF"],
     "image": "https://d2r1lkk9i7row.cloudfront.net/mobile/member/83101006.jpg",
     "mbti_type": "INFP",
-    "mbti_scores": {"E": 10, "S": 45, "T": 10, "J": 45}
+    "mbti_scores": {"E": 30, "S": 45, "T": 30, "J": 45}
   },
   {
     "id": "25",
@@ -257,7 +257,7 @@
     "colors": ["#FF69B4", "#FF0000"],
     "image": "https://d2r1lkk9i7row.cloudfront.net/mobile/member/83101005.jpg",
     "mbti_type": "INFP",
-    "mbti_scores": {"E": 45, "S": 10, "T": 45, "J": 10}
+    "mbti_scores": {"E": 45, "S": 30, "T": 45, "J": 30}
   },
   {
     "id": "27",
@@ -307,7 +307,7 @@
     "colors": ["#FF1493", "#FFB6C1"],
     "image": "https://d2r1lkk9i7row.cloudfront.net/hashiranokai/member/83101012.jpg",
     "mbti_type": "INTP",
-    "mbti_scores": {"E": 20, "S": 20, "T": 80, "J": 48}
+    "mbti_scores": {"E": 30, "S": 30, "T": 70, "J": 45}
   },
   {
     "id": "32",
@@ -317,7 +317,7 @@
     "colors": ["#FFFFFF", "#00CED1"],
     "image": "https://d2r1lkk9i7row.cloudfront.net/hashiranokai/member/83101013.jpg",
     "mbti_type": "INFP",
-    "mbti_scores": {"E": 10, "S": 45, "T": 45, "J": 10}
+    "mbti_scores": {"E": 30, "S": 45, "T": 45, "J": 30}
   },
   {
     "id": "33",
@@ -337,7 +337,7 @@
     "colors": ["#FF69B4", "#FFFF00"],
     "image": "https://d2r1lkk9i7row.cloudfront.net/hashiranokai/member/83101015.jpg",
     "mbti_type": "ISFP",
-    "mbti_scores": {"E": 45, "S": 75, "T": 10, "J": 10}
+    "mbti_scores": {"E": 45, "S": 65, "T": 30, "J": 30}
   },
   {
     "id": "35",
@@ -357,7 +357,7 @@
     "colors": ["#FFB6C1", "#FFB6C1"],
     "image": "https://d2r1lkk9i7row.cloudfront.net/hashiranokai/member/83101017.jpg",
     "mbti_type": "ENFP",
-    "mbti_scores": {"E": 95, "S": 48, "T": 10, "J": 48}
+    "mbti_scores": {"E": 75, "S": 45, "T": 30, "J": 45}
   },
   {
     "id": "37",
@@ -367,7 +367,7 @@
     "colors": ["#00CED1", "#0000FF"],
     "image": "https://d2r1lkk9i7row.cloudfront.net/hashiranokai/member/83101018.jpg",
     "mbti_type": "ISFP",
-    "mbti_scores": {"E": 45, "S": 95, "T": 45, "J": 10}
+    "mbti_scores": {"E": 45, "S": 70, "T": 45, "J": 30}
   },
   {
     "id": "38",
@@ -437,7 +437,7 @@
     "colors": ["#800080", "#800080"],
     "image": "https://d2r1lkk9i7row.cloudfront.net/hashiranokai/member/83101025.jpg",
     "mbti_type": "INFP",
-    "mbti_scores": {"E": 48, "S": 20, "T": 48, "J": 20}
+    "mbti_scores": {"E": 45, "S": 30, "T": 45, "J": 30}
   },
   {
     "id": "45",
@@ -447,7 +447,7 @@
     "colors": ["#00FFFF", "#9ACD32"],
     "image": "https://d2r1lkk9i7row.cloudfront.net/hashiranokai/member/83101026.jpg",
     "mbti_type": "INFP",
-    "mbti_scores": {"E": 48, "S": 10, "T": 48, "J": 10}
+    "mbti_scores": {"E": 45, "S": 30, "T": 45, "J": 30}
   },
   {
     "id": "46",
@@ -480,3 +480,4 @@
     "mbti_scores": {"E": 82, "S": 30, "T": 38, "J": 78}
   }
 ]
+
