@@ -292,6 +292,12 @@ function calculateResults() {
         // C. A/T 堅韌度互補加成
         if (userPerc.A < 50 && (M.A !== undefined && M.A >= 65)) baseComp += 1.5;
 
+// 🌟 【新增：新世代光環加成 (Rookie Bonus)】 🌟
+        // 針對 17期 至 21期 成員，給予 0.8 分嘅微小加成，增加佢哋嘅曝光率
+        if (m.ki === "17期" || m.ki === "18期" || m.ki === "19期" || m.ki === "20期" || m.ki === "21期") {
+            baseComp += 0.8;
+        }
+       
         // D. 智能封頂，預留空間畀緣分值
         baseComp = Math.max(0, Math.min(96, baseComp));
 
@@ -715,6 +721,7 @@ function triggerPinkParticles(element) {
         colors: ['#FF1493', '#FFB6C1', '#FFFFFF'], ticks: 36, origin: { x, y }, zIndex: 2147483647
     });
 }
+
 
 
 
