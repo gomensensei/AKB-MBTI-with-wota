@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700&display=swap');
 
+
 :root {
     --cyber-pink: #FF1493;
     --cyber-pink-glow: rgba(255, 20, 147, 0.5);
@@ -236,31 +237,31 @@ input[type=range].custom-range::-webkit-slider-runnable-track {
 
 /* 呼吸發光效果 */
 @keyframes pulse-glow {
-    0%, 100% { filter: drop-shadow(0 0 5px rgba(255, 20, 147, 0.3)); }
+    0%, 80% { filter: drop-shadow(0 0 5px rgba(255, 20, 147, 0.3)); }
     50% { filter: drop-shadow(0 0 15px rgba(255, 20, 147, 0.8)); }
 }
 .pulse-glow { animation: pulse-glow 2.5s infinite ease-in-out; }
 
 /* 頭像推色外框呼吸 */
 @keyframes pulse-border {
-    0%, 100% { box-shadow: 0 0 8px var(--cyber-pink), inset 0 0 4px var(--cyber-pink); }
+    0%, 80% { box-shadow: 0 0 8px var(--cyber-pink), inset 0 0 4px var(--cyber-pink); }
     50% { box-shadow: 0 0 20px var(--cyber-pink), inset 0 0 10px var(--cyber-pink); }
 }
 .pulse-border { animation: pulse-border 2.5s infinite ease-in-out; border-radius: 50%; transition: all 0.5s; }
 
 /* 90%+ 專用變厚外框 */
-.thick-pulse-border { border: 4px solid var(--cyber-pink); animation: pulse-border 1.5s infinite ease-in-out; }
+.thick-pulse-border { border: 2px solid var(--cyber-pink); animation: pulse-border 1.5s infinite ease-in-out; }
 
 /* 相性數字呼吸與爆光 */
 @keyframes pulse-text {
-    0%, 100% { text-shadow: 0 0 5px rgba(255, 20, 147, 0.4); }
+    0%, 80% { text-shadow: 0 0 5px rgba(255, 20, 147, 0.4); }
     50% { text-shadow: 0 0 15px rgba(255, 20, 147, 0.9); }
 }
 .pulse-text { animation: pulse-text 2.5s infinite ease-in-out; }
 @keyframes burst-light {
     0% { filter: brightness(1) drop-shadow(0 0 0px #fff); transform: scale(1); }
     50% { filter: brightness(1.5) drop-shadow(0 0 20px #FF1493); transform: scale(1.2); }
-    100% { filter: brightness(1) drop-shadow(0 0 5px #FF1493); transform: scale(1); }
+    80% { filter: brightness(1) drop-shadow(0 0 5px #FF1493); transform: scale(1); }
 }
 .burst-light-anim { animation: burst-light 0.8s ease-out forwards; display: inline-block; }
 
@@ -272,7 +273,7 @@ input[type=range].custom-range::-webkit-slider-runnable-track {
 }
 .giant-heart {
     font-size: 180px;
-    filter: drop-shadow(0 0 30px rgba(255, 20, 147, 0.8));
+    filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.8));
     animation: giant-heartbeat 1.5s ease-in-out infinite;
 }
 @keyframes giant-heartbeat {
@@ -371,25 +372,30 @@ input[type=range].custom-range::-webkit-slider-runnable-track {
 }
 
 
-/* 強制使用粉色經典箭咀鼠標 */
-body {
+/* ==================================
+   1. 強制粉色箭頭鼠標 (無圓點)
+   ================================== */
+*, body, html {
     cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23FF69B4" stroke="black" stroke-width="1" d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86 3.73 8.35c.16.36.61.52.97.35l2.43-1.09c.36-.16.52-.61.35-.97l-3.72-8.33 6.01.55c.45.04.77-.47.49-.83L6.34 2.86c-.24-.31-.84-.13-.84.35z"/></svg>'), auto !important;
 }
 
-/* 按鈕、拉桿等可點擊元素保持原本的手指圖案 */
-a, button, input[type="range"], select {
-    cursor: pointer !important; 
+/* 按鈕與可點擊區域保持一致，不要變回 Windows 預設手指 */
+a, button, input, select, .question-item, label, .slider-ticks span {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23FF69B4" stroke="black" stroke-width="1" d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86 3.73 8.35c.16.36.61.52.97.35l2.43-1.09c.36-.16.52-.61.35-.97l-3.72-8.33 6.01.55c.45.04.77-.47.49-.83L6.34 2.86c-.24-.31-.84-.13-.84.35z"/></svg>'), pointer !important;
 }
-/* 水波漣漪動畫 CSS */
+
+/* ==================================
+   2. 水波漣漪動畫
+   ================================== */
 .ripple-effect {
     position: fixed;
     border-radius: 50%;
     transform: scale(0);
-    transform-origin: center center; /* 確保從正中心放大 */
+    transform-origin: center center;
     animation: ripple-anim 600ms ease-out forwards;
     background-color: rgba(255, 105, 180, 0.4);
     pointer-events: none;
-    z-index: 9999;
+    z-index: 99999;
 }
 @keyframes ripple-anim {
     0% { transform: scale(0); opacity: 1; }
@@ -424,29 +430,46 @@ a, button, input[type="range"], select {
     font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif !important;
 }
 
-/* ================================== */
-/* 截圖專用排版 (只在按下載時生效)      */
-/* ================================== */
+/* ==================================
+   4. 完美 1080x1920 截圖專用排版
+   ================================== */
 .exporting-mode {
-    padding-bottom: 40px !important; /* 確保框底有足夠空間 */
+    width: 540px !important; 
+    height: 960px !important; 
+    position: absolute !important;
+    top: 0 !important;
+    left: 0 !important;
+    z-index: -1 !important;
+    overflow: hidden !important; 
+    background: #FFF5F8 !important; /* 淡粉色背景 */
+    display: flex !important;
+    flex-direction: column !important;
+    align-items: center !important;
+    justify-content: flex-start !important;
+    padding-top: 30px !important;
 }
 
-/* 縮小雷達圖，將空間讓給深度分析 */
+/* 讓雷達圖靠近頂部並維持正常大小 */
+.exporting-mode .landing-header { margin-bottom: 0px !important; }
 .exporting-mode #radar-wrapper {
-    transform: scale(0.7) !important;
-    margin-top: -30px !important;
-    margin-bottom: -30px !important;
+    width: 330px !important; /* 保持適當大小 */
+    margin: -10px auto 5px auto !important; /* 向上推，靠近標題 */
 }
 
-/* 將深度分析的字體稍微縮小，以免爆框 */
-.exporting-mode #deep-analysis-box {
-    font-size: 12px !important;
-    margin-top: 15px !important;
-}
-
-/* 白色卡片內距微調 */
+/* 將成員分析卡片緊貼雷達圖並按比例微縮 */
 .exporting-mode #main-display-section {
-    padding: 15px 15px 25px 15px !important;
-    margin-bottom: 20px !important;
+    width: 90% !important;
+    margin-top: 0 !important;
+    padding: 15px 20px 20px 20px !important;
+    transform: scale(0.92); /* 整體按比例縮小 8% 塞入 960px 高度 */
+    transform-origin: top center;
+    box-shadow: none !important; /* 截圖去除陰影更乾淨 */
+    border: 3px solid #ffb7c5 !important;
 }
 
+/* 深度分析文字稍微縮小 */
+.exporting-mode #deep-analysis-box {
+    font-size: 13px !important;
+    margin-top: 10px !important;
+    padding: 12px !important;
+}
