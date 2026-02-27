@@ -278,7 +278,7 @@ input[type=range].custom-range::-webkit-slider-runnable-track {
     
     /* 2. 調整位置：加 margin-top 逼佢向下移，遮住頭像區塊。
           (如果發覺太低，可以將 15vh 改細做 10vh；如果唔夠低就改做 20vh) */
-    margin-top: 17vh; 
+    margin-top: 18vh; 
     
     filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.8));
     animation: giant-heartbeat 1.5s ease-in-out infinite;
@@ -326,17 +326,17 @@ input[type=range].custom-range::-webkit-slider-runnable-track {
 .result-avatar::after {
     content: "";
     position: absolute;
-    top: -50%;   /* 放大尺寸以覆蓋旋轉後的角落 */
-    left: -150%; /* 初始位置在左側畫面外 */
-    width: 80%;  /* 光束寬度 */
+    top: -50%;   
+    left: -150%; 
+    width: 80%;  
     height: 200%;
     
-    /* 漸變光束：透明 -> 半透明白 -> 透明 */
-    background: linear_gradient(
+    /* 🌟 關鍵修正：linear-gradient (中間係減號) 🌟 */
+    background: linear-gradient(
         90deg, 
         rgba(255, 255, 255, 0) 0%, 
-        rgba(255, 255, 255, 0.1) 20%, /* 稍微帶點光暈 */
-        rgba(255, 255, 255, 0.6) 50%, /* 最亮處 */
+        rgba(255, 255, 255, 0.1) 20%, 
+        rgba(255, 255, 255, 0.6) 50%, 
         rgba(255, 255, 255, 0.1) 80%,
         rgba(255, 255, 255, 0) 100%
     );
@@ -473,7 +473,7 @@ a, button, input, select, .question-item, label, .slider-ticks span {
 .exporting-mode .landing-header { 
     width: 100% !important; /* 撐開 100% 寬度 */
     text-align: center !important; /* 🌟 內容文字置中 */
-    margin-bottom: -35px !important; /* 負值往上拉 */
+    margin-bottom: -25px !important; /* 負值往上拉 */
     transform: scale(1.2); 
 }
 .exporting-mode .landing-header h2 {
@@ -587,4 +587,5 @@ body > canvas {
     z-index: 999999 !important; /* 突破天際嘅層級 */
     pointer-events: none !important; /* 確保唔會阻礙你點擊滑桿 */
 }
+
 
