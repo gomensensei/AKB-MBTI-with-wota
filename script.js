@@ -421,9 +421,10 @@ function renderMainDisplay(member, titleLabel) {
             <p style="margin-bottom:12px;"><strong>S/N:</strong> <span style="color: var(--cyber-pink); font-weight:bold;">${getDimDetail(member.diffs.S, 'S', true)}</span> - ${getDimDetail(member.diffs.S, 'S', false)}</p>
             <p style="margin-bottom:12px;"><strong>T/F:</strong> <span style="color: var(--cyber-pink); font-weight:bold;">${getDimDetail(member.diffs.T, 'T', true)}</span> - ${getDimDetail(member.diffs.T, 'T', false)}</p>
             <p style="margin-bottom:15px;"><strong>J/P:</strong> <span style="color: var(--cyber-pink); font-weight:bold;">${getDimDetail(member.diffs.J, 'J', true)}</span> - ${getDimDetail(member.diffs.J, 'J', false)}</p>
-            <div style="background: rgba(255, 20, 147, 0.05); border-left: 4px solid var(--cyber-pink); border-radius: 4px; padding: 15px;">
-                <strong>${ui.deep_analysis_label[currentLang]}</strong><br>${mLang.analysis[currentLang]}
-            </div>
+        </div>
+
+        <div id="deep-analysis-box" style="text-align: left; background: rgba(255, 20, 147, 0.05); border-left: 4px solid var(--cyber-pink); border-radius: 4px; padding: 15px; font-size: 14px; color: #444; line-height: 1.6;">
+            <strong>${ui.deep_analysis_label[currentLang]}</strong><br>${mLang.analysis[currentLang]}
         </div>
     `;
 }
@@ -577,16 +578,16 @@ myRadarChart = new Chart(ctx, {
     });
 
     // 3. 下載按鈕事件 (已加入防 Crop 底與深度分析顯示邏輯)
-    document.getElementById('download-btn').addEventListener('click', async () => {
+document.getElementById('download-btn').addEventListener('click', async () => {
         const container = document.getElementById('export-container');
         const webOnly = document.querySelectorAll('.web-only'); 
         const exportOnly = document.querySelectorAll('.export-only');
         
-        // 隱藏網頁專用元素，顯示匯出專用元素
+        // 隱藏長氣文字，顯示 4 個粉色 Tag
         webOnly.forEach(el => el.style.display = 'none'); 
         exportOnly.forEach(el => el.style.display = 'grid'); 
         
-        // 🌟 新增：套用截圖專用排版 (縮細雷達、顯示深度分析)
+        // 🌟 加入截圖專用排版 class (等陣 CSS 會控制佢)
         container.classList.add('exporting-mode');
 
         const oldWidth = container.style.width; 
@@ -594,20 +595,19 @@ myRadarChart = new Chart(ctx, {
         const oldPos = container.style.position;
         
         container.style.width = "540px"; 
-        container.style.height = "auto"; // 改用 auto 讓內容自然撐開
-        container.style.position = "absolute"; // 改用 absolute 避免 fixed 帶來的滾動截斷問題
+        container.style.height = "auto"; // 改用 auto 確保底部被撐開，唔會切斷
+        container.style.position = "absolute"; 
         container.style.top = "0"; 
         container.style.left = "0"; 
-        container.style.zIndex = "-1"; // 移到背景層避免遮擋
+        container.style.zIndex = "-1"; 
         
         window.scrollTo(0, 0);
         
         try {
-            // 使用 windowWidth 確保 html2canvas 擷取完整寬度
             const canvas = await html2canvas(container, { 
                 scale: 2, 
                 useCORS: true, 
-                backgroundColor: "#fdfcfb",
+                backgroundColor: "#FFF5F8", // 你圖一的淡粉色背景
                 windowWidth: 540
             });
             const link = document.createElement('a'); 
@@ -615,10 +615,11 @@ myRadarChart = new Chart(ctx, {
             link.href = canvas.toDataURL("image/png"); 
             link.click();
         } finally {
-            // 恢復原本排版
+            // 恢復原狀
             webOnly.forEach(el => el.style.display = 'block'); 
             exportOnly.forEach(el => el.style.display = 'none');
             container.classList.remove('exporting-mode');
+            
             container.style.width = oldWidth; 
             container.style.height = oldHeight; 
             container.style.position = oldPos;
@@ -822,6 +823,7 @@ document.addEventListener('mousedown', function(e) {
 function randomInRange(min, max) {
     return Math.random() * (max - min) + min;
 }
+
 
 
 
