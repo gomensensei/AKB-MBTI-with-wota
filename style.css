@@ -372,3 +372,44 @@ input[type=range].custom-range::-webkit-slider-runnable-track {
 }
 
 
+/* 1. 經典粉色鼠標 */
+body {
+    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="%23FF69B4" stroke="black" stroke-width="1"><path d="M7 2l12 11.2-5.8.5 3.3 7.3-2.25 1-3.2-7.4-4.4 5z"/></svg>'), auto;
+}
+
+/* 2. 點擊水波漣漪動畫 */
+.ripple-effect {
+    position: fixed;
+    border-radius: 50%;
+    transform: scale(0);
+    animation: ripple-anim 600ms linear;
+    background-color: rgba(255, 105, 180, 0.4); 
+    pointer-events: none; 
+    z-index: 9999;
+}
+@keyframes ripple-anim {
+    to { transform: scale(3); opacity: 0; }
+}
+
+/* 3. 截圖專用模式 (縮細雷達、顯示深度分析、防 Crop 底) */
+.exporting-mode {
+    padding-bottom: 30px !important; 
+}
+.exporting-mode .chart-container, 
+.exporting-mode #radar-wrapper {
+    transform: scale(0.85);
+    margin-top: -15px;
+    margin-bottom: -15px;
+}
+.exporting-mode .web-only {
+    display: none !important;
+}
+.exporting-mode .export-only {
+    display: grid !important;
+}
+.exporting-mode .deep-analysis-box {
+    display: block !important; 
+    font-size: 0.85em; 
+    margin-top: 10px;
+    line-height: 1.4;
+}
