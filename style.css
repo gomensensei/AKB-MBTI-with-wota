@@ -580,4 +580,11 @@ a, button, input, select, .question-item, label, .slider-ticks span {
 
 
 
+/* ==================================
+   強制將點擊櫻花特效推到全畫面最頂層
+   ================================== */
+body > canvas {
+    z-index: 999999 !important; /* 突破天際嘅層級 */
+    pointer-events: none !important; /* 確保唔會阻礙你點擊滑桿 */
+}
 
