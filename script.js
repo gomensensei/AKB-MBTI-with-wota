@@ -28,11 +28,11 @@ function getMbtiBaseScore(userType, memberType) {
     if (mbtiBaseMatrix[userType] && mbtiBaseMatrix[userType][memberType]) {
         return mbtiBaseMatrix[userType][memberType];
     }
-    return 70; // 預設安全值
+    return 70; 
 }
 
 // ==========================================
-// 核心演算法組件 2：固定緣分值產生器 (防止隨機失憶症)
+// 核心演算法組件 2：固定緣分值產生器
 // ==========================================
 function getSeededLuck(userPerc, memberId) {
     const seedString = `${Math.round(userPerc.E)}_${Math.round(userPerc.S)}_${memberId}`;
@@ -41,7 +41,7 @@ function getSeededLuck(userPerc, memberId) {
         hash = ((hash << 5) - hash) + seedString.charCodeAt(i);
         hash |= 0; 
     }
-    return (Math.abs(hash) % 40) / 10; // 產生 0.0 ~ 3.9 嘅微調分數
+    return (Math.abs(hash) % 40) / 10; 
 }
 
 let membersDB = [];
@@ -108,16 +108,14 @@ document.addEventListener('DOMContentLoaded', async () => {
         if (currentPage > 0) { currentPage--; updateUI(); window.scrollTo({ top: 0, behavior: 'smooth' }); }
     });
 
-document.getElementById('next-btn')?.addEventListener('click', () => {
+    document.getElementById('next-btn')?.addEventListener('click', () => {
         if (!document.getElementById('next-btn').disabled) {
             if (currentPage < totalPages - 1) { 
                 currentPage++; 
                 updateUI(); 
                 window.scrollTo({ top: 0, behavior: 'smooth' }); 
             } else { 
-                // 當是最後一頁時，執行計算
                 calculateResults(); 
-                // 注意：這裡移除了 window.scrollTo，因為 Loading 畫面通常是固定在螢幕正中央的
             }
         }
     });
@@ -177,10 +175,11 @@ function renderQuiz() {
         }
         track.appendChild(pageDiv);
     }
-track.addEventListener('input', handleSlider);
+    
+    track.addEventListener('input', handleSlider);
     track.addEventListener('change', handleSlider);
     
-    // 🌟 新增：解決中立位置無法直接點擊的問題
+    // 解決中立位置無法直接點擊的問題
     track.addEventListener('mousedown', (e) => {
         if (e.target.tagName === 'INPUT' && e.target.type === 'range') {
             e.target.dispatchEvent(new Event('change', { bubbles: true }));
@@ -258,7 +257,6 @@ function updateProgress() {
 // 核心演算法組件 3：終極計分與排序引擎
 // ==========================================
 function calculateResults() {
-    // 1. 計算用家答題分數
     let scores = { E: 0, S: 0, T: 0, J: 0, A: 0 };
     for (let i = 1; i <= 60; i++) {
         const qData = i18nData.questions[i];
@@ -267,7 +265,6 @@ function calculateResults() {
         scores[qData.dim] += val;
     }
     
-    // 2. 轉換為百分比與 MBTI 字串
     userPerc = {
         E: ((scores.E - 12) / 72) * 100, 
         S: ((scores.S - 12) / 72) * 100, 
@@ -278,7 +275,6 @@ function calculateResults() {
     
     userMbtiStr = (userPerc.E > 50 ? 'E' : 'I') + (userPerc.S > 50 ? 'S' : 'N') + (userPerc.T > 50 ? 'T' : 'F') + (userPerc.J > 50 ? 'J' : 'P');
     
-    // 3. 逐一比對資料庫成員
     let matchResults = membersDB.map(m => {
         let M = m.mbti_scores;
         let diffE = Math.abs(userPerc.E - M.E);
@@ -286,11 +282,9 @@ function calculateResults() {
         let diffT = Math.abs(userPerc.T - M.T);
         let diffJ = Math.abs(userPerc.J - M.J);
 
-        // A. 取得 MBTI 官方相性基數 (宏觀定調)
         let tierBaseScore = getMbtiBaseScore(userMbtiStr, m.mbti_type);
-        if (tierBaseScore <= 50) tierBaseScore = 55; // 保底機制，防止 N型沙漠
+        if (tierBaseScore <= 50) tierBaseScore = 55; 
 
-        // B. 餘弦波與線性微調 (微觀排位)
         let simBonusE = (50 - diffE) / 25; 
         let simBonusS = (50 - diffS) / 20; 
         let simBonusT = (50 - diffT) / 25; 
@@ -301,19 +295,13 @@ function calculateResults() {
         let modifier = simBonusE + simBonusS + simBonusT + simBonusJ + compBonusE + compBonusJ;
         let baseComp = tierBaseScore + modifier;
 
-        // C. A/T 堅韌度互補加成
         if (userPerc.A < 50 && (M.A !== undefined && M.A >= 65)) baseComp += 1.5;
 
-// 🌟 【新增：新世代光環加成 (Rookie Bonus)】 🌟
-        // 針對 17期 至 21期 成員，給予 0.8 分嘅微小加成，增加佢哋嘅曝光率
         if (m.ki === "17期" || m.ki === "18期" || m.ki === "19期" || m.ki === "20期" || m.ki === "21期") {
             baseComp += 0.8;
         }
-       
-        // D. 智能封頂，預留空間畀緣分值
+        
         baseComp = Math.max(0, Math.min(96, baseComp));
-
-        // E. 加入固定緣分值 (0.0 ~ 3.9)
         const luckFactor = getSeededLuck(userPerc, m.id);
         let finalComp = baseComp + luckFactor;
         
@@ -324,49 +312,31 @@ function calculateResults() {
         };
     });
     
-    // 4. 初步排序
     matchResults.sort((a, b) => b.comp - a.comp);
     
-    // ==========================================
-    // 5. 相對神推保底機制 (Curve Grading) - 確保極致 UX 體驗
-    // ==========================================
     let topScore = matchResults[0].comp;
     if (topScore < 92) {
         let boost = 93.5 - topScore; 
-        
         matchResults = matchResults.map((m, index) => {
             let individualBoost = boost * Math.max(0, (1 - index * 0.15));
             let newComp = m.comp + individualBoost;
-            
-            // 用固定緣分值做偽隨機突破，確保唔會隨機失憶
             if (index === 0) {
                 let fixedExtraBonus = (getSeededLuck(userPerc, m.id) / 3.9) * 2.5; 
                 newComp += fixedExtraBonus;
             }
-            
             return {
                 ...m,
                 comp: parseFloat(Math.min(99.9, newComp).toFixed(1))
             };
         });
-        
-        // 重新排序確保名次正確
         matchResults.sort((a, b) => b.comp - a.comp);
     }
-    // ==========================================
     
-    // 6. 儲存結果與觸發畫面
     matchResultsGlobal = matchResults; 
     localStorage.removeItem('akb_answers'); 
     
     const finalTopCompScore = matchResultsGlobal[0].comp;
-    
-    // 呼叫 Loading 動畫 (進入結果頁)
-    if(typeof showLoadingAndReveal === 'function') {
-        showLoadingAndReveal(finalTopCompScore);
-    } else {
-        renderResultPage(matchResultsGlobal);
-    }
+    showLoadingAndReveal(finalTopCompScore);
 }
 
 function getConicGradient(colors) {
@@ -389,10 +359,6 @@ function renderMainDisplay(member, titleLabel) {
     const mLang = i18nData.members_analysis[member.id];
     const ui = i18nData.ui;
     const cb = `?v=${new Date().getTime()}`;
-    
-    // 判斷是否為超神推 (95%+) 來決定要不要加愛心
-    const isSuperMatch = member.comp >= 95;
-    const heartHtml = isSuperMatch ? `<span class="match-heart" style="display:inline-block; margin-left: 5px;">💖</span>` : '';
 
     return `
         <div style="font-size: 18px; font-weight:bold; margin-bottom: 15px; color: var(--cyber-pink);">${titleLabel}</div>
@@ -403,8 +369,8 @@ function renderMainDisplay(member, titleLabel) {
         
         <h3 style="font-size: 22px; margin-bottom: 5px;">${member.name_ja} <span style="font-size:14px; opacity:0.7;">(${member.mbti_type})</span></h3>
         
-        <p style="color: var(--cyber-pink); font-weight: 800; font-size: 24px; margin: 5px 0 10px 0;">
-            ${ui.compatibility_label[currentLang] || ''} <span class="comp-score">${member.comp}%</span>${heartHtml}
+        <p class="comp-score-container" style="color: var(--cyber-pink); font-weight: 800; font-size: 24px; margin: 5px 0 10px 0; display:flex; justify-content:center; align-items:center;">
+            ${ui.compatibility_label[currentLang] || ''} <span class="comp-score" style="margin-left:5px;">0.0%</span>
         </p>
         
         <div class="dark-badge" style="font-size: 14px; padding: 8px 15px;">${mLang.title[currentLang]}</div>
@@ -439,6 +405,7 @@ function renderResultPage(allMembers) {
     let ui = i18nData.ui;
     const cb = `?v=${new Date().getTime()}`;
     const content = document.getElementById('result-content');
+    
     content.innerHTML = `
         <div id="export-container" style="background: linear-gradient(135deg, #fdfcfb, #f0e6ea); width: 100%; max-width: 540px; margin: 0 auto; overflow: hidden; border-radius: 20px;">
             <div id="export-card" style="padding: 40px 15px; position: relative; display: flex; flex-direction: column; align-items: center; min-height: 850px; justify-content: space-around;">
@@ -486,28 +453,18 @@ function renderResultPage(allMembers) {
             <button id="share-x-btn" class="cyber-btn" style="flex: 1; background: #000; color: #fff;">分享到 𝕏</button>
         </div>
     `;
+
     if(myRadarChart) myRadarChart.destroy();
     const ctx = document.getElementById('radarChart').getContext('2d');
-myRadarChart = new Chart(ctx, {
+    myRadarChart = new Chart(ctx, {
         type: 'radar',
         data: {
             labels: ui.radar_labels[currentLang],
             datasets: [{ data: [userPerc.E, userPerc.S, userPerc.T, userPerc.J, userPerc.A], backgroundColor: 'rgba(255, 20, 147, 0.4)', borderColor: '#FF1493', borderWidth: 3, pointRadius: 4, pointBackgroundColor: '#FF1493' }]
         },
         options: {
-            // 🌟 【新增 1】：畫布四周加 Padding，確保最邊緣嘅字唔會出界被 Crop
-            layout: {
-                padding: {
-                    left: 25,
-                    right: 25,
-                    top: 20,
-                    bottom: 20
-                }
-            },
-            animation: {
-                duration: 2500,           // 動畫持續 2.5 秒
-                easing: 'easeOutQuart'    // 絲滑的減速效果
-            },
+            layout: { padding: { left: 25, right: 25, top: 20, bottom: 20 } },
+            animation: { duration: 2500, easing: 'easeOutQuart' },
             scales: {
                 r: {
                     angleLines: { color: 'rgba(0,0,0,0.1)' },
@@ -515,19 +472,13 @@ myRadarChart = new Chart(ctx, {
                     ticks: { display: true, stepSize: 20, backdropColor: 'transparent', color: '#999', font: { size: 10 } },
                     suggestedMin: 0, 
                     suggestedMax: 100,
-                    // 🌟 【新增 2】：加大外圍文字 (例如"審美(S)") 同雷達網角位嘅距離
-                    pointLabels: {
-                        padding: 10
-                    }
+                    pointLabels: { padding: 10 }
                 } 
             }, 
-            plugins: { 
-                legend: { display: false } 
-            } 
+            plugins: { legend: { display: false } } 
         }
     });
    
-// 1. 選擇神推的選單事件 (加入了動畫觸發)
     document.getElementById('oshi-select').addEventListener('change', (e) => {
         const oshiId = e.target.value;
         const bestList = document.getElementById('web-best-list');
@@ -543,7 +494,6 @@ myRadarChart = new Chart(ctx, {
                 myRadarChart.data.datasets.pop(); 
                 myRadarChart.update(); 
             }
-            // 🌟 回到第一名：觸發動畫，但關閉神推小愛心 (false)
             applyDynamicAnimations(b1.comp, false);
             return; 
         }
@@ -565,66 +515,120 @@ myRadarChart = new Chart(ctx, {
         };
         myRadarChart.update(); 
         window.scrollTo({ top: 0, behavior: 'smooth' });
-
-        // 🌟 選擇神推：觸發動畫，並開啟神推專屬小愛心 (true)
         applyDynamicAnimations(oshi.comp, true);
     });
 
-    // 2. 返回 Best 3 按鈕事件
     document.getElementById('back-to-best3-btn').addEventListener('click', () => {
         document.getElementById('oshi-select').value = ""; 
         document.getElementById('oshi-select').dispatchEvent(new Event('change'));
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-// ----------------------------------------------------
-// 下載截圖功能 (使用 exporting-mode)
-// ----------------------------------------------------
-document.getElementById('download-btn').addEventListener('click', async () => {
-    const container = document.getElementById('export-container');
-    const webOnly = document.querySelectorAll('.web-only'); 
-    const exportOnly = document.querySelectorAll('.export-only');
-    
-    // 隱藏長氣文字，顯示 4 個粉色 Tag
-    webOnly.forEach(el => el.style.display = 'none'); 
-    exportOnly.forEach(el => el.style.display = 'grid'); 
-    
-    // 強制顯示深度分析
-    const deepBox = document.getElementById('deep-analysis-box');
-    if(deepBox) deepBox.style.display = 'block';
+    // 下載截圖
+    document.getElementById('download-btn').addEventListener('click', async () => {
+        const container = document.getElementById('export-container');
+        const webOnly = document.querySelectorAll('.web-only'); 
+        const exportOnly = document.querySelectorAll('.export-only');
+        
+        webOnly.forEach(el => el.style.display = 'none'); 
+        exportOnly.forEach(el => el.style.display = 'grid'); 
+        
+        container.classList.add('exporting-mode');
+        const deepBox = document.getElementById('deep-analysis-box');
+        if(deepBox) deepBox.style.display = 'block';
 
-    // 加入排版 class
-    container.classList.add('exporting-mode');
-    window.scrollTo(0, 0);
-    
-    try {
-        // scale: 2 配上 CSS 540x960，確保產生 1080x1920 高清圖
-        const canvas = await html2canvas(container, { 
-            scale: 2, 
-            useCORS: true, 
-            backgroundColor: "#FFF5F8",
-            windowWidth: 540,
-            windowHeight: 960 
-        });
-        const link = document.createElement('a'); 
-        link.download = `AKB48_${userMbtiStr}_Result.png`; 
-        link.href = canvas.toDataURL("image/png"); 
-        link.click();
-    } finally {
-        // 恢復網頁原貌
-        webOnly.forEach(el => el.style.display = 'block'); 
-        exportOnly.forEach(el => el.style.display = 'none');
-        container.classList.remove('exporting-mode');
-        // 網頁版原本就需要顯示 deepBox，所以不需要再隱藏它
-    }
-});
+        window.scrollTo(0, 0);
+        
+        try {
+            const canvas = await html2canvas(container, { 
+                scale: 2, 
+                useCORS: true, 
+                backgroundColor: "#FFF5F8",
+                windowWidth: 540,
+                windowHeight: 960 
+            });
+            const link = document.createElement('a'); 
+            link.download = `AKB48_${userMbtiStr}_Result.png`; 
+            link.href = canvas.toDataURL("image/png"); 
+            link.click();
+        } finally {
+            webOnly.forEach(el => el.style.display = 'block'); 
+            exportOnly.forEach(el => el.style.display = 'none');
+            container.classList.remove('exporting-mode');
+        }
+    });
+   
+    document.getElementById('share-x-btn').addEventListener('click', () => {
+        const shareTexts = {
+            'zh-HK': { mbti: "我的追星人格：", soulmate: "我的靈魂伴侶：", oshi: "我的神推相性：", check: "測測你的 AKB48 靈魂成員：" },
+            'zh-CN': { mbti: "我的追星人格：", soulmate: "我的灵魂伴侣：", oshi: "我的神推相性：", check: "测测你的 AKB48 灵魂成员：" },
+            'ja': { mbti: "私のオタク人格：", soulmate: "運命のパートナー：", oshi: "神推しとの相性：", check: "あなたのAKB48ソウルメイトを診断：" },
+            'ko': { mbti: "나의 덕질 성격:", soulmate: "나의 소울메이트:", oshi: "나의 카미오시 상성:", check: "나의 AKB48 소울메이트 테스트:" },
+            'en': { mbti: "My Stan Personality:", soulmate: "My Soulmate:", oshi: "My Kami-Oshi Compatibility:", check: "Find your AKB48 soulmate:" },
+            'th': { mbti: "บุคลิกการติ่งของฉัน:", soulmate: "โซลเมตของฉัน:", oshi: "ความเข้ากันได้กับคามิโอชิ:", check: "ค้นหาโซลเมต AKB48 ของคุณ:" },
+            'id': { mbti: "Kepribadian Stan Saya:", soulmate: "Belahan Jiwaku:", oshi: "Kecocokan Kami-Oshi Saya:", check: "Temukan soulmate AKB48 kamu:" }
+        };
+        const st = shareTexts[currentLang] || shareTexts['en']; const shareUrl = window.location.href; const isOshi = currentDisplayMember.id !== b1.id;
+        const memberHash = `#${currentDisplayMember.name_ja.replace(/\s+/g, '')}`;
+        const relationTitle = isOshi ? st.oshi : st.soulmate;
+        const tweetText = `【${st.mbti}${userMbtiStr} ${userTitle}】\n💖 ${relationTitle}${currentDisplayMember.name_ja} (${currentDisplayMember.comp}%)\n\n${st.check}\n👇 ${shareUrl}\n\n#AKB48 #MBTI ${memberHash} #性格鑑定`;
+        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`, '_blank');
+    });
+}
 
-// ----------------------------------------------------
+// ==========================================
 // 動畫與特效引擎區
-// ----------------------------------------------------
+// ==========================================
 let oshiHeartInterval = null; 
 
-// 負責所有頭像發光、Count Up 與神推心心的通用函數
+function showLoadingAndReveal(bestCompScore) {
+    const loader = document.getElementById('loading-overlay');
+    loader.style.display = 'flex';
+    loader.classList.remove('hidden');
+    
+    const progressCircle = loader.querySelector('.progress');
+    progressCircle.style.transition = 'none';
+    progressCircle.style.strokeDashoffset = '283';
+    void progressCircle.offsetWidth;
+    progressCircle.style.transition = 'stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
+    progressCircle.style.strokeDashoffset = '0';
+    
+    setTimeout(() => {
+        loader.style.opacity = '0';
+        setTimeout(() => {
+            loader.classList.add('hidden');
+            loader.style.opacity = '1'; 
+            
+            document.getElementById('page-quiz').classList.add('hidden');
+            document.getElementById('page-result').classList.remove('hidden');
+            renderResultPage(matchResultsGlobal);
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            if (bestCompScore >= 85) {
+                const giantHeart = document.getElementById('giant-heart-overlay');
+                giantHeart.classList.remove('hidden');
+                giantHeart.style.opacity = '1';
+                
+                setTimeout(() => {
+                    giantHeart.style.opacity = '0';
+                    setTimeout(() => giantHeart.classList.add('hidden'), 500);
+                    
+                    if (typeof confetti !== 'undefined') {
+                        confetti({ particleCount: 200, spread: 360, startVelocity: 40, origin: {y: 0.4}, zIndex: 2147483647, ticks: 150 });
+                    }
+                    applyDynamicAnimations(bestCompScore, false);
+                }, 4500);
+            } else {
+                if (typeof confetti !== 'undefined') {
+                    confetti({ particleCount: 100, spread: 160, startVelocity: 30, origin: {y: 0.6}, zIndex: 2147483647 });
+                }
+                applyDynamicAnimations(bestCompScore, false);
+            }
+        }, 500);
+    }, 1500);
+}
+
 function applyDynamicAnimations(compScore, isOshi = false) {
     const avatar = document.querySelector('.result-avatar'); 
     const compText = document.querySelector('.comp-score'); 
@@ -638,15 +642,11 @@ function applyDynamicAnimations(compScore, isOshi = false) {
 
     if (compText) {
         compText.className = 'comp-score pulse-text'; 
-        // 1. 初始化為 0%，移除任何舊的💖
-        compText.innerHTML = "0.0%";
+        compText.innerHTML = "0.0%"; // 開始前歸零
         
-        // 2. 執行數字跳動，並傳入 Callback
         animateCountUp(compText, compScore, () => {
-            // Callback: 當數字停下來後執行
             if (compScore >= 95) {
                 compText.classList.add('burst-light-anim');
-                // 延遲 0.5 秒後，才顯示心心
                 setTimeout(() => {
                     compText.innerHTML = `${compScore.toFixed(1)}% <span class="match-heart" style="display:inline-block; margin-left: 5px; animation: heart-beat 1s infinite;">💖</span>`;
                 }, 500);
@@ -656,7 +656,6 @@ function applyDynamicAnimations(compScore, isOshi = false) {
         });
     }
 
-    // 神推微小飄心動畫 (維持不變)
     if (isOshi && typeof confetti !== 'undefined') {
         const heartPath = 'M167 72c19,-38 37,-56 75,-56 42,0 76,33 76,75 0,76 -76,151 -151,227 -76,-76 -151,-151 -151,-227 0,-42 33,-75 75,-75 38,0 57,18 76,56z';
         const heartShape = confetti.shapeFromPath({ path: heartPath, matrix: [0.033, 0, 0, 0.033, -5, -5] });
@@ -676,7 +675,6 @@ function applyDynamicAnimations(compScore, isOshi = false) {
     }
 }
 
-// 數字跳動函數 (支援 Callback)
 function animateCountUp(element, finalValue, onComplete) {
     let duration = 1500; 
     let startTimestamp = null;
@@ -694,13 +692,12 @@ function animateCountUp(element, finalValue, onComplete) {
         } else {
             element.innerHTML = finalValue.toFixed(1) + '%';
             triggerPinkParticles(element);
-            if (onComplete) onComplete(); // 動畫結束，呼叫 Callback 加愛心
+            if (onComplete) onComplete(); 
         }
     };
     window.requestAnimationFrame(step);
 }
 
-// 粉色粒子散開 (不變)
 function triggerPinkParticles(element) {
     if (typeof confetti === 'undefined') return;
     const rect = element.getBoundingClientRect();
@@ -713,19 +710,16 @@ function triggerPinkParticles(element) {
     });
 }
 
-// 輔助工具：生成隨機數
 function randomInRange(min, max) {
     return Math.random() * (max - min) + min;
 }
 
-// ----------------------------------------------------
-// 全局點擊水波回饋 (只限左鍵 mousedown)
-// ----------------------------------------------------
+// ==========================================
+// 全局點擊水波回饋
+// ==========================================
 document.addEventListener('mousedown', function(e) {
-    // 確保只在左鍵點擊時觸發 (e.button === 0 代表左鍵)
-    if (e.button !== 0) return;
+    if (e.button !== 0) return; // 只限滑鼠左鍵
 
-    // 清除舊漣漪，防止出現多個
     const existingRipples = document.querySelectorAll('.ripple-effect');
     existingRipples.forEach(r => r.remove());
 
