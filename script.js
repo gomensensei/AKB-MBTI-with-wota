@@ -577,207 +577,130 @@ myRadarChart = new Chart(ctx, {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
-    // 3. 下載按鈕事件 (已加入防 Crop 底與深度分析顯示邏輯)
+// ----------------------------------------------------
+// 下載截圖功能 (使用 exporting-mode)
+// ----------------------------------------------------
 document.getElementById('download-btn').addEventListener('click', async () => {
-        const container = document.getElementById('export-container');
-        const webOnly = document.querySelectorAll('.web-only'); 
-        const exportOnly = document.querySelectorAll('.export-only');
-        
-        // 隱藏長氣文字，顯示 4 個粉色 Tag
-        webOnly.forEach(el => el.style.display = 'none'); 
-        exportOnly.forEach(el => el.style.display = 'grid'); 
-        
-        // 🌟 加入截圖專用排版 class (等陣 CSS 會控制佢)
-        container.classList.add('exporting-mode');
-
-        const oldWidth = container.style.width; 
-        const oldHeight = container.style.height; 
-        const oldPos = container.style.position;
-        
-        container.style.width = "540px"; 
-        container.style.height = "auto"; // 改用 auto 確保底部被撐開，唔會切斷
-        container.style.position = "absolute"; 
-        container.style.top = "0"; 
-        container.style.left = "0"; 
-        container.style.zIndex = "-1"; 
-        
-        window.scrollTo(0, 0);
-        
-        try {
-            const canvas = await html2canvas(container, { 
-                scale: 2, 
-                useCORS: true, 
-                backgroundColor: "#FFF5F8", // 你圖一的淡粉色背景
-                windowWidth: 540
-            });
-            const link = document.createElement('a'); 
-            link.download = `AKB48_${userMbtiStr}_Result.png`; 
-            link.href = canvas.toDataURL("image/png"); 
-            link.click();
-        } finally {
-            // 恢復原狀
-            webOnly.forEach(el => el.style.display = 'block'); 
-            exportOnly.forEach(el => el.style.display = 'none');
-            container.classList.remove('exporting-mode');
-            
-            container.style.width = oldWidth; 
-            container.style.height = oldHeight; 
-            container.style.position = oldPos;
-            container.style.zIndex = "";
-        }
-    });
-   
-    document.getElementById('share-x-btn').addEventListener('click', () => {
-        const shareTexts = {
-            'zh-HK': { mbti: "我的追星人格：", soulmate: "我的靈魂伴侶：", oshi: "我的神推相性：", check: "測測你的 AKB48 靈魂成員：" },
-            'zh-CN': { mbti: "我的追星人格：", soulmate: "我的灵魂伴侣：", oshi: "我的神推相性：", check: "测测你的 AKB48 灵魂成员：" },
-            'ja': { mbti: "私のオタク人格：", soulmate: "運命のパートナー：", oshi: "神推しとの相性：", check: "あなたのAKB48ソウルメイトを診断：" },
-            'ko': { mbti: "나의 덕질 성격:", soulmate: "나의 소울메이트:", oshi: "나의 카미오시 상성:", check: "나의 AKB48 소울메이트 테스트:" },
-            'en': { mbti: "My Stan Personality:", soulmate: "My Soulmate:", oshi: "My Kami-Oshi Compatibility:", check: "Find your AKB48 soulmate:" },
-            'th': { mbti: "บุคลิกการติ่งของฉัน:", soulmate: "โซลเมตของฉัน:", oshi: "ความเข้ากันได้กับคามิโอชิ:", check: "ค้นหาโซลเมต AKB48 ของคุณ:" },
-            'id': { mbti: "Kepribadian Stan Saya:", soulmate: "Belahan Jiwaku:", oshi: "Kecocokan Kami-Oshi Saya:", check: "Temukan soulmate AKB48 kamu:" }
-        };
-        const st = shareTexts[currentLang] || shareTexts['en']; const shareUrl = window.location.href; const isOshi = currentDisplayMember.id !== b1.id;
-        const memberHash = `#${currentDisplayMember.name_ja.replace(/\s+/g, '')}`;
-        const relationTitle = isOshi ? st.oshi : st.soulmate;
-        const tweetText = `【${st.mbti}${userMbtiStr} ${userTitle}】\n💖 ${relationTitle}${currentDisplayMember.name_ja} (${currentDisplayMember.comp}%)\n\n${st.check}\n👇 ${shareUrl}\n\n#AKB48 #MBTI ${memberHash} #性格鑑定`;
-        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`, '_blank');
-    });
-}
-
-// ==========================================
-// 動畫與特效引擎區 (終極版)
-// ==========================================
-
-let oshiHeartInterval = null; // 控制神推細心心飄落的計時器
-
-// 1. Loading 圓圈與巨型愛心展示
-function showLoadingAndReveal(bestCompScore) {
-    const loader = document.getElementById('loading-overlay');
-    loader.style.display = 'flex';
-    loader.classList.remove('hidden');
+    const container = document.getElementById('export-container');
+    const webOnly = document.querySelectorAll('.web-only'); 
+    const exportOnly = document.querySelectorAll('.export-only');
     
-    const progressCircle = loader.querySelector('.progress');
-    progressCircle.style.transition = 'none';
-    progressCircle.style.strokeDashoffset = '283';
-    void progressCircle.offsetWidth;
-    progressCircle.style.transition = 'stroke-dashoffset 1.5s cubic-bezier(0.4, 0, 0.2, 1)';
-    progressCircle.style.strokeDashoffset = '0';
+    // 隱藏長氣文字，顯示 4 個粉色 Tag
+    webOnly.forEach(el => el.style.display = 'none'); 
+    exportOnly.forEach(el => el.style.display = 'grid'); 
     
-    setTimeout(() => {
-        loader.style.opacity = '0';
-        setTimeout(() => {
-            loader.classList.add('hidden');
-            loader.style.opacity = '1'; 
-            
-            // 切換頁面
-            document.getElementById('page-quiz').classList.add('hidden');
-            document.getElementById('page-result').classList.remove('hidden');
-            renderResultPage(matchResultsGlobal);
-            
-            // 【解決問題 2】：畫面顯示後立刻滑到最上方，確保看到雷達圖生成
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-            
-            // 【解決問題 4】：巨型愛心與漫天櫻花爆發
-            if (bestCompScore >= 85) {
-                const giantHeart = document.getElementById('giant-heart-overlay');
-                giantHeart.classList.remove('hidden');
-                giantHeart.style.opacity = '1';
-                
-                // 讓愛心撲通跳 4.5 秒 (1.5秒 x 3次)
-                setTimeout(() => {
-                    giantHeart.style.opacity = '0';
-                    setTimeout(() => giantHeart.classList.add('hidden'), 500);
-                    
-                    // 爆出快閃漫天櫻花 (ticks 設為 150 讓它快點消失)
-                    if (typeof confetti !== 'undefined') {
-                        confetti({ particleCount: 200, spread: 360, startVelocity: 40, origin: {y: 0.4}, zIndex: 2147483647, ticks: 150 });
-                    }
-                    // 愛心結束後才開始跑數字和頭像發光
-                    applyDynamicAnimations(bestCompScore, false);
-                }, 4500);
-            } else {
-                // 如果沒有 95%，直接爆發普通彩帶並跑數字
-                if (typeof confetti !== 'undefined') {
-                    confetti({ particleCount: 100, spread: 160, startVelocity: 30, origin: {y: 0.6}, zIndex: 2147483647 });
-                }
-                applyDynamicAnimations(bestCompScore, false);
-            }
-        }, 500);
-    }, 1500);
-}
+    // 強制顯示深度分析
+    const deepBox = document.getElementById('deep-analysis-box');
+    if(deepBox) deepBox.style.display = 'block';
 
-// 2. 負責所有頭像發光、Count Up 與神推心心的通用函數 (解決問題 3, 5, 6, 7)
+    // 加入排版 class
+    container.classList.add('exporting-mode');
+    window.scrollTo(0, 0);
+    
+    try {
+        // scale: 2 配上 CSS 540x960，確保產生 1080x1920 高清圖
+        const canvas = await html2canvas(container, { 
+            scale: 2, 
+            useCORS: true, 
+            backgroundColor: "#FFF5F8",
+            windowWidth: 540,
+            windowHeight: 960 
+        });
+        const link = document.createElement('a'); 
+        link.download = `AKB48_${userMbtiStr}_Result.png`; 
+        link.href = canvas.toDataURL("image/png"); 
+        link.click();
+    } finally {
+        // 恢復網頁原貌
+        webOnly.forEach(el => el.style.display = 'block'); 
+        exportOnly.forEach(el => el.style.display = 'none');
+        container.classList.remove('exporting-mode');
+        // 網頁版原本就需要顯示 deepBox，所以不需要再隱藏它
+    }
+});
+
+// ----------------------------------------------------
+// 動畫與特效引擎區
+// ----------------------------------------------------
+let oshiHeartInterval = null; 
+
+// 負責所有頭像發光、Count Up 與神推心心的通用函數
 function applyDynamicAnimations(compScore, isOshi = false) {
     const avatar = document.querySelector('.result-avatar'); 
     const compText = document.querySelector('.comp-score'); 
 
-    // 清除之前的神推飄心心計時器
     if (oshiHeartInterval) clearInterval(oshiHeartInterval);
 
-    // 頭像發光與變厚
     if (avatar) {
-        avatar.className = 'result-avatar pulse-border'; // 重置並加上基礎呼吸
+        avatar.className = 'result-avatar pulse-border'; 
         if (compScore >= 90) avatar.classList.add('thick-pulse-border');
     }
 
-    // 觸發 Count Up 和爆光
     if (compText) {
-        compText.className = 'comp-score pulse-text'; // 重置
-        if (compScore >= 90) {
-            // 重新觸發爆光動畫 (先移除再加入)
-            compText.classList.remove('burst-light-anim');
-            void compText.offsetWidth; 
-            compText.classList.add('burst-light-anim');
-        }
-        animateCountUp(compText, compScore);
+        compText.className = 'comp-score pulse-text'; 
+        // 1. 初始化為 0%，移除任何舊的💖
+        compText.innerHTML = "0.0%";
+        
+        // 2. 執行數字跳動，並傳入 Callback
+        animateCountUp(compText, compScore, () => {
+            // Callback: 當數字停下來後執行
+            if (compScore >= 95) {
+                compText.classList.add('burst-light-anim');
+                // 延遲 0.5 秒後，才顯示心心
+                setTimeout(() => {
+                    compText.innerHTML = `${compScore.toFixed(1)}% <span class="match-heart" style="display:inline-block; margin-left: 5px; animation: heart-beat 1s infinite;">💖</span>`;
+                }, 500);
+            } else {
+                compText.innerHTML = `${compScore.toFixed(1)}%`;
+            }
+        });
     }
 
-    // 【解決問題 5】：選擇神推時，頭像附近飄出細心心
+    // 神推微小飄心動畫 (維持不變)
     if (isOshi && typeof confetti !== 'undefined') {
         const heartPath = 'M167 72c19,-38 37,-56 75,-56 42,0 76,33 76,75 0,76 -76,151 -151,227 -76,-76 -151,-151 -151,-227 0,-42 33,-75 75,-75 38,0 57,18 76,56z';
         const heartShape = confetti.shapeFromPath({ path: heartPath, matrix: [0.033, 0, 0, 0.033, -5, -5] });
         
         oshiHeartInterval = setInterval(() => {
-            if(!document.querySelector('.result-avatar')) return; // 防止切換頁面報錯
+            if(!document.querySelector('.result-avatar')) return; 
             const rect = document.querySelector('.result-avatar').getBoundingClientRect();
-            // 從頭像上半部隨機飄出
             const x = (rect.left + rect.width / 2 + randomInRange(-30, 30)) / window.innerWidth;
             const y = (rect.top + 20) / window.innerHeight;
             
             confetti({
-                particleCount: 1, startVelocity: randomInRange(10, 15), gravity: -0.05, // 負重力=向上飄
+                particleCount: 1, startVelocity: randomInRange(10, 15), gravity: -0.05, 
                 ticks: 200, shapes: [heartShape], colors: ['#FF1493', '#FF69B4', '#ffb7c5'],
                 scalar: randomInRange(0.5, 1.0), origin: {x, y}, drift: randomInRange(-0.5, 0.5), zIndex: 999
             });
-        }, 600); // 每 0.6 秒飄一顆
+        }, 600); 
     }
 }
 
-// 3. 數字慢慢跳動，結束時散開粉色粒子
-function animateCountUp(element, finalValue) {
+// 數字跳動函數 (支援 Callback)
+function animateCountUp(element, finalValue, onComplete) {
     let duration = 1500; 
     let startTimestamp = null;
-    element.innerText = "0.0%"; 
+    element.innerHTML = "0.0%"; 
 
     const step = (timestamp) => {
         if (!startTimestamp) startTimestamp = timestamp;
         const progress = Math.min((timestamp - startTimestamp) / duration, 1);
         const easeOut = progress * (2 - progress); 
         
-        element.innerText = (easeOut * finalValue).toFixed(1) + '%';
+        element.innerHTML = (easeOut * finalValue).toFixed(1) + '%';
         
         if (progress < 1) {
             window.requestAnimationFrame(step);
         } else {
-            element.innerText = finalValue.toFixed(1) + '%';
+            element.innerHTML = finalValue.toFixed(1) + '%';
             triggerPinkParticles(element);
+            if (onComplete) onComplete(); // 動畫結束，呼叫 Callback 加愛心
         }
     };
     window.requestAnimationFrame(step);
 }
 
-// 4. 粉色粒子散開 (維持原樣)
+// 粉色粒子散開 (不變)
 function triggerPinkParticles(element) {
     if (typeof confetti === 'undefined') return;
     const rect = element.getBoundingClientRect();
@@ -790,40 +713,36 @@ function triggerPinkParticles(element) {
     });
 }
 
+// 輔助工具：生成隨機數
+function randomInRange(min, max) {
+    return Math.random() * (max - min) + min;
+}
 
-// 全局點擊水波回饋 (單一且精準置中)
+// ----------------------------------------------------
+// 全局點擊水波回饋 (只限左鍵 mousedown)
+// ----------------------------------------------------
 document.addEventListener('mousedown', function(e) {
-    // 1. 先清除舊的漣漪，防止出現多個
+    // 確保只在左鍵點擊時觸發 (e.button === 0 代表左鍵)
+    if (e.button !== 0) return;
+
+    // 清除舊漣漪，防止出現多個
     const existingRipples = document.querySelectorAll('.ripple-effect');
     existingRipples.forEach(r => r.remove());
 
-    // 2. 創建新漣漪
     let ripple = document.createElement('div');
     ripple.className = 'ripple-effect';
     
-    // 設定大小，並計算偏移量以確保置中
     const size = 30; 
     const offset = size / 2;
     
     ripple.style.width = size + 'px';
     ripple.style.height = size + 'px';
-    // 鼠標位置減去一半大小，才能確保中心點對齊鼠標尖端
     ripple.style.left = (e.clientX - offset) + 'px';
     ripple.style.top = (e.clientY - offset) + 'px';
     
     document.body.appendChild(ripple);
     
-    // 3. 動畫結束後移除
     setTimeout(() => {
         if(ripple.parentNode) ripple.remove();
     }, 600);
 });
-
-// 輔助工具：生成指定範圍內的隨機數 (畀神推心心動畫用)
-function randomInRange(min, max) {
-    return Math.random() * (max - min) + min;
-}
-
-
-
-
