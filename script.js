@@ -2,6 +2,48 @@
    2026 AKB48 粉絲深度性格鑑定 - 緣分與演算法最終版
    ========================================= */
 
+// ==========================================
+// 核心演算法組件 1：MBTI 官方 16 型人格相性基數表
+// ==========================================
+const mbtiBaseMatrix = {
+    'INFP': { ENFJ:90, ENTJ:90, INFP:80, ENFP:80, INFJ:80, INTJ:80, INTP:75, ENTP:75, ISFP:60, ESFP:60, ISTP:60, ESTP:60, ISFJ:50, ESFJ:50, ISTJ:50, ESTJ:50 },
+    'ENFP': { INFJ:90, INTJ:90, INFP:80, ENFP:80, ENFJ:80, ENTJ:80, INTP:75, ENTP:75, ISFP:60, ESFP:60, ISTP:60, ESTP:60, ISFJ:50, ESFJ:50, ISTJ:50, ESTJ:50 },
+    'INFJ': { ENFP:90, ENTP:90, INFP:80, INFJ:80, ENFJ:80, INTJ:80, INTP:75, ENTJ:75, ISFP:60, ESFP:60, ISTP:60, ESTP:60, ISFJ:50, ESFJ:50, ISTJ:50, ESTJ:50 },
+    'ENFJ': { INFP:90, ISFP:90, ENFP:80, INFJ:80, ENFJ:80, INTJ:80, INTP:75, ENTP:75, ENTJ:75, ESFP:60, ISTP:60, ESTP:60, ISFJ:50, ESFJ:50, ISTJ:50, ESTJ:50 },
+    'INTP': { ENTJ:90, ESTJ:90, INFP:75, ENFP:75, INFJ:75, ENFJ:75, INTP:80, ENTP:80, INTJ:80, ISFP:60, ESFP:60, ISTP:60, ESTP:60, ISFJ:50, ESFJ:50, ISTJ:50 },
+    'ENTP': { INFJ:90, INTJ:90, INFP:75, ENFP:75, ENFJ:75, INTP:80, ENTP:80, ENTJ:80, ISFP:60, ESFP:60, ISTP:60, ESTP:60, ISFJ:50, ESFJ:50, ISTJ:50, ESTJ:50 },
+    'INTJ': { ENFP:90, ENTP:90, INFP:80, INFJ:80, ENFJ:80, INTP:80, INTJ:80, ENTJ:80, ISFP:60, ESFP:60, ISTP:60, ESTP:60, ISFJ:50, ESFJ:50, ISTJ:50, ESTJ:50 },
+    'ENTJ': { INFP:90, INTP:90, ENFP:80, INFJ:75, ENFJ:75, ENTP:80, INTJ:80, ENTJ:80, ISFP:60, ESFP:60, ISTP:60, ESTP:60, ISFJ:50, ESFJ:50, ISTJ:50, ESTJ:50 },
+    'ISFP': { ENFJ:90, ESFJ:90, ISFP:80, ESFP:80, ISTP:80, ESTP:80, ISFJ:75, ISTJ:75, INFP:60, ENFP:60, INFJ:60, INTJ:60, INTP:60, ENTP:60, ENTJ:60, ESTJ:50 },
+    'ESFP': { ISFJ:90, ISTJ:90, ISFP:80, ESFP:80, ISTP:80, ESTP:80, ESFJ:75, INFP:60, ENFP:60, INFJ:60, ENFJ:60, INTP:60, ENTP:60, INTJ:60, ENTJ:60, ESTJ:50 },
+    'ISTP': { ESTJ:90, ENTJ:90, ISFP:80, ESFP:80, ISTP:80, ESTP:80, ISFJ:75, ISTJ:75, INFP:60, ENFP:60, INFJ:60, ENFJ:60, INTP:60, ENTP:60, INTJ:60, ESFJ:50 },
+    'ESTP': { ISFJ:90, ISTJ:90, ISFP:80, ESFP:80, ISTP:80, ESTP:80, ESTJ:75, INFP:60, ENFP:60, INFJ:60, ENFJ:60, INTP:60, ENTP:60, INTJ:60, ENTJ:60, ESFJ:50 },
+    'ISFJ': { ESFP:90, ESTP:90, ISFJ:80, ESFJ:80, ISTJ:80, ESTJ:80, ISFP:75, ISTP:75, INFP:50, ENFP:50, INFJ:50, ENFJ:50, INTP:50, ENTP:50, INTJ:50, ENTJ:50 },
+    'ESFJ': { ISFP:90, ISTP:90, ISFJ:80, ESFJ:80, ISTJ:80, ESTJ:80, ESFP:75, ESTP:75, INFP:50, ENFP:50, INFJ:50, ENFJ:50, INTP:50, ENTP:50, INTJ:50, ENTJ:50 },
+    'ISTJ': { ESFP:90, ESTP:90, ISFJ:80, ESFJ:80, ISTJ:80, ESTJ:80, ISFP:75, ISTP:75, INFP:50, ENFP:50, INFJ:50, ENFJ:50, INTP:50, ENTP:50, INTJ:50, ENTJ:50 },
+    'ESTJ': { INTP:90, ISTP:90, ISFJ:80, ESFJ:80, ISTJ:80, ESTJ:80, ESTP:75, ISFP:50, ESFP:50, INFP:50, ENFP:50, INFJ:50, ENFJ:50, ENTP:50, INTJ:50, ENTJ:50 }
+};
+
+function getMbtiBaseScore(userType, memberType) {
+    if (mbtiBaseMatrix[userType] && mbtiBaseMatrix[userType][memberType]) {
+        return mbtiBaseMatrix[userType][memberType];
+    }
+    return 70; // 預設安全值
+}
+
+// ==========================================
+// 核心演算法組件 2：固定緣分值產生器 (防止隨機失憶症)
+// ==========================================
+function getSeededLuck(userPerc, memberId) {
+    const seedString = `${Math.round(userPerc.E)}_${Math.round(userPerc.S)}_${memberId}`;
+    let hash = 0;
+    for (let i = 0; i < seedString.length; i++) {
+        hash = ((hash << 5) - hash) + seedString.charCodeAt(i);
+        hash |= 0; 
+    }
+    return (Math.abs(hash) % 40) / 10; // 產生 0.0 ~ 3.9 嘅微調分數
+}
+
 let membersDB = [];
 let i18nData = {};
 let currentLang = "zh-HK";
@@ -201,9 +243,10 @@ function updateProgress() {
 }
 
 // ==========================================
-// 核心升級：MBTI 餘弦波加權相性模型 + 緣分因子
+// 核心演算法組件 3：終極計分與排序引擎
 // ==========================================
 function calculateResults() {
+    // 1. 計算用家答題分數
     let scores = { E: 0, S: 0, T: 0, J: 0, A: 0 };
     for (let i = 1; i <= 60; i++) {
         const qData = i18nData.questions[i];
@@ -211,11 +254,19 @@ function calculateResults() {
         if (qData.rev) val = 8 - val;
         scores[qData.dim] += val;
     }
+    
+    // 2. 轉換為百分比與 MBTI 字串
     userPerc = {
-        E: ((scores.E - 12) / 72) * 100, S: ((scores.S - 12) / 72) * 100, T: ((scores.T - 12) / 72) * 100, J: ((scores.J - 12) / 72) * 100, A: ((scores.A - 12) / 72) * 100
+        E: ((scores.E - 12) / 72) * 100, 
+        S: ((scores.S - 12) / 72) * 100, 
+        T: ((scores.T - 12) / 72) * 100, 
+        J: ((scores.J - 12) / 72) * 100, 
+        A: ((scores.A - 12) / 72) * 100
     };
+    
     userMbtiStr = (userPerc.E > 50 ? 'E' : 'I') + (userPerc.S > 50 ? 'S' : 'N') + (userPerc.T > 50 ? 'T' : 'F') + (userPerc.J > 50 ? 'J' : 'P');
     
+    // 3. 逐一比對資料庫成員
     let matchResults = membersDB.map(m => {
         let M = m.mbti_scores;
         let diffE = Math.abs(userPerc.E - M.E);
@@ -223,25 +274,29 @@ function calculateResults() {
         let diffT = Math.abs(userPerc.T - M.T);
         let diffJ = Math.abs(userPerc.J - M.J);
 
-        // 1. Cosine 波函數：獎勵相似 (diff=0) 與 互補 (diff=100)
-        let matchE = 75 + 25 * Math.cos(diffE * Math.PI / 50);
-        let matchT = 75 + 25 * Math.cos(diffT * Math.PI / 50);
-        let matchJ = 75 + 25 * Math.cos(diffJ * Math.PI / 50);
-        
-        // 2. S/N 直線計算 (越近越好，確保基礎溝通頻率)
-        let matchS = 100 - (diffS * 0.8);
+        // A. 取得 MBTI 官方相性基數 (宏觀定調)
+        let tierBaseScore = getMbtiBaseScore(userMbtiStr, m.mbti_type);
+        if (tierBaseScore <= 50) tierBaseScore = 55; // 保底機制，防止 N型沙漠
 
-        // 3. 維度權重 (S/N 最重要，權重 2.5)
-        let baseComp = (matchE * 1.0 + matchS * 2.5 + matchT * 1.5 + matchJ * 1.0) / 6.0;
-        
-        // 4. 天花板限制 (S/N 差距過大，強制封頂)
-        if (diffS > 40) { baseComp = Math.min(baseComp, 82); }
+        // B. 餘弦波與線性微調 (微觀排位)
+        let simBonusE = (50 - diffE) / 25; 
+        let simBonusS = (50 - diffS) / 20; 
+        let simBonusT = (50 - diffT) / 25; 
+        let simBonusJ = (50 - diffJ) / 25; 
+        let compBonusE = Math.cos(diffE * Math.PI / 50); 
+        let compBonusJ = Math.cos(diffJ * Math.PI / 50); 
 
-        // 5. A/T 堅韌度互補加成
-        if (userPerc.A < 50 && (M.A !== undefined && M.A >= 65)) baseComp += 3;
+        let modifier = simBonusE + simBonusS + simBonusT + simBonusJ + compBonusE + compBonusJ;
+        let baseComp = tierBaseScore + modifier;
 
-        // 6. 緣分浮動機制 (隨機增加 0-5% 分數，增加成員曝光多樣性)
-        const luckFactor = Math.random() * 5; 
+        // C. A/T 堅韌度互補加成
+        if (userPerc.A < 50 && (M.A !== undefined && M.A >= 65)) baseComp += 1.5;
+
+        // D. 智能封頂，預留空間畀緣分值
+        baseComp = Math.max(0, Math.min(96, baseComp));
+
+        // E. 加入固定緣分值 (0.0 ~ 3.9)
+        const luckFactor = getSeededLuck(userPerc, m.id);
         let finalComp = baseComp + luckFactor;
         
         return { 
@@ -251,15 +306,49 @@ function calculateResults() {
         };
     });
     
+    // 4. 初步排序
     matchResults.sort((a, b) => b.comp - a.comp);
+    
+    // ==========================================
+    // 5. 相對神推保底機制 (Curve Grading) - 確保極致 UX 體驗
+    // ==========================================
+    let topScore = matchResults[0].comp;
+    if (topScore < 92) {
+        let boost = 93.5 - topScore; 
+        
+        matchResults = matchResults.map((m, index) => {
+            let individualBoost = boost * Math.max(0, (1 - index * 0.15));
+            let newComp = m.comp + individualBoost;
+            
+            // 用固定緣分值做偽隨機突破，確保唔會隨機失憶
+            if (index === 0) {
+                let fixedExtraBonus = (getSeededLuck(userPerc, m.id) / 3.9) * 2.5; 
+                newComp += fixedExtraBonus;
+            }
+            
+            return {
+                ...m,
+                comp: parseFloat(Math.min(99.9, newComp).toFixed(1))
+            };
+        });
+        
+        // 重新排序確保名次正確
+        matchResults.sort((a, b) => b.comp - a.comp);
+    }
+    // ==========================================
+    
+    // 6. 儲存結果與觸發畫面
     matchResultsGlobal = matchResults; 
     localStorage.removeItem('akb_answers'); 
     
-    // 取得第一名 (Soulmate) 的相性分數
-    const topCompScore = matchResultsGlobal[0].comp;
-
-    // 呼叫 Loading 動畫 (我們把 renderResultPage 移到這裡面執行)
-    showLoadingAndReveal(topCompScore);
+    const finalTopCompScore = matchResultsGlobal[0].comp;
+    
+    // 呼叫 Loading 動畫 (進入結果頁)
+    if(typeof showLoadingAndReveal === 'function') {
+        showLoadingAndReveal(finalTopCompScore);
+    } else {
+        renderResultPage(matchResultsGlobal);
+    }
 }
 
 function getConicGradient(colors) {
@@ -626,6 +715,7 @@ function triggerPinkParticles(element) {
         colors: ['#FF1493', '#FFB6C1', '#FFFFFF'], ticks: 36, origin: { x, y }, zIndex: 2147483647
     });
 }
+
 
 
 
