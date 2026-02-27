@@ -467,11 +467,15 @@ a, button, input, select, .question-item, label, .slider-ticks span {
 
 /* 3. 雷達圖容器：利用 margin: 0 auto 置中 */
 .exporting-mode #radar-wrapper {
-    width: 520px !important; /* 你想要嘅大尺寸 */
+    width: 320px !important; /* 你想要嘅大尺寸 */
+
+    /* 🌟 關鍵：用 scale 按比例放大雷達圖 (1.25 = 放大 25%) */
+    transform: scale(1.3) !important;
+    
     margin-left: auto !important;  /* 🌟 自動邊距實現水平置中 */
     margin-right: auto !important; /* 🌟 自動邊距實現水平置中 */
-    margin-top: -25 !important;
-    margin-bottom: -35 !important;
+    margin-top: -15px !important;
+    margin-bottom: -15px !important;
     display: block !important;
 }
 /* 確保雷達圖入面粒 canvas 唔會歪咗 */
@@ -482,7 +486,7 @@ a, button, input, select, .question-item, label, .slider-ticks span {
 /* 4. 將成員分析卡片緊貼雷達圖 */
 .exporting-mode #main-display-section {
     width: 98% !important;
-    margin-top: -35px !important; 
+    margin-top: -45px !important; 
     padding: 9px 15px 15px 15px !important; /* 減少內部留白 */
     transform: scale(0.95); 
     transform-origin: top center;
@@ -502,6 +506,7 @@ a, button, input, select, .question-item, label, .slider-ticks span {
     padding: 8px !important;
     line-height: 1.4 !important; /* 縮減行距 */
 }
+
 
 
 
