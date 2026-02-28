@@ -435,6 +435,7 @@ function renderResultPage(allMembers) {
     resPage.classList.remove('hidden');
     let b1 = allMembers[0], b2 = allMembers[1], b3 = allMembers[2];
     currentDisplayMember = b1; 
+window.history.replaceState(null, null, `#result=${userMbtiStr}&score=${currentDisplayMember.comp}&oshi=${currentDisplayMember.id}`);
     let userTitle = i18nData.mbti_titles[userMbtiStr]?.[currentLang] || userMbtiStr;
     let ui = i18nData.ui;
     const cb = `?v=${new Date().getTime()}`;
@@ -529,6 +530,9 @@ function renderResultPage(allMembers) {
                 myRadarChart.update(); 
             }
             applyDynamicAnimations(b1.comp, false);
+           
+           window.history.replaceState(null, null, `#result=${userMbtiStr}&score=${currentDisplayMember.comp}&oshi=${currentDisplayMember.id}`);
+           
             return; 
         }
         
@@ -550,6 +554,9 @@ function renderResultPage(allMembers) {
         myRadarChart.update(); 
         window.scrollTo({ top: 0, behavior: 'smooth' });
         applyDynamicAnimations(oshi.comp, true);
+
+       window.history.replaceState(null, null, `#result=${userMbtiStr}&score=${currentDisplayMember.comp}&oshi=${currentDisplayMember.id}`);
+       
     });
 
     document.getElementById('back-to-best3-btn').addEventListener('click', () => {
@@ -582,7 +589,10 @@ function renderResultPage(allMembers) {
                 windowHeight: 960 
             });
             const link = document.createElement('a'); 
-            link.download = `AKB48_${userMbtiStr}_Result.png`; 
+// 🌟 更新檔名規則：AKB48_MBTI_ESFP_ゆいゆい_92.png
+const safeName = currentDisplayMember.nickname || currentDisplayMember.name_ja;
+const formattedScore = Math.round(currentDisplayMember.comp);
+link.download = `AKB48_MBTI_${userMbtiStr}_${safeName}_${formattedScore}.png`;
             link.href = canvas.toDataURL("image/png"); 
             link.click();
         } finally {
@@ -814,6 +824,7 @@ document.addEventListener('mousedown', function(e) {
         });
     }
 });
+
 
 
 
