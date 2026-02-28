@@ -272,23 +272,28 @@ input[type=range].custom-range::-webkit-slider-runnable-track {
     z-index: 10005; pointer-events: none; opacity: 0; transition: opacity 0.5s;
 }
 
+/* 巨型愛心本體設定 (電腦版預設) */
 .giant-heart {
-    /* 1. 改大粒心：由 180px 加大到 300px (甚至 350px)，確保夠闊夠高 */
-    font-size: 350px; 
-    
-    /* 2. 調整位置：加 margin-top 逼佢向下移，遮住頭像區塊。
-          (如果發覺太低，可以將 15vh 改細做 10vh；如果唔夠低就改做 20vh) */
-    margin-top: 20vh; 
-    
+    font-size: 380px; 
+    margin-top: 18vh; /* 電腦版向下移 18% 剛好遮住卡片上半部 */
     filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.8));
     animation: giant-heartbeat 1.5s ease-in-out infinite;
 }
 
+/* 🌟 終極修復愛心穿幫：手機版專屬位置微調 🌟 */
+@media (max-width: 768px) {
+    .giant-heart {
+        /* 手機螢幕長，所以要拉高個心心 */
+        margin-top: 5vh; 
+        /* 稍微加大心心，確保左右都遮得實 */
+        font-size: 420px; 
+    }
+}
+
 @keyframes giant-heartbeat {
-    /* 3. 保底大細：原本 0.8 縮得太細會穿幫，改做 scale(1) 保證最細嗰陣都夠遮 */
     0%, 100% { transform: scale(1); }
     15% { transform: scale(1.3); }
-    30% { transform: scale(1.1); } /* 中間收縮嗰下都唔好縮得太細 */
+    30% { transform: scale(1.1); } 
     45% { transform: scale(1.3); }
 }
 
@@ -609,6 +614,7 @@ body > canvas {
     z-index: 999999 !important; /* 突破天際嘅層級 */
     pointer-events: none !important; /* 確保唔會阻礙你點擊滑桿 */
 }
+
 
 
 
