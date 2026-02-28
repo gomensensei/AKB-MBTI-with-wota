@@ -618,18 +618,18 @@ link.download = `AKB48_MBTI_${userMbtiStr}_${safeName}_${formattedScore}.png`;
    
     document.getElementById('share-x-btn').addEventListener('click', () => {
         const shareTexts = {
-            'zh-HK': { mbti: "我的追星人格：", soulmate: "我的靈魂伴侶：", oshi: "我的神推相性：", check: "測測你的 AKB48 靈魂成員：" },
-            'zh-CN': { mbti: "我的追星人格：", soulmate: "我的灵魂伴侣：", oshi: "我的神推相性：", check: "测测你的 AKB48 灵魂成员：" },
-            'ja': { mbti: "私のオタク人格：", soulmate: "運命のパートナー：", oshi: "神推しとの相性：", check: "あなたのAKB48ソウルメイトを診断：" },
-            'ko': { mbti: "나의 덕질 성격:", soulmate: "나의 소울메이트:", oshi: "나의 카미오시 상성:", check: "나의 AKB48 소울메이트 테스트:" },
-            'en': { mbti: "My Stan Personality:", soulmate: "My Soulmate:", oshi: "My Kami-Oshi Compatibility:", check: "Find your AKB48 soulmate:" },
+           'zh-HK': { mbti: "我的追星人格：", unmei: "命中注定的神推：", aishou: "我的神推相性：", check: "🌸 尋找與你最契合的 AKB48 成員：" },
+            'zh-CN': { mbti: "我的追星人格：", unmei: "命中注定的神推：", aishou: "我的神推相性：", check: "🌸 寻找与你最契合的 AKB48 成员：" },
+            'ja': { mbti: "私のオタク人格：", unmei: "運命の推しメン：", aishou: "神推しとの相性：", check: "🌸 あなたと「神相性」なAKB48メンバーを診断：" },
+            'ko': { mbti: "나의 덕질 성격:", unmei: "운명의 오시멘:", aishou: "나의 카미오시 상성:", check: "🌸 나의 AKB48 소울메이트 테스트:" },
+            'en': { mbti: "My Stan Personality:", unmei: "My Fated Member:", aishou: "My Compatibility:", check: "🌸 Find your AKB48 soulmate:" }
             'th': { mbti: "บุคลิกการติ่งของฉัน:", soulmate: "โซลเมตของฉัน:", oshi: "ความเข้ากันได้กับคามิโอชิ:", check: "ค้นหาโซลเมต AKB48 ของคุณ:" },
             'id': { mbti: "Kepribadian Stan Saya:", soulmate: "Belahan Jiwaku:", oshi: "Kecocokan Kami-Oshi Saya:", check: "Temukan soulmate AKB48 kamu:" }
         };
         const st = shareTexts[currentLang] || shareTexts['en']; const shareUrl = window.location.href; const isOshi = currentDisplayMember.id !== b1.id;
         const memberHash = `#${currentDisplayMember.name_ja.replace(/\s+/g, '')}`;
         const relationTitle = isOshi ? st.oshi : st.soulmate;
-        const tweetText = `【${st.mbti}${userMbtiStr} ${userTitle}】\n💖 ${relationTitle}${currentDisplayMember.name_ja} (${currentDisplayMember.comp}%)\n\n${st.check}\n👇 ${shareUrl}\n\n#AKB48 #MBTI ${memberHash} #性格鑑定`;
+        const tweetText = `【${st.mbti}${userMbtiStr} ${userTitle}】\n💖 ${relationTitle}${currentDisplayMember.name_ja} (${currentDisplayMember.comp}%)\n\n${st.check}\n👇 ${shareUrl}\n\n#AKB48 #MBTI ${memberHash} #性格診断`;
         window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`, '_blank');
     });
 }
@@ -838,6 +838,7 @@ document.addEventListener('mousedown', function(e) {
         });
     }
 });
+
 
 
 
