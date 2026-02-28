@@ -419,23 +419,24 @@ a, button, input, select, .question-item, label, .slider-ticks span {
 }
 
 /* ==================================
-   網頁版/手機版 雷達圖通用排版 (修復偏右及文字被切)
+   網頁版/手機版 雷達圖通用排版 (終極防偏右)
    ================================== */
 #radar-wrapper {
     position: relative;
     width: 100%;
-    max-width: 340px; /* 限制最大寬度，確保手機螢幕左右有足夠空間顯示文字 */
-    margin: 0 auto 20px auto; /* 確保整個容器絕對置中 */
+    max-width: 350px; /* 稍微加闊少少，確保字有位走 */
+    aspect-ratio: 1 / 1; /* 強制保持正方形，防 Chart.js 算錯比例 */
+    margin: 0 auto 20px auto !important; /* 強制置中 */
     display: flex;
     justify-content: center;
     align-items: center;
-    overflow: visible; /* 確保突出來的文字不會被隱藏 */
 }
 
 #radarChart {
-    max-width: 100% !important;
-    height: auto !important;
-    margin: 0 auto !important; /* 強制畫布本身置中 */
+    width: 100% !important; /* 強制畫布撐滿 wrapper */
+    height: 100% !important;
+    margin: 0 auto !important;
+    display: block !important;
 }
 
 /* 3. 截圖專用模式 (縮細雷達、顯示深度分析、防 Crop 底) */
@@ -607,6 +608,7 @@ body > canvas {
     z-index: 999999 !important; /* 突破天際嘅層級 */
     pointer-events: none !important; /* 確保唔會阻礙你點擊滑桿 */
 }
+
 
 
 
