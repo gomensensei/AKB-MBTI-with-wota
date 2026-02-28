@@ -149,12 +149,25 @@ input[type=range].custom-range.touched::-webkit-slider-thumb { background: var(-
 #custom-cursor { transition: opacity 0.3s ease; }
 #custom-cursor.hidden-cursor { opacity: 0 !important; }
 
-/* 手機版排版修正 (解決選單遮擋與首頁太高) */
+/* ==================================
+   手機版排版修正 (解決選單遮擋與首頁太高)
+   ================================== */
 @media (max-width: 768px) {
     #lang-switcher-container { position: fixed; top: 10px; right: 10px; }
-    .progress-container { top: 55px !important; } /* 避開選單 */
+    .progress-container { top: 55px !important; } 
     #page-landing { justify-content: center; padding-top: 40px; min-height: 85vh; }
-    #custom-cursor { display: none; } /* 手機版直接隱藏鼠標點 */
+    #custom-cursor { display: none; } 
+    
+    .giant-heart {
+        font-size: 320px; 
+        margin-top: 28vh; 
+    }
+
+    /* 🌟 終極殺手鐧：如果手機版雷達圖偏右，強制向左拉！ 🌟 */
+    #radar-wrapper {
+        transform: translateX(-15px); /* 向左移動 15px，抵銷偏右問題 */
+        /* 如果你發覺拉得唔夠，可以改大數值，例如 -20px 或 -25px */
+    }
 }
 
 /* =======================================
@@ -284,11 +297,11 @@ input[type=range].custom-range::-webkit-slider-runnable-track {
 @media (max-width: 768px) {
     .giant-heart {
         /* 1. 將字體稍微縮細返，避免穿出個 mon 太多，320px 剛好夠遮卡片 */
-        font-size: 320px; 
+        font-size: 300px; 
         
         /* 2. 手機螢幕長，往下推多啲，確保遮住頭像、名字同 % 數 
            (原本 18vh，而家加大到 25vh 甚至 28vh，你可以試下哪個最準) */
-        margin-top: 28vh;
+        margin-top: 30vh;
     }
 }
 
@@ -616,6 +629,7 @@ body > canvas {
     z-index: 999999 !important; /* 突破天際嘅層級 */
     pointer-events: none !important; /* 確保唔會阻礙你點擊滑桿 */
 }
+
 
 
 
