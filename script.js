@@ -498,14 +498,11 @@ window.history.replaceState(null, null, `#result=${userMbtiStr}&score=${currentD
             datasets: [{ data: [userPerc.E, userPerc.S, userPerc.T, userPerc.J, userPerc.A], backgroundColor: 'rgba(255, 20, 147, 0.4)', borderColor: '#FF1493', borderWidth: 3, pointRadius: 4, pointBackgroundColor: '#FF1493' }]
         },
 options: {
-            // 🌟 1. 強制對稱留白，確保五角形有足夠空間置中
             layout: { 
                 padding: { left: 35, right: 35, top: 35, bottom: 35 } 
             }, 
-            
             maintainAspectRatio: true, 
             responsive: true,
-            
             animation: { duration: 2500, easing: 'easeOutQuart' },
             scales: {
                 r: {
@@ -520,11 +517,10 @@ options: {
                     },
                     suggestedMin: 0, 
                     suggestedMax: 100,
-                    
-                    // 🌟 2. 減少標籤與五角形的距離，避免推歪圖表
+                    // 🌟 終極修復偏右：大幅減少手機版字體大小及距離
                     pointLabels: { 
-                        padding: 8, 
-                        font: { size: window.innerWidth < 400 ? 11 : 13 }
+                        padding: window.innerWidth < 400 ? 2 : 8, // 手機版將字體貼緊五角形
+                        font: { size: window.innerWidth < 400 ? 10 : 13 } // 手機版字體縮細到 10px
                     }
                 } 
             }, 
@@ -842,6 +838,7 @@ document.addEventListener('mousedown', function(e) {
         });
     }
 });
+
 
 
 
