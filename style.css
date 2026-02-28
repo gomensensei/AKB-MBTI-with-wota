@@ -297,11 +297,11 @@ input[type=range].custom-range::-webkit-slider-runnable-track {
 @media (max-width: 768px) {
     .giant-heart {
         /* 1. 將字體稍微縮細返，避免穿出個 mon 太多，320px 剛好夠遮卡片 */
-        font-size: 280px; 
+        font-size: 250px; 
         
         /* 2. 手機螢幕長，往下推多啲，確保遮住頭像、名字同 % 數 
            (原本 18vh，而家加大到 25vh 甚至 28vh，你可以試下哪個最準) */
-        margin-top: 35vh;
+        margin-top: 40vh;
     }
 }
 
@@ -629,6 +629,7 @@ body > canvas {
     z-index: 999999 !important; /* 突破天際嘅層級 */
     pointer-events: none !important; /* 確保唔會阻礙你點擊滑桿 */
 }
+
 
 
 
