@@ -497,8 +497,14 @@ window.history.replaceState(null, null, `#result=${userMbtiStr}&score=${currentD
             labels: ui.radar_labels[currentLang],
             datasets: [{ data: [userPerc.E, userPerc.S, userPerc.T, userPerc.J, userPerc.A], backgroundColor: 'rgba(255, 20, 147, 0.4)', borderColor: '#FF1493', borderWidth: 3, pointRadius: 4, pointBackgroundColor: '#FF1493' }]
         },
-        options: {
-            layout: { padding: { left: 25, right: 25, top: 20, bottom: 20 } },
+options: {
+            // 🌟 1. 將 padding 設為對稱，甚至改為 0，讓圖表自動填滿
+            layout: { padding: 10 }, 
+            
+            // 🌟 2. 確保雷達圖保持正比例，不會被外層拉長拉扁
+            maintainAspectRatio: true, 
+            responsive: true,
+            
             animation: { duration: 2500, easing: 'easeOutQuart' },
             scales: {
                 r: {
@@ -507,7 +513,11 @@ window.history.replaceState(null, null, `#result=${userMbtiStr}&score=${currentD
                     ticks: { display: true, stepSize: 20, backdropColor: 'transparent', color: '#999', font: { size: 10 } },
                     suggestedMin: 0, 
                     suggestedMax: 100,
-                    pointLabels: { padding: 10 }
+                    // 🌟 3. 調整標籤與圖表的距離，防止字體過大推擠圖表
+                    pointLabels: { 
+                        padding: 15, 
+                        font: { size: window.innerWidth < 400 ? 11 : 13 } // 手機版稍微縮小字體防擠壓
+                    }
                 } 
             }, 
             plugins: { legend: { display: false } } 
@@ -824,6 +834,7 @@ document.addEventListener('mousedown', function(e) {
         });
     }
 });
+
 
 
 
