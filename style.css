@@ -278,7 +278,7 @@ input[type=range].custom-range::-webkit-slider-runnable-track {
     
     /* 2. 調整位置：加 margin-top 逼佢向下移，遮住頭像區塊。
           (如果發覺太低，可以將 15vh 改細做 10vh；如果唔夠低就改做 20vh) */
-    margin-top: 18vh; 
+    margin-top: 19vh; 
     
     filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.8));
     animation: giant-heartbeat 1.5s ease-in-out infinite;
@@ -416,6 +416,26 @@ a, button, input, select, .question-item, label, .slider-ticks span {
     0% { transform: scale(0); opacity: 1; }
     /* 2️⃣ 調整放大倍數：原本 3.5 倍太大，改做 2.5 倍 (即係最高峰係 15px * 2.5 = 37.5px) */
     100% { transform: scale(2.0); opacity: 0; }
+}
+
+/* ==================================
+   網頁版/手機版 雷達圖通用排版 (修復偏右及文字被切)
+   ================================== */
+#radar-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 340px; /* 限制最大寬度，確保手機螢幕左右有足夠空間顯示文字 */
+    margin: 0 auto 20px auto; /* 確保整個容器絕對置中 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: visible; /* 確保突出來的文字不會被隱藏 */
+}
+
+#radarChart {
+    max-width: 100% !important;
+    height: auto !important;
+    margin: 0 auto !important; /* 強制畫布本身置中 */
 }
 
 /* 3. 截圖專用模式 (縮細雷達、顯示深度分析、防 Crop 底) */
@@ -587,5 +607,6 @@ body > canvas {
     z-index: 999999 !important; /* 突破天際嘅層級 */
     pointer-events: none !important; /* 確保唔會阻礙你點擊滑桿 */
 }
+
 
 
