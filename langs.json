@@ -1,9 +1,9 @@
 {
     "ui": {
     "app_title": {
-      "zh-HK": "AKB48 粉絲深度性格鑑定",
-      "zh-CN": "AKB48 粉丝深度性格鉴定",
-      "ja": "AKB48 ファン深度性格診断",
+      "zh-HK": "AKB48 粉絲深度MBTI性格鑑定",
+      "zh-CN": "AKB48 粉丝深度MBTI性格鉴定",
+      "ja": "AKB48 ファンMBTI性格診断",
       "ko": "AKB48 팬 심층 성격 테스트",
       "en": "AKB48 Fan Personality Test",
       "th": "แบบทดสอบบุคลิกภาพแฟนคลับ AKB48",
@@ -38,9 +38,9 @@
       "id": "Dibuat oleh penggemar Gomensensei. Ini adalah situs tidak resmi dan tidak berafiliasi dengan AKB48.<br>Hak cipta gambar adalah milik masing-masing pemiliknya."
     },
     "title_main": {
-      "zh-HK": "AKB48<br><span class='highlight'>粉絲深度性格鑑定</span>",
-      "zh-CN": "AKB48<br><span class='highlight'>粉丝深度性格鉴定</span>",
-      "ja": "AKB48<br><span class='highlight'>ファン性格診断</span>",
+      "zh-HK": "AKB48<br><span class='highlight'>粉絲深度MBTI性格鑑定</span>",
+      "zh-CN": "AKB48<br><span class='highlight'>粉丝深度MBTI性格鉴定</span>",
+      "ja": "AKB48<br><span class='highlight'>ファンMBTI性格診断</span>",
       "ko": "AKB48<br><span class='highlight'>팬 심층 성격 테스트</span>",
       "en": "AKB48<br><span class='highlight'>Fan Personality Test</span>",
       "th": "AKB48<br><span class='highlight'>แบบทดสอบบุคลิกภาพแฟนคลับ</span>",
@@ -1961,6 +1961,7 @@
     }
 }
 }
+
 
 
 
