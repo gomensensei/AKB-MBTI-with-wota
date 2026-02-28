@@ -274,11 +274,11 @@ input[type=range].custom-range::-webkit-slider-runnable-track {
 
 .giant-heart {
     /* 1. 改大粒心：由 180px 加大到 300px (甚至 350px)，確保夠闊夠高 */
-    font-size: 380px; 
+    font-size: 350px; 
     
     /* 2. 調整位置：加 margin-top 逼佢向下移，遮住頭像區塊。
           (如果發覺太低，可以將 15vh 改細做 10vh；如果唔夠低就改做 20vh) */
-    margin-top: 19vh; 
+    margin-top: 20vh; 
     
     filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.8));
     animation: giant-heartbeat 1.5s ease-in-out infinite;
@@ -609,6 +609,7 @@ body > canvas {
     z-index: 999999 !important; /* 突破天際嘅層級 */
     pointer-events: none !important; /* 確保唔會阻礙你點擊滑桿 */
 }
+
 
 
 
