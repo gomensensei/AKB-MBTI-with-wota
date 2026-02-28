@@ -419,21 +419,22 @@ a, button, input, select, .question-item, label, .slider-ticks span {
 }
 
 /* ==================================
-   網頁版/手機版 雷達圖通用排版 (終極防偏右)
+   網頁版/手機版 雷達圖通用排版
    ================================== */
 #radar-wrapper {
     position: relative;
     width: 100%;
-    max-width: 350px; /* 稍微加闊少少，確保字有位走 */
-    aspect-ratio: 1 / 1; /* 強制保持正方形，防 Chart.js 算錯比例 */
-    margin: 0 auto 20px auto !important; /* 強制置中 */
+    /* 🌟 放寬到 380px，配合剛才加的 Padding */
+    max-width: 380px; 
+    aspect-ratio: 1 / 1; 
+    margin: 0 auto 20px auto !important; 
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 #radarChart {
-    width: 100% !important; /* 強制畫布撐滿 wrapper */
+    width: 100% !important; 
     height: 100% !important;
     margin: 0 auto !important;
     display: block !important;
@@ -608,6 +609,7 @@ body > canvas {
     z-index: 999999 !important; /* 突破天際嘅層級 */
     pointer-events: none !important; /* 確保唔會阻礙你點擊滑桿 */
 }
+
 
 
 
