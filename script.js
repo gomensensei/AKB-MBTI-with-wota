@@ -498,10 +498,11 @@ window.history.replaceState(null, null, `#result=${userMbtiStr}&score=${currentD
             datasets: [{ data: [userPerc.E, userPerc.S, userPerc.T, userPerc.J, userPerc.A], backgroundColor: 'rgba(255, 20, 147, 0.4)', borderColor: '#FF1493', borderWidth: 3, pointRadius: 4, pointBackgroundColor: '#FF1493' }]
         },
 options: {
-            // 🌟 1. 將 padding 設為對稱，甚至改為 0，讓圖表自動填滿
-            layout: { padding: 10 }, 
+            // 🌟 1. 強制對稱留白，確保五角形有足夠空間置中
+            layout: { 
+                padding: { left: 35, right: 35, top: 35, bottom: 35 } 
+            }, 
             
-            // 🌟 2. 確保雷達圖保持正比例，不會被外層拉長拉扁
             maintainAspectRatio: true, 
             responsive: true,
             
@@ -510,13 +511,20 @@ options: {
                 r: {
                     angleLines: { color: 'rgba(0,0,0,0.1)' },
                     grid: { color: 'rgba(0,0,0,0.08)' },
-                    ticks: { display: true, stepSize: 20, backdropColor: 'transparent', color: '#999', font: { size: 10 } },
+                    ticks: { 
+                        display: true, 
+                        stepSize: 20, 
+                        backdropColor: 'transparent', 
+                        color: '#999', 
+                        font: { size: 10 } 
+                    },
                     suggestedMin: 0, 
                     suggestedMax: 100,
-                    // 🌟 3. 調整標籤與圖表的距離，防止字體過大推擠圖表
+                    
+                    // 🌟 2. 減少標籤與五角形的距離，避免推歪圖表
                     pointLabels: { 
-                        padding: 15, 
-                        font: { size: window.innerWidth < 400 ? 11 : 13 } // 手機版稍微縮小字體防擠壓
+                        padding: 8, 
+                        font: { size: window.innerWidth < 400 ? 11 : 13 }
                     }
                 } 
             }, 
@@ -834,6 +842,7 @@ document.addEventListener('mousedown', function(e) {
         });
     }
 });
+
 
 
 
