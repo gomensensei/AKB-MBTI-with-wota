@@ -1,5 +1,13 @@
 {
   "ui": {
+
+    "btn_music_off": {
+      "zh-HK": "🎵 音樂：關", "zh-CN": "🎵 音乐：关", "ja": "🎵 BGM：OFF", "ko": "🎵 음악：OFF", "en": "🎵 Music: OFF", "th": "🎵 ปิดเพลง", "id": "🎵 Musik: OFF"
+    },
+    "btn_music_on": {
+      "zh-HK": "🎵 音樂：開", "zh-CN": "🎵 音乐：开", "ja": "🎵 BGM：ON", "ko": "🎵 음악：ON", "en": "🎵 Music: ON", "th": "🎵 เปิดเพลง", "id": "🎵 Musik: ON"
+    },
+    
     "app_title": {
       "zh-HK": "AKB48 粉絲深度MBTI性格鑑定",
       "zh-CN": "AKB48 粉丝深度MBTI性格鉴定",
@@ -2032,6 +2040,7 @@
     }
 }
 }
+
 
 
 
