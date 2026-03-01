@@ -2,10 +2,10 @@
   "ui": {
 
     "btn_music_off": {
-      "zh-HK": "🎵 音樂：關", "zh-CN": "🎵 音乐：关", "ja": "🎵 BGM：OFF", "ko": "🎵 음악：OFF", "en": "🎵 Music: OFF", "th": "🎵 ปิดเพลง", "id": "🎵 Musik: OFF"
+      "zh-HK": "🎵 名残り桜：關", "zh-CN": "🎵 名残り桜：关", "ja": "🎵 名残り桜：OFF", "ko": "🎵 나고리 사쿠라：OFF", "en": "🎵 Nagori Sakura: OFF", "th": "🎵 มิวสิกวิดีโอ", "id": "🎵 Nagori Sakura: OFF"
     },
     "btn_music_on": {
-      "zh-HK": "🎵 音樂：開", "zh-CN": "🎵 音乐：开", "ja": "🎵 BGM：ON", "ko": "🎵 음악：ON", "en": "🎵 Music: ON", "th": "🎵 เปิดเพลง", "id": "🎵 Musik: ON"
+      "zh-HK": "🎵 名残り桜：開", "zh-CN": "🎵 名残り桜：开", "ja": "🎵 名残り桜：ON", "ko": "🎵 나고리 사쿠라：ON", "en": "🎵 Nagori Sakura: ON", "th": "🎵 มิวสิกวิดีโอ", "id": "🎵 Nagori Sakura: ON"
     },
 
     "mv_title": {
@@ -2051,6 +2051,7 @@
     }
 }
 }
+
 
 
 
