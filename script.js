@@ -96,6 +96,25 @@ document.addEventListener('DOMContentLoaded', async () => {
         applyLanguage(currentLang);
     } catch (e) { console.error("載入 JSON 失敗:", e); }
 
+
+   // ==========================================
+    // 🌟 放在這裡！與其他按鈕的綁定並列
+    // ==========================================
+    document.getElementById('toggle-about-btn')?.addEventListener('click', () => {
+        const aboutContent = document.getElementById('about-content');
+        if (aboutContent) {
+            aboutContent.classList.toggle('hidden');
+        }
+    });
+
+    document.getElementById('start-btn')?.addEventListener('click', () => {
+        document.getElementById('page-landing').classList.add('hidden');
+        document.getElementById('page-quiz').classList.remove('hidden');
+        renderQuiz();
+        updateUI(); 
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+
     document.getElementById('start-btn')?.addEventListener('click', () => {
         document.getElementById('page-landing').classList.add('hidden');
         document.getElementById('page-quiz').classList.remove('hidden');
@@ -616,7 +635,7 @@ link.download = `AKB48_MBTI_${userMbtiStr}_${safeName}_${formattedScore}.png`;
         }
     });
    
-    document.getElementById('share-x-btn').addEventListener('click', () => {
+document.getElementById('share-x-btn').addEventListener('click', () => {
         const shareTexts = {
             'zh-HK': { mbti: "我的追星人格：", unmei: "命中注定的神推：", aishou: "我的神推相性：", check: "🌸 尋找與你最契合的 AKB48 成員：" },
             'zh-CN': { mbti: "我的追星人格：", unmei: "命中注定的神推：", aishou: "我的神推相性：", check: "🌸 寻找与你最契合的 AKB48 成员：" },
@@ -846,6 +865,7 @@ document.addEventListener('mousedown', function(e) {
         });
     }
 });
+
 
 
 
