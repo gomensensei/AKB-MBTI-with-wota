@@ -28,7 +28,7 @@
       "th": "บุคลิกตอนติ่งอาจจะต่างจากตัวตนปกติของคุณ <br>60 คำถามนี้จะช่วยเปิดเผยคุณลักษณะที่ซ่อนอยู่อย่างแม่นยำ<br> (* แบบทดสอบนี้ทำขึ้นเพื่อความบันเทิงของแฟนคลับเท่านั้น ไม่ใช่การวินิจฉัยทางจิตวิทยา)",
       "id": "Kepribadian stan kamu mungkin berbeda dari diri kamu sehari-hari.<br> 60 pertanyaan ini akan secara akurat mengungkap sifat tersembunyimu<br> (* Hanya untuk hiburan penggemar, bukan diagnosis profesional)."
     },
-    "footer_text": {
+    "footer_credit": {
       "zh-HK": "本測驗由粉絲 ゴメン先生 (gomensensei) 製作，與 AKB48 官方無任何關聯。<br>圖片及相關資料版權歸原屬公司所有。",
       "zh-CN": "本测验由粉丝 ゴメン先生 (gomensensei) 制作，与 AKB48 官方无任何关联。<br>图片及相关资料版权归原属公司所有。",
       "ja": "本サイトはファンである ゴメン先生 (gomensensei) が作成した非公式のものであり、AKB48運営とは一切関係ありません。<br>画像等の著作権は各権利者に帰属します。",
@@ -2034,6 +2034,7 @@
     }
 }
 }
+
 
 
 
