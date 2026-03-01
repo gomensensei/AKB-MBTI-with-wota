@@ -867,6 +867,65 @@ document.addEventListener('mousedown', function(e) {
 });
 
 
+// ==========================================
+// 音樂播放器與吸附邏輯 (Intersection Observer)
+// ==========================================
+
+function toggleMusic() {
+    const wrap = document.getElementById('footer-mv-wrap');
+    const iframe = document.getElementById('footer-yt-player');
+    const btn = document.getElementById('music-toggle-btn');
+    const videoId = 'Aw2NpveLOFs'; // 名残り桜 MV ID
+
+    // 取得多語言文字
+    const onText = (i18nData.ui.btn_music_on && i18nData.ui.btn_music_on[currentLang]) ? i18nData.ui.btn_music_on[currentLang] : "🎵 Music ON";
+    const offText = (i18nData.ui.btn_music_off && i18nData.ui.btn_music_off[currentLang]) ? i18nData.ui.btn_music_off[currentLang] : "🎵 Music OFF";
+
+    if (wrap.classList.contains('hidden')) {
+        // 開啟音樂
+        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+        wrap.classList.remove('hidden');
+        btn.innerHTML = onText;
+        btn.style.background = "rgba(255, 20, 147, 0.15)";
+        btn.style.color = "var(--cyber-pink)";
+        btn.style.border = "1px solid var(--cyber-pink)";
+    } else {
+        // 關閉音樂
+        iframe.src = '';
+        wrap.classList.add('hidden');
+        btn.innerHTML = offText;
+        btn.style.background = "transparent";
+        btn.style.color = "var(--text-muted)";
+        btn.style.border = "1px solid rgba(255,255,255,0.3)";
+    }
+}
+
+// 監聽器：當頁面滑到最底 (Footer 出現) 時，讓播放器自動歸位
+document.addEventListener('DOMContentLoaded', () => {
+    const footer = document.getElementById('site-footer');
+    const mvWrap = document.getElementById('footer-mv-wrap');
+
+    if ('IntersectionObserver' in window && footer && mvWrap) {
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                // 如果 Footer 進入了螢幕畫面
+                if (entry.isIntersecting) {
+                    mvWrap.classList.remove('floating-mode');
+                    mvWrap.classList.add('docked-mode');
+                } else {
+                    // 如果用家滑回上面 (離開了 Footer)
+                    mvWrap.classList.remove('docked-mode');
+                    mvWrap.classList.add('floating-mode');
+                }
+            });
+        }, { 
+            root: null,
+            threshold: 0.05 // 只要 Footer 露出 5% 就觸發歸位
+        });
+
+        observer.observe(footer);
+    }
+});
 
 
 
