@@ -648,22 +648,26 @@ body > canvas {
 
 
 /* ==========================================
-   應援播放器：懸浮 vs 歸位 樣式
+   應援播放器：懸浮 vs 歸位 樣式 (已修復轉場 Bug)
    ========================================== */
+
+#footer-mv-wrap {
+    /* 🌟 拔除 width 100% 帶來的閃爍，指定動畫過渡的屬性 */
+    transition: width 0.4s ease, bottom 0.4s ease, right 0.4s ease, opacity 0.4s ease;
+}
 
 /* 狀態 A：懸浮模式 (Floating) */
 #footer-mv-wrap.floating-mode {
     position: fixed;
-    bottom: 95px; /* 避開手機版底部的 [上一頁][下一頁] 按鈕 */
+    bottom: 95px;
     right: 15px;
-    width: 240px; /* 電腦版大小 */
+    width: 240px;
     z-index: 1000;
-    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
     box-shadow: 0 10px 30px rgba(0,0,0,0.25);
     opacity: 0.95;
 }
 
-/* 手機版懸浮時縮小，確保不擋字 */
+/* 手機版懸浮縮小 */
 @media (max-width: 600px) {
     #footer-mv-wrap.floating-mode {
         width: 160px;
@@ -680,13 +684,13 @@ body > canvas {
     position: relative;
     bottom: 0 !important;
     right: 0 !important;
-    width: 100%;
-    max-width: 400px;
+    /* 🌟 核心修復：不要用 width: 100%，改用固定 px，手機版用 vw 防爆版 */
+    width: 320px; 
+    max-width: 90vw; 
     margin: 0 auto 20px auto;
     z-index: 1;
     box-shadow: 0 5px 15px rgba(0,0,0,0.1);
     opacity: 1;
-    transform: none;
 }
 
 
