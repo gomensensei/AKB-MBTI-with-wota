@@ -621,7 +621,6 @@ a, button, input, select, .question-item, label, .slider-ticks span {
 }
 
 
-
 /* ==================================
    強制將點擊櫻花特效推到全畫面最頂層
    ================================== */
@@ -631,8 +630,47 @@ body > canvas {
 }
 
 
+/* ==========================================
+   應援播放器：懸浮 vs 歸位 樣式
+   ========================================== */
 
+/* 狀態 A：懸浮模式 (Floating) */
+#footer-mv-wrap.floating-mode {
+    position: fixed;
+    bottom: 95px; /* 避開手機版底部的 [上一頁][下一頁] 按鈕 */
+    right: 15px;
+    width: 240px; /* 電腦版大小 */
+    z-index: 1000;
+    transition: all 0.5s cubic-bezier(0.25, 0.8, 0.25, 1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+    opacity: 0.95;
+}
 
+/* 手機版懸浮時縮小，確保不擋字 */
+@media (max-width: 600px) {
+    #footer-mv-wrap.floating-mode {
+        width: 160px;
+        bottom: 85px;
+        right: 10px;
+    }
+    #footer-mv-wrap.floating-mode .mv-title-text {
+        font-size: 11px;
+    }
+}
+
+/* 狀態 B：歸位模式 (Docked in Footer) */
+#footer-mv-wrap.docked-mode {
+    position: relative;
+    bottom: 0 !important;
+    right: 0 !important;
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto 20px auto;
+    z-index: 1;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    opacity: 1;
+    transform: none;
+}
 
 
 
