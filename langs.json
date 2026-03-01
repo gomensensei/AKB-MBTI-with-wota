@@ -131,7 +131,80 @@
       "zh-HK": "你", "zh-CN": "你", "ja": "あなた", "ko": "당신", "en": "You", "th": "คุณ", "id": "Kamu"
     }
   },
-
+    
+"btn_about": {
+      "zh-HK": "💡 開發秘辛 / About Project",
+      "zh-CN": "💡 开发秘辛 / About Project",
+      "ja": "💡 開発の裏側 / About Project",
+      "ko": "💡 개발 비화 / About Project",
+      "en": "💡 Developer Notes / About Project",
+      "th": "💡 เบื้องหลังการพัฒนา",
+      "id": "💡 Catatan Pengembang"
+    },
+    "about_title": {
+      "zh-HK": "💻 開發者語錄",
+      "zh-CN": "💻 开发者语录",
+      "ja": "💻 開発者ノート",
+      "ko": "💻 개발자 노트",
+      "en": "💻 Developer's Note",
+      "th": "💻 บันทึกจากผู้พัฒนา",
+      "id": "💻 Catatan Pengembang"
+    },
+    "about_intro": {
+      "zh-HK": "我們致力於打造一個具備深度與美感的鑑定工具：",
+      "zh-CN": "我们致力于打造一个具备深度与美感的鉴定工具：",
+      "ja": "単なるお遊びではなく、深度と美しさを備えた診断ツールを目指しました：",
+      "ko": "단순한 오락이 아닌, 깊이와 미적 감각을 갖춘 진단 도구를 만들기 위해 노력했습니다:",
+      "en": "We are dedicated to building a testing tool with both depth and aesthetic appeal:",
+      "th": "เรามุ่งมั่นที่จะสร้างเครื่องมือทดสอบที่มีทั้งความลึกซึ้งและความสวยงาม:",
+      "id": "Kami berdedikasi untuk membangun alat pengujian dengan kedalaman dan daya tarik estetika:"
+    },
+    "about_p1": {
+      "zh-HK": "<strong>進度防失蹤：</strong>整合 LocalStorage 實時保存答題進度，意外斷網也能即時續作。",
+      "zh-CN": "<strong>进度防失踪：</strong>整合 LocalStorage 实时保存答题进度，意外断网也能即时续作。",
+      "ja": "<strong>進捗の自動保存：</strong>LocalStorageを統合し、解答状況をリアルタイムに保存。途中で閉じても再開可能です。",
+      "ko": "<strong>진행 데이터 보호：</strong>LocalStorage를 활용해 답변을 실시간으로 저장하여, 도중에 꺼져도 이어서 할 수 있습니다。",
+      "en": "<strong>Progress Auto-Save：</strong>Integrates LocalStorage to save your progress in real-time.",
+      "th": "<strong>บันทึกอัตโนมัติ：</strong>ใช้ LocalStorage เพื่อบันทึกคำตอบของคุณแบบเรียลไทม์",
+      "id": "<strong>Simpan Otomatis：</strong>Mengintegrasikan LocalStorage untuk menyimpan progres Anda."
+    },
+    "about_p2": {
+      "zh-HK": "<strong>私隱優先渲染：</strong>利用 html2canvas 在裝置本地生成高清結果卡，性格數據絕不上傳。",
+      "zh-CN": "<strong>隐私优先渲染：</strong>利用 html2canvas 在设备本地生成高清结果卡，性格数据绝不上传。",
+      "ja": "<strong>プライバシー最優先：</strong>html2canvasを利用し、端末上で高画質結果カードを生成。性格データは送信されません。",
+      "ko": "<strong>프라이버시 우선：</strong>기기 내에서 고화질 결과 카드를 생성하며, 성격 데이터는 서버로 전송되지 않습니다.",
+      "en": "<strong>Privacy-First：</strong>Uses html2canvas to generate HD result cards locally; personality data is never uploaded.",
+      "th": "<strong>เน้นความเป็นส่วนตัว：</strong>สร้างการ์ดผลลัพธ์บนอุปกรณ์ของคุณ โดยไม่มีการอัปโหลดข้อมูลลักษณะนิสัย",
+      "id": "<strong>Mengutamakan Privasi：</strong>Menghasilkan kartu hasil secara lokal; data kepribadian tidak pernah diunggah."
+    },
+    "about_p3": {
+      "zh-HK": "<strong>動態頻率匹配：</strong>內建 MBTI 餘弦波演算法，透過動態雷達圖即時比較性格重合度。",
+      "zh-CN": "<strong>动态频率匹配：</strong>内建 MBTI 余弦波演算法，透过动态雷达图即时比较性格重合度。",
+      "ja": "<strong>ダイナミック相性：</strong>コサイン類似度アルゴリズムを内蔵。レーダーチャートで性格の重なりを比較します。",
+      "ko": "<strong>동적 매칭：</strong>코사인 유사도 알고리즘을 내장하여, 레이더 차트로 성격 일치도를 즉시 비교합니다.",
+      "en": "<strong>Dynamic Matching：</strong>Features a MBTI cosine wave algorithm, using radar charts to compare personality overlaps.",
+      "th": "<strong>จับคู่แบบไดนามิก：</strong>มีอัลกอริทึมโคไซน์เปรียบเทียบความเข้ากันได้ของนิสัยแบบเรียลไทม์",
+      "id": "<strong>Pencocokan Dinamis：</strong>Menampilkan algoritma gelombang kosinus menggunakan grafik radar untuk membandingkan kecocokan."
+    },
+    "about_p4": {
+      "zh-HK": "<strong>智能狀態追蹤：</strong>透過 URL Hash 鎖定結果，配合智能命名系統，讓下載的圖片檔名一目了然。",
+      "zh-CN": "<strong>智能状态追踪：</strong>透过 URL Hash 锁定结果，配合智能命名系统，让下载的图片档名一目了然。",
+      "ja": "<strong>スマート状態記録：</strong>URL Hashで結果をロックし、画像も「メンバー名＋スコア」で自動命名されます。",
+      "ko": "<strong>스마트 추적：</strong>URL Hash로 결과를 기록하고, 이미지 파일명에 결과를 표시합니다.",
+      "en": "<strong>Smart Tracking：</strong>Locks the result via URL Hash and uses a smart naming system for downloaded images.",
+      "th": "<strong>การติดตามอัจฉริยะ：</strong>ล็อกผลลัพธ์ผ่าน URL Hash และใช้ระบบตั้งชื่ออัจฉริยะเพื่อการดาวน์โหลด",
+      "id": "<strong>Pelacakan Cerdas：</strong>Mengunci hasil melalui URL Hash dan menggunakan sistem penamaan cerdas."
+    },
+    "about_outro": {
+      "zh-HK": "這個網站，是我們用代碼為 AKB48 飯圈撰寫的一份深度情書。🌸",
+      "zh-CN": "这个网站，是我们用代码为 AKB48 饭圈撰写的一份深度情书。🌸",
+      "ja": "このサイトは、私たちがコードを使ってAKB48界隈に宛てたラブレターです。🌸",
+      "ko": "이 사이트는 우리가 코드로 작성하여 AKB48 팬덤에 보내는 깊은 사랑의 러브레터입니다.🌸",
+      "en": "This website is a deep love letter written in code for the AKB48 fandom.🌸",
+      "th": "เว็บไซต์นี้คือจดหมายรักลึกซึ้งที่เขียนด้วยโค้ดเพื่อส่งถึงแฟนคลับ AKB48 🌸",
+      "id": "Situs web ini adalah surat cinta mendalam yang ditulis dalam kode untuk fandom AKB48.🌸"
+    },
+    
   "dim_analysis": {
     "E": {
       "sim": { 
@@ -1961,6 +2034,7 @@
     }
 }
 }
+
 
 
 
