@@ -878,8 +878,8 @@ function toggleMusic() {
     const videoId = 'Aw2NpveLOFs'; // 名残り桜 MV ID
 
     // 取得多語言文字
-    const onText = (i18nData.ui.btn_music_on && i18nData.ui.btn_music_on[currentLang]) ? i18nData.ui.btn_music_on[currentLang] : "🎵 Music ON";
-    const offText = (i18nData.ui.btn_music_off && i18nData.ui.btn_music_off[currentLang]) ? i18nData.ui.btn_music_off[currentLang] : "🎵 Music OFF";
+    const onText = (i18nData.ui.btn_music_on && i18nData.ui.btn_music_on[currentLang]) ? i18nData.ui.btn_music_on[currentLang] : "🎵 名残り桜：開";
+    const offText = (i18nData.ui.btn_music_off && i18nData.ui.btn_music_off[currentLang]) ? i18nData.ui.btn_music_off[currentLang] : "🎵 名残り桜：關";
 
     if (wrap.classList.contains('hidden')) {
         // 開啟音樂
@@ -926,6 +926,7 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(footer);
     }
 });
+
 
 
 
