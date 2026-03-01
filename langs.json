@@ -7,6 +7,17 @@
     "btn_music_on": {
       "zh-HK": "🎵 音樂：開", "zh-CN": "🎵 音乐：开", "ja": "🎵 BGM：ON", "ko": "🎵 음악：ON", "en": "🎵 Music: ON", "th": "🎵 เปิดเพลง", "id": "🎵 Musik: ON"
     },
+
+    "mv_title": {
+      "zh-HK": "🌸 名残り桜 Music Video / AKB48 67th Single",
+"zh-CN": "名残り桜 Music Video / AKB48 第 67 张单曲",
+      "ja": "名残り桜 Music Video / AKB48 67th Single",
+      "ko": "나고리 사쿠라(名残り桜) Music Video / AKB48 67th Single",
+      "en": "Nagori Sakura Music Video / AKB48 67th Single",
+      "th": "มิวสิกวิดีโอ Nagori Sakura / AKB48 67th Single",
+      "id": "Video Musik Nagori Sakura / AKB48 67th Single"
+    },
+
     
     "app_title": {
       "zh-HK": "AKB48 粉絲深度MBTI性格鑑定",
@@ -2040,6 +2051,7 @@
     }
 }
 }
+
 
 
 
