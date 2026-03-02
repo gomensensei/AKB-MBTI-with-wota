@@ -569,41 +569,41 @@
     }
   },
 
-  "badges": {
-  "E": {
-    "tier5": { "ko": "🤝 덕질 인싸 리더", "th": "🤝 ผู้นำโซเชียลโอตะ", "id": "🤝 Pemimpin Sosial Fandom" },
-    "tier4": { "ko": "📢 열혈 응원 개척자", "th": "📢 แนวหน้าสายเชียร์", "id": "📢 Pelopor Dukungan Semangat" },
-    "tier3": { "ko": "🎫 안정적인 응원 기반", "th": "🎫 ฐานรากแห่งการซัพพอร์ต", "id": "🎫 Pilar Dukungan Stabil" },
-    "tier2": { "ko": "📱 심층 관찰자", "th": "📱 ผู้สังเกตการณ์เชิงลึก", "id": "📱 Pengamat Mendalam" },
-    "tier1": { "ko": "✨ 영혼의 감응자", "th": "✨ ผู้สื่อจิตวิญญาณ", "id": "✨ Sensor Jiwa Fandom" }
+"badges": {
+    "E": {
+      "tier5": { "zh-HK": "🤝 飯圈社交領袖", "zh-CN": "🤝 饭圈社交领袖", "ja": "🤝 飯界の社交リーダー", "en": "🤝 Fandom Social Leader", "ko": "🤝 덕질 인싸 리더", "th": "🤝 ผู้นำโซเชียลโอตะ", "id": "🤝 Pemimpin Sosial Fandom" },
+      "tier4": { "zh-HK": "📢 熱血應援先鋒", "zh-CN": "📢 热血应援先锋", "ja": "📢 熱血応援エバンジェリスト", "en": "📢 Passionate Support Pioneer", "ko": "📢 열혈 응원 개척자", "th": "📢 แนวหน้าสายเชียร์", "id": "📢 Pelopor Dukungan Semangat" },
+      "tier3": { "zh-HK": "🎫 穩定應援基石", "zh-CN": "🎫 稳定应援基石", "ja": "🎫 安定の応援基盤", "en": "🎫 Steady Support Pillar", "ko": "🎫 안정적인 응원 기반", "th": "🎫 ฐานรากแห่งการซัพพอร์ต", "id": "🎫 Pilar Dukungan Stabil" },
+      "tier2": { "zh-HK": "📱 深層觀察者", "zh-CN": "📱 深层观察者", "ja": "📱 深層のオブザーバー", "en": "📱 Deep Observer", "ko": "📱 심층 관찰자", "th": "📱 ผู้สังเกตการณ์เชิงลึก", "id": "📱 Pengamat Mendalam" },
+      "tier1": { "zh-HK": "✨ 靈魂感應者", "zh-CN": "✨ 灵魂感应者", "ja": "✨ ソウル・インフルエンサー", "en": "✨ Soul Resonance Seeker", "ko": "✨ 영혼의 감응자", "th": "✨ ผู้สื่อจิตวิญญาณ", "id": "✨ Sensor Jiwa Fandom" }
+    },
+    "J": {
+      "tier5": { "zh-HK": "📐 戰略級應援官", "zh-CN": "📐 战略级应援官", "ja": "📐 戦略的推し活マネージャー", "en": "📐 Strategic Support Officer", "ko": "📐 전략적 덕질 매니저", "th": "📐 นักวางแผนอังกอร์", "id": "📐 Perwira Strategis" },
+      "tier4": { "zh-HK": "📅 規律守護者", "zh-CN": "📅 规律守护者", "ja": "📅 ルーチン・ガーディアン", "en": "📅 Routine Guardian", "ko": "📅 루틴 수호자", "th": "📅 ผู้พิทักษ์ตารางเวลา", "id": "📅 Penjaga Rutinitas" },
+      "tier3": { "zh-HK": "🍵 平衡追星族", "zh-CN": "🍵 平衡追星族", "ja": "🍵 バランス型オタク", "en": "🍵 Balanced Stan", "ko": "🍵 밸런스형 덕후", "th": "🍵 โอตะสายสมดุล", "id": "🍵 Stan Seimbang" },
+      "tier2": { "zh-HK": "🍀 隨緣系單推人", "zh-CN": "🍀 随缘系单推人", "ja": "🍀 自由奔放な単推し", "en": "🍀 Free-spirited Solo-Stan", "ko": "🍀 자유분방한 단오시", "th": "🍀 คามิโอชิสายชิลล์", "id": "🍀 Solo-Stan Bebas" },
+      "tier1": { "zh-HK": "🎈 飯圈自由靈魂", "zh-CN": "🎈 饭圈自由灵魂", "ja": "🎈 界隈の自由な魂", "en": "🎈 Fandom Free Spirit", "ko": "🎈 자유로운 덕질 영혼", "th": "🎈 โอตะอิสระ", "id": "🎈 Jiwa Fandom Bebas" }
+    },
+    "T": {
+      "tier5": { "zh-HK": "📊 理性分析之眼", "zh-CN": "📊 理性分析之眼", "ja": "📊 冷徹な分析眼", "en": "📊 Rational Analytic Eye", "ko": "📊 이성적 분석의 눈", "th": "📊 นักวิเคราะห์สายเหตุผล", "id": "📊 Mata Analitis Rasional" },
+      "tier4": { "zh-HK": "🧐 專業鑑賞家", "zh-CN": "🧐 专业鉴赏家", "ja": "🧐 プロの鑑賞家", "en": "🧐 Expert Connoisseur", "ko": "🧐 프로 감상가", "th": "🧐 นักเสพผลงานมือโปร", "id": "🧐 Penikmat Ahli" },
+      "tier3": { "zh-HK": "⚖️ 公正觀察員", "zh-CN": "⚖️ 公正观察员", "ja": "⚖️ 公平なオブザーバー", "en": "⚖️ Fair-minded Observer", "ko": "⚖️ 공정한 관찰자", "th": "⚖️ ผู้สังเกตการณ์ผู้เที่ยงธรรม", "id": "⚖️ Pengamat Adil" },
+      "tier2": { "zh-HK": "💌 暖心共情守護者", "zh-CN": "💌 暖心共情守护者", "ja": "💌 慈愛の共感サポーター", "en": "💌 Empathetic Protector", "ko": "💌 따뜻한 공감 서포터", "th": "💌 ผู้พิทักษ์สายซัพพอร์ตใจ", "id": "💌 Pelindung Empati" },
+      "tier1": { "zh-HK": "😭 靈魂同調者", "zh-CN": "😭 灵魂同调者", "ja": "😭 感情同期のマスター", "en": "😭 Emotional Synchronizer", "ko": "😭 감정 동기화 마스터", "th": "😭 สายอินร่วมความรู้สึก", "id": "😭 Sinkronisator Emosi" }
+    },
+    "S": {
+      "tier5": { "zh-HK": "🎨 細節捕捉大師", "zh-CN": "🎨 细节捕捉大师", "ja": "🎨 ディテール・マスター", "en": "🎨 Detail Capture Master", "ko": "🎨 디테일 캡처 마스터", "th": "🎨 มาสเตอร์เก็บรายละเอียด", "id": "🎨 Master Penangkap Detail" },
+      "tier4": { "zh-HK": "🧵 實質考據黨", "zh-CN": "🧵 实质考据党", "ja": "🧵 リアルの考証班", "en": "🧵 Evidence-based Researcher", "ko": "🧵 실증적 연구원", "th": "🧵 นักสืบข้อมูล", "id": "🧵 Peneliti Berbasis Fakta" },
+      "tier3": { "zh-HK": "🎬 全方位視角", "zh-CN": "🎬 全方位视角", "ja": "🎬 オールラウンド視界", "en": "🎬 Panoramic Perspective", "ko": "🎬 올라운드 시야", "th": "🎬 มุมมองรอบด้าน", "id": "🎬 Perspektif Panoramik" },
+      "tier2": { "zh-HK": "🔮 潛力預言家", "zh-CN": "🔮 潜力预言家", "ja": "🔮 ポテンシャル予言者", "en": "🔮 Potential Prophet", "ko": "🔮 잠재력 예언가", "th": "🔮 นักพยากรณ์ศักยภาพ", "id": "🔮 Nabi Potensial" },
+      "tier1": { "zh-HK": "✨ 意境追尋者", "zh-CN": "✨ 意境追寻者", "ja": "✨ 理想の追求者", "en": "✨ Spiritual Visionary", "ko": "✨ 이상을 쫓는 자", "th": "✨ ผู้แสวงหาจิตตารมณ์", "id": "✨ Visioner Spiritual" }
+    },
+    "A": {
+      "high": { "zh-HK": "🛡️ 不屈之精神支柱", "zh-CN": "🛡️ 不屈之精神支柱", "ja": "🛡️ 不屈の精神的支柱", "en": "🛡️ Unyielding Pillar", "ko": "🛡️ 불굴의 정신적 지주", "th": "🛡️ เสาหลักจิตวิญญาณ", "id": "🛡️ Pilar Semangat Tak Patah" },
+      "mid": { "zh-HK": "⛵ 韌性應援者", "zh-CN": "⛵ 韧性应援者", "ja": "⛵ しなやかな応援者", "en": "⛵ Resilient Supporter", "ko": "⛵ 유연한 응원자", "th": "⛵ ผู้สนับสนุนผู้ยืดหยุ่น", "id": "⛵ Pendukung Tangguh" },
+      "low": { "zh-HK": "🌸 感性守護靈魂", "zh-CN": "🌸 感性守护灵魂", "ja": "🌸 繊細な守護の魂", "en": "🌸 Sensitive Guardian Soul", "ko": "🌸 섬세한 수호의 영혼", "th": "🌸 จิตวิญญาณผู้พิทักษ์ที่อ่อนไหว", "id": "🌸 Jiwa Penjaga Sensitif" }
+    }
   },
-  "J": {
-    "tier5": { "ko": "📐 전략적 덕질 매니저", "th": "📐 นักวางแผนอังกอร์", "id": "📐 Perwira Strategis" },
-    "tier4": { "ko": "📅 루틴 수호자", "th": "📅 ผู้พิทักษ์ตารางเวลา", "id": "📅 Penjaga Rutinitas" },
-    "tier3": { "ko": "🍵 밸런스형 덕후", "th": "🍵 โอตะสายสมดุล", "id": "🍵 Stan Seimbang" },
-    "tier2": { "ko": "🍀 자유분방한 단오시", "th": "🍀 คามิโอชิสายชิลล์", "id": "🍀 Solo-Stan Bebas" },
-    "tier1": { "ko": "🎈 자유로운 덕질 영혼", "th": "🎈 โอตะอิสระ", "id": "🎈 Jiwa Fandom Bebas" }
-  },
-  "T": {
-    "tier5": { "ko": "📊 이성적 분석의 눈", "th": "📊 นักวิเคราะห์สายเหตุผล", "id": "📊 Mata Analitis Rasional" },
-    "tier4": { "ko": "🧐 프로 감상가", "th": "🧐 นักเสพผลงานมือโปร", "id": "🧐 Penikmat Ahli" },
-    "tier3": { "ko": "⚖️ 공정한 관찰자", "th": "⚖️ ผู้สังเกตการณ์ผู้เที่ยงธรรม", "id": "⚖️ Pengamat Adil" },
-    "tier2": { "ko": "💌 따뜻한 공감 서포터", "th": "💌 ผู้พิทักษ์สายซัพพอร์ตใจ", "id": "💌 Pelindung Empati" },
-    "tier1": { "ko": "😭 감정 동기화 마스터", "th": "😭 สายอินร่วมความรู้สึก", "id": "😭 Sinkronisator Emosi" }
-  },
-  "S": {
-    "tier5": { "ko": "🎨 디테일 캡처 마스터", "th": "🎨 มาสเตอร์เก็บรายละเอียด", "id": "🎨 Master Penangkap Detail" },
-    "tier4": { "ko": "🧵 실증적 연구원", "th": "🧵 นักสืบข้อมูล", "id": "🧵 Peneliti Berbasis Fakta" },
-    "tier3": { "ko": "🎬 올라운드 시야", "th": "🎬 มุมมองรอบด้าน", "id": "🎬 Perspektif Panoramik" },
-    "tier2": { "ko": "🔮 잠재력 예언가", "th": "🔮 นักพยากรณ์ศักยภาพ", "id": "🔮 Nabi Potensial" },
-    "tier1": { "ko": "✨ 이상을 쫓는 자", "th": "✨ ผู้แสวงหาจิตตารมณ์", "id": "✨ Visioner Spiritual" }
-  },
-  "A": {
-    "high": { "ko": "🛡️ 불굴의 정신적 지주", "th": "🛡️ เสาหลักจิตวิญญาณ", "id": "🛡️ Pilar Semangat Tak Patah" },
-    "mid": { "ko": "⛵ 유연한 응원자", "th": "⛵ ผู้สนับสนุนผู้ยืดหยุ่น", "id": "⛵ Pendukung Tangguh" },
-    "low": { "ko": "🌸 섬세한 수호의 영혼", "th": "🌸 จิตวิญญาณผู้พิทักษ์ที่อ่อนไหว", "id": "🌸 Jiwa Penjaga Sensitif" }
-  }
-},
     
   "dim_analysis": {
     "E": {
@@ -2434,6 +2434,7 @@
     }
 }
 }
+
 
 
 
