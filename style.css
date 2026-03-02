@@ -251,15 +251,59 @@ body > canvas { z-index: 999999 !important; pointer-events: none !important; }
 #footer-mv-wrap.hidden { opacity: 0; pointer-events: none; transform: translateY(20px) scale(0.8); display: block !important; }
 #yt-player-container { width: 100%; aspect-ratio: 16 / 9; background: #000; }
 
-.badge-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 12px 0 15px 0; }
-.achievement-badge { background: rgba(255, 20, 147, 0.1); color: var(--cyber-pink); border: 1px solid rgba(255, 20, 147, 0.3); padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; box-shadow: 0 2px 8px rgba(255, 20, 147, 0.05); animation: badge-pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) backwards; }
+/* ==================================
+   修復版：成就勳章 (Badges) 樣式
+   ================================== */
+.badge-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 6px; /* 縮細間距 */
+    margin: 8px 0 10px 0; /* 🌟 縮細上下 margin，爭取垂直空間 */
+}
+
+.achievement-badge {
+    background: rgba(255, 20, 147, 0.1);
+    color: var(--cyber-pink);
+    border: 1px solid rgba(255, 20, 147, 0.3);
+    
+    /* 🌟 修復問題 2：勳章整體縮細 */
+    padding: 4px 10px; /* 從 6px 12px 縮細 */
+    font-size: 11px; /* 從 12px 縮細 */
+    border-radius: 16px; /* 從 20px 縮細 */
+    
+    font-weight: bold;
+    box-shadow: 0 2px 8px rgba(255, 20, 147, 0.05);
+    animation: badge-pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) backwards;
+}
+
+/* 針對 Tier 5 (極端高分) 的特別閃亮樣式 */
+.achievement-badge.legendary {
+    background: linear-gradient(135deg, #FF1493, #FF69B4);
+    color: white;
+    border: none;
+    box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4);
+    text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+}
+
 .achievement-badge:nth-child(1) { animation-delay: 0.1s; }
 .achievement-badge:nth-child(2) { animation-delay: 0.3s; }
 .achievement-badge:nth-child(3) { animation-delay: 0.5s; }
-@keyframes badge-pop { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
-.achievement-badge.legendary { background: linear-gradient(135deg, #FF1493, #FF69B4); color: white; border: none; box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4); text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
 
-/* 📱 手機版 RWD 修復區 */
+@keyframes badge-pop {
+    0% { transform: scale(0.5); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+/* 🌟 修復問題 1：下載時強制清空所有動畫 🌟 */
+.exporting-mode * {
+    animation: none !important;
+    transition: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+}
+
+/* 📱 移動端微調 */
 @media (max-width: 768px) {
     #lang-switcher-container { position: fixed; top: 10px; right: 10px; }
     .progress-container { top: 55px !important; } 
