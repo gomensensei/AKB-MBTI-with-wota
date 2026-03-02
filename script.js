@@ -271,13 +271,22 @@ function updateProgress() {
     const tipText = document.getElementById('progress-tip-text');
     const milestones = { 20: 'stage_20', 30: 'stage_30', 40: 'stage_40', 50: 'stage_50' };
     
-    if (tipText && milestones[count] && i18nData.progress_tips && i18nData.progress_tips[milestones[count]]) {
-        const options = i18nData.progress_tips[milestones[count]][currentLang] || i18nData.progress_tips[milestones[count]]['en'];
-        const randomTip = options[Math.floor(Math.random() * options.length)];
-        
-        tipText.innerText = randomTip;
-        tipText.style.opacity = '1';
-        setTimeout(() => { tipText.style.opacity = '0'; }, 3500); 
+    if (tipText && milestones[count]) {
+        try {
+            const stageData = i18nData.progress_tips?.[milestones[count]];
+            if (stageData) {
+                // 🌟 防死機機制：如果找不到當前語言，順序找 zh-HK -> en -> 空陣列，確保絕對不會報錯
+                const options = stageData[currentLang] || stageData['zh-HK'] || stageData['en'] || [];
+                if (options.length > 0) {
+                    const randomTip = options[Math.floor(Math.random() * options.length)];
+                    tipText.innerText = randomTip;
+                    tipText.style.opacity = '1';
+                    setTimeout(() => { tipText.style.opacity = '0'; }, 3500); 
+                }
+            }
+        } catch (e) {
+            console.error("鼓勵語載入錯誤，但不影響答題:", e);
+        }
     }
 }
 
@@ -877,3 +886,4 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(footer);
     }
 });
+
