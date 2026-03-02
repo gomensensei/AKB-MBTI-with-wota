@@ -289,10 +289,25 @@ function updateUI() {
     if (firstQ && userAnswers[currentPage * 10 + 1] === undefined) firstQ.classList.add('active');
 }
 
+// 替換原本的 updateProgress
 function updateProgress() {
     const count = Object.keys(userAnswers).length;
     document.getElementById('progress-text').textContent = `${count}/60`;
     document.getElementById('progress-bar').style.width = `${(count / 60) * 100}%`;
+
+    // 觸發隨機鼓勵語
+    const tipText = document.getElementById('progress-tip-text');
+    const milestones = { 20: 'stage_20', 30: 'stage_30', 40: 'stage_40', 50: 'stage_50' };
+    
+    // 如果 tipText 存在，並且到達指定題數
+    if (tipText && milestones[count] && i18nData.ui.progress_tips && i18nData.ui.progress_tips[milestones[count]]) {
+        const options = i18nData.ui.progress_tips[milestones[count]][currentLang] || i18nData.ui.progress_tips[milestones[count]]['en'];
+        const randomTip = options[Math.floor(Math.random() * options.length)];
+        
+        tipText.innerText = randomTip;
+        tipText.style.opacity = '1';
+        setTimeout(() => { tipText.style.opacity = '0'; }, 3500); // 3.5秒後消失
+    }
 }
 
 // ==========================================
@@ -408,6 +423,38 @@ function getDimDetail(diff, dimKey, isShortLabel = false) {
     return isShortLabel ? data[status][currentLang] : data[status].desc[currentLang];
 }
 
+// 🌟 新增：計算並生成勳章 HTML 的 Helper 函數
+function getMemberBadgesHtml(userPerc) {
+    if (!i18nData.ui.badges) return ""; 
+
+    const dimensions = [
+        { key: 'E', val: userPerc.E }, { key: 'J', val: userPerc.J },
+        { key: 'T', val: userPerc.T }, { key: 'S', val: userPerc.S }, { key: 'A', val: userPerc.A }
+    ];
+    // 攞最極端嗰 3 個特質
+    dimensions.sort((a, b) => Math.abs(b.val - 50) - Math.abs(a.val - 50)); 
+    
+    let badgesHtml = '<div class="badge-container">';
+    dimensions.slice(0, 3).forEach(d => {
+        let tierClass = "achievement-badge";
+        let tierKey = "";
+        if (d.key === 'A') {
+            if (d.val >= 80) { tierKey = 'high'; tierClass += " legendary"; }
+            else if (d.val >= 40) tierKey = 'mid'; else tierKey = 'low';
+        } else {
+            if (d.val >= 90) { tierKey = 'tier5'; tierClass += " legendary"; }
+            else if (d.val >= 70) tierKey = 'tier4';
+            else if (d.val >= 40) tierKey = 'tier3';
+            else if (d.val >= 11) tierKey = 'tier2';
+            else { tierKey = 'tier1'; tierClass += " legendary"; }
+        }
+        const badgeText = i18nData.ui.badges[d.key][tierKey][currentLang] || i18nData.ui.badges[d.key][tierKey]['en'];
+        badgesHtml += `<span class="${tierClass}">${badgeText}</span>`;
+    });
+    badgesHtml += '</div>';
+    return badgesHtml;
+}
+
 function renderMainDisplay(member, titleLabel) {
     const mLang = i18nData.members_analysis[member.id];
     const ui = i18nData.ui;
@@ -416,11 +463,13 @@ function renderMainDisplay(member, titleLabel) {
     return `
         <div style="font-size: 18px; font-weight:bold; margin-bottom: 15px; color: var(--cyber-pink);">${titleLabel}</div>
         
-<div class="result-avatar" style="width: 120px; height: 120px; border-radius: 50%; padding: 4px; ${getAvatarBgStyle(member.colors)} margin: 0 auto 12px auto; transition: all 0.3s ease;">
+        <div class="result-avatar" style="width: 120px; height: 120px; border-radius: 50%; padding: 4px; ${getAvatarBgStyle(member.colors)} margin: 0 auto 12px auto; transition: all 0.3s ease;">
             <img crossorigin="anonymous" src="${member.image}${cb}" style="width: 100%; height: 100%; border-radius: 50%; object-fit: cover; border: 3px solid white;">
         </div>
         
         <h3 style="font-size: 22px; margin-bottom: 5px;">${member.name_ja} <span style="font-size:14px; opacity:0.7;">(${member.mbti_type})</span></h3>
+        
+        ${getMemberBadgesHtml(userPerc)}
         
         <p class="comp-score-container" style="color: var(--cyber-pink); font-weight: 800; font-size: 24px; margin: 5px 0 10px 0; display:flex; justify-content:center; align-items:center;">
             ${ui.compatibility_label[currentLang] || ''} <span class="comp-score" style="margin-left:5px;">0.0%</span>
@@ -975,3 +1024,4 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(footer);
     }
 });
+
