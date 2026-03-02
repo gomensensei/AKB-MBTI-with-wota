@@ -71,11 +71,15 @@
         </section>
 
         <section id="page-quiz" class="hidden">
-            <div class="progress-container glass-panel-top">
-                <div class="progress-text"><span data-i18n="progress_label">進度：</span><span id="progress-text">0/60</span></div>
-                <div class="progress-bar-bg">
-                    <div id="progress-bar" class="progress-bar-fill"></div>
-                </div>
+<div class="progress-container glass-panel-top">
+    <div class="progress-text">
+        <span data-i18n="progress_label">進度：</span><span id="progress-text">0/60</span>
+    </div>
+    <div class="progress-bar-bg">
+        <div id="progress-bar" class="progress-bar-fill"></div>
+    </div>
+    <div id="progress-tip-text" style="font-size: 11px; color: var(--cyber-pink); text-align: center; margin-top: 6px; font-weight: bold; opacity: 0; transition: opacity 0.5s; pointer-events: none; min-height: 16px;"></div>
+</div>
             </div>
             <div class="quiz-viewport">
                 <div id="quiz-track" class="quiz-track"></div>
@@ -203,6 +207,7 @@ function continuousSakura() {
     </script>
 </body>
 </html>
+
 
 
 
