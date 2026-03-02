@@ -482,12 +482,13 @@ function renderResultPage(allMembers) {
     
     content.innerHTML = `
         <div id="export-container" style="background: linear-gradient(135deg, #fdfcfb, #f0e6ea); width: 100%; max-width: 540px; margin: 0 auto; overflow: hidden; border-radius: 20px;">
-            <div id="export-card" style="padding: 40px 15px; position: relative; display: flex; flex-direction: column; align-items: center; min-height: 850px; justify-content: space-around;">
+            <div id="export-card" style="padding: 30px 15px; position: relative; display: flex; flex-direction: column; align-items: center; min-height: 850px; justify-content: space-around;">
                 
                 <div class="landing-header" style="text-align:center; width: 100%;">
                     <span class="subtitle" style="font-size: 16px; letter-spacing: 3px;">${ui.result_subtitle[currentLang]}</span>
                     <h2 style="font-size: 52px; color: var(--cyber-pink); margin: 10px 0 0 0; line-height: 1;">${userMbtiStr}</h2>
-                    <h3 style="font-size: 22px; color: var(--text-main); margin-top: 8px; margin-bottom: 15px;">${userTitle}</h3>
+                    
+                    <h3 style="font-size: 22px; color: var(--text-main); margin-top: 5px; margin-bottom: 15px;">${userTitle}</h3>
                     
                     ${getMemberBadgesHtml(userPerc)}
                 </div>
@@ -500,6 +501,7 @@ function renderResultPage(allMembers) {
                 </div>
             </div>
         </div>
+        
         <div id="web-best-list" class="web-only" style="margin-top: 20px;">
             <div style="background: rgba(255,255,255,0.7); border: 1px dashed var(--sakura-light); padding: 15px; border-radius: 12px; margin-bottom: 10px; display: flex; align-items: center;">
                 <img crossorigin="anonymous" src="${b2.image}${cb}" style="width:55px; height:55px; border-radius:50%; margin-right:15px; border: 2px solid white; box-shadow: 0 2px 5px rgba(0,0,0,0.1);">
@@ -516,7 +518,7 @@ function renderResultPage(allMembers) {
                 </div>
             </div>
         </div>
-        <div class="web-only" style="margin-top: 25px; background: white; border-radius: 16px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
+        <div class="web-only" style="margin-top: 25px; background: white; border-radius: 166px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
             <h4 style="margin-bottom: 10px; text-align:center;">${ui.select_oshi_label[currentLang]}</h4>
             <select id="oshi-select" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size:16px;">
                 <option value="">${ui.select_oshi_default[currentLang]}</option>
@@ -535,6 +537,7 @@ function renderResultPage(allMembers) {
             <button id="copy-link-btn" class="cyber-btn" style="width: 100%; background: var(--cyber-pink); color: #fff;">🔗 複製專屬結果連結</button>
         </div>
     `;
+
 
 
     if(myRadarChart) myRadarChart.destroy();
@@ -893,5 +896,6 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(footer);
     }
 });
+
 
 
