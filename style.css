@@ -651,52 +651,57 @@ body > canvas {
    應援播放器：懸浮 vs 歸位 樣式 (已修復轉場 Bug)
    ========================================== */
 
+/* 播放器外層容器 */
 #footer-mv-wrap {
-    /* 🌟 拔除 width 100% 帶來的閃爍，指定動畫過渡的屬性 */
-    transition: width 0.4s ease, bottom 0.4s ease, right 0.4s ease, opacity 0.4s ease;
+    width: 280px; /* 手機版建議寬度 */
+    background: #000;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 999;
 }
 
-/* 狀態 A：懸浮模式 (Floating) */
+/* 🌟 懸浮模式：平時答題時，縮喺右下角 */
 #footer-mv-wrap.floating-mode {
     position: fixed;
-    bottom: 95px;
-    right: 15px;
-    width: 240px;
-    z-index: 1000;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.25);
-    opacity: 0.95;
-}
-
-/* 手機版懸浮縮小 */
-@media (max-width: 600px) {
-    #footer-mv-wrap.floating-mode {
-        width: 160px;
-        bottom: 85px;
-        right: 10px;
-    }
-    #footer-mv-wrap.floating-mode .mv-title-text {
-        font-size: 11px;
-    }
-}
-
-/* 狀態 B：歸位模式 (Docked in Footer) */
-#footer-mv-wrap.docked-mode {
-    position: relative;
-    bottom: 0 !important;
-    right: 0 !important;
-    /* 🌟 核心修復：不要用 width: 100%，改用固定 px，手機版用 vw 防爆版 */
-    width: 320px; 
-    max-width: 90vw; 
-    margin: 0 auto 20px auto;
-    z-index: 1;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    right: 20px;
+    bottom: 80px; /* 避開底部導覽列或按鈕 */
+    transform: scale(1);
     opacity: 1;
 }
 
+/* 🌟 歸位模式：滑到最底時，自動吸附喺 Footer 裡面 */
+#footer-mv-wrap.docked-mode {
+    position: relative;
+    right: 0;
+    bottom: 0;
+    margin: 20px auto;
+    width: 100%;
+    max-width: 560px; /* 電腦版最大寬度 */
+    transform: scale(1);
+}
 
+/* 🌟 預播隱藏：確保 5 秒預播時唔會被睇到 */
+#footer-mv-wrap.hidden {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(20px) scale(0.8);
+    display: block !important; /* 必須係 block 保持 iframe 運作，但用 opacity 隱藏 */
+}
 
+/* YouTube Iframe 比例容器 (16:9) */
+#yt-player-container {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: #000;
+}
 
-
-
-
-
+/* 移動端微調 */
+@media (max-width: 480px) {
+    #footer-mv-wrap.floating-mode {
+        width: 180px; /* 手機版細啲，唔好遮住題目 */
+        right: 10px;
+        bottom: 100px;
+    }
+}
