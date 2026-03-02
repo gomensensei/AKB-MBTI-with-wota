@@ -375,7 +375,7 @@
       "🗣️ Siap? Teriakkan nama itu di dalam hatimu!"
     ]
   }
-}
+},
 
   "badges": {
   "E": {
@@ -411,7 +411,7 @@
     "mid": { "ko": "⛵ 유연한 응원자", "th": "⛵ ผู้สนับสนุนผู้ยืดหยุ่น", "id": "⛵ Pendukung Tangguh" },
     "low": { "ko": "🌸 섬세한 수호의 영혼", "th": "🌸 จิตวิญญาณผู้พิทักษ์ที่อ่อนไหว", "id": "🌸 Jiwa Penjaga Sensitif" }
   }
-}
+},
     
   "dim_analysis": {
     "E": {
@@ -2242,6 +2242,7 @@
     }
 }
 }
+
 
 
 
