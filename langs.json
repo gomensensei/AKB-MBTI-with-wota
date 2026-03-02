@@ -222,160 +222,352 @@
     }
   },
 
-  "progress_tips": {
-  "stage_20": {
-    "ko": [
-      "🌸 Overture가 울려 퍼집니다! 극장에 들어갈 준비 되셨나요?",
-      "✨ '쇼니치'처럼 꿈의 감정이 시작됩니다!",
-      "🏃‍♀️ 1/3 완료! 연구생처럼 활기찬 기분인가요?",
-      "🎵 I want you~ I need you~ 질문들도 당신을 사랑해요!",
-      "🤝 처음 악수회에 갔을 때처럼 긴장되나요?",
-      "🚪 극장의 문이 열렸습니다. 도전할 준비 되셨나요?",
-      "🔥 당신의 '덕질 영혼'이 깨어나기 시작했습니다!",
-      "💎 20문제 완료! 이것이 당신의 '찬스의 순서'입니다!",
-      "🗳️ 모든 선택은 당신 마음속 총선거 투표입니다.",
-      "🥰 '만나고 싶었어'! 최고의 상성이 기다리고 있습니다!"
-    ],
-    "th": [
-      "🌸 Overture เริ่มแล้ว! พร้อมเข้าเธียเตอร์หรือยัง?",
-      "✨ เหมือนกับ 'Shonichi' การทดสอบความฝันกำลังจะเริ่มขึ้น!",
-      "🏃‍♀️ เสร็จไป 1/3 แล้ว! รู้สึกกระตือรือร้นเหมือนเคงคิวเซย์ไหม?",
-      "🎵 I want you~ I need you~ คำถามก็รักคุณนะ!",
-      "🤝 ความรู้สึก 20 ข้อนี้ เหมือนตอนไปงานจับมือครั้งแรกไหม?",
-      "🚪 ประตูเธียเตอร์เปิดแล้ว พร้อมรับความท้าทายต่อไปหรือยัง?",
-      "🔥 'จิตวิญญาณแฟนคลับ' ของคุณเริ่มตื่นขึ้นแล้ว!",
-      "💎 ครบ 20 ข้อ! นี่คือ 'Chance no Junban' ของคุณ!",
-      "🗳️ ทุกการตัดสินใจ คือการโหวตเลือกตั้งในใจคุณ",
-      "🥰 'Aitakatta'! เมมเบอร์ที่เข้ากับคุณที่สุดอยู่ข้างหน้าแล้ว!"
-    ],
-    "id": [
-      "🌸 Overture telah menggema! Siap masuk ke teater?",
-      "✨ Seperti 'Shonichi', penilaian impian baru saja dimulai!",
-      "🏃‍♀️ 1/3 selesai! Merasa bersemangat seperti Kenkyuusei?",
-      "🎵 I want you~ I need you~ Pertanyaannya juga menyukaimu!",
-      "🤝 Perasaan 20 soal ini, seperti pertama kali ikut Handshake event?",
-      "🚪 Pintu teater sudah terbuka. Siap untuk tantangan selanjutnya?",
-      "🔥 'Jiwa Wota' kamu mulai terbangun!",
-      "💎 20 soal selesai! Inilah 'Chance no Junban' milikmu!",
-      "🗳️ Setiap pilihan adalah voting Sousenkyo di hatimu.",
-      "🥰 'Aitakatta'! Member yang paling cocok ada di depan mata!"
-    ]
+"progress_tips": {
+    "stage_20": {
+      "zh-HK": [
+        "🌸 Overture 響起！準備好進入劇場未？",
+        "✨ 就像《初日》一樣，夢想的鑑定正要開始！",
+        "🏃‍♀️ 完成 1/3 喇！感覺自己係咪好似研究生咁充滿活力？",
+        "🎵 I want you~ I need you~ 題目們也很愛你喔！",
+        "🤝 這 20 題的感覺，係咪好似第一次去握手會咁緊張？",
+        "🚪 劇場的大門已經打開，準備好迎接更多挑戰未？",
+        "🔥 你的『追星靈魂』開始慢慢覺醒喇！",
+        "💎 20 題達成！這就是屬於你的《機會順序》！",
+        "🗳️ 每一個選擇，都是對你自己內心的一次總選舉投票。",
+        "🥰 《Aitakatta》！相性最高的成員就在前方！"
+      ],
+      "zh-CN": [
+        "🌸 Overture 响起了！准备好进入剧场了吗？",
+        "✨ 就像《初日》一样，梦想的鉴定正要开始！",
+        "🏃‍♀️ 完成 1/3 了！感觉自己是不是像研究生一样充满活力？",
+        "🎵 I want you~ I need you~ 题目们也很爱你喔！",
+        "🤝 这 20 题的感觉，是不是就像第一次去握手会一样紧张？",
+        "🚪 剧场的大门已经打开，准备好迎接更多挑战了吗？",
+        "🔥 你的『追星灵魂』开始慢慢觉醒了！",
+        "💎 20 题达成！这就是属于你的《机会顺序》！",
+        "🗳️ 每一个选择，都是对自己内心的一次总选举投票。",
+        "🥰 《Aitakatta》！相性最高的成员就在前方！"
+      ],
+      "ja": [
+        "🌸 Overtureが鳴り響く！劇場の準備はいい？",
+        "✨ 『初日』のように、夢の鑑定が今始まる！",
+        "🏃‍♀️ 1/3終了！研究生のような気分じゃない？",
+        "🎵 I want you~ I need you~ 設問も君に夢中！",
+        "🤝 初めての個別握手会のような緊張感？",
+        "🚪 劇場の扉は開いた。次なる挑戦へ！",
+        "🔥 君の『オタ魂』が目覚め始めたようだ！",
+        "💎 20問達成！これが君の『チャンスの順番』！",
+        "🗳️ 全ての選択が、君の心の総選挙投票だ。",
+        "🥰 『会いたかった』！最高の相性はすぐそこ！"
+      ],
+      "en": [
+        "🌸 Overture is on! Ready to enter the theater?",
+        "✨ Like 'Shonichi', the dream assessment begins!",
+        "🏃‍♀️ 1/3 done! Feeling like a Kenkyuusei?",
+        "🎵 I want you~ I need you~ The questions love you too!",
+        "🤝 Feels like your first handshake event?",
+        "🚪 The theater doors are open. Ready for the challenge?",
+        "🔥 Your 'Stan Soul' is starting to wake up!",
+        "💎 20 questions! This is your 'Chance no Junban'!",
+        "🗳️ Every choice is a vote in your heart's Election.",
+        "🥰 'Aitakatta'! Your soulmate is just ahead!"
+      ],
+      "ko": [
+        "🌸 Overture가 울려 퍼집니다! 극장에 들어갈 준비 되셨나요?",
+        "✨ '쇼니치'처럼 꿈의 감정이 시작됩니다!",
+        "🏃‍♀️ 1/3 완료! 연구생처럼 활기찬 기분인가요?",
+        "🎵 I want you~ I need you~ 질문들도 당신을 사랑해요!",
+        "🤝 처음 악수회에 갔을 때처럼 긴장되나요?",
+        "🚪 극장의 문이 열렸습니다. 도전할 준비 되셨나요?",
+        "🔥 당신의 '덕질 영혼'이 깨어나기 시작했습니다!",
+        "💎 20문제 완료! 이것이 당신의 '찬스의 순서'입니다!",
+        "🗳️ 모든 선택은 당신 마음속 총선거 투표입니다.",
+        "🥰 '만나고 싶었어'! 최고의 상성이 기다리고 있습니다!"
+      ],
+      "th": [
+        "🌸 Overture เริ่มแล้ว! พร้อมเข้าเธียเตอร์หรือยัง?",
+        "✨ เหมือนกับ 'Shonichi' การทดสอบความฝันกำลังจะเริ่มขึ้น!",
+        "🏃‍♀️ เสร็จไป 1/3 แล้ว! รู้สึกกระตือรือร้นเหมือนเคงคิวเซย์ไหม?",
+        "🎵 I want you~ I need you~ คำถามก็รักคุณนะ!",
+        "🤝 ความรู้สึก 20 ข้อนี้ เหมือนตอนไปงานจับมือครั้งแรกไหม?",
+        "🚪 ประตูเธียเตอร์เปิดแล้ว พร้อมรับความท้าทายต่อไปหรือยัง?",
+        "🔥 'จิตวิญญาณแฟนคลับ' ของคุณเริ่มตื่นขึ้นแล้ว!",
+        "💎 ครบ 20 ข้อ! นี่คือ 'Chance no Junban' ของคุณ!",
+        "🗳️ ทุกการตัดสินใจ คือการโหวตเลือกตั้งในใจคุณ",
+        "🥰 'Aitakatta'! เมมเบอร์ที่เข้ากับคุณที่สุดอยู่ข้างหน้าแล้ว!"
+      ],
+      "id": [
+        "🌸 Overture telah menggema! Siap masuk ke teater?",
+        "✨ Seperti 'Shonichi', penilaian impian baru saja dimulai!",
+        "🏃‍♀️ 1/3 selesai! Merasa bersemangat seperti Kenkyuusei?",
+        "🎵 I want you~ I need you~ Pertanyaannya juga menyukaimu!",
+        "🤝 Perasaan 20 soal ini, seperti pertama kali ikut Handshake event?",
+        "🚪 Pintu teater sudah terbuka. Siap untuk tantangan selanjutnya?",
+        "🔥 'Jiwa Wota' kamu mulai terbangun!",
+        "💎 20 soal selesai! Inilah 'Chance no Junban' milikmu!",
+        "🗳️ Setiap pilihan adalah voting Sousenkyo di hatimu.",
+        "🥰 'Aitakatta'! Member yang paling cocok ada di depan mata!"
+      ]
+    },
+    "stage_30": {
+      "zh-HK": [
+        "🌊 一半達成！就像《RIVER》，不要停下，向前衝吧！",
+        "🌸 《10年櫻》開了一半，我們已經行了這麼遠了。",
+        "🌀 50% 進度！大腦是不是正在《Heavy Rotation》？",
+        "👤 你的性格輪廓已經開始慢慢浮現出來了。",
+        "🎤 Setlist 已到一半，MC 後就要繼續加油！",
+        "🔰 不要被《Beginner》的標籤難倒，你做得很好！",
+        "🔍 分析進入深層區，你的本質是隱藏不住的。",
+        "🚌 就像長距離遠征的巴士，休息完再出發！",
+        "🌟 30 題達成！你已經不再是普通的路人飯了。",
+        "✨ 一半路程，一半期待，靈魂成員正在那邊等你。"
+      ],
+      "zh-CN": [
+        "🌊 一半达成！就像《RIVER》，不要停下，向前冲吧！",
+        "🌸 《10年樱》开了一半，我们已经走了这么远了。",
+        "🌀 50% 进度！大脑是不是正在《Heavy Rotation》？",
+        "👤 你的性格轮廓已经开始慢慢浮现出来了。",
+        "🎤 Setlist 已到一半，MC 后就要继续加油！",
+        "🔰 不要被《Beginner》的标签难倒，你做得很好！",
+        "🔍 分析进入深层区，你的本质是隐藏不住的。",
+        "🚌 就像长距离远征的巴士，休息完再出发！",
+        "🌟 30 题达成！你已经不再是普通的路人饭了。",
+        "✨ 一半路程，一半期待，灵魂成员正在那边等你。"
+      ],
+      "ja": [
+        "🌊 半分達成！『RIVER』のように突き進め！",
+        "🌸 『10年桜』が半分。ここまで来たんだね。",
+        "🌀 脳内『ヘビーローテーション』中かな？",
+        "👤 君の性格の輪郭が見えてきたよ。",
+        "🎤 セトリは半分。MCの後は気合を入れて！",
+        "🔰 『Beginner』に負けるな。君ならできる！",
+        "🔍 分析は深層へ。君の本質は隠せないよ。",
+        "🚌 遠征バスの休憩終了。さあ、出発だ！",
+        "🌟 30問達成！君はもうただのライト層じゃない。",
+        "✨ 折り返し地点、メンバーが君を待っている。"
+      ],
+      "en": [
+        "🌊 Halfway! Like 'RIVER', don't stop now!",
+        "🌸 '10nen Zakura' is halfway. We've come so far.",
+        "🌀 Is your brain in 'Heavy Rotation' yet?",
+        "👤 Your personality profile is taking shape.",
+        "🎤 Halfway through the Setlist. Keep it up after MC!",
+        "🔰 Don't be fooled by the 'Beginner' label. Good job!",
+        "🔍 Analysis going deep. Your essence is showing.",
+        "🚌 Like an expedition bus, let's go after the break!",
+        "🌟 30 questions! You're more than just a casual fan now.",
+        "✨ Midpoint! Your soulmate member is waiting."
+      ],
+      "ko": [
+        "🌊 절반 달성! 'RIVER'처럼 멈추지 말고 나아가세요!",
+        "🌸 '10년 벚꽃'이 절반 피었습니다. 여기까지 왔네요.",
+        "🌀 50% 완료! 뇌내 '헤비 로테이션' 중인가요?",
+        "👤 당신의 성격 윤곽이 서서히 드러나고 있습니다.",
+        "🎤 세트리스트 절반! MC 끝나고 계속 힘내세요!",
+        "🔰 'Beginner'라는 꼬리표에 지지 마세요. 잘하고 있어요!",
+        "🔍 분석이 심층부로 들어갑니다. 본질은 숨길 수 없어요.",
+        "🚌 원정 버스 휴식 끝. 자, 다시 출발!",
+        "🌟 30문제 완료! 이제 단순한 라이트 팬이 아니군요.",
+        "✨ 반환점, 운명의 멤버가 당신을 기다리고 있습니다."
+      ],
+      "th": [
+        "🌊 ครึ่งทางแล้ว! เหมือนเพลง 'RIVER' อย่าหยุดนะ ลุยไปเลย!",
+        "🌸 '10nen Zakura' บานครึ่งทางแล้ว เรามาไกลเหมือนกันนะ",
+        "🌀 คืบหน้า 50%! ในหัวกำลัง 'Heavy Rotation' อยู่ใช่ไหม?",
+        "👤 เค้าโครงนิสัยของคุณเริ่มชัดเจนขึ้นแล้วนะ",
+        "🎤 Setlist มาครึ่งทางแล้ว หลัง MC ลุยกันต่อ!",
+        "🔰 อย่าท้อกับคำว่า 'Beginner' คุณทำได้ดีมาก!",
+        "🔍 การวิเคราะห์เริ่มลึกซึ้งขึ้น ซ่อนตัวตนไว้ไม่ได้แล้วล่ะ",
+        "🚌 เหมือนรถบัสเดินทางไกล พักเสร็จแล้วลุยต่อ!",
+        "🌟 30 ข้อแล้ว! คุณไม่ใช่แค่แฟนคลับทั่วไปแล้วนะ",
+        "✨ ครึ่งทางแล้ว เมมเบอร์ที่ใช่กำลังรอคุณอยู่"
+      ],
+      "id": [
+        "🌊 Setengah jalan! Seperti 'RIVER', jangan berhenti, ayo maju!",
+        "🌸 '10nen Zakura' setengah mekar, kita sudah sejauh ini.",
+        "🌀 Progres 50%! Apakah otakmu sedang 'Heavy Rotation'?",
+        "👤 Profil kepribadianmu mulai terlihat jelas.",
+        "🎤 Setlist sudah separuh jalan. Semangat setelah MC!",
+        "🔰 Jangan menyerah karena label 'Beginner', kamu hebat!",
+        "🔍 Analisis semakin dalam. Esensimu tidak bisa disembunyikan.",
+        "🚌 Seperti bus ekspedisi, setelah istirahat ayo berangkat lagi!",
+        "🌟 30 soal selesai! Kamu bukan lagi fans biasa.",
+        "✨ Titik tengah! Member soulmate-mu sedang menunggu."
+      ]
+    },
+    "stage_40": {
+      "zh-HK": [
+        "💎 聽到了嗎？那是《大聲鑽石》的旋律！",
+        "👏 2/3 達成！安可（Encore）聲隱約聽到了。",
+        "🏃‍♂️ 現在是《Flying Get》的衝刺時間，加油！",
+        "💓 靈魂相性越趨接近，感受到她的氣息嗎？",
+        "🧱 遇到牆壁沒關係，像劇場支柱一樣克服它！",
+        "✨ 你是主角，最後一段路一起《希望無限》！",
+        "💪 40 題達成！你展現出資深 Wota 的耐力了。",
+        "🎀 保持著《Everyday、髮箍》那清爽心情！",
+        "🧠 演算法已看穿你內心深處的『神推』潛質。",
+        "🎶 就快到終點，千萬不要錯過任何一個拍子！"
+      ],
+      "zh-CN": [
+        "💎 听到了吗？那是《大声钻石》的旋律！",
+        "👏 2/3 达成！安可（Encore）声隐约听到了。",
+        "🏃‍♂️ 现在是《Flying Get》的冲刺时间，加油！",
+        "💓 灵魂相性越趋接近，感受到她的气息吗？",
+        "🧱 遇到墙壁没关系，像剧场支柱一样克服它！",
+        "✨ 你是主角，最后一段路一起《希望无限》！",
+        "💪 40 题达成！你展现出资深 Wota 的耐力了。",
+        "🎀 保持着《Everyday、发箍》那清爽心情！",
+        "🧠 算法已看穿你内心深处的『神推』潜质。",
+        "🎶 就快到终点，千万不要错过任何一个拍子！"
+      ],
+      "ja": [
+        "💎 聞こえる？『大声ダイヤモンド』のメロディ！",
+        "👏 2/3達成！アンコールの声が聞こえてくる。",
+        "🏃‍♂️ 今は『フライングゲット』の追い込み時！",
+        "💓 相性は最高潮へ。彼女の気配を感じる？",
+        "🧱 壁にぶつかっても、あの柱のように強く！",
+        "✨ 君が主役だ。『希望的リフレイン』で走れ！",
+        "💪 40問達成！君はまさにベテランオタだ。",
+        "🎀 『Everyday、カチューシャ』の爽快感で！",
+        "🧠 君の心の『神推し』候補を解析済みだよ。",
+        "🎶 ゴールは目前。リズムを外さないで！"
+      ],
+      "en": [
+        "💎 Can you hear it? The 'Oogoe Diamond' melody!",
+        "👏 2/3 done! I can hear the Encore calls.",
+        "🏃‍♂️ It's 'Flying Get' sprint time. Let's go!",
+        "💓 Soulmate vibes rising. Can you feel her presence?",
+        "🧱 Hit a wall? Overcome it like the theater pillars!",
+        "✨ You're the star. 'Kibo teki Refrain' to the end!",
+        "💪 40 questions! You've shown veteran Wota endurance.",
+        "🎀 Keep that 'Everyday, Kachuusha' fresh feeling!",
+        "🧠 Algorithms found your 'Kami-oshi' potential.",
+        "🎶 Almost at the finish. Don't miss a beat!"
+      ],
+      "ko": [
+        "💎 들리나요? '오오고에 다이아몬드'의 선율!",
+        "👏 2/3 달성! 앵콜의 함성이 들려오기 시작합니다.",
+        "🏃‍♂️ 지금은 '플라잉 겟'의 스퍼트 타임!",
+        "💓 상성이 최고조에 달합니다. 그녀의 기척이 느껴지나요?",
+        "🧱 벽에 부딪혀도 극장의 기둥처럼 이겨내세요!",
+        "✨ 당신이 주인공입니다. '희망적 리프레인'으로 달려요!",
+        "💪 40문제 완료! 베테랑 오타의 인내력을 보여주셨군요.",
+        "🎀 'Everyday, 카츄샤'의 상쾌한 기분으로!",
+        "🧠 알고리즘이 당신 마음속 '카미오시' 잠재력을 파악했습니다.",
+        "🎶 골인 지점이 눈앞입니다. 리듬을 놓치지 마세요!"
+      ],
+      "th": [
+        "💎 ได้ยินไหม? นั่นคือทำนองเพลง 'Oogoe Diamond'!",
+        "👏 2/3 แล้ว! เสียง Encore เริ่มดังขึ้นแล้วนะ",
+        "🏃‍♂️ ช่วงเวลา 'Flying Get' สปีดกันหน่อย!",
+        "💓 ความเข้ากันได้พุ่งสูงขึ้น รู้สึกถึงเมมเบอร์คนนั้นไหม?",
+        "🧱 เจออุปสรรคก็ไม่เป็นไร ก้าวข้ามมันไปเหมือนเสาในเธียเตอร์!",
+        "✨ คุณคือตัวเอก ลุยไปกับ 'Kibouteki Refrain' เลย!",
+        "💪 40 ข้อแล้ว! คุณมีความอดทนระดับโอตะรุ่นเก๋าเลยนะ",
+        "🎀 รักษาความรู้สึกสดใสแบบ 'Everyday, Kachuusha' ไว้!",
+        "🧠 ระบบวิเคราะห์เจอแวว 'คามิโอชิ' ในใจคุณแล้ว",
+        "🎶 ใกล้ถึงเส้นชัยแล้ว อย่าหลุดจังหวะล่ะ!"
+      ],
+      "id": [
+        "💎 Dengar itu? Itu melodi 'Oogoe Diamond'!",
+        "👏 2/3 selesai! Suara Encore sudah mulai terdengar.",
+        "🏃‍♂️ Saatnya sprint 'Flying Get', semangat!",
+        "💓 Kecocokan semakin dekat. Merasakan kehadirannya?",
+        "🧱 Menabrak rintangan? Lewati seperti pilar teater!",
+        "✨ Kamu adalah bintangnya. Terus maju dengan 'Kibouteki Refrain'!",
+        "💪 40 soal selesai! Ketahananmu seperti Wota veteran.",
+        "🎀 Pertahankan perasaan segar 'Everyday, Kachuusha'!",
+        "🧠 Algoritma telah membaca potensi 'Kami-oshi' di hatimu.",
+        "🎶 Hampir sampai garis akhir. Jangan sampai kehilangan irama!"
+      ]
+    },
+    "stage_50": {
+      "zh-HK": [
+        "🌸 看到《名残り桜》了！最後 10 題衝刺！",
+        "👑 最後階段！Center 的位置正在等著你！",
+        "🥠 《戀愛幸運餅乾》跳完，好運就會出現！",
+        "🚌 命定的成員，正在巴士站那邊等你...",
+        "✈️ 最後 10 題！像《紙飛機》飛向終點吧。",
+        "💡 感受到劇場射燈的熱力嗎？結果即將揭曉！",
+        "🏃‍♀️ 50 題達成！剩餘最後一點，去見神推吧！",
+        "📖 追星命運已寫好 90%，最後一筆由你完成。",
+        "✨ 櫻花瓣正為你而飄落，結果一定會驚喜。",
+        "🗣️ 準備好了嗎？大聲叫出你心中那個名字！"
+      ],
+      "zh-CN": [
+        "🌸 看到《名残り桜》了！最后 10 题冲刺！",
+        "👑 最后阶段！Center 的位置正在等着你！",
+        "🥠 《恋爱幸运饼干》跳完，好运就会出现！",
+        "🚌 命定的成员，正在巴士站那边等你...",
+        "✈️ 最后 10 题！像《纸飞机》飞向终点吧。",
+        "💡 感受到剧场射灯的热力吗？结果即将揭晓！",
+        "🏃‍♀️ 50 题达成！剩余最后一点，去见神推吧！",
+        "📖 追星命运已写好 90%，最后一笔由你完成。",
+        "✨ 樱花瓣正为你而飘落，结果一定会惊喜。",
+        "🗣️ 准备好了吗？大声叫出你心中那个名字！"
+      ],
+      "ja": [
+        "🌸 『名残り桜』が見えた！ラスト10問！",
+        "👑 最終段階！センターの座が君を待っている！",
+        "🥠 『恋チュン』を踊れば、幸運が訪れる！",
+        "🚌 運命のメンバーが、バス停で君を待ってる…",
+        "✈️ ラスト10問！紙飛行機のように未来へ！",
+        "💡 スポットライトの熱を感じる？結果発表へ！",
+        "🏃‍♀️ 50問達成！さあ、神推しに会いに行こう！",
+        "📖 オタ運命は90%確定。仕上げは君の手で。",
+        "✨ 桜の花びらが舞う。結果をお楽しみに！",
+        "🗣️ 準備はいい？推しの名前を叫ぼう！"
+      ],
+      "en": [
+        "🌸 'Nagori Sakura' in sight! Last 10 q's sprint!",
+        "👑 Final stage! The Center position awaits you!",
+        "🥠 Dance the 'Fortune Cookie', luck is coming!",
+        "🚌 Your fated member is waiting at the bus stop...",
+        "✈️ Last 10! Fly like a 'Paper Plane' to the end.",
+        "💡 Feel the spotlight heat? Results revealing soon!",
+        "🏃‍♀️ 50 questions done! Go meet your Kami-oshi now!",
+        "📖 Destiny is 90% written. Finish the final stroke.",
+        "✨ Cherry petals are falling. Enjoy the result!",
+        "🗣️ Ready? Shout that name in your heart!"
+      ],
+      "ko": [
+        "🌸 '나고리 사쿠라'가 보입니다! 마지막 10문제!",
+        "👑 최종 단계! 센터의 자리가 당신을 기다리고 있습니다!",
+        "🥠 '사랑하는 포춘 쿠키'를 추면 행운이 찾아옵니다!",
+        "🚌 운명의 멤버가 버스 정류장에서 당신을 기다립니다...",
+        "✈️ 마지막 10문제! 종이비행기처럼 미래를 향해 날아봐요!",
+        "💡 스포트라이트의 열기가 느껴지나요? 곧 결과가 발표됩니다!",
+        "🏃‍♀️ 50문제 완료! 자, 카미오시를 만나러 가볼까요!",
+        "📖 덕질 운명은 90% 확정. 마무리는 당신의 손으로.",
+        "✨ 벚꽃잎이 흩날립니다. 결과를 기대해 주세요!",
+        "🗣️ 준비됐나요? 마음속 그 이름을 크게 외쳐보세요!"
+      ],
+      "th": [
+        "🌸 เห็น 'Nagori Sakura' แล้ว! 10 ข้อสุดท้าย สปีดเต็มที่!",
+        "👑 ด่านสุดท้าย! ตำแหน่ง Center กำลังรอคุณอยู่!",
+        "🥠 เต้น 'Koisuru Fortune Cookie' จบ ความโชคดีจะมาหา!",
+        "🚌 เมมเบอร์แห่งโชคชะตา กำลังรอคุณอยู่ที่ป้ายรถเมล์...",
+        "✈️ 10 ข้อสุดท้าย! บินไปถึงเส้นชัยเหมือน 'เครื่องบินกระดาษ' เลย",
+        "💡 รู้สึกถึงความร้อนจากสปอตไลท์ไหม? ผลลัพธ์ใกล้จะเปิดเผยแล้ว!",
+        "🏃‍♀️ 50 ข้อแล้ว! อีกนิดเดียว ไปเจอคามิโอชิกันเถอะ!",
+        "📖 โชคชะตาถูกเขียนไว้แล้ว 90% ตอนจบขึ้นอยู่กับคุณ",
+        "✨ กลีบซากุระกำลังร่วงหล่น รอลุ้นผลลัพธ์ได้เลย!",
+        "🗣️ พร้อมหรือยัง? วินาทีสุดท้าย ตะโกนชื่อนั้นในใจคุณออกมาเลย!"
+      ],
+      "id": [
+        "🌸 'Nagori Sakura' sudah terlihat! 10 soal terakhir, ayo lari!",
+        "👑 Tahap akhir! Posisi Center menantimu!",
+        "🥠 Menari 'Koisuru Fortune Cookie', keberuntungan akan datang!",
+        "🚌 Member takdirmu sedang menunggu di halte bus...",
+        "✈️ 10 soal terakhir! Terbanglah seperti 'Pesawat Kertas' menuju akhir.",
+        "💡 Merasakan panasnya lampu sorot? Hasil segera diumumkan!",
+        "🏃‍♀️ 50 soal selesai! Tinggal sedikit lagi, ayo temui Kami-oshi-mu!",
+        "📖 Takdir Wota sudah 90% tertulis. Selesaikan goresan terakhir.",
+        "✨ Kelopak sakura berjatuhan. Nikmati kejutannya!",
+        "🗣️ Siap? Teriakkan nama itu di dalam hatimu!"
+      ]
+    }
   },
-  "stage_30": {
-    "ko": [
-      "🌊 절반 달성! 'RIVER'처럼 멈추지 말고 나아가세요!",
-      "🌸 '10년 벚꽃'이 절반 피었습니다. 여기까지 왔네요.",
-      "🌀 50% 완료! 뇌내 '헤비 로테이션' 중인가요?",
-      "👤 당신의 성격 윤곽이 서서히 드러나고 있습니다.",
-      "🎤 세트리스트 절반! MC 끝나고 계속 힘내세요!",
-      "🔰 'Beginner'라는 꼬리표에 지지 마세요. 잘하고 있어요!",
-      "🔍 분석이 심층부로 들어갑니다. 본질은 숨길 수 없어요.",
-      "🚌 원정 버스 휴식 끝. 자, 다시 출발!",
-      "🌟 30문제 완료! 이제 단순한 라이트 팬이 아니군요.",
-      "✨ 반환점, 운명의 멤버가 당신을 기다리고 있습니다."
-    ],
-    "th": [
-      "🌊 ครึ่งทางแล้ว! เหมือนเพลง 'RIVER' อย่าหยุดนะ ลุยไปเลย!",
-      "🌸 '10nen Zakura' บานครึ่งทางแล้ว เรามาไกลเหมือนกันนะ",
-      "🌀 คืบหน้า 50%! ในหัวกำลัง 'Heavy Rotation' อยู่ใช่ไหม?",
-      "👤 เค้าโครงนิสัยของคุณเริ่มชัดเจนขึ้นแล้วนะ",
-      "🎤 Setlist มาครึ่งทางแล้ว หลัง MC ลุยกันต่อ!",
-      "🔰 อย่าท้อกับคำว่า 'Beginner' คุณทำได้ดีมาก!",
-      "🔍 การวิเคราะห์เริ่มลึกซึ้งขึ้น ซ่อนตัวตนไว้ไม่ได้แล้วล่ะ",
-      "🚌 เหมือนรถบัสเดินทางไกล พักเสร็จแล้วลุยต่อ!",
-      "🌟 30 ข้อแล้ว! คุณไม่ใช่แค่แฟนคลับทั่วไปแล้วนะ",
-      "✨ ครึ่งทางแล้ว เมมเบอร์ที่ใช่กำลังรอคุณอยู่"
-    ],
-    "id": [
-      "🌊 Setengah jalan! Seperti 'RIVER', jangan berhenti, ayo maju!",
-      "🌸 '10nen Zakura' setengah mekar, kita sudah sejauh ini.",
-      "🌀 Progres 50%! Apakah otakmu sedang 'Heavy Rotation'?",
-      "👤 Profil kepribadianmu mulai terlihat jelas.",
-      "🎤 Setlist sudah separuh jalan. Semangat setelah MC!",
-      "🔰 Jangan menyerah karena label 'Beginner', kamu hebat!",
-      "🔍 Analisis semakin dalam. Esensimu tidak bisa disembunyikan.",
-      "🚌 Seperti bus ekspedisi, setelah istirahat ayo berangkat lagi!",
-      "🌟 30 soal selesai! Kamu bukan lagi fans biasa.",
-      "✨ Titik tengah! Member soulmate-mu sedang menunggu."
-    ]
-  },
-  "stage_40": {
-    "ko": [
-      "💎 들리나요? '오오고에 다이아몬드'의 선율!",
-      "👏 2/3 달성! 앵콜의 함성이 들려오기 시작합니다.",
-      "🏃‍♂️ 지금은 '플라잉 겟'의 스퍼트 타임!",
-      "💓 상성이 최고조에 달합니다. 그녀의 기척이 느껴지나요?",
-      "🧱 벽에 부딪혀도 극장의 기둥처럼 이겨내세요!",
-      "✨ 당신이 주인공입니다. '희망적 리프레인'으로 달려요!",
-      "💪 40문제 완료! 베테랑 오타의 인내력을 보여주셨군요.",
-      "🎀 'Everyday, 카츄샤'의 상쾌한 기분으로!",
-      "🧠 알고리즘이 당신 마음속 '카미오시' 잠재력을 파악했습니다.",
-      "🎶 골인 지점이 눈앞입니다. 리듬을 놓치지 마세요!"
-    ],
-    "th": [
-      "💎 ได้ยินไหม? นั่นคือทำนองเพลง 'Oogoe Diamond'!",
-      "👏 2/3 แล้ว! เสียง Encore เริ่มดังขึ้นแล้วนะ",
-      "🏃‍♂️ ช่วงเวลา 'Flying Get' สปีดกันหน่อย!",
-      "💓 ความเข้ากันได้พุ่งสูงขึ้น รู้สึกถึงเมมเบอร์คนนั้นไหม?",
-      "🧱 เจออุปสรรคก็ไม่เป็นไร ก้าวข้ามมันไปเหมือนเสาในเธียเตอร์!",
-      "✨ คุณคือตัวเอก ลุยไปกับ 'Kibouteki Refrain' เลย!",
-      "💪 40 ข้อแล้ว! คุณมีความอดทนระดับโอตะรุ่นเก๋าเลยนะ",
-      "🎀 รักษาความรู้สึกสดใสแบบ 'Everyday, Kachuusha' ไว้!",
-      "🧠 ระบบวิเคราะห์เจอแวว 'คามิโอชิ' ในใจคุณแล้ว",
-      "🎶 ใกล้ถึงเส้นชัยแล้ว อย่าหลุดจังหวะล่ะ!"
-    ],
-    "id": [
-      "💎 Dengar itu? Itu melodi 'Oogoe Diamond'!",
-      "👏 2/3 selesai! Suara Encore sudah mulai terdengar.",
-      "🏃‍♂️ Saatnya sprint 'Flying Get', semangat!",
-      "💓 Kecocokan semakin dekat. Merasakan kehadirannya?",
-      "🧱 Menabrak rintangan? Lewati seperti pilar teater!",
-      "✨ Kamu adalah bintangnya. Terus maju dengan 'Kibouteki Refrain'!",
-      "💪 40 soal selesai! Ketahananmu seperti Wota veteran.",
-      "🎀 Pertahankan perasaan segar 'Everyday, Kachuusha'!",
-      "🧠 Algoritma telah membaca potensi 'Kami-oshi' di hatimu.",
-      "🎶 Hampir sampai garis akhir. Jangan sampai kehilangan irama!"
-    ]
-  },
-  "stage_50": {
-    "ko": [
-      "🌸 '나고리 사쿠라'가 보입니다! 마지막 10문제!",
-      "👑 최종 단계! 센터의 자리가 당신을 기다리고 있습니다!",
-      "🥠 '사랑하는 포춘 쿠키'를 추면 행운이 찾아옵니다!",
-      "🚌 운명의 멤버가 버스 정류장에서 당신을 기다립니다...",
-      "✈️ 마지막 10문제! 종이비행기처럼 미래를 향해 날아봐요!",
-      "💡 스포트라이트의 열기가 느껴지나요? 곧 결과가 발표됩니다!",
-      "🏃‍♀️ 50문제 완료! 자, 카미오시를 만나러 가볼까요!",
-      "📖 덕질 운명은 90% 확정. 마무리는 당신의 손으로.",
-      "✨ 벚꽃잎이 흩날립니다. 결과를 기대해 주세요!",
-      "🗣️ 준비됐나요? 마음속 그 이름을 크게 외쳐보세요!"
-    ],
-    "th": [
-      "🌸 เห็น 'Nagori Sakura' แล้ว! 10 ข้อสุดท้าย สปีดเต็มที่!",
-      "👑 ด่านสุดท้าย! ตำแหน่ง Center กำลังรอคุณอยู่!",
-      "🥠 เต้น 'Koisuru Fortune Cookie' จบ ความโชคดีจะมาหา!",
-      "🚌 เมมเบอร์แห่งโชคชะตา กำลังรอคุณอยู่ที่ป้ายรถเมล์...",
-      "✈️ 10 ข้อสุดท้าย! บินไปถึงเส้นชัยเหมือน 'เครื่องบินกระดาษ' เลย",
-      "💡 รู้สึกถึงความร้อนจากสปอตไลท์ไหม? ผลลัพธ์ใกล้จะเปิดเผยแล้ว!",
-      "🏃‍♀️ 50 ข้อแล้ว! อีกนิดเดียว ไปเจอคามิโอชิกันเถอะ!",
-      "📖 โชคชะตาถูกเขียนไว้แล้ว 90% ตอนจบขึ้นอยู่กับคุณ",
-      "✨ กลีบซากุระกำลังร่วงหล่น รอลุ้นผลลัพธ์ได้เลย!",
-      "🗣️ พร้อมหรือยัง? วินาทีสุดท้าย ตะโกนชื่อนั้นในใจคุณออกมาเลย!"
-    ],
-    "id": [
-      "🌸 'Nagori Sakura' sudah terlihat! 10 soal terakhir, ayo lari!",
-      "👑 Tahap akhir! Posisi Center menantimu!",
-      "🥠 Menari 'Koisuru Fortune Cookie', keberuntungan akan datang!",
-      "🚌 Member takdirmu sedang menunggu di halte bus...",
-      "✈️ 10 soal terakhir! Terbanglah seperti 'Pesawat Kertas' menuju akhir.",
-      "💡 Merasakan panasnya lampu sorot? Hasil segera diumumkan!",
-      "🏃‍♀️ 50 soal selesai! Tinggal sedikit lagi, ayo temui Kami-oshi-mu!",
-      "📖 Takdir Wota sudah 90% tertulis. Selesaikan goresan terakhir.",
-      "✨ Kelopak sakura berjatuhan. Nikmati kejutannya!",
-      "🗣️ Siap? Teriakkan nama itu di dalam hatimu!"
-    ]
-  }
-},
 
   "badges": {
   "E": {
@@ -2242,6 +2434,7 @@
     }
 }
 }
+
 
 
 
