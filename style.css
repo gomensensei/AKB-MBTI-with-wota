@@ -1,6 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Noto+Sans+JP:wght@400;500;700&display=swap');
 
-
 :root {
     --cyber-pink: #FF1493;
     --cyber-pink-glow: rgba(255, 20, 147, 0.5);
@@ -38,6 +37,7 @@ body {
     padding: 20px;
     display: flex;
     flex-direction: column;
+    z-index: 10;
 }
 
 .hidden { display: none !important; }
@@ -96,32 +96,24 @@ h1 { font-size: 28px; font-weight: 800; line-height: 1.3; margin-bottom: 15px; }
 .pulse-glow { animation: pulse 1.5s infinite; }
 @keyframes pulse { 0% { box-shadow: 0 0 0 0 rgba(255, 20, 147, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(255, 20, 147, 0); } 100% { box-shadow: 0 0 0 0 rgba(255, 20, 147, 0); } }
 
-/* 完美修復 Crop 圖的滑動區 */
-.quiz-viewport { overflow: hidden; flex-grow: 1; width: 100%; position: relative; }
-.quiz-track { display: flex; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); width: 600%; /* 確保 6 頁有足夠空間 */ }
-.quiz-page { width: 16.666%; flex-shrink: 0; padding: 5px; } /* 100% / 6 = 16.666% */
+.quiz-viewport { overflow: hidden; flex-grow: 1; width: 100%; position: relative; padding-top: 15px; }
+.quiz-track { display: flex; transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1); width: 600%; }
+.quiz-page { width: 16.666%; flex-shrink: 0; padding: 5px; }
 
 .question-item {
     background: rgba(255, 255, 255, 0.5); border-radius: 16px; padding: 20px 15px; margin-bottom: 20px;
-    opacity: 0.3; transform: scale(0.98); transition: all 0.3s ease; pointer-events: none; /* 未解鎖不可點 */
+    opacity: 0.3; transform: scale(0.98); transition: all 0.3s ease; pointer-events: none;
 }
 .question-item.active { opacity: 1; transform: scale(1); background: rgba(255, 255, 255, 0.9); box-shadow: 0 4px 15px rgba(255, 20, 147, 0.1); border: 1px solid var(--sakura-light); pointer-events: auto; }
-.question-text {
-    font-size: 16px;
-    font-weight: 500;
-    margin-bottom: 20px;
-    line-height: 1.6;    /* 增加行高讓換行不擠迫 */
-    min-height: 3em;     /* 預留至少兩至三行的空間，防止跳動 */
-}
+.question-text { font-size: 16px; font-weight: 500; margin-bottom: 20px; line-height: 1.6; min-height: 3em; }
 
-/* 磁吸滑桿 */
-.slider-container { position: relative; padding: 10px 0; }
+.slider-container { position: relative; padding: 10px 0; user-select: none; -webkit-user-select: none; }
 .slider-ticks { position: absolute; top: 50%; left: 12px; right: 12px; display: flex; justify-content: space-between; transform: translateY(-50%); pointer-events: none; z-index: 1; }
 .slider-ticks span { width: 6px; height: 6px; background: #ccc; border-radius: 50%; }
-input[type=range].custom-range { -webkit-appearance: none; width: 100%; background: transparent; position: relative; z-index: 3; margin: 0; }
+input[type=range].custom-range { -webkit-appearance: none; width: 100%; background: transparent; position: relative; z-index: 100; cursor: pointer; margin: 0; }
 input[type=range].custom-range:focus { outline: none; }
-input[type=range].custom-range::-webkit-slider-runnable-track { width: 100%; height: 4px; background: rgba(255, 20, 147, 0.15); border-radius: 2px; }
-input[type=range].custom-range::-webkit-slider-thumb { -webkit-appearance: none; height: 24px; width: 24px; border-radius: 50%; background: #dcdcdc; border: 3px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.2); margin-top: -10px; transition: all 0.2s ease; }
+input[type=range].custom-range::-webkit-slider-runnable-track { width: 100%; height: 4px; background: rgba(255, 20, 147, 0.15); border-radius: 2px; pointer-events: auto; }
+input[type=range].custom-range::-webkit-slider-thumb { -webkit-appearance: none; height: 24px; width: 24px; border-radius: 50%; background: #dcdcdc; border: 3px solid white; box-shadow: 0 2px 6px rgba(0,0,0,0.2); margin-top: -10px; transition: all 0.2s ease; position: relative; z-index: 101; pointer-events: auto; }
 input[type=range].custom-range.touched::-webkit-slider-thumb { background: var(--cyber-pink); border-color: white; transform: scale(1.2); box-shadow: 0 0 12px var(--cyber-pink-glow); }
 .slider-labels { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-muted); margin-top: 15px; font-weight: 500; }
 
@@ -129,207 +121,46 @@ input[type=range].custom-range.touched::-webkit-slider-thumb { background: var(-
 .progress-bar-bg { width: 100%; height: 6px; background: rgba(255, 20, 147, 0.1); border-radius: 3px; overflow: hidden; }
 .progress-bar-fill { height: 100%; width: 0%; background: var(--cyber-pink); box-shadow: 0 0 10px var(--cyber-pink-glow); transition: width 0.3s ease; }
 
-.ripple-effect { position: fixed; width: 20px; height: 20px; border: 2px solid var(--cyber-pink); border-radius: 50%; pointer-events: none; transform: translate(-50%, -50%) scale(1); animation: rippleAnim 0.6s ease-out forwards; z-index: 9998; }
-
-/* 暗黑徽章 (解決黃字/白字睇唔到嘅問題) */
 .dark-badge {
     background: #2D3436; color: white; padding: 6px 12px; border-radius: 6px;
     font-size: 13px; font-weight: bold; display: inline-block; margin-bottom: 10px;
 }
 
-/* =======================================
-   新增修正：語言選單、手機版優化與狀態亮起
-   ======================================= */
-
-/* 語言選單與音樂按鈕容器樣式 */
 #lang-switcher-container { 
-    position: absolute; 
-    top: 20px; 
-    right: 20px; 
-    z-index: 1000;
-    /* 🌟 新增：Flexbox 解決重疊問題 */
-    display: flex;         
-    align-items: center;
-    gap: 8px;              
+    position: absolute; top: 20px; right: 20px; z-index: 1000;
+    display: flex; align-items: center; gap: 8px;              
 }
 
-/* 確保音樂按鈕不會變形 */
-#music-toggle-btn {
-    margin: 0 !important; 
-    white-space: nowrap; 
-}
+#music-toggle-btn { margin: 0 !important; white-space: nowrap; }
 
 .glass-select { padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(255,20,147,0.5); background: rgba(255,255,255,0.8); backdrop-filter: blur(5px); color: var(--cyber-pink); font-weight: bold; cursor: pointer; outline: none; }
 
-/* 鼠標淡出狀態 */
 #custom-cursor { transition: opacity 0.3s ease; }
 #custom-cursor.hidden-cursor { opacity: 0 !important; }
 
-/* ==================================
-   手機版排版修正 (解決選單遮擋與首頁太高)
-   ================================== */
-@media (max-width: 768px) {
-    #lang-switcher-container { position: fixed; top: 10px; right: 10px; }
-    .progress-container { top: 55px !important; } 
-    #page-landing { justify-content: center; padding-top: 40px; min-height: 85vh; }
-    #custom-cursor { display: none; } 
-    
-    .giant-heart {
-        font-size: 320px; 
-        margin-top: 28vh; 
-    }
-}
-
-    /* 🌟 終極殺手鐧：如果手機版雷達圖偏右，強制向左拉！ 🌟 */
-    #radar-wrapper {
-        transform: translateX(-20px); /* 向左移動 15px，抵銷偏右問題 */
-        /* 如果你發覺拉得唔夠，可以改大數值，例如 -20px 或 -25px */
-    }
-}
-
-/* =======================================
-   修復：進度條遮擋、Slider 卡頓與 Footer
-   ======================================= */
-
-/* 解決第一條問題被進度條遮擋 */
-.quiz-viewport { 
-    padding-top: 15px; 
-}
-
-/* =======================================
-   終極修復：滑桿拖曳卡頓與無法拉動問題
-   ======================================= */
-
-.slider-container {
-    /* 防止滑鼠拖曳時不小心反白到文字，導致中斷滑動 */
-    user-select: none;
-    -webkit-user-select: none;
-}
-
-input[type=range].custom-range {
-    /* 強制將滑桿本體推到最上層 */
-    position: relative;
-    z-index: 100;
-    cursor: pointer;
-}
-
-input[type=range].custom-range::-webkit-slider-thumb {
-    /* 確保拖曳把手能 100% 接收到滑鼠事件 */
-    position: relative;
-    z-index: 101;
-    pointer-events: auto;
-}
-
-input[type=range].custom-range::-webkit-slider-runnable-track {
-    pointer-events: auto;
-}
-
-/* 確保 App 容器在櫻花之上 */
-#app-container {
-    position: relative;
-    z-index: 10;
-}
-
-/* Footer 樣式 */
-.site-footer {
-    text-align: center;
-    font-size: 11px;
-    color: var(--text-muted);
-    margin-top: 30px;
-    padding-top: 15px;
-    border-top: 1px solid rgba(0,0,0,0.05);
-    line-height: 1.5;
-    opacity: 0.8;
-}
-
-@media (max-width: 768px) {
-    /* 手機版進度條避開選單後，增加下方留白 */
-    .quiz-viewport { padding-top: 35px; }
-}
-
-
-/* 預設隱藏標籤，只在匯出時透過 JS 可能顯示或配合 class 控制 */
-.export-only { display: none; }
-
-/* 網頁顯示時，圖片專用標籤隱藏 */
-#export-card .export-only { display: none; }
-
-/* 這是下載圖片時的關鍵控制 */
-.html2canvas-container .web-only { display: none !important; }
-.html2canvas-container .export-only { display: grid !important; }
-
-}
-
-
-/* =======================================
-   UI 美學改進：發光、心跳與 Loading 動畫
-   ======================================= */
-
-/* 呼吸發光效果 */
-@keyframes pulse-glow {
-    0%, 80% { filter: drop-shadow(0 0 5px rgba(255, 20, 147, 0.3)); }
-    50% { filter: drop-shadow(0 0 15px rgba(255, 20, 147, 0.8)); }
-}
+/* 🌟 動畫特效 🌟 */
+@keyframes pulse-glow { 0%, 80% { filter: drop-shadow(0 0 5px rgba(255, 20, 147, 0.3)); } 50% { filter: drop-shadow(0 0 15px rgba(255, 20, 147, 0.8)); } }
 .pulse-glow { animation: pulse-glow 2.5s infinite ease-in-out; }
-
-/* 頭像推色外框呼吸 */
-@keyframes pulse-border {
-    0%, 100% { box-shadow: 0 0 8px var(--cyber-pink), inset 0 0 4px var(--cyber-pink); }
-    50% { box-shadow: 0 0 20px var(--cyber-pink), inset 0 0 10px var(--cyber-pink); }
-}
+@keyframes pulse-border { 0%, 100% { box-shadow: 0 0 8px var(--cyber-pink), inset 0 0 4px var(--cyber-pink); } 50% { box-shadow: 0 0 20px var(--cyber-pink), inset 0 0 10px var(--cyber-pink); } }
 .pulse-border { animation: pulse-border 2.5s infinite ease-in-out; border-radius: 50%; transition: all 0.5s; }
-
-/* 90%+ 專用變厚外框 */
 .thick-pulse-border { border: 2px solid var(--cyber-pink); animation: pulse-border 1.5s infinite ease-in-out; }
-
-/* 相性數字呼吸與爆光 */
-@keyframes pulse-text {
-    0%, 100% { text-shadow: 0 0 5px rgba(255, 20, 147, 0.4); }
-    50% { text-shadow: 0 0 15px rgba(255, 20, 147, 0.9); }
-}
+@keyframes pulse-text { 0%, 100% { text-shadow: 0 0 5px rgba(255, 20, 147, 0.4); } 50% { text-shadow: 0 0 15px rgba(255, 20, 147, 0.9); } }
 .pulse-text { animation: pulse-text 2.5s infinite ease-in-out; }
-@keyframes burst-light {
-    0% { filter: brightness(1) drop-shadow(0 0 0px #fff); transform: scale(1); }
-    50% { filter: brightness(1.5) drop-shadow(0 0 20px #FF1493); transform: scale(1.2); }
-    100% { filter: brightness(1) drop-shadow(0 0 5px #FF1493); transform: scale(1); }
-}
+@keyframes burst-light { 0% { filter: brightness(1) drop-shadow(0 0 0px #fff); transform: scale(1); } 50% { filter: brightness(1.5) drop-shadow(0 0 20px #FF1493); transform: scale(1.2); } 100% { filter: brightness(1) drop-shadow(0 0 5px #FF1493); transform: scale(1); } }
 .burst-light-anim { animation: burst-light 0.8s ease-out forwards; display: inline-block; }
 
-/* 巨型心跳動畫 */
 #giant-heart-overlay {
     position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
     display: flex; justify-content: center; align-items: center;
     z-index: 10005; pointer-events: none; opacity: 0; transition: opacity 0.5s;
 }
-
-/* 巨型愛心本體設定 (電腦版預設) */
 .giant-heart {
-    font-size: 380px; 
-    margin-top: 18vh; /* 電腦版向下移 18% 剛好遮住卡片上半部 */
+    font-size: 380px; margin-top: 18vh; 
     filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.8));
     animation: giant-heartbeat 1.5s ease-in-out infinite;
 }
+@keyframes giant-heartbeat { 0%, 100% { transform: scale(1); } 15% { transform: scale(1.3); } 30% { transform: scale(1.1); } 45% { transform: scale(1.3); } }
 
-/* 🌟 終極修復愛心穿幫：手機版專屬位置微調 🌟 */
-@media (max-width: 768px) {
-    .giant-heart {
-        /* 1. 將字體稍微縮細返，避免穿出個 mon 太多，320px 剛好夠遮卡片 */
-        font-size: 250px; 
-        
-        /* 2. 手機螢幕長，往下推多啲，確保遮住頭像、名字同 % 數 
-           (原本 18vh，而家加大到 25vh 甚至 28vh，你可以試下哪個最準) */
-        margin-top: 40vh;
-    }
-}
-
-@keyframes giant-heartbeat {
-    0%, 100% { transform: scale(1); }
-    15% { transform: scale(1.3); }
-    30% { transform: scale(1.1); } 
-    45% { transform: scale(1.3); }
-}
-
-/* Loading 畫面樣式修正 */
 #loading-overlay {
     position: fixed; inset: 0; background: rgba(255,255,255,0.85);
     backdrop-filter: blur(5px); z-index: 10000;
@@ -347,389 +178,87 @@ input[type=range].custom-range::-webkit-slider-runnable-track {
 }
 .loader-text { font-family: var(--font-jp); font-weight: bold; font-size: 1.2rem; color: var(--cyber-pink); letter-spacing: 2px; }
 
-/* =======================================
-   UI 美學改進：成員頭像「閃卡反光」效果
-   ======================================= */
-
-/* 1. 確保頭像容器具備基準定位與遮罩 */
-.result-avatar {
-    position: relative; /* 基準定位予 pseudo-element */
-    overflow: hidden;    /* 關鍵：確保反光不會超出圓圈 */
-    /* 為了流暢度，建議加上這行硬件加速 */
-    transform: translateZ(0); 
-}
-
-/* 2. 建立光影遮罩 (::after Pseudo-element) */
+.result-avatar { position: relative; overflow: hidden; transform: translateZ(0); }
 .result-avatar::after {
-    content: "";
-    position: absolute;
-    top: -50%;   
-    left: -150%; 
-    width: 80%;  
-    height: 200%;
-    
-    /* 🌟 關鍵修正：linear-gradient (中間係減號) 🌟 */
-    background: linear-gradient(
-        90deg, 
-        rgba(255, 255, 255, 0) 0%, 
-        rgba(255, 255, 255, 0.1) 20%, 
-        rgba(255, 255, 255, 0.6) 50%, 
-        rgba(255, 255, 255, 0.1) 80%,
-        rgba(255, 255, 255, 0) 100%
-    );
-    
-    /* 傾斜角度 */
-    transform: rotate(30deg);
-    
-    /* 基礎透明度 (靜止時) */
-    opacity: 0;
-    
-    /* 延遲 3 秒後播放 1.2 秒，無限循環 (總共 4.2 秒一個循環) */
-    animation: shine-sweep 4.2s infinite;
-    
-    pointer-events: none; /* 不影響滑鼠點擊圖片 */
-    z-index: 2;            /* 浮在 img (z-index: 1) 上方 */
+    content: ""; position: absolute; top: -50%; left: -150%; width: 80%; height: 200%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.1) 20%, rgba(255, 255, 255, 0.6) 50%, rgba(255, 255, 255, 0.1) 80%, rgba(255, 255, 255, 0) 100%);
+    transform: rotate(30deg); opacity: 0; animation: shine-sweep 4.2s infinite; pointer-events: none; z-index: 2;
 }
+@keyframes shine-sweep { 0%, 70% { left: -150%; opacity: 0; } 71% { left: -150%; opacity: 1; } 100% { left: 150%; opacity: 1; } }
 
-/* 3. 定義掃過動畫 Keyframes */
-@keyframes shine-sweep {
-    0% { 
-        left: -150%; 
-        opacity: 0; 
-    }
-    
-    /* 靜止 70% 時間 (大約 3秒)，讓它看起來像定期閃一下 */
-    70% { 
-        left: -150%; 
-        opacity: 0; 
-    } 
-    
-    /* 開始出現 */
-    71% { 
-        left: -150%; 
-        opacity: 1; 
-    }
-    
-    /* 用 30% 時間 (大約 1.2秒) 快速掃過 */
-    100% { 
-        left: 150%; 
-        opacity: 1; 
-    }
-}
+*, body, html { cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23FF69B4" stroke="black" stroke-width="1" d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86 3.73 8.35c.16.36.61.52.97.35l2.43-1.09c.36-.16.52-.61.35-.97l-3.72-8.33 6.01.55c.45.04.77-.47.49-.83L6.34 2.86c-.24-.31-.84-.13-.84.35z"/></svg>'), auto !important; }
+a, button, input, select, .question-item, label, .slider-ticks span { cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23FF69B4" stroke="black" stroke-width="1" d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86 3.73 8.35c.16.36.61.52.97.35l2.43-1.09c.36-.16.52-.61.35-.97l-3.72-8.33 6.01.55c.45.04.77-.47.49-.83L6.34 2.86c-.24-.31-.84-.13-.84.35z"/></svg>'), pointer !important; }
 
-
-/* ==================================
-   1. 強制粉色箭頭鼠標 (無圓點)
-   ================================== */
-*, body, html {
-    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23FF69B4" stroke="black" stroke-width="1" d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86 3.73 8.35c.16.36.61.52.97.35l2.43-1.09c.36-.16.52-.61.35-.97l-3.72-8.33 6.01.55c.45.04.77-.47.49-.83L6.34 2.86c-.24-.31-.84-.13-.84.35z"/></svg>'), auto !important;
-}
-
-/* 按鈕與可點擊區域保持一致，不要變回 Windows 預設手指 */
-a, button, input, select, .question-item, label, .slider-ticks span {
-    cursor: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path fill="%23FF69B4" stroke="black" stroke-width="1" d="M5.5 3.21V20.8c0 .45.54.67.85.35l4.86-4.86 3.73 8.35c.16.36.61.52.97.35l2.43-1.09c.36-.16.52-.61.35-.97l-3.72-8.33 6.01.55c.45.04.77-.47.49-.83L6.34 2.86c-.24-.31-.84-.13-.84.35z"/></svg>'), pointer !important;
-}
-
-/* ==================================
-   2. 水波漣漪動畫
-   ================================== */
 .ripple-effect {
-    position: fixed;
-    border-radius: 50%;
-    transform: scale(0);
-    transform-origin: center center;
-    
-    /* 1️⃣ 調整大細：由原本嘅 30px 改細做 15px 托底 */
-    width: 15px !important; 
-    height: 15px !important; 
-    
-    background-color: rgba(255, 105, 180, 0.4); /* 粉色，保持半透明 */
-    pointer-events: none;
-    z-index: 99999; /* 確保疊在最上層 */
+    position: fixed; border-radius: 50%; transform: scale(0); transform-origin: center center;
+    width: 15px !important; height: 15px !important; 
+    background-color: rgba(255, 105, 180, 0.4); pointer-events: none; z-index: 99999; 
     animation: ripple-anim 600ms ease-out forwards;
 }
+@keyframes ripple-anim { 0% { transform: scale(0); opacity: 1; } 100% { transform: scale(2.0); opacity: 0; } }
 
-@keyframes ripple-anim {
-    0% { transform: scale(0); opacity: 1; }
-    /* 2️⃣ 調整放大倍數：原本 3.5 倍太大，改做 2.5 倍 (即係最高峰係 15px * 2.5 = 37.5px) */
-    100% { transform: scale(2.0); opacity: 0; }
-}
+#radar-wrapper { position: relative; width: 100%; max-width: 380px; aspect-ratio: 1 / 1; margin: 0 auto 20px auto !important; display: flex; justify-content: center; align-items: center; }
+#radarChart { width: 100% !important; height: 100% !important; margin: 0 auto !important; display: block !important; }
 
-/* ==================================
-   網頁版/手機版 雷達圖通用排版
-   ================================== */
-#radar-wrapper {
-    position: relative;
-    width: 100%;
-    /* 🌟 放寬到 380px，配合剛才加的 Padding */
-    max-width: 380px; 
-    aspect-ratio: 1 / 1; 
-    margin: 0 auto 20px auto !important; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
+.export-only { display: none; }
+#export-card .export-only { display: none; }
+.html2canvas-container .web-only { display: none !important; }
+.html2canvas-container .export-only { display: grid !important; }
 
-#radarChart {
-    width: 100% !important; 
-    height: 100% !important;
-    margin: 0 auto !important;
-    display: block !important;
-}
-
-/* 3. 截圖專用模式 (縮細雷達、顯示深度分析、防 Crop 底) */
 .exporting-mode {
     padding-bottom: 30px !important; 
-}
-.exporting-mode .chart-container, 
-.exporting-mode #radar-wrapper {
-    transform: scale(0.85);
-    margin-top: -15px;
-    margin-bottom: -15px;
-}
-.exporting-mode .web-only {
-    display: none !important;
-}
-.exporting-mode .export-only {
-    display: grid !important;
-}
-.exporting-mode .deep-analysis-box {
-    display: block !important; 
-    font-size: 0.85em; 
-    margin-top: 10px;
-    line-height: 1.4;
-}
-
-/* 強制選單使用支援日文的字體 */
-#oshi-select, #oshi-select option {
-    font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif !important;
-}
-
-/* ==================================
-   4. 完美 1080x1920 截圖專用排版 (終極緊湊版)
-   ================================== */
-.exporting-mode {
-    width: 540px !important; 
-    height: 960px !important; 
-    position: absolute !important;
-    top: 0 !important;
-    left: 0 !important;
-    z-index: -1 !important;
-    overflow: hidden !important; 
-    background: #FFF5F8 !important; /* 淡粉色背景 */
-    
-    /* 使用 Flexbox 讓內容置中對齊 */
-    display: flex !important;
-    flex-direction: column !important;
-    align-items: center !important;
-    justify-content: flex-start !important; /* 對齊頂部 */
-    
-    /* 1. 將整體的頂部 padding 大幅減少，讓內容往上移 */
+    width: 540px !important; height: 960px !important; position: absolute !important; top: 0 !important; left: 0 !important;
+    z-index: -1 !important; overflow: hidden !important; background: #FFF5F8 !important;
+    display: flex !important; flex-direction: column !important; align-items: center !important; justify-content: flex-start !important;
     padding-top: -15px !important; 
 }
+.exporting-mode .chart-container, .exporting-mode #radar-wrapper { transform: scale(0.85); margin-top: -15px; margin-bottom: -15px; }
+.exporting-mode .web-only { display: none !important; }
+.exporting-mode .export-only { display: grid !important; margin-top: 0px !important; gap: 6px !important;}
+.exporting-mode .deep-analysis-box { display: block !important; font-size: 0.85em; margin-top: 10px; line-height: 1.4; }
+.exporting-mode .landing-header { width: 100% !important; text-align: center !important; margin-bottom: -25px !important; transform: scale(1.2); }
+.exporting-mode .landing-header h2 { font-size: 46px !important; margin-top: -5px !important; }
+.exporting-mode #radar-wrapper { width: 320px !important; margin-left: auto !important; margin-right: auto !important; margin-top: -25px !important; margin-bottom: -25px !important; display: block !important; }
+.exporting-mode #radarChart { margin: 0 auto !important; }
+.exporting-mode #main-display-section { width: 98% !important; margin-top: -25px !important; padding: 9px 15px 15px 15px !important; transform: scale(1.0); transform-origin: top center; border: 3px solid #ffb7c5 !important; }
+.exporting-mode #deep-analysis-box { font-size: 12px !important; margin-top: 6px !important; padding: 8px !important; line-height: 1.4 !important; }
+.exporting-mode .result-avatar { animation: none !important; box-shadow: none !important; border: 1px solid rgba(255, 105, 180, 0.2) !important; }
+.exporting-mode .pulse-border, .exporting-mode .thick-pulse-border { animation: none !important; box-shadow: none !important; }
 
-/* 2. 標題區塊與下方雷達圖的距離縮到最小 */
-.exporting-mode .landing-header { 
-    width: 100% !important; /* 撐開 100% 寬度 */
-    text-align: center !important; /* 🌟 內容文字置中 */
-    margin-bottom: -25px !important; /* 負值往上拉 */
-    transform: scale(1.2); 
-}
-.exporting-mode .landing-header h2 {
-    font-size: 46px !important;
-    margin-top: -5px !important;
-}
+#oshi-select, #oshi-select option { font-family: 'Noto Sans JP', 'Hiragino Kaku Gothic ProN', 'Meiryo', sans-serif !important; }
 
-/* 3. 雷達圖容器：利用 margin: 0 auto 置中 */
-.exporting-mode #radar-wrapper {
-    width: 320px !important; /* 你想要嘅大尺寸 */
-    
-    margin-left: auto !important;  /* 🌟 自動邊距實現水平置中 */
-    margin-right: auto !important; /* 🌟 自動邊距實現水平置中 */
-    margin-top: -25px !important;
-    margin-bottom: -25px !important;
-    display: block !important;
-}
-/* 確保雷達圖入面粒 canvas 唔會歪咗 */
-.exporting-mode #radarChart {
-    margin: 0 auto !important;
-}
+.sakura-petal { position: fixed; top: -10%; z-index: 1; pointer-events: none; animation: fall linear infinite; background-color: rgba(255, 182, 193, 0.6); border-radius: 15px 0px 15px 0px; }
+@keyframes fall { 0% { top: -10%; transform: translateX(0) rotate(0deg); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 110%; transform: translateX(100px) rotate(360deg); opacity: 0; } }
 
-/* 4. 將成員分析卡片緊貼雷達圖 */
-.exporting-mode #main-display-section {
-    width: 98% !important;
-    margin-top: -25px !important; 
-    padding: 9px 15px 15px 15px !important; /* 減少內部留白 */
-    transform: scale(1.0); 
-    transform-origin: top center;
-    border: 3px solid #ffb7c5 !important;
-}
+body > canvas { z-index: 999999 !important; pointer-events: none !important; }
 
-/* 5. 確保 4 個 Tag 的間距緊密 */
-.exporting-mode .export-only {
-    margin-top: 0px !important; /* 縮小與上方文字的距離 */
-    gap: 6px !important;
-}
+.site-footer { text-align: center; font-size: 11px; color: var(--text-muted); margin-top: 30px; padding-top: 15px; border-top: 1px solid rgba(0,0,0,0.05); line-height: 1.5; opacity: 0.8; }
 
-/* 6. 深度分析文字縮小並靠近 Tag */
-.exporting-mode #deep-analysis-box {
-    font-size: 12px !important;
-    margin-top: 6px !important;
-    padding: 8px !important;
-    line-height: 1.4 !important; /* 縮減行距 */
-}
+#footer-mv-wrap { width: 280px; background: #000; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); z-index: 999; }
+#footer-mv-wrap.floating-mode { position: fixed; right: 20px; bottom: 80px; transform: scale(1); opacity: 1; }
+#footer-mv-wrap.docked-mode { position: relative; right: 0; bottom: 0; margin: 20px auto; width: 100%; max-width: 560px; transform: scale(1); }
+#footer-mv-wrap.hidden { opacity: 0; pointer-events: none; transform: translateY(20px) scale(0.8); display: block !important; }
+#yt-player-container { width: 100%; aspect-ratio: 16 / 9; background: #000; }
 
-
-
-/* ==================================
-   截圖專用：關閉所有動畫與陰影
-   ================================== */
-.exporting-mode .result-avatar {
-    /* 強制關閉呼吸動畫 */
-    animation: none !important; 
-    
-    /* 強制移除外圍發光陰影，保證邊緣乾淨 */
-    box-shadow: none !important; 
-    
-    /* 如果你覺得冇咗陰影之後，個框太單調，可以加返少少實線 border 托底 */
-    border: 1px solid rgba(255, 105, 180, 0.2) !important;
-}
-
-/* 如果你嘅閃動效果寫喺 img 標籤或者其他 class 上面，一併關閉 */
-.exporting-mode .pulse-border, 
-.exporting-mode .thick-pulse-border {
-    animation: none !important;
-    box-shadow: none !important;
-}
-
-
-
-/* =======================================
-   新增：背景櫻花花瓣飄落動畫 (由頂飄到底)
-   ======================================= */
-.sakura-petal {
-    position: fixed;
-    top: -10%; /* 確保由螢幕頂部外面開始 */
-    z-index: 1; /* 放在背景層 */
-    pointer-events: none; /* 唔阻礙點擊 */
-    animation: fall linear infinite;
-    /* 預設花瓣樣式 (可以配合 JS 生成) */
-    background-color: rgba(255, 182, 193, 0.6); 
-    border-radius: 15px 0px 15px 0px; 
-}
-
-@keyframes fall {
-    0% {
-        top: -10%;
-        transform: translateX(0) rotate(0deg);
-        opacity: 0;
-    }
-    10% {
-        opacity: 1; /* 慢慢浮現 */
-    }
-    90% {
-        opacity: 1;
-    }
-    100% {
-        top: 110%; /* 🌟 關鍵：確保飄到螢幕底部外面 (大於 100vh) */
-        transform: translateX(100px) rotate(360deg);
-        opacity: 0; /* 消失 */
-    }
-}
-
-
-/* ==================================
-   強制將點擊櫻花特效推到全畫面最頂層
-   ================================== */
-body > canvas {
-    z-index: 999999 !important; /* 突破天際嘅層級 */
-    pointer-events: none !important; /* 確保唔會阻礙你點擊滑桿 */
-}
-
-
-/* ==========================================
-   應援播放器：懸浮 vs 歸位 樣式 (已修復轉場 Bug)
-   ========================================== */
-
-/* 播放器外層容器 */
-#footer-mv-wrap {
-    width: 280px; /* 手機版建議寬度 */
-    background: #000;
-    border-radius: 12px;
-    overflow: hidden;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 999;
-}
-
-/* 🌟 懸浮模式：平時答題時，縮喺右下角 */
-#footer-mv-wrap.floating-mode {
-    position: fixed;
-    right: 20px;
-    bottom: 80px; /* 避開底部導覽列或按鈕 */
-    transform: scale(1);
-    opacity: 1;
-}
-
-/* 🌟 歸位模式：滑到最底時，自動吸附喺 Footer 裡面 */
-#footer-mv-wrap.docked-mode {
-    position: relative;
-    right: 0;
-    bottom: 0;
-    margin: 20px auto;
-    width: 100%;
-    max-width: 560px; /* 電腦版最大寬度 */
-    transform: scale(1);
-}
-
-/* 🌟 預播隱藏：確保 5 秒預播時唔會被睇到 */
-#footer-mv-wrap.hidden {
-    opacity: 0;
-    pointer-events: none;
-    transform: translateY(20px) scale(0.8);
-    display: block !important; /* 必須係 block 保持 iframe 運作，但用 opacity 隱藏 */
-}
-
-/* YouTube Iframe 比例容器 (16:9) */
-#yt-player-container {
-    width: 100%;
-    aspect-ratio: 16 / 9;
-    background: #000;
-}
-
-/* 移動端微調 */
-@media (max-width: 480px) {
-    #footer-mv-wrap.floating-mode {
-        width: 180px; /* 手機版細啲，唔好遮住題目 */
-        right: 10px;
-        bottom: 100px;
-    }
-}
-
-
-/* ==================================
-   1. 成就勳章 (Badges) 樣式
-   ================================== */
-.badge-container {
-    display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 12px 0 15px 0;
-}
-.achievement-badge {
-    background: rgba(255, 20, 147, 0.1); color: var(--cyber-pink);
-    border: 1px solid rgba(255, 20, 147, 0.3); padding: 6px 12px;
-    border-radius: 20px; font-size: 12px; font-weight: bold;
-    box-shadow: 0 2px 8px rgba(255, 20, 147, 0.05);
-    animation: badge-pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) backwards;
-}
+.badge-container { display: flex; flex-wrap: wrap; justify-content: center; gap: 8px; margin: 12px 0 15px 0; }
+.achievement-badge { background: rgba(255, 20, 147, 0.1); color: var(--cyber-pink); border: 1px solid rgba(255, 20, 147, 0.3); padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: bold; box-shadow: 0 2px 8px rgba(255, 20, 147, 0.05); animation: badge-pop 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) backwards; }
 .achievement-badge:nth-child(1) { animation-delay: 0.1s; }
 .achievement-badge:nth-child(2) { animation-delay: 0.3s; }
 .achievement-badge:nth-child(3) { animation-delay: 0.5s; }
+@keyframes badge-pop { 0% { transform: scale(0.5); opacity: 0; } 100% { transform: scale(1); opacity: 1; } }
+.achievement-badge.legendary { background: linear-gradient(135deg, #FF1493, #FF69B4); color: white; border: none; box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4); text-shadow: 0 1px 2px rgba(0,0,0,0.2); }
 
-@keyframes badge-pop {
-    0% { transform: scale(0.5); opacity: 0; }
-    100% { transform: scale(1); opacity: 1; }
+/* 📱 手機版 RWD 修復區 */
+@media (max-width: 768px) {
+    #lang-switcher-container { position: fixed; top: 10px; right: 10px; }
+    .progress-container { top: 55px !important; } 
+    #page-landing { justify-content: center; padding-top: 40px; min-height: 85vh; }
+    #custom-cursor { display: none; } 
+    .giant-heart { font-size: 250px; margin-top: 40vh; }
+    #radar-wrapper { transform: translateX(-20px); }
+    .quiz-viewport { padding-top: 35px; }
 }
-/* 傳說級勳章樣式 (金邊/高光感) */
-.achievement-badge.legendary {
-    background: linear-gradient(135deg, #FF1493, #FF69B4); color: white;
-    border: none; box-shadow: 0 4px 15px rgba(255, 20, 147, 0.4); text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+
+@media (max-width: 480px) {
+    #footer-mv-wrap.floating-mode { width: 180px; right: 10px; bottom: 100px; }
 }
