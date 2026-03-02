@@ -234,7 +234,18 @@ body > canvas { z-index: 999999 !important; pointer-events: none !important; }
 
 .site-footer { text-align: center; font-size: 11px; color: var(--text-muted); margin-top: 30px; padding-top: 15px; border-top: 1px solid rgba(0,0,0,0.05); line-height: 1.5; opacity: 0.8; }
 
-#footer-mv-wrap { width: 280px; background: #000; border-radius: 12px; overflow: hidden; box-shadow: 0 10px 30px rgba(0,0,0,0.5); transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); z-index: 999; }
+#footer-mv-wrap {
+    width: 280px; 
+    background: #000; 
+    border-radius: 12px; 
+    overflow: hidden; 
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
+    
+    /* 🌟 修復關鍵：拿走 all，只針對位置和透明度做動畫，禁止寬度漸變 */
+    transition: transform 0.4s ease, opacity 0.4s ease, bottom 0.4s ease, right 0.4s ease; 
+    
+    z-index: 999; 
+}
 #footer-mv-wrap.floating-mode { position: fixed; right: 20px; bottom: 80px; transform: scale(1); opacity: 1; }
 #footer-mv-wrap.docked-mode { position: relative; right: 0; bottom: 0; margin: 20px auto; width: 100%; max-width: 560px; transform: scale(1); }
 #footer-mv-wrap.hidden { opacity: 0; pointer-events: none; transform: translateY(20px) scale(0.8); display: block !important; }
@@ -262,3 +273,4 @@ body > canvas { z-index: 999999 !important; pointer-events: none !important; }
 @media (max-width: 480px) {
     #footer-mv-wrap.floating-mode { width: 180px; right: 10px; bottom: 100px; }
 }
+
