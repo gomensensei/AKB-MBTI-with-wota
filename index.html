@@ -3,30 +3,26 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
     <title data-i18n="app_title">2026 AKB48 粉絲深度性格鑑定</title>
-
     <meta property="og:title" content="2026 AKB48 粉絲深度性格鑑定">
     <meta property="og:description" content="利用 MBTI 餘弦波演算法，找出與你最契合的 AKB48 靈魂成員！">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://gomensensei.github.io/AKB-MBTI-with-wota/">
     <meta property="og:image" content="https://gomensensei.github.io/AKB-MBTI-with-wota/og-image.png">
-
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="2026 AKB48 粉絲深度性格鑑定">
     <meta name="twitter:description" content="測測看你與哪位 AKB48 成員最契合！">
     <meta name="twitter:image" content="https://gomensensei.github.io/AKB-MBTI-with-wota/og-image.png">
     
-<link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&display=swap" rel="stylesheet">
     
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
-    
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
 </head>
 <body>
-<div id="loading-overlay" class="hidden">
+    <div id="loading-overlay" class="hidden">
         <div class="loader-container">
             <div class="loader-circle">
                 <svg viewBox="0 0 100 100">
@@ -41,9 +37,9 @@
     <div id="giant-heart-overlay" class="hidden">
         <div class="giant-heart">💖</div>
     </div>
-<div id="lang-switcher-container">
+
+    <div id="lang-switcher-container">
         <button id="music-toggle-btn" class="glass-select" style="cursor: pointer; width: auto; padding: 0 10px; font-size: 13px;" onclick="toggleMusic()" data-i18n="btn_music_off">🎵 名残り桜：關</button>
-        
         <select id="lang-switcher" class="glass-select">
             <option value="zh-HK">繁體中文</option>
             <option value="zh-CN">简体中文</option>
@@ -71,19 +67,20 @@
         </section>
 
         <section id="page-quiz" class="hidden">
-<div class="progress-container glass-panel-top">
-    <div class="progress-text">
-        <span data-i18n="progress_label">進度：</span><span id="progress-text">0/60</span>
-    </div>
-    <div class="progress-bar-bg">
-        <div id="progress-bar" class="progress-bar-fill"></div>
-    </div>
-    <div id="progress-tip-text" style="font-size: 11px; color: var(--cyber-pink); text-align: center; margin-top: 6px; font-weight: bold; opacity: 0; transition: opacity 0.5s; pointer-events: none; min-height: 16px;"></div>
-</div>
+            <div class="progress-container glass-panel-top">
+                <div class="progress-text">
+                    <span data-i18n="progress_label">進度：</span><span id="progress-text">0/60</span>
+                </div>
+                <div class="progress-bar-bg">
+                    <div id="progress-bar" class="progress-bar-fill"></div>
+                </div>
+                <div id="progress-tip-text" style="font-size: 11px; color: var(--cyber-pink); text-align: center; margin-top: 6px; font-weight: bold; opacity: 0; transition: opacity 0.5s; pointer-events: none; min-height: 16px;"></div>
             </div>
+            
             <div class="quiz-viewport">
                 <div id="quiz-track" class="quiz-track"></div>
             </div>
+            
             <div class="quiz-nav glass-panel-bottom">
                 <button id="prev-btn" class="nav-btn disabled" data-i18n="btn_prev">上一頁</button>
                 <button id="next-btn" class="nav-btn cyber-btn" data-i18n="btn_next">下一頁</button>
@@ -93,7 +90,6 @@
         <section id="page-result" class="hidden glass-panel">
             <div id="result-content"></div>
         </section>
-        
 
         <div class="about-project-container" style="text-align: center; margin: 40px auto 20px auto; max-width: 540px; padding: 0 15px;">
             <button id="toggle-about-btn" class="cyber-btn" style="background: transparent; color: var(--text-muted); box-shadow: none; border: 1px dashed rgba(255, 20, 147, 0.4); font-size: 14px; padding: 10px; cursor: pointer;" data-i18n="btn_about"></button>
@@ -111,51 +107,40 @@
             </div>
         </div>
 
-<footer class="site-footer" id="site-footer" style="text-align: center; padding: 20px; font-size: 12px; color: #888; margin-top: 20px; line-height: 1.5; position: relative;">
-<script src="https://www.youtube.com/iframe_api"></script>
-
-<footer class="site-footer" id="site-footer">
-    <div id="footer-mv-wrap" class="hidden floating-mode">
-        <div style="background: var(--cyber-pink); color: white; padding: 6px 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 12px 12px 0 0;">
-            <span class="mv-title-text" style="font-weight: bold;" data-i18n="mv_full_title">名残り桜 Music Video</span>
-            <button onclick="toggleMusic()" style="background: none; border: none; color: white; cursor: pointer; font-size: 18px; line-height: 1;">&times;</button>
-        </div>
-        <div id="yt-player-container"></div>
+        <footer class="site-footer" id="site-footer" style="text-align: center; padding: 20px; font-size: 12px; color: #888; margin-top: 20px; line-height: 1.5; position: relative;">
+            <div id="footer-mv-wrap" class="hidden floating-mode">
+                <div style="background: var(--cyber-pink); color: white; padding: 6px 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 12px 12px 0 0;">
+                    <span class="mv-title-text" style="font-weight: bold;" data-i18n="mv_full_title">名残り桜 Music Video</span>
+                    <button onclick="toggleMusic()" style="background: none; border: none; color: white; cursor: pointer; font-size: 18px; line-height: 1;">&times;</button>
+                </div>
+                <div id="yt-player-container"></div>
+            </div>
+            <p data-i18n="footer_credit"></p>
+        </footer>
     </div>
-    <p data-i18n="footer_credit"></p>
-</footer>
 
-
-<script src="script.js"></script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="script.js"></script>
     <script>
-        // 使用 window.onload 確保外部程式庫 (Confetti) 已經完全載入
         window.onload = function() {
             const cursor = document.getElementById('custom-cursor');
-            
-            // 1. 鼠標移動邏輯
-            document.addEventListener('mousemove', (e) => {
-                if(window.innerWidth > 768) {
-                    cursor.classList.remove('hidden-cursor');
-                    cursor.style.left = e.clientX + 'px';
-                    cursor.style.top = e.clientY + 'px';
-                }
-            });
+            if(cursor) {
+                document.addEventListener('mousemove', (e) => {
+                    if(window.innerWidth > 768) {
+                        cursor.classList.remove('hidden-cursor');
+                        cursor.style.left = e.clientX + 'px';
+                        cursor.style.top = e.clientY + 'px';
+                    }
+                });
+            }
 
-            // 🌸 櫻花參數設定
             const sakuraPetalPath = 'M10,0 C12,5 20,8 18,15 C16,22 12,18 10,16 C8,18 4,22 2,15 C0,8 8,5 10,0 Z';
             const sakuraColors = ['#F5A9CB', '#F08CB5', '#EFA5C8'];
 
-            // 確保 confetti 存在才執行
             if (typeof confetti !== 'undefined') {
                 const sakuraShape = confetti.shapeFromPath({ path: sakuraPetalPath });
 
-                // 2. 點擊噴發櫻花
                 document.addEventListener('click', (e) => {
-                    if(window.innerWidth > 768) {
-                        cursor.classList.add('hidden-cursor');
-                        setTimeout(() => cursor.classList.remove('hidden-cursor'), 500);
-                    }
-                    
                     const ripple = document.createElement('div');
                     ripple.className = 'ripple-effect';
                     ripple.style.left = e.clientX + 'px';
@@ -177,53 +162,30 @@
                     });
                 });
 
-                // 3. 背景持續慢速飄落櫻花
                 function randomInRange(min, max) { return Math.random() * (max - min) + min; }
                 
-// 【解決問題 8】：背景櫻花參數加強 (增加大小、飄移度、數量)
-function continuousSakura() {
-    confetti({
-        particleCount: window.innerWidth < 768 ? 2 : 3, // 手機也明顯可見
-        startVelocity: 0,
-        gravity: randomInRange(0.04, 0.1),
-        ticks: 800,
-        shapes: [sakuraShape],
-        colors: sakuraColors,
-        scalar: randomInRange(1.0, 1.8), // 放大花瓣
-        origin: { x: Math.random(), y: randomInRange(-0.2, 0) },
-        drift: randomInRange(-1, 1),     // 增加風吹飄移感
-        disableForReducedMotion: false,
-        zIndex: 0 // 放在背景
-    });
-    setTimeout(continuousSakura, randomInRange(150, 300)); // 頻率調快
-}
-                
+                function continuousSakura() {
+                    confetti({
+                        particleCount: window.innerWidth < 768 ? 2 : 3,
+                        startVelocity: 0,
+                        gravity: randomInRange(0.04, 0.1),
+                        ticks: 800,
+                        shapes: [sakuraShape],
+                        colors: sakuraColors,
+                        scalar: randomInRange(1.0, 1.8),
+                        origin: { x: Math.random(), y: randomInRange(-0.2, 0) },
+                        drift: randomInRange(-1, 1),
+                        disableForReducedMotion: false,
+                        zIndex: 0 
+                    });
+                    setTimeout(continuousSakura, randomInRange(150, 300));
+                }
                 
                 continuousSakura();
             } else {
-                console.error("櫻花庫載入失敗，請檢查網路連線或 CDN 網址。");
+                console.error("櫻花庫載入失敗。");
             }
         };
     </script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
