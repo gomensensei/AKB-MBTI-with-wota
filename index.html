@@ -108,20 +108,19 @@
         </div>
 
 <footer class="site-footer" id="site-footer" style="text-align: center; padding: 20px; font-size: 12px; color: #888; margin-top: 20px; line-height: 1.5; position: relative;">
-            
-            <div id="footer-mv-wrap" class="hidden floating-mode">
-                <div style="background: var(--cyber-pink); color: white; padding: 6px 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 12px 12px 0 0;">
-                    <span class="mv-title-text" style="font-weight: bold;" data-i18n="mv_title">名残り桜 Music Video / AKB48 67th Single</span>
-                    <button onclick="toggleMusic()" style="background: none; border: none; color: white; cursor: pointer; font-size: 18px; line-height: 1;">&times;</button>
-                </div>
-                <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; background: #000; border-radius: 0 0 12px 12px; border: 1.5px solid var(--cyber-pink); border-top: none;">
-                    <iframe id="footer-yt-player" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0;" src="" allow="autoplay; encrypted-media" allowfullscreen></iframe>
-                </div>
-            </div>
+<script src="https://www.youtube.com/iframe_api"></script>
 
-            <p data-i18n="footer_credit"></p>
-        </footer>
+<footer class="site-footer" id="site-footer">
+    <div id="footer-mv-wrap" class="hidden floating-mode">
+        <div style="background: var(--cyber-pink); color: white; padding: 6px 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 12px 12px 0 0;">
+            <span class="mv-title-text" style="font-weight: bold;" data-i18n="mv_full_title">名残り桜 Music Video</span>
+            <button onclick="toggleMusic()" style="background: none; border: none; color: white; cursor: pointer; font-size: 18px; line-height: 1;">&times;</button>
+        </div>
+        <div id="yt-player-container"></div>
     </div>
+    <p data-i18n="footer_credit"></p>
+</footer>
+
 
 <script src="script.js"></script>
     <script>
@@ -204,6 +203,7 @@ function continuousSakura() {
     </script>
 </body>
 </html>
+
 
 
 
