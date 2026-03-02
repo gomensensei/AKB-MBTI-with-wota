@@ -138,8 +138,12 @@ function applyLanguage(lang) {
         });
         updateUI(); 
     }
-    if (!document.getElementById('page-result').classList.contains('hidden') && matchResultsGlobal.length > 0) {
+if (!document.getElementById('page-result').classList.contains('hidden') && matchResultsGlobal.length > 0) {
         renderResultPage(matchResultsGlobal);
+        
+        // 🌟 新增：轉語言後重新觸發數字與心跳動畫
+        const isOshi = document.getElementById('oshi-select').value !== "";
+        applyDynamicAnimations(currentDisplayMember.comp, isOshi);
     }
 }
 
@@ -437,8 +441,6 @@ function renderMainDisplay(member, titleLabel) {
         
         <h3 style="font-size: 22px; margin-bottom: 5px;">${member.name_ja} <span style="font-size:14px; opacity:0.7;">(${member.mbti_type})</span></h3>
         
-        ${getMemberBadgesHtml(userPerc)}
-        
         <p class="comp-score-container" style="color: var(--cyber-pink); font-weight: 800; font-size: 24px; margin: 5px 0 10px 0; display:flex; justify-content:center; align-items:center;">
             ${ui.compatibility_label[currentLang] || ''} <span class="comp-score" style="margin-left:5px;">0.0%</span>
         </p>
@@ -481,11 +483,15 @@ function renderResultPage(allMembers) {
     content.innerHTML = `
         <div id="export-container" style="background: linear-gradient(135deg, #fdfcfb, #f0e6ea); width: 100%; max-width: 540px; margin: 0 auto; overflow: hidden; border-radius: 20px;">
             <div id="export-card" style="padding: 40px 15px; position: relative; display: flex; flex-direction: column; align-items: center; min-height: 850px; justify-content: space-around;">
+                
                 <div class="landing-header" style="text-align:center; width: 100%;">
                     <span class="subtitle" style="font-size: 16px; letter-spacing: 3px;">${ui.result_subtitle[currentLang]}</span>
                     <h2 style="font-size: 52px; color: var(--cyber-pink); margin: 10px 0 0 0; line-height: 1;">${userMbtiStr}</h2>
-                    <h3 style="font-size: 22px; color: var(--text-main); margin-top: 8px;">${userTitle}</h3>
+                    <h3 style="font-size: 22px; color: var(--text-main); margin-top: 8px; margin-bottom: 15px;">${userTitle}</h3>
+                    
+                    ${getMemberBadgesHtml(userPerc)}
                 </div>
+
                 <div id="radar-wrapper" style="position: relative; width: 320px; margin: 20px auto;">
                     <canvas id="radarChart"></canvas>
                 </div>
@@ -529,6 +535,7 @@ function renderResultPage(allMembers) {
             <button id="copy-link-btn" class="cyber-btn" style="width: 100%; background: var(--cyber-pink); color: #fff;">🔗 複製專屬結果連結</button>
         </div>
     `;
+
 
     if(myRadarChart) myRadarChart.destroy();
     const ctx = document.getElementById('radarChart').getContext('2d');
@@ -886,4 +893,5 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(footer);
     }
 });
+
 
