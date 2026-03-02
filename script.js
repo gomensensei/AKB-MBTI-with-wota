@@ -868,39 +868,90 @@ document.addEventListener('mousedown', function(e) {
 
 
 // ==========================================
-// 音樂播放器與吸附邏輯 (Intersection Observer)
+// 音樂播放器與吸附邏輯 (YouTube API 進階版)
 // ==========================================
 
+let player; 
+let isMusicEnabled = false;
+let hasPreplayed = false;
+
+// 🌟 1. 當 YouTube API 準備好時會自動執行呢個 function
+function onYouTubeIframeAPIReady() {
+    player = new YT.Player('yt-player-container', { // 對應 index.html 嘅 div ID
+        height: '100%',
+        width: '100%',
+        videoId: 'Aw2NpveLOFs', // 名残り桜 MV ID
+        host: 'https://www.youtube-nocookie.com', // 使用 nocookie 減少追蹤
+        playerVars: {
+            'autoplay': 0, // 交畀我哋用 code 控制
+            'rel': 0,
+            'controls': 1,
+            'modestbranding': 1,
+            'enablejsapi': 1,
+            'playsinline': 1 // 確保手機版唔會自動全螢幕
+        },
+        events: {
+            'onReady': onPlayerReady
+        }
+    });
+}
+
+// 🌟 2. 播放器載入完成後嘅「隱藏式預播」邏輯 (處理廣告/緩衝)
+function onPlayerReady(event) {
+    // 先靜音，以免嚇親用家
+    event.target.mute();
+    
+    // 啟動播放，開始消耗 5 秒廣告或緩衝時間
+    event.target.playVideo();
+    
+    // 5 秒後自動暫停並還原設定
+    setTimeout(() => {
+        // 如果用家喺呢 5 秒內仲未主動撳「開音樂」
+        if (!isMusicEnabled) {
+            event.target.pauseVideo(); // 暫停播放
+            event.target.seekTo(0);    // 進度條拉返去開頭
+            event.target.unMute();     // 解除靜音，準備正式播
+            hasPreplayed = true;
+            console.log("5秒預播完成，隨時可以啟動！");
+        }
+    }, 5000);
+}
+
+// 🌟 3. 切換音樂：改用 API 嘅暫停/播放，唔再重新載入 iframe
 function toggleMusic() {
     const wrap = document.getElementById('footer-mv-wrap');
-    const iframe = document.getElementById('footer-yt-player');
     const btn = document.getElementById('music-toggle-btn');
-    const videoId = 'Aw2NpveLOFs'; // 名残り桜 MV ID
 
     // 取得多語言文字
     const onText = (i18nData.ui.btn_music_on && i18nData.ui.btn_music_on[currentLang]) ? i18nData.ui.btn_music_on[currentLang] : "🎵 名残り桜：開";
     const offText = (i18nData.ui.btn_music_off && i18nData.ui.btn_music_off[currentLang]) ? i18nData.ui.btn_music_off[currentLang] : "🎵 名残り桜：關";
 
-    if (wrap.classList.contains('hidden')) {
+    if (!isMusicEnabled) {
         // 開啟音樂
-        iframe.src = `https://www.youtube.com/embed/${videoId}?autoplay=1&rel=0`;
+        if (player && typeof player.playVideo === 'function') {
+            player.playVideo(); // 🌟 指令：繼續播放
+        }
         wrap.classList.remove('hidden');
         btn.innerHTML = onText;
         btn.style.background = "rgba(255, 20, 147, 0.15)";
         btn.style.color = "var(--cyber-pink)";
         btn.style.border = "1px solid var(--cyber-pink)";
+        isMusicEnabled = true;
     } else {
         // 關閉音樂
-        iframe.src = '';
+        if (player && typeof player.pauseVideo === 'function') {
+            player.pauseVideo(); // 🌟 指令：暫停播放
+        }
         wrap.classList.add('hidden');
         btn.innerHTML = offText;
         btn.style.background = "transparent";
         btn.style.color = "var(--text-muted)";
         btn.style.border = "1px solid rgba(255,255,255,0.3)";
+        isMusicEnabled = false;
     }
 }
 
-// 監聽器：當頁面滑到最底 (Footer 出現) 時，讓播放器自動歸位
+// 🌟 4. 監聽器：當頁面滑到最底 (Footer 出現) 時，讓播放器自動歸位 (保留你原本嘅邏輯)
 document.addEventListener('DOMContentLoaded', () => {
     const footer = document.getElementById('site-footer');
     const mvWrap = document.getElementById('footer-mv-wrap');
@@ -908,35 +959,19 @@ document.addEventListener('DOMContentLoaded', () => {
     if ('IntersectionObserver' in window && footer && mvWrap) {
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
-                // 如果 Footer 進入了螢幕畫面
                 if (entry.isIntersecting) {
                     mvWrap.classList.remove('floating-mode');
                     mvWrap.classList.add('docked-mode');
                 } else {
-                    // 如果用家滑回上面 (離開了 Footer)
                     mvWrap.classList.remove('docked-mode');
                     mvWrap.classList.add('floating-mode');
                 }
             });
         }, { 
             root: null,
-            threshold: 0.05 // 只要 Footer 露出 5% 就觸發歸位
+            threshold: 0.05 
         });
 
         observer.observe(footer);
     }
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
