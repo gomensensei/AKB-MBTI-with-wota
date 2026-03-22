@@ -1579,7 +1579,28 @@
         "id": "Haruna menunjukkan pandangan ke depan dan empati yang sangat tinggi. Meski tidak selalu menjadi pusat perhatian di panggung, di belakang layar dia adalah ahli taktik yang dengan cermat merawat orang lain dan mengatur detail. Dia sangat terorganisir, memastikan tim berjalan lancar dengan menguasai detail, menjadikannya pilar yang sangat bisa diandalkan oleh member lain."
       }
     },
-    "12": {
+  "12": {
+        "title": {
+            "zh-HK": "溫柔守護的治癒系",
+            "zh-CN": "温柔守护的治愈系",
+            "ja": "優しく見守る癒し系",
+            "ko": "다정하게 지켜보는 힐링계",
+            "en": "The Gentle Healer",
+            "th": "สายฮีลลิ่งที่คอยปกป้องอย่างอ่อนโยน",
+            "id": "Penyembuh yang Lembut"
+        },
+        "analysis": {
+            "zh-HK": "與 ISFJ 的她一樣，你們都擁有細膩的觀察力與強烈的奉獻精神。你們不是最張揚的人，但總能在背後給予團隊最安定的力量。你們的契合度建立在互相理解與默默支持的頻率上。",
+            "zh-CN": "与 ISFJ 的她一样，你们都拥有细腻的观察力与强烈的奉献精神。你们不是最张扬的人，但总能在背后给予团队最安定的力量。你们的契合度建立在互相理解与默默支持的频率上。",
+            "ja": "ISFJの彼女と同じく、細やかな観察力と強い献身の心を持っています。決して派手ではありませんが、いつも陰でチームに安心感を与えます。お互いを理解し、黙って支え合うことで強い絆が生まれます。",
+            "ko": "ISFJ인 그녀와 마찬가지로, 섬세한 관찰력과 강한 헌신 정신을 가지고 있습니다. 화려하지는 않지만 항상 뒤에서 팀에 안정감을 줍니다. 서로를 이해하고 묵묵히 지지하는 주파수에서 상성이 맞습니다.",
+            "en": "Like her (ISFJ), you possess keen observation skills and a strong sense of dedication. You may not be the loudest, but you always provide stabilizing support behind the scenes. Your compatibility is built on mutual understanding.",
+            "th": "เช่นเดียวกับเธอที่เป็น ISFJ คุณมีทักษะการสังเกตที่ละเอียดอ่อนและมีความทุ่มเทสูง คุณอาจไม่ใช่คนที่โดดเด่นที่สุด แต่ก็คอยเป็นกำลังใจที่มั่นคงให้ทีมเสมอ ความเข้ากันได้ของคุณเกิดจากความเข้าใจและการสนับสนุนซึ่งกันและกัน",
+            "id": "Seperti dia (ISFJ), kamu memiliki keterampilan observasi yang tajam dan rasa dedikasi yang kuat. Mungkin bukan yang paling mencolok, tapi selalu memberikan dukungan yang menstabilkan. Kecocokan kalian dibangun atas dasar saling pengertian."
+        }
+    },
+  
+    "13": {
       "title": {
         "zh-HK": "【直擊現實的冷靜鑑賞家】", "zh-CN": "【直击现实的冷静鉴赏家】", "ja": "【現実を直視する冷静な鑑賞家】", "ko": "【현실을 직시하는 냉정한 감상가】", "en": "【The Calm Connoisseur Facing Reality Directly】", "th": "【นักเลงผู้เยือกเย็นที่เผชิญหน้ากับความจริง】", "id": "【Penikmat Tenang yang Menghadapi Realitas Langsung】"
       },
@@ -1602,7 +1623,7 @@
         "id": "Erii menunjukkan logika rasional yang ekstrim dan sifat sensorik yang realistis. Dia tidak sengaja memuaskan massa dan memiliki estetika pribadi yang khas. Dia mendukung 'biarkan fakta berbicara' dan mendesak publik untuk mengevaluasi grup hanya setelah memahami situasi mereka saat ini."
       }
     },
-    "13": {
+    "14": {
       "title": {
         "zh-HK": "【熱愛舞台互動的表演者】", "zh-CN": "【热爱舞台互动的表演者】", "ja": "【ステージの交流を愛するパフォーマー】", "ko": "【무대 소통을 사랑하는 퍼포머】", "en": "【The Performer Who Loves Stage Interaction】", "th": "【นักแสดงผู้รักการโต้ตอบบนเวที】", "id": "【Penampil yang Mencintai Interaksi Panggung】"
       },
@@ -1625,7 +1646,7 @@
         "id": "Dia sangat didorong oleh pengalaman sensorik. Dia sangat eksplosif di atas panggung, menikmati tatapan dan tepuk tangan penonton. Dalam wawancara, dia dengan penuh semangat mendesak fans—berharap mereka yang tertarik padanya melalui photobook-nya akan datang ke teater secara langsung untuk merasakan pesona sejati dari pertunjukan live-nya, menunjukkan sifat ekstrovert yang mendambakan interaksi manusia secara langsung."
       }
     },
-    "14": {
+    "15": {
       "title": {
         "zh-HK": "【打破僵局的柔軟探險家】", "zh-CN": "【打破僵局的柔软探险家】", "ja": "【現状を打破する柔軟な探検家】", "ko": "【교착 상태를 깨는 유연한 탐험가】", "en": "【The Flexible Explorer Breaking Deadlocks】", "th": "【นักสำรวจผู้ยืดหยุ่นที่ทำลายกรอบเดิมๆ】", "id": "【Penjelajah Fleksibel yang Memecahkan Kebuntuan】"
       },
@@ -1648,7 +1669,7 @@
         "id": "Manaka menunjukkan sifat 'dingin di luar, hangat di dalam'. Selama menjadi kapten, ia memusatkan perhatian pada harmoni emosional, mendobrak sistem posisi tetap tradisional untuk memastikan setiap member memiliki kesempatan bersinar. Dia tidak menekan dengan aturan, tetapi memimpin dengan kerendahan hati dan empati, percaya bahwa kebahagiaan member lebih penting daripada posisi pribadi. Gaya manajemennya yang fleksibel dan lembut sangat dicintai oleh para member."
       }
     },
-    "15": {
+    "16": {
       "title": {
         "zh-HK": "【追求和諧美的溫和藝術家】", "zh-CN": "【追求和谐美的温和艺术家】", "ja": "【調和と美を追求する穏やかな芸術家】", "ko": "【조화와 미를 추구하는 온화한 예술가】", "en": "【The Gentle Artist Pursuing Harmonious Beauty】", "th": "【ศิลปินผู้อ่อนโยนที่แสวงหาความงามอันกลมกลืน】", "id": "【Seniman Lembut yang Mengejar Keindahan Harmonis】"
       },
@@ -1671,7 +1692,7 @@
         "id": "Ayami memiliki kepribadian yang lembut dan santai, memberikan rasa aman seperti seorang kakak perempuan kepada orang-orang di sekitarnya. Ia sangat pandai membagikan cuplikan indah dari kesehariannya di media sosial, menunjukkan ketajaman matanya terhadap estetika. Ia tidak menyukai pertengkaran dan lebih suka berinteraksi dalam suasana yang harmonis, menjadikannya pilar emosional yang stabil dalam tim."
       }
     },
-    "16": {
+    "17": {
       "title": {
         "zh-HK": "【守護家族羈絆的感性之魂】", "zh-CN": "【守护家族羁绊的感性之魂】", "ja": "【家族の絆を守る感性の魂】", "ko": "【가족의 유대를 지키는 감성적인 영혼】", "en": "【The Sensual Soul Guarding Family Bonds】", "th": "【จิตวิญญาณแห่งความรู้สึกที่ปกป้องสายใยครอบครัว】", "id": "【Jiwa Sensual yang Menjaga Ikatan Keluarga】"
       },
@@ -1695,7 +1716,7 @@
       }
     },
 
-"17": {
+"18": {
       "title": {
         "zh-HK": "【極致自律的感性藝術家】", "zh-CN": "【极致自律的感性艺术家】", "ja": "【究極にストイックな感性の芸術家】", "ko": "【극한의 자기관리를 보여주는 감성 아티스트】", "en": "【The Highly Disciplined Sensual Artist】", "th": "【ศิลปินอารมณ์ศิลป์ที่มีวินัยในตัวเองขั้นสุด】", "id": "【Seniman Sensual dengan Disiplin Ekstrem】"
       },
@@ -1718,7 +1739,49 @@
         "id": "Zukky adalah seniman yang tangguh. Meskipun biasanya pendiam dan pemalu, begitu berada di panggung, ia menyampaikan emosi yang kuat melalui bahasa tubuh. Demi mencapai penampilan sempurna, ia menerapkan manajemen diri yang ketat dengan tekad luar biasa, mengubah perasaan batin menjadi energi panggung yang memukau."
       }
     },
-    "18": {
+
+ "19": {
+        "title": {
+            "zh-HK": "充滿奇思妙想的夢想家",
+            "zh-CN": "充满奇思妙想的梦想家",
+            "ja": "独創的な夢想家",
+            "ko": "기발한 상상력의 몽상가",
+            "en": "The Creative Dreamer",
+            "th": "นักฝันผู้เต็มไปด้วยจินตนาการ",
+            "id": "Pemimpi yang Kreatif"
+        },
+        "analysis": {
+            "zh-HK": "INFP 獨特的感性讓你們的內心世界產生共鳴。你們對世界有著不拘一格的看法，比起世俗的標準，更在乎靈魂的自由與真誠。你們能讀懂她那些奇妙又可愛的腦洞。",
+            "zh-CN": "INFP 独特的感性让你们的内心世界产生共鸣。你们对世界有着不拘一格的看法，比起世俗的标准，更在乎灵魂的自由与真诚。你们能读懂她那些奇妙又可爱的脑洞。",
+            "ja": "INFP特有の感性が、二人の内面世界を共鳴させます。型にはまらない視点を持ち、世間の基準よりも魂の自由と誠実さを大切にします。彼女の不思議で可愛い発想を誰よりも理解できるはずです。",
+            "ko": "INFP 특유의 감성이 두 사람의 내면 세계를 공명하게 합니다. 틀에 얽매이지 않는 시각을 가지며, 세상의 기준보다 영혼의 자유와 진정성을 중요하게 생각합니다. 그녀의 엉뚱하고 귀여운 상상을 누구보다 잘 이해할 것입니다.",
+            "en": "Your INFP sensitivities resonate deeply. You both view the world outside the box, valuing soul freedom and authenticity over worldly standards. You perfectly understand her wonderfully quirky thoughts.",
+            "th": "ความอ่อนไหวแบบ INFP ทำให้โลกภายในของคุณทั้งสองเชื่อมโยงกัน คุณมองโลกนอกกรอบ ให้คุณค่ากับอิสระและจริงใจมากกว่ามาตรฐานสังคม คุณเข้าใจความคิดที่แปลกแต่น่ารักของเธอได้เป็นอย่างดี",
+            "id": "Sensitivitas INFP kalian beresonansi dalam. Kalian melihat dunia di luar kebiasaan, lebih menghargai kebebasan jiwa dan ketulusan daripada standar duniawi. Kamu sangat memahami pikirannya yang unik dan menggemaskan."
+        }
+    },
+    "20": {
+        "title": {
+            "zh-HK": "洞察人心的理想主義者",
+            "zh-CN": "洞察人心的理想主义者",
+            "ja": "本質を見抜く理想主義者",
+            "ko": "사람의 마음을 꿰뚫는 이상주의자",
+            "en": "The Insightful Idealist",
+            "th": "นักอุดมคติผู้หยั่งรู้จิตใจคน",
+            "id": "Idealis yang Berwawasan"
+        },
+        "analysis": {
+            "zh-HK": "做為 INFJ，你們擁有極高的共情能力與強烈的責任感。你們總是習慣把團隊和他人放在首位，同時在內心描繪著長遠的未來。你們的靈魂相性在於能夠承載彼此的溫柔與深沉的思考。",
+            "zh-CN": "做为 INFJ，你们拥有极高的共情能力与强烈的责任感。你们总是习惯把团队和他人放在首位，同时在内心描绘着长远的未来。你们的灵魂相性在于能够承载彼此的温柔与深沉的思考。",
+            "ja": "INFJとして、高い共感力と強い責任感を持っています。常にチームや他者を優先し、心の中で長期的なビジョンを描いています。お互いの優しさと深い思考を受け止め合える、まさに魂のパートナーです。",
+            "ko": "INFJ로서 매우 높은 공감 능력과 강한 책임감을 가지고 있습니다. 항상 팀과 타인을 우선시하며, 마음속으로 먼 미래를 그립니다. 서로의 다정함과 깊은 생각을 품어줄 수 있는 영혼의 파트너입니다.",
+            "en": "As INFJs, you possess profound empathy and a strong sense of responsibility. You prioritize others while envisioning a long-term future. Your soul compatibility lies in bearing each other's tenderness and deep thoughts.",
+            "th": "ในฐานะ INFJ คุณมีความเห็นอกเห็นใจสูงและมีความรับผิดชอบ มักจะให้ความสำคัญกับผู้อื่นก่อนเสมอพร้อมกับมองการณ์ไกล ความเข้ากันได้ของคุณคือการเข้าใจความอ่อนโยนและความคิดที่ลึกซึ้งของกันและกัน",
+            "id": "Sebagai INFJ, kalian memiliki empati yang dalam dan rasa tanggung jawab yang kuat. Kalian memprioritaskan orang lain sambil memikirkan masa depan jangka panjang. Kecocokan jiwa kalian terletak pada kemampuan memahami kelembutan satu sama lain."
+        }
+    },
+  
+    "21": {
       "title": {
         "zh-HK": "【打破常規的趣味冒險者】", "zh-CN": "【打破常规的趣味冒险者】", "ja": "【常識を打ち破るユニークな冒険者】", "ko": "【틀을 깨는 유쾌한 모험가】", "en": "【The Fun Adventurer Breaking Conventions】", "th": "【นักผจญภัยสุดสนุกที่ฉีกทุกกฎเกณฑ์】", "id": "【Petualang Seru yang Mendobrak Aturan】"
       },
@@ -1741,7 +1804,7 @@
         "id": "Maho memiliki kepribadian yang santai dan menyukai anime, tipikal member yang spontan. Ia tidak suka dibatasi oleh aturan dan jadwal yang kaku; pikirannya melompat-lompat dan sering bertindak di luar dugaan. Keseruan yang tak terduga ini membuatnya sangat menarik di live streaming, memberi fans suasana yang santai dan bebas."
       }
     },
-    "19": {
+    "22": {
       "title": {
         "zh-HK": "【目光堅定的宇宙領航者】", "zh-CN": "【目光坚定的宇宙领航者】", "ja": "【眼差しが力強い宇宙のナビゲーター】", "ko": "【눈빛이 확고한 우주의 길잡이】", "en": "【The Firm-Gazed Space Navigator】", "th": "【ผู้นำทางแห่งจักรวาลผู้มีแววตามุ่งมั่น】", "id": "【Navigator Luar Angkasa dengan Tatapan Teguh】"
       },
@@ -1764,7 +1827,7 @@
         "id": "Airi adalah kepribadian pemimpin generasi baru. Ia memiliki daya tarik yang kuat dan visi yang berwawasan ke depan. Ia menatap lurus ke mata fans dan memberikan janji yang paling teguh; ia adalah seseorang yang terlahir untuk berdiri di tengah sorotan dan memimpin semua orang."
       }
     },
-    "20": {
+    "23": {
       "title": {
         "zh-HK": "【純粹熱愛的守護者】", "zh-CN": "【纯粹热爱的守护者】", "ja": "【純粋な愛の守護者】", "ko": "【순수한 사랑의 수호자】", "en": "【The Guardian of Pure Love】", "th": "【ผู้พิทักษ์แห่งความรักอันบริสุทธิ์】", "id": "【Penjaga Cinta Murni】"
       },
@@ -1787,7 +1850,7 @@
         "id": "Sebagai mantan fans, Eriko sangat memahami mentalitas penggemar. Ia selalu berkomunikasi dengan fans dengan cara yang paling tulus dan tanpa basa-basi, diam-diam dan mantap bersinar dengan ritmenya sendiri."
       }
     },
-    "21": {
+    "24": {
       "title": {
         "zh-HK": "【在現實與戲劇間掙扎的藝術家】", "zh-CN": "【在现实与戏剧间挣扎的艺术家】", "ja": "【現実と演劇の狭間で葛藤する芸術家】", "ko": "【현실과 연기 사이에서 고뇌하는 아티스트】", "en": "【The Artist Struggling Between Reality and Drama】", "th": "【ศิลปินผู้ดิ้นรนระหว่างความเป็นจริงและการแสดง】", "id": "【Seniman yang Berjuang Antara Realitas dan Drama】"
       },
@@ -1810,7 +1873,7 @@
         "id": "Sora adalah seorang seniman yang mencari keseimbangan antara indra realistis dan emosi batin. Meski tidak pandai merangkai kata, ia mencurahkan emosi yang tulus dan tanpa basa-basi ke dalam penampilannya."
       }
     },
-    "22": {
+    "25": {
       "title": {
         "zh-HK": "【推崇實用主義的魅力辣妹】", "zh-CN": "【推崇实用主义的魅力辣妹】", "ja": "【実用主義を重んじる魅力的なギャル】", "ko": "【실용주의를 추구하는 매력적인 갸루】", "en": "【The Charismatic Gal Emphasizing Pragmatism】", "th": "【แกลเจ้าเสน่ห์ผู้ยึดถือความเป็นจริง】", "id": "【Gyaru Karismatik yang Mengutamakan Pragmatisme】"
       },
@@ -1833,7 +1896,7 @@
         "id": "Dijuluki 'Tomochin era Reiwa' oleh netizen, logika pengambilan keputusan Yuki condong pada pragmatisme dan efisiensi. Ia lebih fokus pada pencapaian tujuan melalui cara konkret daripada sekadar berteori kosong."
       }
     },
-    "23": {
+    "26": {
       "title": {
         "zh-HK": "【深思熟慮的團隊平衡者】", "zh-CN": "【深思熟虑的团队平衡者】", "ja": "【熟慮を重ねるチームのバランサー】", "ko": "【심사숙고하는 팀의 밸런서】", "en": "【The Thoughtful Team Balancer】", "th": "【ผู้สร้างสมดุลให้ทีมที่คิดอย่างรอบคอบ】", "id": "【Penyeimbang Tim yang Penuh Pertimbangan】"
       },
@@ -1856,7 +1919,7 @@
         "id": "Mizumin adalah penyeimbang tim yang penuh pemikiran. Saat menghadapi perbedaan pendapat, meskipun ia menghargai pembuktian sudut pandangnya, pada akhirnya ia akan bertindak berdasarkan gambaran besar grup dan harmoni emosional."
       }
     },
-    "24": {
+    "27": {
       "title": {
         "zh-HK": "【設身處地的感性靈魂】", "zh-CN": "【设身处地的感性灵魂】", "ja": "【相手の立場に立つ感性の魂】", "ko": "【역지사지의 감성 영혼】", "en": "【The Empathetic Sensual Soul】", "th": "【จิตวิญญาณแห่งความรู้สึกที่เอาใจเขามาใส่ใจเรา】", "id": "【Jiwa Sensual yang Empatik】"
       },
@@ -1879,7 +1942,7 @@
         "id": "Mayuu memiliki jiwa sensual yang sangat empatik. Setiap kali dihadapkan pada keputusan, ia dengan tulus memprioritaskan perasaan batin mereka yang terkena dampak, daripada menimbang logika atau efisiensi."
       }
     },
-    "25": {
+    "28": {
       "title": {
         "zh-HK": "【熱愛集體生活的歡樂表演者】", "zh-CN": "【热爱集体生活的欢乐表演者】", "ja": "【集団生活を愛する陽気なパフォーマー】", "ko": "【단체 생활을 사랑하는 유쾌한 퍼포머】", "en": "【The Joyful Performer Who Loves Group Life】", "th": "【นักแสดงสุดร่าเริงผู้รักชีวิตแบบกลุ่ม】", "id": "【Penampil Ceria yang Mencintai Kehidupan Grup】"
       },
@@ -1902,7 +1965,7 @@
         "id": "Yuki adalah perwakilan sinar matahari dari Generasi 17. Ia sangat menikmati suasana teater yang ramai dan sibuk. Motivasinya berasal dari membuat orang di sekitarnya merasa bahagia, dan gaya eksekusinya bergantung pada ledakan emosional sesaat."
       }
     },
-    "26": {
+    "29": {
       "title": {
         "zh-HK": "【安靜自守的夢想編織者】", "zh-CN": "【安静自守的梦想编织者】", "ja": "【静かに夢を紡ぐ守護者】", "ko": "【조용히 꿈을 엮는 수호자】", "en": "【The Quiet Dream Weaver】", "th": "【นักถักทอความฝันผู้รักความสงบ】", "id": "【Penjalin Mimpi yang Tenang】"
       },
@@ -1925,7 +1988,7 @@
         "id": "Dibandingkan dengan aktivitas kelompok yang bising, dia lebih menyukai hobi unik yang memberinya kedamaian. Ritme hidupnya mengalir santai, dan dia tidak suka diikat oleh rencana yang detail."
       }
     },
-    "27": {
+    "30": {
       "title": {
         "zh-HK": "【獨立自律的邏輯思考者】", "zh-CN": "【独立自律的逻辑思考者】", "ja": "【自立した論理的思考者】", "ko": "【독립적이고 자율적인 논리 사색가】", "en": "【The Independent and Disciplined Logical Thinker】", "th": "【นักคิดเชิงตรรกะผู้เป็นอิสระและมีระเบียบวินัย】", "id": "【Pemikir Logis yang Mandiri dan Disiplin】"
       },
@@ -1948,7 +2011,7 @@
         "id": "Ia mempertahankan rasa ingin tahu yang kuat tentang bidang-bidang yang tidak diketahui, dan menjunjung tinggi efisiensi serta sikap pragmatis saat membuat keputusan. Meskipun ritme kerjanya fleksibel, ia sering merasa kewalahan untuk mempertahankan jadwal yang konsisten, lebih mengandalkan ledakan energi untuk menyelesaikan tugas."
       }
     },
-    "28": {
+    "31": {
       "title": {
         "zh-HK": "【引領新紀元的使命型領袖】", "zh-CN": "【引领新纪元的使命型领袖】", "ja": "【新時代を導く使命型リーダー】", "ko": "【신시대를 이끄는 사명형 리더】", "en": "【The Mission-Driven Leader of a New Era】", "th": "【ผู้นำผู้มีภารกิจในการเปิดศักราชใหม่】", "id": "【Pemimpin Berbasis Misi untuk Era Baru】"
       },
@@ -1971,7 +2034,7 @@
         "id": "Yuna adalah pemimpin spiritual Generasi 18. Ia menyatakan niatnya untuk memimpin AKB bersama teman-teman sebayanya; tindakannya yang mengikat takdir pribadinya dengan sejarah grup dan tekad untuk memimpin semua orang maju adalah perilaku buku teks dari seorang ENFJ."
       }
     },
-    "29": {
+    "32": {
       "title": {
         "zh-HK": "【熱衷辯論的知性冒險家】", "zh-CN": "【热衷辩论的知性冒险家】", "ja": "【議論を愛する知的な冒険家】", "ko": "【토론을 즐기는 지적 모험가】", "en": "【The Intellectual Adventurer Passionate About Debate】", "th": "【นักผจญภัยสายวิชาการผู้รักการถกเถียง】", "id": "【Petualang Intelektual yang Gemar Berdebat】"
       },
@@ -1994,7 +2057,7 @@
         "id": "Sae adalah petualang yang antusias dengan tantangan intelektual. Ia sangat menikmati mengeksplorasi ide-ide yang tidak konvensional; dalam perbedaan pendapat, ia memprioritaskan untuk membuktikan pendapatnya daripada menjaga perasaan orang lain. Setiap kali menemui rintangan tak terduga, ia dapat dengan cepat menyesuaikan rencananya dan beradaptasi dengan perubahan tanpa usaha berarti."
       }
     },
-    "30": {
+    "33": {
       "title": {
         "zh-HK": "【靈活切換賽道的戰略型偶像】", "zh-CN": "【灵活切换赛道的战略型偶像】", "ja": "【柔軟に路線変更する戦略型アイドル】", "ko": "【유연하게 노선을 바꾸는 전략형 아이돌】", "en": "【The Strategic Idol Flexibly Switching Lanes】", "th": "【ไอดอลนักวางกลยุทธ์ผู้เปลี่ยนเส้นทางได้อย่างยืดหยุ่น】", "id": "【Idola Strategis yang Fleksibel Berpindah Jalur】"
       },
@@ -2017,7 +2080,7 @@
         "id": "Kasumin adalah idola strategis yang fleksibel berpindah jalur. Ia memiliki intuisi yang tajam, mampu beralih secara fleksibel dari rute tradisional ke rute 'Gyaru' dan variety show yang lebih personal berdasarkan tuntutan pasar."
       }
     },
-    "31": {
+    "34": {
       "title": {
         "zh-HK": "【在自我懷疑中進化的邏輯家】", "zh-CN": "【在自我怀疑中进化的逻辑家】", "ja": "【自己懐疑の中で進化する論理家】", "ko": "【자기 의심 속에서 진화하는 논리학자】", "en": "【The Logician Evolving Amidst Self-Doubt】", "th": "【นักตรรกะผู้พัฒนาตนเองท่ามกลางความสงสัยในตัวเอง】", "id": "【Ahli Logika yang Berevolusi di Tengah Keraguan Diri】"
       },
@@ -2040,7 +2103,7 @@
         "id": "Hinano adalah seorang pemikir logis yang terus berevolusi di tengah keraguan diri. Dia menghargai logika dan fakta dalam keputusannya, dengan tenang menganalisis kekurangannya sendiri. Hal ini menunjukkan sifat yang mengejar kesempurnaan namun rentan terhadap rasa cemas."
       }
     },
-    "32": {
+    "35": {
       "title": {
         "zh-HK": "【跟隨情感直覺的夢想家】", "zh-CN": "【跟随情感直觉的梦想家】", "ja": "【感情の直感に従う夢想家】", "ko": "【감정적 직관을 따르는 몽상가】", "en": "【The Dreamer Following Emotional Intuition】", "th": "【นักฝันผู้ทำตามลางสังหรณ์และเสียงหัวใจ】", "id": "【Pemimpi yang Mengikuti Intuisi Emosional】"
       },
@@ -2064,7 +2127,7 @@
       }
     },
 
-"33": {
+"36": {
       "title": {
         "zh-HK": "【秉持實事求是的音聲職人】", "zh-CN": "【秉持实事求是的音声职人】", "ja": "【実事求是を貫く歌声の職人】", "ko": "【사실을 중시하는 보컬 장인】", "en": "【The Matter-of-Fact Vocal Artisan】", "th": "【ช่างฝีมือด้านเสียงร้องผู้ยึดมั่นในความจริง】", "id": "【Artisan Vokal yang Berpegang pada Fakta】"
       },
@@ -2087,7 +2150,7 @@
         "id": "Sebagai ace vokal dari Generasi 18, Kohina adalah seorang artisan vokal dengan semangat pragmatis. Ia memiliki kemandirian diri yang tinggi dan menikmati tugas-tugas di mana ia dapat tenggelam dalam ritmenya sendiri. Saat menangani masalah, ia menunjukkan pemikiran yang sangat logis, memprioritaskan fakta di atas hubungan emosional. Ia tidak terpaku pada prosedur tradisional namun lebih menyukai solusi kreatif yang memungkinkannya menunjukkan bakatnya."
       }
     },
-    "34": {
+    "37": {
       "title": {
         "zh-HK": "【追求卓越的身體美學家】", "zh-CN": "【追求卓越的身体美学家】", "ja": "【卓越を追求する身体の美学者】", "ko": "【탁월함을 추구하는 신체 미학자】", "en": "【The Physical Aesthete Pursuing Excellence】", "th": "【ผู้เชี่ยวชาญด้านความงามทางสรีระที่แสวงหาความเป็นเลิศ】", "id": "【Pakar Estetika Fisik yang Mengejar Keunggulan】"
       },
@@ -2110,7 +2173,7 @@
         "id": "Azuki adalah seorang pakar estetika fisik yang mengejar keunggulan. Bahkan di teater yang bising, energinya tetap terfokus ke dalam pada kinerja fisiknya. Ia sangat setia pada praktik sensorik, mampu secara tepat mengidentifikasi variasi gerakan halus saat latihan tari dan mengatasi tugas tingkat kesulitan tinggi melalui ledakan energi singkat. Dipandu oleh nilai-nilai batin, ia pada akhirnya memprioritaskan perasaan orang dan resonansi emosional. Gayanya fleksibel dan eksplosif."
       }
     },
-    "35": {
+    "38": {
       "title": {
         "zh-HK": "【紀律嚴明的次世代總管】", "zh-CN": "【纪律严明的次世代总管】", "ja": "【規律厳格な次世代の総監督】", "ko": "【규율이 엄격한 차세대 총괄 매니저】", "en": "【The Disciplined Next-Gen Manager】", "th": "【ผู้จัดการรุ่นใหม่จอมระเบียบวินัย】", "id": "【Manajer Generasi Berikutnya yang Disiplin】"
       },
@@ -2133,7 +2196,7 @@
         "id": "Yui adalah ESTJ yang sangat langka di grup, seorang manajer generasi berikutnya yang sangat disiplin. Meskipun usianya masih muda, ia memiliki energi sosial dan kepercayaan diri yang kuat, tidak takut untuk memulai komunikasi. Ia sangat menghargai tatanan dan detail yang nyata. Dalam pengambilan keputusan, ia menekankan efisiensi dan fakta di atas perasaan untuk mencapai tujuan. Ia adalah perencana ulung yang dengan mahir mengatur jadwalnya dan tetap sepenuhnya tenang di bawah tekanan, memberinya pesona 'dewasa sebelum waktunya' yang menggemaskan sekaligus berwibawa."
       }
     },
-    "36": {
+    "39": {
       "title": {
         "zh-HK": "【散發溫暖光芒的創意太陽】", "zh-CN": "【散发温暖光芒的创意太阳】", "ja": "【温かい光を放つクリエイティブな太陽】", "ko": "【따뜻한 빛을 발산하는 창의적인 태양】", "en": "【The Creative Sun Radiating Warm Light】", "th": "【ดวงอาทิตย์แห่งความคิดสร้างสรรค์ที่เปล่งประกายอบอุ่น】", "id": "【Matahari Kreatif yang Memancarkan Cahaya Hangat】"
       },
@@ -2156,7 +2219,7 @@
         "id": "Momoka adalah matahari kreatif yang memancarkan cahaya hangat. Dia memiliki energi sosial yang besar, dengan penuh semangat menampilkan dirinya dan dengan cepat membangun koneksi dalam grup. Dia memiliki hasrat tak terbatas untuk kreativitas, sangat berinvestasi dalam konsep proyek. Didorong terutama oleh sentimen dan empati, dia menyukai intuisi emosional dalam pengambilan keputusan. Dia tidak menyukai jadwal yang kaku, lebih memilih untuk memamerkan pesona idolanya secara spontan dan fleksibel."
       }
     },
-    "37": {
+    "40": {
       "title": {
         "zh-HK": "【細膩捕捉情緒的寧靜職人】", "zh-CN": "【细腻捕捉情绪的宁静职人】", "ja": "【感情を繊細に捉える静かな職人】", "ko": "【감정을 섬세하게 포착하는 고요한 장인】", "en": "【The Tranquil Artisan Delicately Capturing Emotions】", "th": "【ช่างฝีมือผู้เงียบสงบที่จับอารมณ์ได้อย่างละเอียดอ่อน】", "id": "【Artisan Tenang yang Secara Halus Menangkap Emosi】"
       },
@@ -2179,7 +2242,7 @@
         "id": "Kairi terlihat seperti ratu es di luar tetapi sebenarnya adalah seorang artisan yang tenang yang dengan halus menangkap emosi. Energinya berfokus ke dalam, lebih suka mengamati daripada aktif bergabung dalam kebisingan di lingkungan sosial. Sangat sensitif terhadap pergeseran emosional, ia secara akurat mengidentifikasi aliran perasaan di lingkungannya. Memprioritaskan nilai dan harmoni, ia secara konsisten mengikuti suara hatinya ketika logika dan emosi berbenturan. Tidak menyukai jadwal yang kaku, ia beradaptasi dengan tangguh terhadap rintangan apa pun."
       }
     },
-    "38": {
+    "41": {
       "title": {
         "zh-HK": "【充滿活力的自由探索者】", "zh-CN": "【充满活力的自由探索者】", "ja": "【エネルギッシュな自由の探求者】", "ko": "【활기 넘치는 자유로운 탐험가】", "en": "【The Energetic Free Explorer】", "th": "【นักสำรวจอิสระที่เต็มไปด้วยพลังชีวิต】", "id": "【Penjelajah Bebas yang Penuh Energi】"
       },
@@ -2202,7 +2265,7 @@
         "id": "Yui adalah penjelajah bebas yang energik. Dilengkapi dengan dorongan ekstrovert yang kuat, dia lincah, ceria, dan membangun interaksi dengan orang asing tanpa rasa takut. Dia sangat ingin tahu tentang hal-hal baru, menikmati eksplorasi ide-ide tidak konvensional dan ekspresi kreatif di luar kenyataan. Dalam pengambilan keputusan, dia sangat condong pada empati, menempatkan dirinya pada posisi orang lain. Membenci belenggu daftar tugas, dia mengejar gaya kerja dan kehidupan yang sangat fleksibel dan tidak terikat."
       }
     },
-    "39": {
+    "42": {
       "title": {
         "zh-HK": "【冷靜應對挑戰的技術實踐者】", "zh-CN": "【冷静应对挑战的技术实践者】", "ja": "【冷静に課題をクリアする技術実践者】", "ko": "【냉정하게 도전을 극복하는 기술 실천가】", "en": "【The Calm Technical Practitioner Facing Challenges】", "th": "【นักปฏิบัติสายเทคนิคผู้รับมือกับความท้าทายอย่างเยือกเย็น】", "id": "【Praktisi Teknis Tenang yang Menghadapi Tantangan】"
       },
@@ -2225,7 +2288,7 @@
         "id": "Sari adalah praktisi teknis yang tenang yang dengan mahir menangani tantangan. Sangat mandiri, ia menunjukkan kepercayaan diri yang tenang dalam situasi yang tidak biasa. Menghargai penyempurnaan keterampilan praktis di atas segalanya, ia menginvestasikan upaya jangka panjang setelah berkomitmen untuk menguasai teknik yang sulit. Menghargai logika dan efisiensi dalam pilihannya, ia bertindak tegas, bahkan mengesampingkan pertimbangan emosional untuk tujuannya. Dengan keterampilan improvisasi yang luar biasa, ia lebih menyukai solusi kreatif dan langsung di mana bakatnya dapat bersinar daripada mengikuti prosedur tradisional selangkah demi selangkah."
       }
     },
-    "40": {
+    "43": {
       "title": {
         "zh-HK": "【具備使命感的團隊領袖】", "zh-CN": "【具备使命感的团队领袖】", "ja": "【使命感を持つチームの牽引者】", "ko": "【사명감을 지닌 팀의 리더】", "en": "【The Mission-Driven Team Leader】", "th": "【ผู้นำทีมผู้เต็มเปี่ยมไปด้วยอุดมการณ์】", "id": "【Pemimpin Tim yang Terdorong Misi】"
       },
@@ -2248,7 +2311,7 @@
         "id": "Mei adalah pemimpin tim yang dilengkapi dengan rasa misi yang mendalam. Seorang pemersatu alami, ia merasa paling bersemangat saat memimpin orang lain menuju tujuan bersama. Tidak puas hanya dengan menyelesaikan tugas-tugas mendesak, ia membayangkan cetak biru yang jelas untuk tujuan jangka panjang yang besar. Dengan empati dan altruisme yang mendalam, ia dengan rela berkorban secara pribadi untuk menjaga keharmonisan tim atau membantu orang lain. Sangat terorganisir dan sangat bertanggung jawab, ia memaksa dirinya untuk memikul tugas penting bahkan di bawah tekanan besar, memastikan semuanya berjalan sesuai rencana."
       }
     },
-    "41": {
+    "44": {
       "title": {
         "zh-HK": "【追求熱鬧現場的直覺表演者】", "zh-CN": "【追求热闹现场的直觉表演者】", "ja": "【熱狂の現場を求める直感型パフォーマー】", "ko": "【뜨거운 현장을 즐기는 직관형 퍼포머】", "en": "【The Intuitive Performer Chasing Lively Scenes】", "th": "【นักแสดงสัญชาตญาณแรงที่หลงใหลความคึกคัก】", "id": "【Penampil Intuitif yang Mengejar Suasana Ramai】"
       },
@@ -2271,7 +2334,7 @@
         "id": "Saki adalah penampil intuitif yang berkembang pesat di lingkungan yang ramai. Energinya didorong oleh interaksi kelompok; ia dengan bersemangat berpartisipasi dalam kegiatan tim dan merasa paling betah dikelilingi oleh orang-orang. Ia sangat menikmati pengalaman sensorik langsung, dengan mudah terpikat oleh suasana teater yang sibuk dan semarak, yang diterjemahkan menjadi kehadiran panggungnya yang kuat dan menular. Saat membuat keputusan, ia mengutamakan empati, menempatkan dirinya pada posisi orang lain dan memprioritaskan penyampaian emosional yang tulus. Gaya eksekusinya sangat eksplosif, mengandalkan ledakan gairah yang tiba-tiba untuk mengatasi tantangan daripada upaya yang mantap dan metodis."
       }
     },
-    "42": {
+    "45": {
       "title": {
         "zh-HK": "【打破年齡界限的靈動核心】", "zh-CN": "【打破年龄界限的灵动核心】", "ja": "【年齢の壁を越える軽快なセンター】", "ko": "【나이의 장벽을 뛰어넘는 통통 튀는 센터】", "en": "【The Dynamic Core Breaking Age Boundaries】", "th": "【ศูนย์กลางความสดใสที่ทลายกำแพงเรื่องอายุ】", "id": "【Inti Dinamis yang Menembus Batas Usia】"
       },
@@ -2294,7 +2357,7 @@
         "id": "Saki adalah inti dinamis yang menembus batas usia. Sebagai member termuda, ia menampilkan keterampilan sosial yang tak kenal takut, secara aktif berinteraksi dengan senior dan fans di berbagai platform media sosial. Ia sangat bersemangat tentang ekspresi kreatif dan melemparkan dirinya sepenuhnya ke dalam tantangan baru seperti mengambil posisi Center. Saat membuat pilihan, ia mengikuti intuisi emosional batinnya; proyeksi emosi yang murni ini memungkinkannya beresonansi kuat saat membawakan lagu. Ritme eksekusinya sangat fleksibel; sementara ia mungkin berjuang untuk mempertahankan kebiasaan belajar rutin yang stabil, ia menunjukkan keterampilan improvisasi yang luar biasa di bawah tekanan. Dalam wawancaranya sebagai Center B-side, ia memamerkan empati yang luar biasa, berharap dapat mengekspresikan debaran cinta pertama bersama semua orang."
       }
     },
-    "43": {
+    "46": {
       "title": {
         "zh-HK": "【冷靜觀察的知性新星】", "zh-CN": "【冷静观察的知性新星】", "ja": "【冷静に観察する知的な新星】", "ko": "【냉정하게 관찰하는 지성파 신성】", "en": "【The Calmly Observing Intellectual Rising Star】", "th": "【ดาวรุ่งสายวิชาการผู้เฝ้าสังเกตอย่างเยือกเย็น】", "id": "【Bintang Baru Intelektual yang Mengamati dengan Tenang】"
       },
@@ -2317,7 +2380,7 @@
         "id": "Di antara Generasi 20 yang energik, Maruyama mungkin tampak berisik pada pandangan pertama, tetapi ia sebenarnya adalah bintang baru intelektual yang mengamati dengan tenang. Sangat mandiri, ia lebih suka meluangkan ruang untuk peningkatan diri bahkan dalam dinamika kelompok kecil. Ia memiliki rasa ingin tahu yang kuat akan bidang pengetahuan baru, dengan penuh semangat mengeksplorasi pengalaman dan teori baru tentang perkembangan masa depan. Berbekal kemampuan beradaptasi yang luar biasa, setiap kali ia menghadapi perubahan tak terduga, ia dapat dengan cepat menyesuaikan pola pikirnya untuk beradaptasi dengan lingkungan baru."
       }
     },
-    "44": {
+    "47": {
       "title": {
         "zh-HK": "【敏感細膩的守護者】", "zh-CN": "【敏感细腻的守护者】", "ja": "【繊細で敏感な守護者】", "ko": "【섬세하고 예민한 수호자】", "en": "【The Sensitive and Delicate Guardian】", "th": "【ผู้พิทักษ์ที่ละเอียดอ่อนและอ่อนไหว】", "id": "【Penjaga yang Sensitif dan Halus】"
       },
@@ -2340,7 +2403,7 @@
         "id": "Mao adalah penjaga batin yang halus dan lembut. Energinya condong ke arah kedamaian batin; dibandingkan dengan lingkungan yang bising, ia membenamkan dirinya dalam hobi menyendiri yang menenangkan pikiran dan jiwanya. Ia memiliki persepsi detail emosional yang mencengangkan, mampu mengidentifikasi secara tepat pergeseran kecil dalam suasana panggung. Saat menghadapi keputusan, ia memprioritaskan kemanusiaan dan harmoni, condong untuk dengan tulus mempertimbangkan perasaan batin mereka yang terkena dampak daripada menimbang pro dan kontra logis. Laju kehidupannya mengikuti kata hatinya; ia tidak suka dibatasi oleh jadwal terperinci dan mengejar lingkungan yang tidak terkekang untuk berkembang."
       }
     },
-    "45": {
+    "48": {
       "title": {
         "zh-HK": "【溫和謙遜的調停者】", "zh-CN": "【温和谦逊的调停者】", "ja": "【温和で謙虚な仲介者】", "ko": "【온화하고 겸손한 중재자】", "en": "【The Gentle and Humble Mediator】", "th": "【ผู้ไกล่เกลี่ยที่อ่อนโยนและถ่อมตัว】", "id": "【Mediator yang Lembut dan Rendah Hati】"
       },
@@ -2363,7 +2426,7 @@
         "id": "Sayuri adalah mediator yang lembut dan rendah hati. Di dalam tim, ia cenderung memainkan peran pendukung, secara diam-diam menyumbangkan kekuatannya dalam kolaborasi alih-alih mencari sorotan. Ia menikmati mengeksplorasi pemikiran kreatif, mendedikasikan dirinya pada karier idola yang otentik, yang mencerminkan ekspektasi dirinya yang murni. Berbekal rasa misi dan dedikasi yang mendalam, ia bahkan akan berkorban secara pribadi untuk membantu orang lain. Ia tidak menyukai rencana terstruktur, memandang daftar tugas sebagai batasan, dan lebih suka membuat kemajuan yang mantap dalam suasana yang fleksibel."
       }
     },
-    "46": {
+    "49": {
       "title": {
         "zh-HK": "【活潑自信的溝通者】", "zh-CN": "【活泼自信的沟通者】", "ja": "【陽気で自信に満ちたコミュニケーター】", "ko": "【활기차고 자신감 넘치는 소통가】", "en": "【The Lively and Confident Communicator】", "th": "【นักสื่อสารที่ร่าเริงและมั่นใจ】", "id": "【Komunikator yang Lincah dan Percaya Diri】"
       },
@@ -2386,7 +2449,7 @@
         "id": "Ema adalah komunikator aktif yang lincah dan percaya diri. Tenang dan tidak takut, kapan pun ia bertemu orang atau hal yang menarik minatnya, ia secara proaktif membangun koneksi tanpa demam panggung. Ia bersemangat tentang ekspresi kreatif, sangat ingin tahu tentang ide-ide out-of-the-box, dan terus mencari pengalaman segar dalam kehidupan sehari-harinya. Menggunakan keramahan dan harmoni sebagai pedoman sosialnya, ia memprioritaskan empati dan kebaikan yang lebih besar saat berinteraksi dengan orang lain. Dalam gaya eksekusinya, ia tidak menyukai rutinitas dan jadwal yang kaku, lebih menyukai metode kerja yang sangat elastis dan beragam."
       }
     },
-    "47": {
+    "50": {
       "title": {
         "zh-HK": "【自律負責的守衛者】", "zh-CN": "【自律负责的守卫者】", "ja": "【自律と責任感の擁護者】", "ko": "【자율적이고 책임감 있는 수호자】", "en": "【The Disciplined and Responsible Defender】", "th": "【ผู้พิทักษ์ที่ซื่อสัตย์และมีความรับผิดชอบ】", "id": "【Pembela yang Disiplin dan Bertanggung Jawab】"
       },
@@ -2409,7 +2472,7 @@
         "id": "Yu adalah landasan tim yang disiplin dan bertanggung jawab. Dia diam-diam memikul tanggung jawab di dalam grup; bahkan ketika dihadapkan pada beban berat, dia mendorong dirinya sendiri untuk mencapai tujuan, menjadikannya pilar dukungan yang sangat andal. Dia memiliki perhatian yang sangat tinggi terhadap detail lingkungan, mampu mengidentifikasi dan menanggapi perubahan kecil pada saat ini. Dalam kehidupan sehari-harinya, dia senang mendedikasikan waktu dan keterampilannya untuk membantu orang lain, menunjukkan dedikasi yang luar biasa. Dalam pendekatannya terhadap tugas, dia dengan ketat mengikuti protokol yang ditetapkan, terbiasa menyelesaikan pekerjaan selangkah demi selangkah, menunjukkan tingkat profesionalisme dan rasa keteraturan yang tinggi."
       }
     },
-    "48": {
+    "51": {
       "title": {
         "zh-HK": "【勇於表達自我的主人公】", "zh-CN": "【勇于表达自我的主人公】", "ja": "【自己表現を恐れない主人公】", "ko": "【자기표현을 두려워하지 않는 주인공】", "en": "【The Protagonist Brave in Self-Expression】", "th": "【ตัวเอกผู้กล้าที่จะแสดงความเป็นตัวเอง】", "id": "【Protagonis yang Berani Mengekspresikan Diri】"
       },
