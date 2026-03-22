@@ -904,18 +904,23 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
-// 定義分組加載成員嘅函數
+// 定義分組加載成員嘅函數 (已整合多國語言)
 async function loadMembers() {
     try {
         const response = await fetch('members.json');
         const membersData = await response.json();
-        const selector = $('oshi-select'); // 確保 ID 對應妳 HTML 嘅下拉選單
+        const selector = $('oshi-select');
         if (!selector) return;
 
-        // 1. 清空原有選項，只保留第一個「請選擇...」
-        const firstOption = selector.options[0];
-        selector.innerHTML = '';
-        if (firstOption) selector.appendChild(firstOption);
+        // 1. 動態生成第一個「請選擇...」選項，並對應 langs.json 翻譯
+        selector.innerHTML = ''; // 清空
+        const firstOption = document.createElement('option');
+        firstOption.value = "";
+        // 優先搵 select_oshi_default，如果未 load 到就用中文做 base
+        firstOption.textContent = (i18nData.ui && i18nData.ui.select_oshi_default) 
+                                  ? i18nData.ui.select_oshi_default[currentLang] 
+                                  : "請選擇神推成員...";
+        selector.appendChild(firstOption);
 
         const groups = {};
 
@@ -929,18 +934,17 @@ async function loadMembers() {
         // 3. 轉化為 HTML optgroup 同 option
         for (const [gen, mems] of Object.entries(groups)) {
             const optgroup = document.createElement('optgroup');
-            optgroup.label = gen;
+            optgroup.label = gen; // 呢度會顯示例如 "16期"
             
             mems.forEach(m => {
                 const option = document.createElement('option');
-                option.value = m.id; // 綁定 ID 方便去 langs.json 攞分析
+                option.value = m.id;
                 option.textContent = `${m.name_ja} (${m.nickname || m.name_ja})`;
                 optgroup.appendChild(option);
             });
             selector.appendChild(optgroup);
         }
         
-        // 將資料存入全域變數，供測驗演算法使用
         membersDB = membersData; 
         
     } catch (error) { 
