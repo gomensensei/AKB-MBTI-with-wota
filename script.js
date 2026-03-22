@@ -49,6 +49,7 @@ let userMbtiStr = "";
 let myRadarChart = null; 
 let matchResultsGlobal = []; 
 let currentDisplayMember = null; 
+let oshiOptionsHTML = ""; // 儲存 optgroup HTML
 
 function detectLanguage() {
     const lang = navigator.language || navigator.userLanguage;
@@ -64,16 +65,12 @@ function detectLanguage() {
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        // 1. 載入語言檔 (保留妳原本嘅 logic)
         const langRes = await fetch('langs.json');
         i18nData = await langRes.json();
         
-        // 2. 呼叫啱啱定義嘅 loadMembers 函數 (取代原本簡單嘅 fetch)
         await loadMembers(); 
 
-        // 3. 後續初始化 (處理 localStorage, 語言切換等)
         const saved = localStorage.getItem('akb_answers');
-        // ... 妳原本剩低嘅 code ...
         if (saved) {
             userAnswers = JSON.parse(saved);
             const ansCount = Object.keys(userAnswers).length;
@@ -143,10 +140,9 @@ function applyLanguage(lang) {
         });
         updateUI(); 
     }
-if (!document.getElementById('page-result').classList.contains('hidden') && matchResultsGlobal.length > 0) {
+    
+    if (!document.getElementById('page-result').classList.contains('hidden') && matchResultsGlobal.length > 0) {
         renderResultPage(matchResultsGlobal);
-        
-        // 🌟 新增：轉語言後重新觸發數字與心跳動畫
         const isOshi = document.getElementById('oshi-select').value !== "";
         applyDynamicAnimations(currentDisplayMember.comp, isOshi);
     }
@@ -284,7 +280,6 @@ function updateProgress() {
         try {
             const stageData = i18nData.progress_tips?.[milestones[count]];
             if (stageData) {
-                // 🌟 防死機機制：如果找不到當前語言，順序找 zh-HK -> en -> 空陣列，確保絕對不會報錯
                 const options = stageData[currentLang] || stageData['zh-HK'] || stageData['en'] || [];
                 if (options.length > 0) {
                     const randomTip = options[Math.floor(Math.random() * options.length)];
@@ -294,7 +289,7 @@ function updateProgress() {
                 }
             }
         } catch (e) {
-            console.error("鼓勵語載入錯誤，但不影響答題:", e);
+            console.error("鼓勵語載入錯誤:", e);
         }
     }
 }
@@ -526,8 +521,8 @@ function renderResultPage(allMembers) {
         <div class="web-only" style="margin-top: 25px; background: white; border-radius: 166px; padding: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.05);">
             <h4 style="margin-bottom: 10px; text-align:center;">${ui.select_oshi_label[currentLang]}</h4>
             <select id="oshi-select" style="width: 100%; padding: 12px; border-radius: 8px; border: 1px solid #ccc; font-size:16px;">
-                <option value="">${ui.select_oshi_default[currentLang]}</option>
-                ${[...allMembers].sort((a,b)=>a.ki.localeCompare(b.ki)).map(m => `<option value="${m.id}">${m.name_ja} (${m.ki})</option>`).join('')}
+                <option value="">${ui.select_oshi_default[currentLang] || "-- 請選擇神推成員 --"}</option>
+                ${oshiOptionsHTML}
             </select>
         </div>
         <div id="back-to-best3-container" class="web-only" style="display: none; margin-top: 15px;">
@@ -542,8 +537,6 @@ function renderResultPage(allMembers) {
             <button id="copy-link-btn" class="cyber-btn" style="width: 100%; background: var(--cyber-pink); color: #fff;">🔗 複製專屬結果連結</button>
         </div>
     `;
-
-
 
     if(myRadarChart) myRadarChart.destroy();
     const ctx = document.getElementById('radarChart').getContext('2d');
@@ -902,50 +895,32 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 });
 
-
-
 // 定義分組加載成員嘅函數 (已整合多國語言)
 async function loadMembers() {
     try {
         const response = await fetch('members.json');
-        const membersData = await response.json();
-        const selector = $('oshi-select');
-        if (!selector) return;
-
-        // 1. 動態生成第一個「請選擇...」選項，並對應 langs.json 翻譯
-        selector.innerHTML = ''; // 清空
-        const firstOption = document.createElement('option');
-        firstOption.value = "";
-        // 優先搵 select_oshi_default，如果未 load 到就用中文做 base
-        firstOption.textContent = (i18nData.ui && i18nData.ui.select_oshi_default) 
-                                  ? i18nData.ui.select_oshi_default[currentLang] 
-                                  : "請選擇神推成員...";
-        selector.appendChild(firstOption);
+        membersDB = await response.json();
 
         const groups = {};
-
-        // 2. 按 ki (期數) 進行分組
-        membersData.forEach(m => { 
+        
+        // 按 ki (期數) 進行分組
+        membersDB.forEach(m => { 
             const gen = m.ki || '其他'; 
             if(!groups[gen]) groups[gen] = []; 
             groups[gen].push(m); 
         });
 
-        // 3. 轉化為 HTML optgroup 同 option
+        // 轉化為 HTML optgroup 同 option 字串，儲存備用
+        let html = "";
         for (const [gen, mems] of Object.entries(groups)) {
-            const optgroup = document.createElement('optgroup');
-            optgroup.label = gen; // 呢度會顯示例如 "16期"
-            
+            html += `<optgroup label="${gen}">`;
             mems.forEach(m => {
-                const option = document.createElement('option');
-                option.value = m.id;
-                option.textContent = `${m.name_ja} (${m.nickname || m.name_ja})`;
-                optgroup.appendChild(option);
+                html += `<option value="${m.id}">${m.name_ja} (${m.nickname || m.name_ja})</option>`;
             });
-            selector.appendChild(optgroup);
+            html += `</optgroup>`;
         }
         
-        membersDB = membersData; 
+        oshiOptionsHTML = html;
         
     } catch (error) { 
         console.error("載入成員資料失敗:", error); 
