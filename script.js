@@ -64,11 +64,16 @@ function detectLanguage() {
 
 document.addEventListener('DOMContentLoaded', async () => {
     try {
-        const [memRes, langRes] = await Promise.all([ fetch('members.json'), fetch('langs.json') ]);
-        membersDB = await memRes.json();
+        // 1. 載入語言檔 (保留妳原本嘅 logic)
+        const langRes = await fetch('langs.json');
         i18nData = await langRes.json();
         
+        // 2. 呼叫啱啱定義嘅 loadMembers 函數 (取代原本簡單嘅 fetch)
+        await loadMembers(); 
+
+        // 3. 後續初始化 (處理 localStorage, 語言切換等)
         const saved = localStorage.getItem('akb_answers');
+        // ... 妳原本剩低嘅 code ...
         if (saved) {
             userAnswers = JSON.parse(saved);
             const ansCount = Object.keys(userAnswers).length;
@@ -899,3 +904,46 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
 
+// 定義分組加載成員嘅函數
+async function loadMembers() {
+    try {
+        const response = await fetch('members.json');
+        const membersData = await response.json();
+        const selector = $('oshi-select'); // 確保 ID 對應妳 HTML 嘅下拉選單
+        if (!selector) return;
+
+        // 1. 清空原有選項，只保留第一個「請選擇...」
+        const firstOption = selector.options[0];
+        selector.innerHTML = '';
+        if (firstOption) selector.appendChild(firstOption);
+
+        const groups = {};
+
+        // 2. 按 ki (期數) 進行分組
+        membersData.forEach(m => { 
+            const gen = m.ki || '其他'; 
+            if(!groups[gen]) groups[gen] = []; 
+            groups[gen].push(m); 
+        });
+
+        // 3. 轉化為 HTML optgroup 同 option
+        for (const [gen, mems] of Object.entries(groups)) {
+            const optgroup = document.createElement('optgroup');
+            optgroup.label = gen;
+            
+            mems.forEach(m => {
+                const option = document.createElement('option');
+                option.value = m.id; // 綁定 ID 方便去 langs.json 攞分析
+                option.textContent = `${m.name_ja} (${m.nickname || m.name_ja})`;
+                optgroup.appendChild(option);
+            });
+            selector.appendChild(optgroup);
+        }
+        
+        // 將資料存入全域變數，供測驗演算法使用
+        membersDB = membersData; 
+        
+    } catch (error) { 
+        console.error("載入成員資料失敗:", error); 
+    }
+}
