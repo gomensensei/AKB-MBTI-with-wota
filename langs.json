@@ -148,6 +148,282 @@
     "radar_user_label": {
       "zh-HK": "你", "zh-CN": "你", "ja": "あなた", "ko": "당신", "en": "You", "th": "คุณ", "id": "Kamu"
     },
+    "cloudSaveTitle": {
+      "zh-HK": "Tool48 Account / Cloud Save", "zh-CN": "Tool48 Account / 云端保存", "ja": "Tool48 Account / Cloud Save", "ko": "Tool48 Account / Cloud Save", "en": "Tool48 Account / Cloud Save", "th": "Tool48 Account / Cloud Save", "id": "Tool48 Account / Cloud Save"
+    },
+    "cloudSaveHint": {
+      "zh-HK": "登入屬自選；不登入也可照常完成測驗，結果會保留在本機。",
+      "zh-CN": "登录是可选功能；不登录也可照常完成测试，结果会保留在本机。",
+      "ja": "ログインは任意です。ログインしなくても診断は通常どおり遊べ、結果は端末内に残ります。",
+      "ko": "로그인은 선택 사항입니다. 로그인하지 않아도 테스트는 그대로 진행되며 결과는 로컬에 남습니다.",
+      "en": "Login is optional. The test still works locally without an account.",
+      "th": "การเข้าสู่ระบบเป็นทางเลือก แบบทดสอบยังใช้งานและเก็บผลในเครื่องได้ตามปกติ",
+      "id": "Login bersifat opsional. Tes tetap berjalan dan hasil tersimpan lokal tanpa akun."
+    },
+    "accountNavGuest": {
+      "zh-HK": "Tool48 帳戶", "zh-CN": "Tool48 账号", "ja": "Tool48 Account", "ko": "Tool48 계정", "en": "Tool48 Account", "th": "บัญชี Tool48", "id": "Akun Tool48"
+    },
+    "cloudAccount": {
+      "zh-HK": "Tool48 帳戶", "zh-CN": "Tool48 账号", "ja": "Tool48 Account", "ko": "Tool48 계정", "en": "Tool48 Account", "th": "บัญชี Tool48", "id": "Akun Tool48"
+    },
+    "cloudLocalOnly": {
+      "zh-HK": "Local only", "zh-CN": "本地模式", "ja": "ローカルのみ", "ko": "로컬 전용", "en": "Local only", "th": "เฉพาะในเครื่อง", "id": "Lokal saja"
+    },
+    "cloudUnavailable": {
+      "zh-HK": "Cloud Save 未能載入，本機結果仍會保留。",
+      "zh-CN": "Cloud Save 未能载入，本地结果仍会保留。",
+      "ja": "Cloud Saveを読み込めませんでした。ローカル結果は保持されます。",
+      "ko": "Cloud Save를 불러오지 못했습니다. 로컬 결과는 유지됩니다.",
+      "en": "Cloud Save could not load. Local results are kept.",
+      "th": "โหลด Cloud Save ไม่ได้ แต่ผลในเครื่องยังอยู่",
+      "id": "Cloud Save tidak dapat dimuat. Hasil lokal tetap disimpan."
+    },
+    "cloudSaveAvailable": {
+      "zh-HK": "Cloud save available", "zh-CN": "可使用云端保存", "ja": "Cloud Save利用可", "ko": "Cloud Save 사용 가능", "en": "Cloud save available", "th": "Cloud Save พร้อมใช้", "id": "Cloud save tersedia"
+    },
+    "cloudSaved": {
+      "zh-HK": "Saved to cloud", "zh-CN": "已保存到云端", "ja": "Cloudに保存済み", "ko": "클라우드에 저장됨", "en": "Saved to cloud", "th": "บันทึกบนคลาวด์แล้ว", "id": "Tersimpan ke cloud"
+    },
+    "cloudDeleted": {
+      "zh-HK": "Deleted", "zh-CN": "已删除", "ja": "削除しました", "ko": "삭제됨", "en": "Deleted", "th": "ลบแล้ว", "id": "Dihapus"
+    },
+    "cloudLoginRequired": {
+      "zh-HK": "請登入 Tool48 Account 使用 Cloud Save。",
+      "zh-CN": "请登录 Tool48 Account 使用 Cloud Save。",
+      "ja": "Cloud Saveを使うにはTool48 Accountにログインしてください。",
+      "ko": "Cloud Save를 사용하려면 Tool48 계정으로 로그인하세요.",
+      "en": "Sign in to Tool48 Account to use Cloud Save.",
+      "th": "เข้าสู่ระบบ Tool48 Account เพื่อใช้ Cloud Save",
+      "id": "Masuk ke Tool48 Account untuk memakai Cloud Save."
+    },
+    "cloudLoginRequiredForResults": {
+      "zh-HK": "登入後可查看你的私人 Cloud Results。",
+      "zh-CN": "登录后可查看你的私人 Cloud Results。",
+      "ja": "ログインすると自分だけのCloud Resultsを確認できます。",
+      "ko": "로그인하면 비공개 Cloud Results를 볼 수 있습니다.",
+      "en": "Sign in to view your private Cloud Results.",
+      "th": "เข้าสู่ระบบเพื่อดู Cloud Results ส่วนตัวของคุณ",
+      "id": "Masuk untuk melihat Cloud Results pribadi kamu."
+    },
+    "cloudNicknamePlaceholder": {
+      "zh-HK": "nickname", "zh-CN": "nickname", "ja": "nickname", "ko": "nickname", "en": "nickname", "th": "nickname", "id": "nickname"
+    },
+    "cloudEmailPlaceholder": {
+      "zh-HK": "Tool48 Account 電郵", "zh-CN": "Tool48 Account 邮箱", "ja": "Tool48 Accountのメール", "ko": "Tool48 Account 이메일", "en": "Tool48 Account email", "th": "อีเมล Tool48 Account", "id": "Email Tool48 Account"
+    },
+    "cloudPasswordPlaceholder": {
+      "zh-HK": "6個字以上密碼", "zh-CN": "至少 6 个字符", "ja": "6文字以上のパスワード", "ko": "6자 이상 비밀번호", "en": "6+ characters", "th": "รหัสผ่านอย่างน้อย 6 ตัว", "id": "Password 6+ karakter"
+    },
+    "cloudSignIn": {
+      "zh-HK": "登入", "zh-CN": "登录", "ja": "ログイン", "ko": "로그인", "en": "Sign in", "th": "เข้าสู่ระบบ", "id": "Masuk"
+    },
+    "cloudCreateAccount": {
+      "zh-HK": "建立帳戶", "zh-CN": "创建账号", "ja": "アカウント作成", "ko": "계정 만들기", "en": "Create account", "th": "สร้างบัญชี", "id": "Buat akun"
+    },
+    "cloudSignOut": {
+      "zh-HK": "登出", "zh-CN": "退出登录", "ja": "ログアウト", "ko": "로그아웃", "en": "Sign out", "th": "ออกจากระบบ", "id": "Keluar"
+    },
+    "cloudMissingEmailPassword": {
+      "zh-HK": "請輸入電郵和密碼。",
+      "zh-CN": "请输入邮箱和密码。",
+      "ja": "メールアドレスとパスワードを入力してください。",
+      "ko": "이메일과 비밀번호를 입력하세요.",
+      "en": "Please enter email and password.",
+      "th": "กรุณาใส่อีเมลและรหัสผ่าน",
+      "id": "Masukkan email dan password."
+    },
+    "cloudMissingSignup": {
+      "zh-HK": "請輸入 nickname、電郵和密碼。",
+      "zh-CN": "请输入 nickname、邮箱和密码。",
+      "ja": "nickname、メール、パスワードを入力してください。",
+      "ko": "nickname, 이메일, 비밀번호를 입력하세요.",
+      "en": "Please enter nickname, email, and password.",
+      "th": "กรุณาใส่ nickname อีเมล และรหัสผ่าน",
+      "id": "Masukkan nickname, email, dan password."
+    },
+    "cloudSigningIn": {
+      "zh-HK": "登入中...", "zh-CN": "登录中...", "ja": "ログイン中...", "ko": "로그인 중...", "en": "Signing in...", "th": "กำลังเข้าสู่ระบบ...", "id": "Sedang masuk..."
+    },
+    "cloudSigningUp": {
+      "zh-HK": "建立帳戶中...", "zh-CN": "创建账号中...", "ja": "アカウント作成中...", "ko": "계정 생성 중...", "en": "Creating account...", "th": "กำลังสร้างบัญชี...", "id": "Membuat akun..."
+    },
+    "cloudSignedIn": {
+      "zh-HK": "已登入。",
+      "zh-CN": "已登录。",
+      "ja": "ログインしました。",
+      "ko": "로그인했습니다.",
+      "en": "Signed in.",
+      "th": "เข้าสู่ระบบแล้ว",
+      "id": "Sudah masuk."
+    },
+    "cloudSignupNeedsConfirm": {
+      "zh-HK": "帳戶已建立，請先確認電郵再登入。",
+      "zh-CN": "账号已创建，请先确认邮箱再登录。",
+      "ja": "アカウントを作成しました。メール確認後にログインしてください。",
+      "ko": "계정을 만들었습니다. 이메일 확인 후 로그인하세요.",
+      "en": "Account created. Please confirm your email before signing in.",
+      "th": "สร้างบัญชีแล้ว กรุณายืนยันอีเมลก่อนเข้าสู่ระบบ",
+      "id": "Akun dibuat. Konfirmasi email sebelum masuk."
+    },
+    "cloudLoggedOut": {
+      "zh-HK": "已登出。",
+      "zh-CN": "已退出登录。",
+      "ja": "ログアウトしました。",
+      "ko": "로그아웃했습니다.",
+      "en": "Signed out.",
+      "th": "ออกจากระบบแล้ว",
+      "id": "Sudah keluar."
+    },
+    "cloudLogoutFailed": {
+      "zh-HK": "登出失敗。",
+      "zh-CN": "退出登录失败。",
+      "ja": "ログアウトできませんでした。",
+      "ko": "로그아웃하지 못했습니다.",
+      "en": "Could not sign out.",
+      "th": "ออกจากระบบไม่สำเร็จ",
+      "id": "Gagal keluar."
+    },
+    "cloudActionFailed": {
+      "zh-HK": "Cloud action failed.",
+      "zh-CN": "云端操作失败。",
+      "ja": "Cloud操作に失敗しました。",
+      "ko": "클라우드 작업에 실패했습니다.",
+      "en": "Cloud action failed.",
+      "th": "ดำเนินการบนคลาวด์ไม่สำเร็จ",
+      "id": "Aksi cloud gagal."
+    },
+    "cloudSaveCurrent": {
+      "zh-HK": "儲存目前結果到雲端",
+      "zh-CN": "保存当前结果到云端",
+      "ja": "現在の結果をCloud保存",
+      "ko": "현재 결과를 클라우드에 저장",
+      "en": "Save current result to cloud",
+      "th": "บันทึกผลปัจจุบันไปยังคลาวด์",
+      "id": "Simpan hasil saat ini ke cloud"
+    },
+    "cloudLoadResults": {
+      "zh-HK": "載入 Cloud Results",
+      "zh-CN": "载入 Cloud Results",
+      "ja": "Cloud Resultsを読み込む",
+      "ko": "Cloud Results 불러오기",
+      "en": "Load Cloud Results",
+      "th": "โหลด Cloud Results",
+      "id": "Muat Cloud Results"
+    },
+    "cloudViewResult": {
+      "zh-HK": "查看", "zh-CN": "查看", "ja": "表示", "ko": "보기", "en": "View", "th": "ดู", "id": "Lihat"
+    },
+    "cloudDeleteResult": {
+      "zh-HK": "刪除", "zh-CN": "删除", "ja": "削除", "ko": "삭제", "en": "Delete", "th": "ลบ", "id": "Hapus"
+    },
+    "cloudNoResults": {
+      "zh-HK": "尚未有 Cloud Results。",
+      "zh-CN": "尚未有 Cloud Results。",
+      "ja": "Cloud Resultsはまだありません。",
+      "ko": "아직 Cloud Results가 없습니다.",
+      "en": "No Cloud Results yet.",
+      "th": "ยังไม่มี Cloud Results",
+      "id": "Belum ada Cloud Results."
+    },
+    "cloudNoCurrentResult": {
+      "zh-HK": "完成一次測驗後才可儲存目前結果。",
+      "zh-CN": "完成一次测试后才可保存当前结果。",
+      "ja": "診断完了後に現在の結果を保存できます。",
+      "ko": "테스트를 완료한 뒤 현재 결과를 저장할 수 있습니다.",
+      "en": "Complete a test before saving the current result.",
+      "th": "ทำแบบทดสอบให้เสร็จก่อนบันทึกผลปัจจุบัน",
+      "id": "Selesaikan tes sebelum menyimpan hasil saat ini."
+    },
+    "cloudSaveSuccess": {
+      "zh-HK": "Saved to cloud.",
+      "zh-CN": "已保存到云端。",
+      "ja": "Cloudに保存しました。",
+      "ko": "클라우드에 저장했습니다.",
+      "en": "Saved to cloud.",
+      "th": "บันทึกไปยังคลาวด์แล้ว",
+      "id": "Disimpan ke cloud."
+    },
+    "cloudAutoSaveSuccess": {
+      "zh-HK": "已自動儲存到雲端。",
+      "zh-CN": "已自动保存到云端。",
+      "ja": "Cloudに自動保存しました。",
+      "ko": "클라우드에 자동 저장했습니다.",
+      "en": "Saved to cloud automatically.",
+      "th": "บันทึกไปยังคลาวด์อัตโนมัติแล้ว",
+      "id": "Otomatis disimpan ke cloud."
+    },
+    "cloudSaveFailedLocalKept": {
+      "zh-HK": "Save failed, local result kept.",
+      "zh-CN": "保存失败，本地结果已保留。",
+      "ja": "保存に失敗しました。ローカル結果は保持されます。",
+      "ko": "저장 실패, 로컬 결과는 유지됩니다.",
+      "en": "Save failed, local result kept.",
+      "th": "บันทึกไม่สำเร็จ แต่ผลในเครื่องยังอยู่",
+      "id": "Gagal menyimpan, hasil lokal tetap ada."
+    },
+    "cloudResultsLoaded": {
+      "zh-HK": "已載入 {count} 個 Cloud Results。",
+      "zh-CN": "已载入 {count} 个 Cloud Results。",
+      "ja": "{count}件のCloud Resultsを読み込みました。",
+      "ko": "Cloud Results {count}개를 불러왔습니다.",
+      "en": "Loaded {count} Cloud Results.",
+      "th": "โหลด Cloud Results แล้ว {count} รายการ",
+      "id": "Memuat {count} Cloud Results."
+    },
+    "cloudLoadSuccess": {
+      "zh-HK": "已載入雲端結果。",
+      "zh-CN": "已载入云端结果。",
+      "ja": "Cloud結果を読み込みました。",
+      "ko": "클라우드 결과를 불러왔습니다.",
+      "en": "Cloud result loaded.",
+      "th": "โหลดผลจากคลาวด์แล้ว",
+      "id": "Hasil cloud dimuat."
+    },
+    "cloudDeleteSuccess": {
+      "zh-HK": "Deleted.",
+      "zh-CN": "已删除。",
+      "ja": "削除しました。",
+      "ko": "삭제했습니다.",
+      "en": "Deleted.",
+      "th": "ลบแล้ว",
+      "id": "Dihapus."
+    },
+    "cloudNoRecordSelected": {
+      "zh-HK": "請先選擇一個 Cloud Result。",
+      "zh-CN": "请先选择一个 Cloud Result。",
+      "ja": "Cloud Resultを選択してください。",
+      "ko": "Cloud Result를 먼저 선택하세요.",
+      "en": "Select a Cloud Result first.",
+      "th": "เลือก Cloud Result ก่อน",
+      "id": "Pilih Cloud Result terlebih dahulu."
+    },
+    "cloudConfirmDeleteResult": {
+      "zh-HK": "確定刪除雲端結果：{label}？",
+      "zh-CN": "确定删除云端结果：{label}？",
+      "ja": "Cloud結果を削除しますか: {label}",
+      "ko": "클라우드 결과를 삭제할까요: {label}",
+      "en": "Delete cloud result: {label}?",
+      "th": "ลบผลบนคลาวด์: {label}?",
+      "id": "Hapus hasil cloud: {label}?"
+    },
+    "cloudTopMatch": {
+      "zh-HK": "最高相性：{name}",
+      "zh-CN": "最高相性：{name}",
+      "ja": "最高相性: {name}",
+      "ko": "최고 상성: {name}",
+      "en": "Top match: {name}",
+      "th": "เข้ากันที่สุด: {name}",
+      "id": "Paling cocok: {name}"
+    },
+    "cloudUntitledResult": {
+      "zh-HK": "未命名結果",
+      "zh-CN": "未命名结果",
+      "ja": "無題の結果",
+      "ko": "제목 없는 결과",
+      "en": "Untitled result",
+      "th": "ผลลัพธ์ไม่มีชื่อ",
+      "id": "Hasil tanpa judul"
+    },
     "btn_about": {
       "zh-HK": "💡 開發秘辛 / About Project",
       "zh-CN": "💡 开发秘辛 / About Project",

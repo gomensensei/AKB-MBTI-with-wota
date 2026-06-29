@@ -50,6 +50,14 @@ let myRadarChart = null;
 let matchResultsGlobal = []; 
 let currentDisplayMember = null; 
 let oshiOptionsHTML = ""; // 儲存 optgroup HTML
+const SUPABASE_URL = "https://jappifgnjssqxvjodgiv.supabase.co";
+const SUPABASE_PUBLISHABLE_KEY = "sb_publishable_oXfJyHkRtn1BHBw-9ictBQ__01qBCZg";
+const CLOUD_TABLE = "personality_results";
+const LOCAL_RESULT_KEY = "akb_last_result";
+let currentResultState = null;
+let currentResultCloudId = "";
+let cloud = { client: null, user: null, records: [], ready: false, busy: false, statusKey: "cloudLocalOnly" };
+let cloudEventsBound = false;
 
 function detectLanguage() {
     const lang = navigator.language || navigator.userLanguage;
@@ -61,6 +69,58 @@ function detectLanguage() {
     if (lowerLang.includes('th')) return 'th';
     if (lowerLang.includes('id')) return 'id';
     return 'en';
+}
+
+function t(key, vars = {}) {
+    let value = i18nData.ui?.[key]?.[currentLang] || i18nData.ui?.[key]?.en || key;
+    Object.entries(vars).forEach(([name, replacement]) => {
+        value = String(value).split(`{${name}}`).join(replacement == null ? "" : String(replacement));
+    });
+    return value;
+}
+
+function escapeHtml(value) {
+    return String(value ?? "").replace(/[&<>"']/g, char => ({
+        "&": "&amp;",
+        "<": "&lt;",
+        ">": "&gt;",
+        '"': "&quot;",
+        "'": "&#39;"
+    }[char]));
+}
+
+function formatCloudTime(value) {
+    if (!value) return "";
+    const date = new Date(value);
+    if (Number.isNaN(date.getTime())) return "";
+    try {
+        return new Intl.DateTimeFormat(currentLang, {
+            year: "numeric",
+            month: "short",
+            day: "numeric",
+            hour: "2-digit",
+            minute: "2-digit"
+        }).format(date);
+    } catch (_error) {
+        return date.toLocaleString();
+    }
+}
+
+function setAccountToggleLabel(label) {
+    const text = document.querySelector("#accountToggleBtn .account-toggle-label");
+    if (text) text.textContent = label;
+}
+
+function getCloudDisplayName() {
+    return cloud.user?.user_metadata?.display_name || cloud.user?.email || t("cloudAccount");
+}
+
+function applyPlaceholderTranslations(lang) {
+    document.querySelectorAll("[data-i18n-placeholder]").forEach(el => {
+        const key = el.getAttribute("data-i18n-placeholder");
+        const value = i18nData.ui?.[key]?.[lang] || i18nData.ui?.[key]?.en;
+        if (value) el.setAttribute("placeholder", value);
+    });
 }
 
 document.addEventListener('DOMContentLoaded', async () => {
@@ -122,6 +182,9 @@ document.addEventListener('DOMContentLoaded', async () => {
             }
         }
     });
+
+    bindCloudEvents();
+    initCloudSave();
 });
 
 function applyLanguage(lang) {
@@ -129,6 +192,7 @@ function applyLanguage(lang) {
         const key = el.getAttribute('data-i18n');
         if (i18nData.ui[key] && i18nData.ui[key][lang]) el.innerHTML = i18nData.ui[key][lang];
     });
+    applyPlaceholderTranslations(lang);
 
     if (!document.getElementById('page-quiz').classList.contains('hidden')) {
         for(let i=1; i<=60; i++) {
@@ -146,6 +210,7 @@ function applyLanguage(lang) {
         const isOshi = document.getElementById('oshi-select').value !== "";
         applyDynamicAnimations(currentDisplayMember.comp, isOshi);
     }
+    updateCloudUI();
 }
 
 function renderQuiz() {
@@ -537,6 +602,8 @@ function renderResultPage(allMembers) {
             <button id="copy-link-btn" class="cyber-btn" style="width: 100%; background: var(--cyber-pink); color: #fff;">🔗 複製專屬結果連結</button>
         </div>
     `;
+    setCurrentResultState();
+    updateCloudUI();
 
     if(myRadarChart) myRadarChart.destroy();
     const ctx = document.getElementById('radarChart').getContext('2d');
@@ -658,6 +725,528 @@ function renderResultPage(allMembers) {
     });
 }
 
+function getCurrentResultLabel() {
+    return i18nData.mbti_titles?.[userMbtiStr]?.[currentLang] || userMbtiStr || t("cloudUntitledResult");
+}
+
+function summarizeMatch(member) {
+    if (!member) return null;
+    return {
+        id: member.id,
+        name: member.name_ja,
+        nickname: member.nickname || "",
+        generation: member.ki || "",
+        mbti_type: member.mbti_type || "",
+        compatibility: member.comp,
+        diffs: member.diffs || {}
+    };
+}
+
+function buildCurrentResultState() {
+    if (!userMbtiStr || !Array.isArray(matchResultsGlobal) || matchResultsGlobal.length === 0) return null;
+    const resultLabel = getCurrentResultLabel();
+    const topMatches = matchResultsGlobal.slice(0, 3).map(summarizeMatch).filter(Boolean);
+    const percentages = { ...userPerc };
+    const answerSnapshot = { ...userAnswers };
+    const payload = {
+        tool: "AKB-MBTI-with-wota",
+        type: "fan-personality-result",
+        version: 1,
+        language: currentLang,
+        result_type: "fan_personality_test",
+        result_label: resultLabel,
+        mbti_code: userMbtiStr,
+        user_percentages: percentages,
+        top_matches: topMatches,
+        display_member_id: currentDisplayMember?.id || matchResultsGlobal[0]?.id || "",
+        answers: answerSnapshot,
+        matches: matchResultsGlobal,
+        url_hash: window.location.hash,
+        saved_locally_at: new Date().toISOString()
+    };
+
+    return {
+        result_type: "fan_personality_test",
+        result_label: resultLabel,
+        mbti_code: userMbtiStr,
+        score_data: {
+            percentages,
+            top_matches: topMatches
+        },
+        answers: answerSnapshot,
+        payload
+    };
+}
+
+function setCurrentResultState() {
+    const state = buildCurrentResultState();
+    if (!state) return null;
+    currentResultState = state;
+    try {
+        localStorage.setItem(LOCAL_RESULT_KEY, JSON.stringify(state.payload));
+    } catch (error) {
+        console.warn("Could not save local result snapshot:", error);
+    }
+    return state;
+}
+
+function setCloudBusy(isBusy) {
+    cloud.busy = isBusy;
+    updateCloudUI();
+}
+
+function setCloudMessage(message) {
+    const safeMessage = message || "";
+    const popoverMessage = document.getElementById("cloudMessage");
+    const hubMessage = document.getElementById("cloudHubMessage");
+    if (popoverMessage) popoverMessage.textContent = safeMessage;
+    if (hubMessage) hubMessage.textContent = safeMessage;
+}
+
+function getCloudStatusText(statusKey) {
+    if (statusKey) return t(statusKey, { count: cloud.records.length });
+    if (!cloud.ready) return t("cloudUnavailable");
+    if (!cloud.user) return t("cloudLocalOnly");
+    return t("cloudSaveAvailable");
+}
+
+function renderCloudResults() {
+    const list = document.getElementById("cloudResultsList");
+    const empty = document.getElementById("cloudResultsEmpty");
+    if (!list || !empty) return;
+
+    list.innerHTML = "";
+    if (!cloud.ready) {
+        empty.hidden = false;
+        empty.textContent = t("cloudUnavailable");
+        return;
+    }
+    if (!cloud.user) {
+        empty.hidden = false;
+        empty.textContent = t("cloudLoginRequiredForResults");
+        return;
+    }
+    if (!cloud.records.length) {
+        empty.hidden = false;
+        empty.textContent = t("cloudNoResults");
+        return;
+    }
+
+    empty.hidden = true;
+    cloud.records.forEach(record => {
+        const payload = normalizeCloudObject(record.payload);
+        const label = record.result_label || payload.result_label || t("cloudUntitledResult");
+        const code = record.mbti_code || payload.mbti_code || "";
+        const topMatch = payload.top_matches?.[0]?.name || "";
+        const metaParts = [
+            formatCloudTime(record.created_at || record.updated_at),
+            topMatch ? t("cloudTopMatch", { name: topMatch }) : ""
+        ].filter(Boolean);
+        const card = document.createElement("div");
+        card.className = "cloud-result-card";
+        card.innerHTML = `
+            <div class="cloud-result-main">
+                <div>
+                    <span class="cloud-result-title">${escapeHtml(label)}</span>
+                    <span class="cloud-result-meta">${escapeHtml(metaParts.join(" / "))}</span>
+                </div>
+                <span class="cloud-result-code">${escapeHtml(code || "--")}</span>
+            </div>
+            <div class="cloud-result-actions">
+                <button class="cloud-form-button primary" type="button" data-cloud-action="view" data-id="${escapeHtml(record.id)}">${escapeHtml(t("cloudViewResult"))}</button>
+                <button class="cloud-form-button delete" type="button" data-cloud-action="delete" data-id="${escapeHtml(record.id)}">${escapeHtml(t("cloudDeleteResult"))}</button>
+            </div>
+        `;
+        card.querySelectorAll("button").forEach(button => {
+            button.disabled = cloud.busy;
+        });
+        list.appendChild(card);
+    });
+}
+
+function updateCloudUI(statusKey) {
+    if (statusKey) cloud.statusKey = statusKey;
+    const loggedIn = Boolean(cloud.user);
+    const hasResult = Boolean(currentResultState || (userMbtiStr && matchResultsGlobal.length > 0));
+    const statusText = getCloudStatusText(statusKey || cloud.statusKey);
+
+    const cloudStatus = document.getElementById("cloudStatus");
+    const cloudHubStatus = document.getElementById("cloudHubStatus");
+    if (cloudStatus) cloudStatus.textContent = statusText;
+    if (cloudHubStatus) cloudHubStatus.textContent = statusText;
+
+    const form = document.getElementById("cloudLoginForm");
+    const actions = document.getElementById("cloudActions");
+    if (form) form.hidden = loggedIn || !cloud.ready;
+    if (actions) actions.hidden = !loggedIn;
+
+    const userLabel = document.getElementById("cloudUserLabel");
+    if (userLabel) userLabel.textContent = loggedIn ? getCloudDisplayName() : "";
+    setAccountToggleLabel(loggedIn ? getCloudDisplayName() : t("accountNavGuest"));
+
+    ["cloudNicknameInput", "cloudEmailInput", "cloudPasswordInput", "cloudSignInBtn", "cloudSignUpBtn"].forEach(id => {
+        const node = document.getElementById(id);
+        if (node) node.disabled = cloud.busy || loggedIn || !cloud.ready;
+    });
+
+    const logoutBtn = document.getElementById("cloudLogoutBtn");
+    const saveBtn = document.getElementById("cloudSaveCurrentBtn");
+    const loadBtn = document.getElementById("cloudLoadResultsBtn");
+    if (logoutBtn) logoutBtn.disabled = cloud.busy;
+    if (saveBtn) saveBtn.disabled = cloud.busy || !cloud.ready || !loggedIn || !hasResult;
+    if (loadBtn) loadBtn.disabled = cloud.busy || !cloud.ready || !loggedIn;
+
+    renderCloudResults();
+}
+
+function requireCloudLogin(silent = false) {
+    const ok = Boolean(cloud.client && cloud.ready && cloud.user);
+    if (!ok && !silent) {
+        updateCloudUI("cloudLocalOnly");
+        setCloudMessage(t("cloudLoginRequired"));
+        const popover = document.getElementById("accountPopover");
+        const toggle = document.getElementById("accountToggleBtn");
+        if (popover && toggle) {
+            popover.hidden = false;
+            toggle.setAttribute("aria-expanded", "true");
+        }
+    }
+    return ok;
+}
+
+async function initCloudSave() {
+    updateCloudUI("cloudLocalOnly");
+    if (!window.supabase?.createClient) {
+        cloud.ready = false;
+        updateCloudUI("cloudUnavailable");
+        setCloudMessage(t("cloudUnavailable"));
+        return;
+    }
+
+    try {
+        cloud.client = window.supabase.createClient(SUPABASE_URL, SUPABASE_PUBLISHABLE_KEY, {
+            auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+        });
+        cloud.ready = true;
+        const { data, error } = await cloud.client.auth.getSession();
+        if (error) throw error;
+        cloud.user = data.session?.user || null;
+
+        cloud.client.auth.onAuthStateChange(async (_event, session) => {
+            cloud.user = session?.user || null;
+            cloud.records = [];
+            cloud.statusKey = "";
+            if (!cloud.user) {
+                currentResultCloudId = "";
+                setCloudMessage(t("cloudLoggedOut"));
+                updateCloudUI("cloudLocalOnly");
+                return;
+            }
+            await loadCloudResults({ silent: true });
+            setCloudMessage(t("cloudSignedIn"));
+            updateCloudUI("cloudSaveAvailable");
+        });
+
+        if (cloud.user) await loadCloudResults({ silent: true });
+        updateCloudUI(cloud.user ? "cloudSaveAvailable" : "cloudLocalOnly");
+    } catch (error) {
+        console.warn("Cloud Save unavailable:", error);
+        cloud.ready = false;
+        setCloudMessage(t("cloudUnavailable"));
+        updateCloudUI("cloudUnavailable");
+    }
+}
+
+function bindCloudEvents() {
+    if (cloudEventsBound) return;
+    cloudEventsBound = true;
+    const popover = document.getElementById("accountPopover");
+    const toggle = document.getElementById("accountToggleBtn");
+
+    toggle?.addEventListener("click", () => {
+        if (!popover) return;
+        popover.hidden = !popover.hidden;
+        toggle.setAttribute("aria-expanded", String(!popover.hidden));
+    });
+
+    document.addEventListener("click", event => {
+        if (!popover || popover.hidden) return;
+        if (popover.contains(event.target) || toggle?.contains(event.target)) return;
+        popover.hidden = true;
+        toggle?.setAttribute("aria-expanded", "false");
+    });
+
+    document.addEventListener("keydown", event => {
+        if (event.key === "Escape" && popover) {
+            popover.hidden = true;
+            toggle?.setAttribute("aria-expanded", "false");
+        }
+    });
+
+    document.getElementById("cloudLoginForm")?.addEventListener("submit", loginCloudAccount);
+    document.getElementById("cloudLogoutBtn")?.addEventListener("click", logoutCloudAccount);
+    document.getElementById("cloudSaveCurrentBtn")?.addEventListener("click", () => saveCurrentResultToCloud());
+    document.getElementById("cloudLoadResultsBtn")?.addEventListener("click", () => loadCloudResults());
+    document.getElementById("cloudResultsList")?.addEventListener("click", event => {
+        const button = event.target.closest("button[data-cloud-action]");
+        if (!button) return;
+        const id = button.dataset.id;
+        if (button.dataset.cloudAction === "view") loadCloudResult(id);
+        if (button.dataset.cloudAction === "delete") deleteCloudResult(id);
+    });
+}
+
+async function loginCloudAccount(event) {
+    event.preventDefault();
+    if (!cloud.client) {
+        setCloudMessage(t("cloudUnavailable"));
+        updateCloudUI("cloudUnavailable");
+        return;
+    }
+
+    const action = event.submitter?.dataset.authAction === "signup" ? "signup" : "signin";
+    const nickname = document.getElementById("cloudNicknameInput")?.value.trim() || "";
+    const email = document.getElementById("cloudEmailInput")?.value.trim() || "";
+    const password = document.getElementById("cloudPasswordInput")?.value || "";
+
+    if (!email || !password) {
+        setCloudMessage(t("cloudMissingEmailPassword"));
+        return;
+    }
+    if (action === "signup" && !nickname) {
+        setCloudMessage(t("cloudMissingSignup"));
+        return;
+    }
+
+    setCloudBusy(true);
+    setCloudMessage(t(action === "signup" ? "cloudSigningUp" : "cloudSigningIn"));
+
+    let result;
+    try {
+        result = action === "signup"
+            ? await cloud.client.auth.signUp({ email, password, options: { data: { display_name: nickname }, emailRedirectTo: window.location.href } })
+            : await cloud.client.auth.signInWithPassword({ email, password });
+    } catch (error) {
+        result = { error };
+    }
+
+    setCloudBusy(false);
+    const passwordInput = document.getElementById("cloudPasswordInput");
+    if (passwordInput) passwordInput.value = "";
+
+    if (result.error) {
+        console.warn(result.error);
+        setCloudMessage(result.error.message || t("cloudActionFailed"));
+        updateCloudUI("cloudActionFailed");
+        return;
+    }
+
+    cloud.user = result.data.session?.user || cloud.user;
+    setCloudMessage(action === "signup" && !result.data.session ? t("cloudSignupNeedsConfirm") : t("cloudSignedIn"));
+    if (cloud.user) {
+        await loadCloudResults({ silent: true });
+        const popover = document.getElementById("accountPopover");
+        const toggle = document.getElementById("accountToggleBtn");
+        if (popover) popover.hidden = true;
+        toggle?.setAttribute("aria-expanded", "false");
+    }
+    updateCloudUI(cloud.user ? "cloudSaveAvailable" : "cloudLocalOnly");
+}
+
+async function logoutCloudAccount() {
+    if (!cloud.client) return;
+    setCloudBusy(true);
+    const { error } = await cloud.client.auth.signOut();
+    setCloudBusy(false);
+    if (error) {
+        console.warn(error);
+        setCloudMessage(error.message || t("cloudLogoutFailed"));
+        updateCloudUI("cloudActionFailed");
+        return;
+    }
+    cloud.user = null;
+    cloud.records = [];
+    currentResultCloudId = "";
+    setCloudMessage(t("cloudLoggedOut"));
+    updateCloudUI("cloudLocalOnly");
+}
+
+function buildCloudRow() {
+    const state = setCurrentResultState();
+    if (!state || !cloud.user) return null;
+    return {
+        user_id: cloud.user.id,
+        result_type: state.result_type,
+        result_label: state.result_label,
+        mbti_code: state.mbti_code,
+        score_data: state.score_data,
+        answers: state.answers,
+        payload: {
+            ...state.payload,
+            cloud_record_id: currentResultCloudId || null,
+            saved_to_cloud_at: new Date().toISOString()
+        },
+        updated_at: new Date().toISOString()
+    };
+}
+
+async function saveCurrentResultToCloud(options = {}) {
+    if (!requireCloudLogin(options.silent)) return false;
+    const row = buildCloudRow();
+    if (!row) {
+        if (!options.silent) setCloudMessage(t("cloudNoCurrentResult"));
+        updateCloudUI("cloudLocalOnly");
+        return false;
+    }
+
+    setCloudBusy(true);
+    let result;
+    try {
+        result = currentResultCloudId
+            ? await cloud.client.from(CLOUD_TABLE).update(row).eq("id", currentResultCloudId).eq("user_id", cloud.user.id).select("id").single()
+            : await cloud.client.from(CLOUD_TABLE).insert(row).select("id").single();
+    } catch (error) {
+        result = { data: null, error };
+    }
+    setCloudBusy(false);
+
+    if (result.error) {
+        console.warn(result.error);
+        setCloudMessage(result.error.message || t("cloudSaveFailedLocalKept"));
+        updateCloudUI("cloudSaveFailedLocalKept");
+        return false;
+    }
+
+    currentResultCloudId = result.data.id;
+    await loadCloudResults({ silent: true });
+    setCloudMessage(t(options.auto ? "cloudAutoSaveSuccess" : "cloudSaveSuccess"));
+    updateCloudUI("cloudSaved");
+    return true;
+}
+
+async function autoSaveCurrentResultToCloud() {
+    if (!cloud.user || !cloud.ready || !currentResultState) {
+        updateCloudUI(cloud.user ? "cloudSaveAvailable" : "cloudLocalOnly");
+        return;
+    }
+    await saveCurrentResultToCloud({ auto: true, silent: true });
+}
+
+async function loadCloudResults(options = {}) {
+    if (!requireCloudLogin(options.silent)) return;
+    setCloudBusy(true);
+    let response;
+    try {
+        response = await cloud.client
+            .from(CLOUD_TABLE)
+            .select("id,user_id,result_type,result_label,mbti_code,score_data,answers,payload,created_at,updated_at")
+            .eq("user_id", cloud.user.id)
+            .order("created_at", { ascending: false });
+    } catch (error) {
+        response = { data: null, error };
+    }
+    setCloudBusy(false);
+
+    const { data, error } = response;
+    if (error) {
+        console.warn(error);
+        setCloudMessage(error.message || t("cloudActionFailed"));
+        updateCloudUI("cloudActionFailed");
+        return;
+    }
+
+    cloud.records = Array.isArray(data) ? data : [];
+    if (!options.silent) setCloudMessage(t("cloudResultsLoaded", { count: cloud.records.length }));
+    updateCloudUI(options.silent ? undefined : "cloudSaveAvailable");
+}
+
+function normalizeCloudObject(value) {
+    if (!value) return {};
+    if (typeof value === "string") {
+        try {
+            return JSON.parse(value);
+        } catch (_error) {
+            return {};
+        }
+    }
+    return typeof value === "object" ? value : {};
+}
+
+function findCloudRecord(recordId) {
+    return cloud.records.find(record => String(record.id) === String(recordId));
+}
+
+function loadCloudResult(recordId) {
+    const record = findCloudRecord(recordId);
+    if (!record) {
+        setCloudMessage(t("cloudNoRecordSelected"));
+        return;
+    }
+
+    const payload = normalizeCloudObject(record.payload);
+    const matches = Array.isArray(payload.matches) ? payload.matches : [];
+    const percentages = normalizeCloudObject(payload.user_percentages || record.score_data?.percentages);
+    const answers = normalizeCloudObject(payload.answers || record.answers);
+    const code = record.mbti_code || payload.mbti_code || "";
+
+    if (!matches.length || !code || Object.keys(percentages).length === 0) {
+        setCloudMessage(t("cloudActionFailed"));
+        updateCloudUI("cloudActionFailed");
+        return;
+    }
+
+    userMbtiStr = code;
+    userPerc = percentages;
+    userAnswers = answers;
+    matchResultsGlobal = matches;
+    currentResultCloudId = record.id;
+
+    document.getElementById("page-landing")?.classList.add("hidden");
+    document.getElementById("page-quiz")?.classList.add("hidden");
+    document.getElementById("page-result")?.classList.remove("hidden");
+    renderResultPage(matchResultsGlobal);
+    setCloudMessage(t("cloudLoadSuccess"));
+    updateCloudUI("cloudSaveAvailable");
+    window.scrollTo({ top: 0, behavior: "smooth" });
+}
+
+async function deleteCloudResult(recordId) {
+    if (!requireCloudLogin()) return;
+    const record = findCloudRecord(recordId);
+    if (!record) {
+        setCloudMessage(t("cloudNoRecordSelected"));
+        return;
+    }
+
+    const label = record.result_label || record.mbti_code || t("cloudUntitledResult");
+    if (!window.confirm(t("cloudConfirmDeleteResult", { label }))) return;
+
+    setCloudBusy(true);
+    let response;
+    try {
+        response = await cloud.client
+            .from(CLOUD_TABLE)
+            .delete()
+            .eq("id", record.id)
+            .eq("user_id", cloud.user.id);
+    } catch (error) {
+        response = { error };
+    }
+    setCloudBusy(false);
+
+    if (response.error) {
+        console.warn(response.error);
+        setCloudMessage(response.error.message || t("cloudActionFailed"));
+        updateCloudUI("cloudActionFailed");
+        return;
+    }
+
+    if (String(currentResultCloudId) === String(record.id)) currentResultCloudId = "";
+    await loadCloudResults({ silent: true });
+    setCloudMessage(t("cloudDeleteSuccess"));
+    updateCloudUI("cloudDeleted");
+}
+
 let oshiHeartInterval = null; 
 
 function showLoadingAndReveal(bestCompScore) {
@@ -681,6 +1270,7 @@ function showLoadingAndReveal(bestCompScore) {
             document.getElementById('page-quiz').classList.add('hidden');
             document.getElementById('page-result').classList.remove('hidden');
             renderResultPage(matchResultsGlobal);
+            autoSaveCurrentResultToCloud();
             window.scrollTo({ top: 0, behavior: 'smooth' });
             
             if (bestCompScore >= 85) {

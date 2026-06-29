@@ -54,6 +54,27 @@
             <option value="th">ภาษาไทย</option>
             <option value="id">Bahasa Indonesia</option>
         </select>
+        <div class="account-shell">
+            <button class="glass-select account-toggle" id="accountToggleBtn" type="button" aria-haspopup="dialog" aria-expanded="false">
+                <span class="account-mark" aria-hidden="true">T48</span>
+                <span class="account-toggle-label" data-i18n="accountNavGuest">Tool48 Account</span>
+            </button>
+            <div class="account-popover" id="accountPopover" hidden>
+                <p class="cloud-status-text" id="cloudStatus" data-i18n="cloudLocalOnly">Local only</p>
+                <form id="cloudLoginForm" class="cloud-login-form">
+                    <input id="cloudNicknameInput" class="cloud-input" type="text" autocomplete="nickname" data-i18n-placeholder="cloudNicknamePlaceholder" placeholder="nickname">
+                    <input id="cloudEmailInput" class="cloud-input" type="email" inputmode="email" autocomplete="email" data-i18n-placeholder="cloudEmailPlaceholder" placeholder="Tool48 Account email">
+                    <input id="cloudPasswordInput" class="cloud-input" type="password" autocomplete="current-password" minlength="6" data-i18n-placeholder="cloudPasswordPlaceholder" placeholder="6+ characters">
+                    <button class="cloud-form-button primary" id="cloudSignInBtn" type="submit" data-auth-action="signin" data-i18n="cloudSignIn">Sign in</button>
+                    <button class="cloud-form-button" id="cloudSignUpBtn" type="submit" data-auth-action="signup" data-i18n="cloudCreateAccount">Create account</button>
+                </form>
+                <div id="cloudActions" class="cloud-actions" hidden>
+                    <span class="cloud-user-pill" id="cloudUserLabel"></span>
+                    <button class="cloud-form-button" id="cloudLogoutBtn" type="button" data-i18n="cloudSignOut">Sign out</button>
+                </div>
+                <p id="cloudMessage" class="cloud-message"></p>
+            </div>
+        </div>
     </div>
 
     <div id="app-container">
@@ -96,6 +117,23 @@
             <div id="result-content"></div>
         </section>
 
+        <section id="cloud-hub" class="cloud-hub glass-panel">
+            <div class="cloud-hub-header">
+                <div>
+                    <p class="cloud-title" data-i18n="cloudSaveTitle">Tool48 Account / Cloud Save</p>
+                    <p class="cloud-status-text" data-i18n="cloudSaveHint">Login is optional. Local play still works.</p>
+                </div>
+                <span class="cloud-pill" id="cloudHubStatus" data-i18n="cloudLocalOnly">Local only</span>
+            </div>
+            <div class="cloud-hub-actions">
+                <button id="cloudSaveCurrentBtn" class="cloud-form-button primary" type="button" data-i18n="cloudSaveCurrent">Save current result to cloud</button>
+                <button id="cloudLoadResultsBtn" class="cloud-form-button" type="button" data-i18n="cloudLoadResults">Load cloud results</button>
+            </div>
+            <p id="cloudHubMessage" class="cloud-message"></p>
+            <div id="cloudResultsList" class="cloud-results-list" aria-live="polite"></div>
+            <p id="cloudResultsEmpty" class="cloud-message" data-i18n="cloudNoResults">No cloud results yet.</p>
+        </section>
+
         <div class="about-project-container" style="text-align: center; margin: 40px auto 20px auto; max-width: 540px; padding: 0 15px;">
             <button id="toggle-about-btn" class="cyber-btn" style="background: transparent; color: var(--text-muted); box-shadow: none; border: 1px dashed rgba(255, 20, 147, 0.4); font-size: 14px; padding: 10px; cursor: pointer;" data-i18n="btn_about"></button>
             
@@ -125,6 +163,7 @@
     </div>
 
     <script src="https://www.youtube.com/iframe_api"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
     <script src="script.js"></script>
     <script>
         window.onload = function() {
