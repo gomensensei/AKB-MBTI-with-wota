@@ -130,6 +130,21 @@
     "btn_download": {
       "zh-HK": "📸 下載結果圖", "zh-CN": "📸 下载结果图", "ja": "📸 結果画像を保存", "ko": "📸 결과 이미지 저장", "en": "📸 DownloadResult Image", "th": "📸 ดาวน์โหลดรูปผลลัพธ์สำหรับ", "id": "📸 Unduh Gambar Hasil untuk"
     },
+    "btn_share_x": {
+      "zh-HK": "分享到 𝕏", "zh-CN": "分享到 𝕏", "ja": "𝕏でシェア", "ko": "𝕏에 공유", "en": "Share to 𝕏", "th": "แชร์ไปยัง 𝕏", "id": "Bagikan ke 𝕏"
+    },
+    "btn_copy_link": {
+      "zh-HK": "🔗 複製專屬結果連結", "zh-CN": "🔗 复制专属结果链接", "ja": "🔗 結果リンクをコピー", "ko": "🔗 결과 링크 복사", "en": "🔗 Copy result link", "th": "🔗 คัดลอกลิงก์ผลลัพธ์", "id": "🔗 Salin tautan hasil"
+    },
+    "copy_link_success": {
+      "zh-HK": "🔗 專屬結果連結已複製！快傳給飯友吧 🌸",
+      "zh-CN": "🔗 专属结果链接已复制！快传给饭友吧 🌸",
+      "ja": "🔗 診断結果のリンクをコピーしました！🌸",
+      "ko": "🔗 결과 링크를 복사했습니다! 친구에게 공유해 보세요 🌸",
+      "en": "🔗 Link copied! Share it with your friends! 🌸",
+      "th": "🔗 คัดลอกลิงก์ผลลัพธ์แล้ว! แชร์ให้เพื่อนได้เลย 🌸",
+      "id": "🔗 Tautan hasil disalin! Bagikan ke temanmu 🌸"
+    },
     "compatibility_label": {
       "zh-HK": "契合度: ", "zh-CN": "契合度: ", "ja": "相性度: ", "ko": "적합도: ", "en": "Compatibility: ", "th": "ระดับความเข้ากันได้: ", "id": "Tingkat Kecocokan: "
     },

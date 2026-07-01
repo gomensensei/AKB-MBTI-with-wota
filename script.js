@@ -56,7 +56,7 @@ const CLOUD_TABLE = "personality_results";
 const LOCAL_RESULT_KEY = "akb_last_result";
 let currentResultState = null;
 let currentResultCloudId = "";
-let cloud = { client: null, user: null, records: [], ready: false, busy: false, statusKey: "cloudLocalOnly" };
+let cloud = { client: null, user: null, records: [], ready: false, busy: false, statusKey: "cloudLocalOnly", messageKey: "", messageVars: {} };
 let cloudEventsBound = false;
 
 function detectLanguage() {
@@ -211,6 +211,7 @@ function applyLanguage(lang) {
         applyDynamicAnimations(currentDisplayMember.comp, isOshi);
     }
     updateCloudUI();
+    refreshCloudMessageLanguage();
 }
 
 function renderQuiz() {
@@ -596,10 +597,10 @@ function renderResultPage(allMembers) {
         
         <div class="web-only result-actions" style="display: flex; gap: 10px; margin-top: 20px;">
             <button id="download-btn" class="cyber-btn" style="flex: 1; background: #2d3436;">${ui.btn_download[currentLang]}</button>
-            <button id="share-x-btn" class="cyber-btn" style="flex: 1; background: #000; color: #fff;">分享到 𝕏</button>
+            <button id="share-x-btn" class="cyber-btn" style="flex: 1; background: #000; color: #fff;">${ui.btn_share_x?.[currentLang] || ui.btn_share_x?.en || 'Share to X'}</button>
         </div>
         <div class="web-only result-actions" style="margin-top: 10px;">
-            <button id="copy-link-btn" class="cyber-btn" style="width: 100%; background: var(--cyber-pink); color: #fff;">🔗 複製專屬結果連結</button>
+            <button id="copy-link-btn" class="cyber-btn" style="width: 100%; background: var(--cyber-pink); color: #fff;">${ui.btn_copy_link?.[currentLang] || ui.btn_copy_link?.en || 'Copy result link'}</button>
         </div>
     `;
     setCurrentResultState();
@@ -714,13 +715,7 @@ function renderResultPage(allMembers) {
     document.getElementById('copy-link-btn').addEventListener('click', () => {
         const url = window.location.href; 
         navigator.clipboard.writeText(url).then(() => {
-            const msg = { 
-                'zh-HK': "🔗 專屬結果連結已複製！快傳給飯友吧 🌸", 
-                'zh-CN': "🔗 专属结果链接已复制！快传给饭友吧 🌸",
-                'ja': "🔗 診断結果のリンクをコピーしました！🌸", 
-                'en': "🔗 Link copied! Share it with your friends! 🌸" 
-            };
-            alert(msg[currentLang] || msg['en']);
+            alert(t('copy_link_success'));
         });
     });
 }
@@ -795,12 +790,29 @@ function setCloudBusy(isBusy) {
     updateCloudUI();
 }
 
-function setCloudMessage(message) {
+function renderCloudMessage(message) {
     const safeMessage = message || "";
     const popoverMessage = document.getElementById("cloudMessage");
     const hubMessage = document.getElementById("cloudHubMessage");
     if (popoverMessage) popoverMessage.textContent = safeMessage;
     if (hubMessage) hubMessage.textContent = safeMessage;
+}
+
+function setCloudMessage(message) {
+    cloud.messageKey = "";
+    cloud.messageVars = {};
+    renderCloudMessage(message);
+}
+
+function setCloudMessageKey(key, vars = {}) {
+    cloud.messageKey = key;
+    cloud.messageVars = { ...vars };
+    renderCloudMessage(t(key, vars));
+}
+
+function refreshCloudMessageLanguage() {
+    if (!cloud.messageKey) return;
+    renderCloudMessage(t(cloud.messageKey, cloud.messageVars));
 }
 
 function getCloudStatusText(statusKey) {
@@ -903,7 +915,7 @@ function requireCloudLogin(silent = false) {
     const ok = Boolean(cloud.client && cloud.ready && cloud.user);
     if (!ok && !silent) {
         updateCloudUI("cloudLocalOnly");
-        setCloudMessage(t("cloudLoginRequired"));
+        setCloudMessageKey("cloudLoginRequired");
         const popover = document.getElementById("accountPopover");
         const toggle = document.getElementById("accountToggleBtn");
         if (popover && toggle) {
@@ -919,7 +931,7 @@ async function initCloudSave() {
     if (!window.supabase?.createClient) {
         cloud.ready = false;
         updateCloudUI("cloudUnavailable");
-        setCloudMessage(t("cloudUnavailable"));
+        setCloudMessageKey("cloudUnavailable");
         return;
     }
 
@@ -938,12 +950,12 @@ async function initCloudSave() {
             cloud.statusKey = "";
             if (!cloud.user) {
                 currentResultCloudId = "";
-                setCloudMessage(t("cloudLoggedOut"));
+                setCloudMessageKey("cloudLoggedOut");
                 updateCloudUI("cloudLocalOnly");
                 return;
             }
             await loadCloudResults({ silent: true });
-            setCloudMessage(t("cloudSignedIn"));
+            setCloudMessageKey("cloudSignedIn");
             updateCloudUI("cloudSaveAvailable");
         });
 
@@ -952,7 +964,7 @@ async function initCloudSave() {
     } catch (error) {
         console.warn("Cloud Save unavailable:", error);
         cloud.ready = false;
-        setCloudMessage(t("cloudUnavailable"));
+        setCloudMessageKey("cloudUnavailable");
         updateCloudUI("cloudUnavailable");
     }
 }
@@ -999,7 +1011,7 @@ function bindCloudEvents() {
 async function loginCloudAccount(event) {
     event.preventDefault();
     if (!cloud.client) {
-        setCloudMessage(t("cloudUnavailable"));
+        setCloudMessageKey("cloudUnavailable");
         updateCloudUI("cloudUnavailable");
         return;
     }
@@ -1010,16 +1022,16 @@ async function loginCloudAccount(event) {
     const password = document.getElementById("cloudPasswordInput")?.value || "";
 
     if (!email || !password) {
-        setCloudMessage(t("cloudMissingEmailPassword"));
+        setCloudMessageKey("cloudMissingEmailPassword");
         return;
     }
     if (action === "signup" && !nickname) {
-        setCloudMessage(t("cloudMissingSignup"));
+        setCloudMessageKey("cloudMissingSignup");
         return;
     }
 
     setCloudBusy(true);
-    setCloudMessage(t(action === "signup" ? "cloudSigningUp" : "cloudSigningIn"));
+    setCloudMessageKey(action === "signup" ? "cloudSigningUp" : "cloudSigningIn");
 
     let result;
     try {
@@ -1042,7 +1054,7 @@ async function loginCloudAccount(event) {
     }
 
     cloud.user = result.data.session?.user || cloud.user;
-    setCloudMessage(action === "signup" && !result.data.session ? t("cloudSignupNeedsConfirm") : t("cloudSignedIn"));
+    setCloudMessageKey(action === "signup" && !result.data.session ? "cloudSignupNeedsConfirm" : "cloudSignedIn");
     if (cloud.user) {
         await loadCloudResults({ silent: true });
         const popover = document.getElementById("accountPopover");
@@ -1067,7 +1079,7 @@ async function logoutCloudAccount() {
     cloud.user = null;
     cloud.records = [];
     currentResultCloudId = "";
-    setCloudMessage(t("cloudLoggedOut"));
+    setCloudMessageKey("cloudLoggedOut");
     updateCloudUI("cloudLocalOnly");
 }
 
@@ -1094,7 +1106,7 @@ async function saveCurrentResultToCloud(options = {}) {
     if (!requireCloudLogin(options.silent)) return false;
     const row = buildCloudRow();
     if (!row) {
-        if (!options.silent) setCloudMessage(t("cloudNoCurrentResult"));
+        if (!options.silent) setCloudMessageKey("cloudNoCurrentResult");
         updateCloudUI("cloudLocalOnly");
         return false;
     }
@@ -1119,7 +1131,7 @@ async function saveCurrentResultToCloud(options = {}) {
 
     currentResultCloudId = result.data.id;
     await loadCloudResults({ silent: true });
-    setCloudMessage(t(options.auto ? "cloudAutoSaveSuccess" : "cloudSaveSuccess"));
+    setCloudMessageKey(options.auto ? "cloudAutoSaveSuccess" : "cloudSaveSuccess");
     updateCloudUI("cloudSaved");
     return true;
 }
@@ -1156,7 +1168,7 @@ async function loadCloudResults(options = {}) {
     }
 
     cloud.records = Array.isArray(data) ? data : [];
-    if (!options.silent) setCloudMessage(t("cloudResultsLoaded", { count: cloud.records.length }));
+    if (!options.silent) setCloudMessageKey("cloudResultsLoaded", { count: cloud.records.length });
     updateCloudUI(options.silent ? undefined : "cloudSaveAvailable");
 }
 
@@ -1179,7 +1191,7 @@ function findCloudRecord(recordId) {
 function loadCloudResult(recordId) {
     const record = findCloudRecord(recordId);
     if (!record) {
-        setCloudMessage(t("cloudNoRecordSelected"));
+        setCloudMessageKey("cloudNoRecordSelected");
         return;
     }
 
@@ -1190,7 +1202,7 @@ function loadCloudResult(recordId) {
     const code = record.mbti_code || payload.mbti_code || "";
 
     if (!matches.length || !code || Object.keys(percentages).length === 0) {
-        setCloudMessage(t("cloudActionFailed"));
+        setCloudMessageKey("cloudActionFailed");
         updateCloudUI("cloudActionFailed");
         return;
     }
@@ -1205,7 +1217,7 @@ function loadCloudResult(recordId) {
     document.getElementById("page-quiz")?.classList.add("hidden");
     document.getElementById("page-result")?.classList.remove("hidden");
     renderResultPage(matchResultsGlobal);
-    setCloudMessage(t("cloudLoadSuccess"));
+    setCloudMessageKey("cloudLoadSuccess");
     updateCloudUI("cloudSaveAvailable");
     window.scrollTo({ top: 0, behavior: "smooth" });
 }
@@ -1214,7 +1226,7 @@ async function deleteCloudResult(recordId) {
     if (!requireCloudLogin()) return;
     const record = findCloudRecord(recordId);
     if (!record) {
-        setCloudMessage(t("cloudNoRecordSelected"));
+        setCloudMessageKey("cloudNoRecordSelected");
         return;
     }
 
@@ -1243,7 +1255,7 @@ async function deleteCloudResult(recordId) {
 
     if (String(currentResultCloudId) === String(record.id)) currentResultCloudId = "";
     await loadCloudResults({ silent: true });
-    setCloudMessage(t("cloudDeleteSuccess"));
+    setCloudMessageKey("cloudDeleteSuccess");
     updateCloudUI("cloudDeleted");
 }
 
