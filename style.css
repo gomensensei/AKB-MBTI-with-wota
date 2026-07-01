@@ -513,3 +513,46 @@ body > canvas { z-index: 999999 !important; pointer-events: none !important; }
     .cloud-hub-header, .cloud-result-main { align-items: stretch; flex-direction: column; }
     .cloud-pill, .cloud-result-code { max-width: none; align-self: flex-start; }
 }
+
+/* Phase 2G account controls: keep the top-right row compact on mobile. */
+#lang-switcher-container {
+    flex-wrap: nowrap;
+    max-width: calc(100vw - 24px);
+}
+
+#music-toggle-btn,
+.glass-select,
+.account-toggle {
+    min-width: 0;
+}
+
+@media (max-width: 768px) {
+    #lang-switcher-container {
+        left: 8px;
+        right: 8px;
+        gap: 6px;
+        flex-wrap: nowrap;
+    }
+    #music-toggle-btn {
+        max-width: 84px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .glass-select {
+        max-width: 92px;
+        padding-inline: 8px;
+    }
+    .account-toggle {
+        max-width: min(132px, 34vw);
+        flex-shrink: 1;
+    }
+    .account-popover {
+        position: fixed;
+        top: 52px;
+        right: 8px;
+        left: 8px;
+        width: auto;
+        max-height: calc(100dvh - 64px);
+        overflow: auto;
+    }
+}

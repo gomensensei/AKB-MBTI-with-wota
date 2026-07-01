@@ -59,6 +59,10 @@ let currentResultCloudId = "";
 let cloud = { client: null, user: null, records: [], ready: false, busy: false, statusKey: "cloudLocalOnly", messageKey: "", messageVars: {} };
 let cloudEventsBound = false;
 
+function isSelectableMember(member) {
+    return Boolean(member) && member.active !== false && member.selectable !== false && member.hiddenFromSelection !== true;
+}
+
 function detectLanguage() {
     const lang = navigator.language || navigator.userLanguage;
     const lowerLang = lang.toLowerCase();
@@ -379,7 +383,7 @@ function calculateResults() {
     
     userMbtiStr = (userPerc.E > 50 ? 'E' : 'I') + (userPerc.S > 50 ? 'S' : 'N') + (userPerc.T > 50 ? 'T' : 'F') + (userPerc.J > 50 ? 'J' : 'P');
     
-    let matchResults = membersDB.map(m => {
+    let matchResults = membersDB.filter(isSelectableMember).map(m => {
         let M = m.mbti_scores;
         let diffE = Math.abs(userPerc.E - M.E);
         let diffS = Math.abs(userPerc.S - M.S);
@@ -1506,7 +1510,7 @@ async function loadMembers() {
         const groups = {};
         
         // 按 ki (期數) 進行分組
-        membersDB.forEach(m => { 
+        membersDB.filter(isSelectableMember).forEach(m => { 
             const gen = m.ki || '其他'; 
             if(!groups[gen]) groups[gen] = []; 
             groups[gen].push(m); 
