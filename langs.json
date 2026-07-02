@@ -788,6 +788,15 @@
       "en": "This website is a deep love letter written in code for the AKB48 fandom.🌸",
       "th": "เว็บไซต์นี้คือจดหมายรักลึกซึ้งที่เขียนด้วยโค้ดเพื่อส่งถึงแฟนคลับ AKB48 🌸",
       "id": "Situs web ini adalah surat cinta mendalam yang ditulis dalam kode untuk fandom AKB48.🌸"
+    },
+    "footer_privacy_promise": {
+      "zh-HK": "未經你明確同意，不會披露你的個人資料。",
+      "zh-CN": "未经你明确同意，不会披露你的个人资料。",
+      "ja": "明確な同意なしに、個人情報を開示することはありません。",
+      "ko": "명시적인 동의 없이 개인 정보를 공개하지 않습니다.",
+      "en": "We will not disclose your personal data without your explicit consent.",
+      "th": "เราจะไม่เปิดเผยข้อมูลส่วนบุคคลของคุณหากไม่ได้รับความยินยอมอย่างชัดเจนจากคุณ",
+      "id": "Kami tidak akan mengungkapkan data pribadi Anda tanpa persetujuan jelas dari Anda."
     }
   },
   "progress_tips": {
