@@ -158,6 +158,17 @@ input[type=range].custom-range.touched::-webkit-slider-thumb { background: var(-
 #music-toggle-btn { margin: 0 !important; white-space: nowrap; }
 
 .glass-select { padding: 8px 12px; border-radius: 8px; border: 1px solid rgba(246,118,166,0.5); background: rgba(255,255,255,0.8); backdrop-filter: blur(5px); color: var(--cyber-pink); font-weight: bold; cursor: pointer; outline: none; }
+.icon-button-text { display: inline-flex; align-items: center; justify-content: center; gap: 6px; }
+.mbti-ui-icon { width: 16px; height: 16px; flex: 0 0 auto; background: currentColor; -webkit-mask: var(--mbti-icon) center/contain no-repeat; mask: var(--mbti-icon) center/contain no-repeat; }
+.mbti-icon-music { --mbti-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M10 4v12.5A3.5 3.5 0 1 1 8 13.3V6l10-2v10.5a3.5 3.5 0 1 1-2-3.2V7.1L10 8.3V4Z'/%3E%3C/svg%3E"); }
+.mbti-heart-mark { position: relative; width: min(48vw, 260px); aspect-ratio: 1; margin: 0 auto; color: rgba(246,118,166,0.18); filter: drop-shadow(0 18px 32px rgba(246,118,166,0.18)); }
+.mbti-heart-mark span { position: absolute; background: currentColor; }
+.mbti-heart-mark span:nth-child(1),
+.mbti-heart-mark span:nth-child(2) { width: 58%; height: 58%; top: 12%; border-radius: 999px; }
+.mbti-heart-mark span:nth-child(1) { left: 4%; }
+.mbti-heart-mark span:nth-child(2) { right: 4%; }
+.mbti-heart-mark span:nth-child(3) { left: 21%; top: 31%; width: 58%; height: 58%; transform: rotate(45deg); border-radius: 12px; }
+.match-heart { width: 16px; height: 16px; display: inline-block; margin-left: 5px; vertical-align: -2px; background: var(--cyber-pink); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M12 21s-7.5-4.4-10-9.2C.3 8.5 2.3 4.5 6 4.2c2.1-.2 3.7.9 4.7 2.2.4.5 1 .5 1.4 0 1-1.3 2.6-2.4 4.7-2.2 3.7.3 5.7 4.3 4 7.6C19.5 16.6 12 21 12 21z'/%3E%3C/svg%3E") center/contain no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M12 21s-7.5-4.4-10-9.2C.3 8.5 2.3 4.5 6 4.2c2.1-.2 3.7.9 4.7 2.2.4.5 1 .5 1.4 0 1-1.3 2.6-2.4 4.7-2.2 3.7.3 5.7 4.3 4 7.6C19.5 16.6 12 21 12 21z'/%3E%3C/svg%3E") center/contain no-repeat; animation: heart-beat 1s infinite; }
 
 .account-shell { position: relative; flex-shrink: 0; }
 .account-toggle {
@@ -356,7 +367,7 @@ input[type=range].custom-range.touched::-webkit-slider-thumb { background: var(-
 #custom-cursor { transition: opacity 0.3s ease; }
 #custom-cursor.hidden-cursor { opacity: 0 !important; }
 
-/* 🌟 動畫特效 🌟 */
+/* Animation effects */
 @keyframes pulse-glow { 0%, 80% { filter: drop-shadow(0 0 5px rgba(255, 20, 147, 0.3)); } 50% { filter: drop-shadow(0 0 15px rgba(255, 20, 147, 0.8)); } }
 .pulse-glow { animation: pulse-glow 2.5s infinite ease-in-out; }
 @keyframes pulse-border { 0%, 100% { box-shadow: 0 0 8px var(--cyber-pink), inset 0 0 4px var(--cyber-pink); } 50% { box-shadow: 0 0 20px var(--cyber-pink), inset 0 0 10px var(--cyber-pink); } }
@@ -376,6 +387,12 @@ input[type=range].custom-range.touched::-webkit-slider-thumb { background: var(-
     font-size: 380px; margin-top: 18vh; 
     filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.8));
     animation: giant-heartbeat 1.5s ease-in-out infinite;
+}
+.giant-heart.mbti-heart-mark {
+    width: min(48vw, 260px);
+    font-size: 0;
+    margin-top: 18vh;
+    filter: drop-shadow(0 0 20px rgba(255, 20, 147, 0.45));
 }
 @keyframes giant-heartbeat { 0%, 100% { transform: scale(1); } 15% { transform: scale(1.3); } 30% { transform: scale(1.1); } 45% { transform: scale(1.3); } }
 
@@ -450,9 +467,15 @@ a, button, input, select, .question-item, label, .slider-ticks span { cursor: ur
 
 body > canvas { z-index: 999999 !important; pointer-events: none !important; }
 
-.site-footer { text-align: center; font-size: 11px; color: var(--text-muted); margin-top: 30px; padding-top: 15px; border-top: 1px solid rgba(0,0,0,0.05); line-height: 1.5; opacity: 0.8; }
+.site-footer { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 14px; text-align: left; font-size: 11px; color: var(--text-muted); margin-top: 24px; padding: 14px 16px; border: 1px solid rgba(255,255,255,0.68); border-radius: 18px; background: rgba(255,255,255,0.46); box-shadow: 0 10px 28px rgba(45,52,54,0.08); line-height: 1.5; opacity: 1; }
 .site-footer p { margin: 0; }
 .site-footer p + p { margin-top: 4px; font-weight: 800; }
+.footer-copy { min-width: 0; flex: 1 1 300px; }
+.footer-links { display: flex; flex-wrap: wrap; align-items: center; justify-content: flex-start; gap: 10px 14px; flex: 0 0 auto; }
+.footer-links a { display: inline-flex; align-items: center; gap: 6px; color: var(--cyber-pink); font-weight: 900; text-decoration: none; white-space: nowrap; }
+.footer-link-icon { width: 14px; height: 14px; flex: 0 0 auto; background: currentColor; -webkit-mask: var(--footer-icon) center/contain no-repeat; mask: var(--footer-icon) center/contain no-repeat; }
+.footer-link-icon-bug { --footer-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='m8 2 1.9 1.9'/%3E%3Cpath d='M14.1 3.9 16 2'/%3E%3Cpath d='M9 7h6'/%3E%3Cpath d='M8 7v8a4 4 0 0 0 8 0V7'/%3E%3Cpath d='M3 13h4'/%3E%3Cpath d='M17 13h4'/%3E%3Cpath d='m5 19 3-3'/%3E%3Cpath d='m19 19-3-3'/%3E%3C/svg%3E"); }
+.footer-link-icon-heart { --footer-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='black'%3E%3Cpath d='M12 21s-7.5-4.4-10-9.2C.3 8.5 2.3 4.5 6 4.2c2.1-.2 3.7.9 4.7 2.2.4.5 1 .5 1.4 0 1-1.3 2.6-2.4 4.7-2.2 3.7.3 5.7 4.3 4 7.6C19.5 16.6 12 21 12 21z'/%3E%3C/svg%3E"); }
 
 #footer-mv-wrap {
     width: 280px; 
@@ -461,7 +484,7 @@ body > canvas { z-index: 999999 !important; pointer-events: none !important; }
     overflow: hidden; 
     box-shadow: 0 10px 30px rgba(0,0,0,0.5); 
     
-    /* 🌟 修復關鍵：拿走 all，只針對位置和透明度做動畫，禁止寬度漸變 */
+    /* Animate only position and opacity here; width must stay stable. */
     transition: transform 0.4s ease, opacity 0.4s ease, bottom 0.4s ease, right 0.4s ease; 
     
     z-index: 999; 
@@ -479,7 +502,7 @@ body > canvas { z-index: 999999 !important; pointer-events: none !important; }
     flex-wrap: wrap;
     justify-content: center;
     gap: 6px; /* 縮細間距 */
-    margin: 8px 0 10px 0; /* 🌟 縮細上下 margin，爭取垂直空間 */
+    margin: 8px 0 10px 0; /* Keep vertical space compact. */
 }
 
 .achievement-badge {
@@ -487,7 +510,7 @@ body > canvas { z-index: 999999 !important; pointer-events: none !important; }
     color: var(--cyber-pink);
     border: 1px solid rgba(255, 20, 147, 0.3);
     
-    /* 🌟 修復問題 2：勳章整體縮細 */
+    /* Keep the badge group compact. */
     padding: 4px 10px; /* 從 6px 12px 縮細 */
     font-size: 11px; /* 從 12px 縮細 */
     border-radius: 16px; /* 從 20px 縮細 */
@@ -515,7 +538,7 @@ body > canvas { z-index: 999999 !important; pointer-events: none !important; }
     100% { transform: scale(1); opacity: 1; }
 }
 
-/* 🌟 修復問題 1：下載時強制清空所有動畫 🌟 */
+/* Disable animations during export. */
 .exporting-mode * {
     animation: none !important;
     transition: none !important;
@@ -523,7 +546,7 @@ body > canvas { z-index: 999999 !important; pointer-events: none !important; }
     transform: none !important;
 }
 
-/* 📱 移動端微調 */
+/* Mobile adjustments */
 @media (max-width: 768px) {
     #lang-switcher-container { position: fixed; top: 10px; right: 10px; left: 10px; justify-content: flex-end; flex-wrap: wrap; }
     .account-toggle { max-width: 142px; min-height: 34px; padding: 7px 9px; font-size: 12px; }
@@ -541,6 +564,8 @@ body > canvas { z-index: 999999 !important; pointer-events: none !important; }
     .cloud-hub-actions, .cloud-result-actions { grid-template-columns: 1fr; }
     .cloud-hub-header, .cloud-result-main { align-items: stretch; flex-direction: column; }
     .cloud-pill, .cloud-result-code { max-width: none; align-self: flex-start; }
+    .site-footer { align-items: flex-start; flex-direction: column; gap: 10px; }
+    .footer-links { width: 100%; }
 }
 
 /* Phase 2G account controls: keep the top-right row compact on mobile. */
