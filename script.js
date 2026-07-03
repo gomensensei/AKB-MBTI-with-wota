@@ -668,6 +668,51 @@ function renderResultPage(allMembers) {
         window.scrollTo({ top: 0, behavior: 'smooth' });
     });
 
+    const isMobileExportDevice = () => /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) || (navigator.maxTouchPoints > 1 && window.innerWidth <= 768) || window.matchMedia('(max-width: 768px)').matches;
+
+    const getMobileSaveText = () => {
+        const map = {
+            'zh-HK': '請長按圖片，然後選擇儲存圖片。',
+            'zh-CN': '请长按图片，然后选择保存图片。',
+            ja: '画像を長押しして保存してください。',
+            ko: '이미지를 길게 눌러 저장해 주세요.',
+            th: 'กดรูปภาพค้างไว้เพื่อบันทึก',
+            id: 'Tekan lama gambar untuk menyimpan.',
+            en: 'Long-press the image to save it.'
+        };
+        return map[currentLang] || map.en;
+    };
+
+    const openMobileImageSaveOverlay = (dataUrl) => {
+        document.getElementById('mobileResultOverlay')?.remove();
+        const overlay = document.createElement('div');
+        overlay.id = 'mobileResultOverlay';
+        overlay.style.cssText = 'position:fixed; inset:0; z-index:3000; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:18px; padding:20px; box-sizing:border-box; background:rgba(0,0,0,0.86); backdrop-filter:blur(8px); opacity:0; transition:opacity .25s ease;';
+
+        const hint = document.createElement('div');
+        hint.textContent = getMobileSaveText();
+        hint.style.cssText = 'max-width:min(92vw,420px); color:#fff; background:#f06292; padding:10px 18px; border-radius:999px; text-align:center; font-weight:900; line-height:1.35; box-shadow:0 8px 24px rgba(240,98,146,.34);';
+
+        const img = document.createElement('img');
+        img.src = dataUrl;
+        img.className = 'allow-save';
+        img.style.cssText = 'max-width:100%; max-height:72dvh; border-radius:18px; object-fit:contain; box-shadow:0 18px 48px rgba(0,0,0,.52); -webkit-touch-callout:default; user-select:auto;';
+
+        const closeBtn = document.createElement('button');
+        closeBtn.type = 'button';
+        closeBtn.setAttribute('aria-label', 'Close');
+        closeBtn.innerHTML = '<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 6 6 18M6 6l12 12"/></svg>';
+        closeBtn.style.cssText = 'position:absolute; top:18px; right:18px; width:42px; height:42px; border-radius:50%; border:1px solid rgba(255,255,255,.28); color:#fff; background:rgba(255,255,255,.16); display:grid; place-items:center;';
+        closeBtn.onclick = () => {
+            overlay.style.opacity = '0';
+            setTimeout(() => overlay.remove(), 250);
+        };
+
+        overlay.append(hint, img, closeBtn);
+        document.body.appendChild(overlay);
+        requestAnimationFrame(() => { overlay.style.opacity = '1'; });
+    };
+
     document.getElementById('download-btn').addEventListener('click', async () => {
         const container = document.getElementById('export-container');
         const webOnly = document.querySelectorAll('.web-only'); 
@@ -687,9 +732,14 @@ function renderResultPage(allMembers) {
             const link = document.createElement('a'); 
             const safeName = currentDisplayMember.nickname || currentDisplayMember.name_ja;
             const formattedScore = Math.round(currentDisplayMember.comp);
-            link.download = `AKB48_MBTI_${userMbtiStr}_${safeName}_${formattedScore}.png`;
-            link.href = canvas.toDataURL("image/png"); 
-            link.click();
+            const dataUrl = canvas.toDataURL("image/png");
+            if (isMobileExportDevice()) {
+                openMobileImageSaveOverlay(dataUrl);
+            } else {
+                link.download = `AKB48_MBTI_${userMbtiStr}_${safeName}_${formattedScore}.png`;
+                link.href = dataUrl; 
+                link.click();
+            }
         } finally {
             webOnly.forEach(el => el.style.display = 'block'); 
             exportOnly.forEach(el => el.style.display = 'none');
