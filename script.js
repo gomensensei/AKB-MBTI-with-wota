@@ -699,11 +699,11 @@ function renderResultPage(allMembers) {
    
     document.getElementById('share-x-btn').addEventListener('click', () => {
         const shareTexts = {
-            'zh-HK': { mbti: "我的追星人格：", unmei: "命中注定的神推：", aishou: "我的神推相性：", check: "🌸 尋找與你最契合的 AKB48 成員：" },
-            'zh-CN': { mbti: "我的追星人格：", unmei: "命中注定的神推：", aishou: "我的神推相性：", check: "🌸 寻找与你最契合的 AKB48 成员：" },
-            'ja': { mbti: "私のオタク人格：", unmei: "運命の推しメン：", aishou: "神推しとの相性：", check: "🌸 あなたと「神相性」なAKB48メンバーを診断：" },
-            'ko': { mbti: "나의 덕질 성격:", unmei: "운명의 오시멘:", aishou: "나의 카미오시 상성:", check: "🌸 나의 AKB48 소울메이트 테스트:" },
-            'en': { mbti: "My Stan Personality:", unmei: "My Fated Member:", aishou: "My Compatibility:", check: "🌸 Find your AKB48 soulmate:" },
+            'zh-HK': { mbti: "我的追星人格：", unmei: "命中注定的神推：", aishou: "我的神推相性：", check: " 尋找與你最契合的 AKB48 成員：" },
+            'zh-CN': { mbti: "我的追星人格：", unmei: "命中注定的神推：", aishou: "我的神推相性：", check: " 寻找与你最契合的 AKB48 成员：" },
+            'ja': { mbti: "私のオタク人格：", unmei: "運命の推しメン：", aishou: "神推しとの相性：", check: " あなたと「神相性」なAKB48メンバーを診断：" },
+            'ko': { mbti: "나의 덕질 성격:", unmei: "운명의 오시멘:", aishou: "나의 카미오시 상성:", check: " 나의 AKB48 소울메이트 테스트:" },
+            'en': { mbti: "My Stan Personality:", unmei: "My Fated Member:", aishou: "My Compatibility:", check: " Find your AKB48 soulmate:" },
             'th': { mbti: "บุคลิกการติ่งของฉัน:", unmei: "โซลเมตของฉัน:", aishou: "ความเข้ากันได้กับคามิโอชิ:", check: "ค้นหาโซลเมต AKB48 ของคุณ:" },
             'id': { mbti: "Kepribadian Stan Saya:", unmei: "Belahan Jiwaku:", aishou: "Kecocokan Kami-Oshi Saya:", check: "Temukan soulmate AKB48 kamu:" }
         };
@@ -712,7 +712,7 @@ function renderResultPage(allMembers) {
         const isOshi = document.getElementById('oshi-select').value !== "";
         const relationTitle = isOshi ? st.aishou : st.unmei;
         const memberHash = `#${currentDisplayMember.name_ja.replace(/\s+/g, '')}`;
-        const tweetText = `【${st.mbti}${userMbtiStr} ${userTitle}】\n✨ ${relationTitle}${currentDisplayMember.name_ja} (${currentDisplayMember.comp}%)\n\n${st.check}\n👇 ${shareUrl}\n\n#AKB48 #MBTI ${memberHash} #性格診断`;
+        const tweetText = `【${st.mbti}${userMbtiStr} ${userTitle}】\n ${relationTitle}${currentDisplayMember.name_ja} (${currentDisplayMember.comp}%)\n\n${st.check}\n ${shareUrl}\n\n#AKB48 #MBTI ${memberHash} #性格診断`;
         window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(tweetText)}`, '_blank');
     });
 
@@ -1336,7 +1336,7 @@ function applyDynamicAnimations(compScore, isOshi = false) {
             if (compScore >= 95) {
                 compText.classList.add('burst-light-anim');
                 setTimeout(() => {
-                    compText.innerHTML = `${compScore.toFixed(1)}% <span class="match-heart" style="display:inline-block; margin-left: 5px; animation: heart-beat 1s infinite;">💖</span>`;
+                    compText.innerHTML = `${compScore.toFixed(1)}% <span class="match-heart" aria-hidden="true"></span>`;
                 }, 500);
             } else {
                 compText.innerHTML = `${compScore.toFixed(1)}%`;
@@ -1459,13 +1459,15 @@ function onPlayerReady(event) {
 function toggleMusic() {
     const wrap = document.getElementById('footer-mv-wrap');
     const btn = document.getElementById('music-toggle-btn');
-    const onText = (i18nData.ui.btn_music_on && i18nData.ui.btn_music_on[currentLang]) ? i18nData.ui.btn_music_on[currentLang] : "🎵 名残り桜：開";
-    const offText = (i18nData.ui.btn_music_off && i18nData.ui.btn_music_off[currentLang]) ? i18nData.ui.btn_music_off[currentLang] : "🎵 名残り桜：關";
+    const btnLabel = btn?.querySelector('[data-i18n]');
+    const onText = (i18nData.ui.btn_music_on && i18nData.ui.btn_music_on[currentLang]) ? i18nData.ui.btn_music_on[currentLang] : "名残り桜：開";
+    const offText = (i18nData.ui.btn_music_off && i18nData.ui.btn_music_off[currentLang]) ? i18nData.ui.btn_music_off[currentLang] : "名残り桜：關";
 
     if (!isMusicEnabled) {
         if (player && typeof player.playVideo === 'function') player.playVideo(); 
         wrap.classList.remove('hidden');
-        btn.innerHTML = onText;
+        if (btnLabel) btnLabel.textContent = onText;
+        else btn.textContent = onText;
         btn.style.background = "rgba(255, 20, 147, 0.15)";
         btn.style.color = "var(--cyber-pink)";
         btn.style.border = "1px solid var(--cyber-pink)";
@@ -1473,7 +1475,8 @@ function toggleMusic() {
     } else {
         if (player && typeof player.pauseVideo === 'function') player.pauseVideo(); 
         wrap.classList.add('hidden');
-        btn.innerHTML = offText;
+        if (btnLabel) btnLabel.textContent = offText;
+        else btn.textContent = offText;
         btn.style.background = "transparent";
         btn.style.color = "var(--text-muted)";
         btn.style.border = "1px solid rgba(255,255,255,0.3)";

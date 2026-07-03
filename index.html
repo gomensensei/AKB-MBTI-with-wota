@@ -39,11 +39,11 @@
     </div>
 
     <div id="giant-heart-overlay" class="hidden">
-        <div class="giant-heart">💖</div>
+        <div class="giant-heart mbti-heart-mark" aria-hidden="true"><span></span><span></span><span></span></div>
     </div>
 
     <div id="lang-switcher-container">
-        <button id="music-toggle-btn" class="glass-select" style="cursor: pointer; width: auto; padding: 0 10px; font-size: 13px;" onclick="toggleMusic()" data-i18n="btn_music_off">🎵 名残り桜：關</button>
+        <button id="music-toggle-btn" class="glass-select icon-button-text" style="cursor: pointer; width: auto; padding: 0 10px; font-size: 13px;" onclick="toggleMusic()"><span class="mbti-ui-icon mbti-icon-music" aria-hidden="true"></span><span data-i18n="btn_music_off">名残り桜：關</span></button>
         <select id="lang-switcher" class="glass-select">
             <option value="zh-HK">繁體中文</option>
             <option value="zh-CN">简体中文</option>
@@ -149,7 +149,7 @@
             </div>
         </div>
 
-        <footer class="site-footer" id="site-footer" style="text-align: center; padding: 20px; font-size: 12px; color: #888; margin-top: 20px; line-height: 1.5; position: relative;">
+        <footer class="site-footer" id="site-footer">
             <div id="footer-mv-wrap" class="hidden floating-mode">
                 <div style="background: var(--cyber-pink); color: white; padding: 6px 10px; display: flex; justify-content: space-between; align-items: center; border-radius: 12px 12px 0 0;">
                     <span class="mv-title-text" style="font-weight: bold;" data-i18n="mv_full_title">名残り桜 Music Video</span>
@@ -157,8 +157,20 @@
                 </div>
                 <div id="yt-player-container"></div>
             </div>
-            <p data-i18n="footer_credit"></p>
-            <p data-i18n="footer_privacy_promise"></p>
+            <div class="footer-copy">
+                <p data-i18n="footer_credit"></p>
+                <p data-i18n="footer_privacy_promise"></p>
+            </div>
+            <div class="footer-links">
+                <a href="https://x.com/sorrysir_gomen" target="_blank" rel="noopener">
+                    <span class="footer-link-icon footer-link-icon-bug" aria-hidden="true"></span>
+                    <span data-i18n="footer_report_bug">回報錯誤</span>
+                </a>
+                <a href="https://www.paypal.com/paypalme/gomensensei" target="_blank" rel="noopener">
+                    <span class="footer-link-icon footer-link-icon-heart" aria-hidden="true"></span>
+                    <span data-i18n="footer_donate">捐款支持</span>
+                </a>
+            </div>
         </footer>
     </div>
 
