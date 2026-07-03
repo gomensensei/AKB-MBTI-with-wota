@@ -604,25 +604,45 @@ body > canvas { z-index: 999999 !important; pointer-events: none !important; }
 
 @media (max-width: 768px) {
     #lang-switcher-container {
-        left: 8px;
-        right: 8px;
-        gap: 6px;
+        left: 76px;
+        right: 6px;
+        gap: 4px;
         flex-wrap: nowrap;
     }
+    .tool48-home-link {
+        top: 8px;
+        left: 8px;
+        min-height: 30px;
+        padding: 5px 8px;
+        font-size: 0.64rem;
+    }
     #music-toggle-btn {
-        max-width: 132px;
+        max-width: min(112px, 31vw);
+        min-height: 30px;
+        padding: 5px 7px !important;
         overflow: hidden;
         text-overflow: ellipsis;
         white-space: nowrap;
-        font-size: 11px !important;
+        font-size: 10px !important;
+        gap: 4px;
     }
     .glass-select {
-        max-width: 92px;
-        padding-inline: 8px;
+        max-width: min(82px, 24vw);
+        min-height: 30px;
+        padding-inline: 6px !important;
+        font-size: 10px;
     }
     .account-toggle {
-        max-width: min(132px, 34vw);
+        max-width: min(108px, 30vw);
+        min-height: 30px;
+        padding: 5px 7px;
+        font-size: 10px;
         flex-shrink: 1;
+    }
+    .account-toggle-label {
+        min-width: 0;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
     .account-popover {
         position: fixed;
@@ -633,4 +653,16 @@ body > canvas { z-index: 999999 !important; pointer-events: none !important; }
         max-height: calc(100dvh - 64px);
         overflow: auto;
     }
+}
+
+@media (max-width: 380px) {
+    #lang-switcher-container { left: 68px; }
+    .tool48-home-link {
+        min-height: 28px;
+        padding: 4px 7px;
+        font-size: 0.6rem;
+    }
+    #music-toggle-btn { max-width: min(104px, 30vw); }
+    .glass-select { max-width: min(76px, 23vw); }
+    .account-toggle { max-width: min(98px, 29vw); }
 }
