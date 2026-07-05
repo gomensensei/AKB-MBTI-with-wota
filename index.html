@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="tool48-turnstile-site-key" content="">
     <title data-i18n="app_title">2026 AKB48 粉絲深度性格鑑定</title>
     <meta property="og:title" content="2026 AKB48 粉絲深度性格鑑定">
     <meta property="og:description" content="利用 MBTI 餘弦波演算法，找出與你最契合的 AKB48 靈魂成員！">
@@ -20,6 +21,7 @@
     <meta name="twitter:image" content="https://gomensensei.github.io/AKB-MBTI-with-wota/og-image.png">
     
     <link rel="stylesheet" href="style.css?v=20260704-mobile-nav">
+    <link rel="stylesheet" href="tool48-install.css?v=20260706-security">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://html2canvas.hertzen.com/dist/html2canvas.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.9.3/dist/confetti.browser.min.js"></script>
@@ -66,6 +68,7 @@
                     <input id="cloudPasswordInput" class="cloud-input" type="password" autocomplete="current-password" minlength="6" data-i18n-placeholder="cloudPasswordPlaceholder" placeholder="6+ characters">
                     <button class="cloud-form-button primary" id="cloudSignInBtn" type="submit" data-auth-action="signin" data-i18n="cloudSignIn">Sign in</button>
                     <button class="cloud-form-button" id="cloudSignUpBtn" type="submit" data-auth-action="signup" data-i18n="cloudCreateAccount">Create account</button>
+                    <button class="tool48-reset-link" id="cloudResetPasswordBtn" type="button" data-tool48-reset-password>Forgot password</button>
                 </form>
                 <div id="cloudActions" class="cloud-actions" hidden>
                     <span class="cloud-user-pill" id="cloudUserLabel"></span>
@@ -176,7 +179,9 @@
 
     <script src="https://www.youtube.com/iframe_api"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="tool48-security.js?v=20260706-security"></script>
     <script src="script.js?v=20260704-mobile-export"></script>
+    <script src="tool48-install.js?v=20260706-security"></script>
     <script>
         window.onload = function() {
             const cursor = document.getElementById('custom-cursor');
