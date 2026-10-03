@@ -405,7 +405,7 @@ function calculateResults() {
 
         if (userPerc.A < 50 && (M.A !== undefined && M.A >= 65)) baseComp += 1.5;
 
-        if (m.ki === "17期" || m.ki === "18期" || m.ki === "19期" || m.ki === "20期" || m.ki === "21期") {
+        if (m.ki === "17期" || m.ki === "18期" || m.ki === "19期" || m.ki === "20期" || m.ki === "21期" || m.ki === "22期") {
             baseComp += 0.8;
         }
         

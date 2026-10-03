@@ -936,5 +936,77 @@
       "T": 38,
       "J": 78
     }
+  },
+  {
+    "id": "52",
+    "name_ja": "大西 ゆな",
+    "nickname": "ゆーちゃん",
+    "ki": "22期",
+    "colors": [
+      "#800080",
+      "#9ACD32"
+    ],
+    "image": "https://d2r1lkk9i7row.cloudfront.net/hashiranokai/member/83101030.jpg",
+    "mbti_type": "INFP",
+    "mbti_scores": {
+      "E": 35,
+      "S": 35,
+      "T": 35,
+      "J": 35
+    }
+  },
+  {
+    "id": "53",
+    "name_ja": "長谷川 百々花",
+    "nickname": "はせもも",
+    "ki": "22期",
+    "colors": [
+      "#FFA500",
+      "#FFA500"
+    ],
+    "image": "https://d2r1lkk9i7row.cloudfront.net/hashiranokai/member/83101031.jpg",
+    "mbti_type": "INFP",
+    "mbti_scores": {
+      "E": 35,
+      "S": 35,
+      "T": 35,
+      "J": 35
+    }
+  },
+  {
+    "id": "54",
+    "name_ja": "前田 衣澄",
+    "nickname": "いず",
+    "ki": "22期",
+    "colors": [
+      "#9ACD32",
+      "#9ACD32"
+    ],
+    "image": "https://d2r1lkk9i7row.cloudfront.net/hashiranokai/member/83101032.jpg",
+    "mbti_type": "INFP",
+    "mbti_scores": {
+      "E": 35,
+      "S": 35,
+      "T": 35,
+      "J": 35
+    }
+  },
+  {
+    "id": "55",
+    "name_ja": "山内 利乃明",
+    "nickname": "りのあ",
+    "ki": "22期",
+    "colors": [
+      "#FFB6C1",
+      "#9ACD32"
+    ],
+    "image": "https://d2r1lkk9i7row.cloudfront.net/hashiranokai/member/83101033.jpg",
+    "mbti_type": "INFP",
+    "mbti_scores": {
+      "E": 35,
+      "S": 35,
+      "T": 35,
+      "J": 35
+    }
   }
 ]
