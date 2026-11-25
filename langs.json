@@ -5093,6 +5093,278 @@
         "id": "Kiko adalah protagonis visioner, berani dalam mengekspresikan dirinya. Dia adalah pemimpin yang bersemangat, sangat termotivasi oleh pemikiran untuk membimbing kelompok menuju tujuan bersama, menjadikannya tokoh inti di antara generasi baru trainee. Dia memiliki cetak biru yang sangat jelas untuk masa depan, mengejar tujuan jangka panjang yang besar daripada sekadar puas dengan menyelesaikan tugas-tugas mendesak. Saat membuat keputusan, dia sepenuhnya mengandalkan nilai-nilai pribadinya dan keyakinan batinnya, menolak untuk mudah terpengaruh oleh komentar eksternal. Dia memiliki daya tahan yang luar biasa kuat untuk tujuannya; bahkan ketika menghadapi rintangan besar, dia bertahan tanpa henti, memamerkan ketahanan mental yang kuat."
       }
     },
+    "52": {
+      "title": {
+        "zh-HK": "【偏外向的暫定推斷】",
+        "zh-CN": "【偏外向的暂定推断】",
+        "ja": "【外向寄りの暫定推定】",
+        "ko": "【Tentative Extroverted Lean】",
+        "en": "【Tentative Extroverted Lean】",
+        "th": "【Tentative Extroverted Lean】",
+        "id": "【Tentative Extroverted Lean】"
+      },
+      "analysis": {
+        "zh-HK": "百問自介整理記錄她自稱明朗有活力、是同期氣氛製造者；她也說自己偏室內派，第一次握手會前很緊張。綜合只給 E 輕至中度優勢，暫列 ENFP。這不是本人公布的 MBTI；N/F/P 證據有限，分數靠近中線。",
+        "zh-CN": "百问自我介绍整理记录她自称开朗有活力、是同期气氛制造者；她也说自己偏室内派，第一次握手会前很紧张。综合只给 E 轻至中度优势，暂列 ENFP。这不是本人公布的 MBTI；N/F/P 证据有限，分数靠近中线。",
+        "ja": "100問では自分を明るく元気と表現し、同期のムードメーカーという回答も記録されています。一方でインドア派とも答え、初めての握手会前には強く緊張したと話しています。Eに軽度から中程度の傾きを見て、暫定的にENFPとしました。本人公表のMBTIではなく、N/F/Pの根拠も限られるため数値は中間寄りです。",
+        "ko": "Her 100-question introduction describes her as bright and energetic; a fan transcript records her calling herself a cohort mood-maker. She also says she is an indoor person and reported nerves before her first handshake event. This supports a modest E lean, so ENFP is tentative. It is not self-reported; N/F/P evidence is limited and scores stay near the midpoint.",
+        "en": "Her 100-question introduction describes her as bright and energetic; a fan transcript records her calling herself a cohort mood-maker. She also says she is an indoor person and reported nerves before her first handshake event. This supports a modest E lean, so ENFP is tentative. It is not self-reported; N/F/P evidence is limited and scores stay near the midpoint.",
+        "th": "Her 100-question introduction describes her as bright and energetic; a fan transcript records her calling herself a cohort mood-maker. She also says she is an indoor person and reported nerves before her first handshake event. This supports a modest E lean, so ENFP is tentative. It is not self-reported; N/F/P evidence is limited and scores stay near the midpoint.",
+        "id": "Her 100-question introduction describes her as bright and energetic; a fan transcript records her calling herself a cohort mood-maker. She also says she is an indoor person and reported nerves before her first handshake event. This supports a modest E lean, so ENFP is tentative. It is not self-reported; N/F/P evidence is limited and scores stay near the midpoint."
+      },
+      "confidence_label": {
+        "zh-HK": "推斷信心",
+        "zh-CN": "推断信心",
+        "ja": "推定の確度",
+        "ko": "Estimate confidence",
+        "en": "Estimate confidence",
+        "th": "Estimate confidence",
+        "id": "Estimate confidence"
+      },
+      "confidence": {
+        "zh-HK": "E/I 中等；整體偏低",
+        "zh-CN": "E/I 中等；整体偏低",
+        "ja": "E/Iは中程度、全体は低め",
+        "ko": "Moderate E/I; low overall",
+        "en": "Moderate E/I; low overall",
+        "th": "Moderate E/I; low overall",
+        "id": "Moderate E/I; low overall"
+      },
+      "sources_label": {
+        "zh-HK": "參考資料",
+        "zh-CN": "参考资料",
+        "ja": "参考資料",
+        "ko": "Sources",
+        "en": "Sources",
+        "th": "Sources",
+        "id": "Sources"
+      },
+      "sources": [
+        {
+          "title": "官方「100のコト」自介影片",
+          "url": "https://www.youtube.com/watch?v=EX-CQnzprNI"
+        },
+        {
+          "title": "「100のコト」粉絲文字整理（非官方）",
+          "url": "https://ameblo.jp/nyan-naka213/entry-12980380462.html"
+        },
+        {
+          "title": "BUBKA 初公開訪問",
+          "url": "https://www.idol-culture.jp/geinou/226761/"
+        },
+        {
+          "title": "週プレ 22期同期座談會",
+          "url": "https://wpb.shueisha.co.jp/gravure/news/20260928-132972/"
+        },
+        {
+          "title": "BUBKA 首次握手會報導",
+          "url": "https://www.idol-culture.jp/geinou/227496/"
+        }
+      ]
+    },
+    "53": {
+      "title": {
+        "zh-HK": "【偏內向的暫定推斷】",
+        "zh-CN": "【偏内向的暂定推断】",
+        "ja": "【内向寄りの暫定推定】",
+        "ko": "【Tentative Introverted Lean】",
+        "en": "【Tentative Introverted Lean】",
+        "th": "【Tentative Introverted Lean】",
+        "id": "【Tentative Introverted Lean】"
+      },
+      "analysis": {
+        "zh-HK": "百問文字整理記錄她偏室內、會獨自整理情緒、重視私人空間；不過她也說會主動協助迷路旅客，媒體亦記錄她照顧同期。這些線索令她只略偏 I，暫列 INFP，信心偏低。文字整理屬粉絲轉錄；N/F/P 未能由現有資料獨立判定，亦非本人公布的 MBTI。",
+        "zh-CN": "百问文字整理记录她偏室内、会独自整理情绪、重视私人空间；不过她也说会主动帮助迷路旅客，媒体也记录她照顾同期。这些线索令她只略偏 I，暂列 INFP，信心偏低。文字整理属于粉丝转录；N/F/P 无法由现有资料独立判断，也不是本人公布的 MBTI。",
+        "ja": "100問のファン文字起こしでは、インドア派、一人で気持ちを整理すること、パーソナルスペースへの配慮が挙がっています。一方、困っている旅行者に自分から声をかけ、同期を支えるとも話しています。Iにわずかに傾く暫定INFPですが、確度は低めです。文字起こしは非公式で、N/F/Pを独立に判定できる資料はありません。",
+        "ko": "A fan transcript of her 100-question introduction records indoor preferences, processing feelings alone, and respect for personal space. She also says she proactively helps travelers, and media describe her supporting her cohort. The balance leans only slightly toward I, so INFP is low-confidence. The transcript is unofficial; N/F/P cannot be independently determined and this is not self-reported.",
+        "en": "A fan transcript of her 100-question introduction records indoor preferences, processing feelings alone, and respect for personal space. She also says she proactively helps travelers, and media describe her supporting her cohort. The balance leans only slightly toward I, so INFP is low-confidence. The transcript is unofficial; N/F/P cannot be independently determined and this is not self-reported.",
+        "th": "A fan transcript of her 100-question introduction records indoor preferences, processing feelings alone, and respect for personal space. She also says she proactively helps travelers, and media describe her supporting her cohort. The balance leans only slightly toward I, so INFP is low-confidence. The transcript is unofficial; N/F/P cannot be independently determined and this is not self-reported.",
+        "id": "A fan transcript of her 100-question introduction records indoor preferences, processing feelings alone, and respect for personal space. She also says she proactively helps travelers, and media describe her supporting her cohort. The balance leans only slightly toward I, so INFP is low-confidence. The transcript is unofficial; N/F/P cannot be independently determined and this is not self-reported."
+      },
+      "confidenceLabel": {
+        "zh-HK": "推斷信心",
+        "zh-CN": "推断信心",
+        "ja": "推定の確度",
+        "ko": "Estimate confidence",
+        "en": "Estimate confidence",
+        "th": "Estimate confidence",
+        "id": "Estimate confidence"
+      },
+      "confidence": {
+        "zh-HK": "偏低；E/I 線索混合",
+        "zh-CN": "偏低；E/I 线索混合",
+        "ja": "低め。E/Iの手掛かりは混在",
+        "ko": "Low; mixed E/I evidence",
+        "en": "Low; mixed E/I evidence",
+        "th": "Low; mixed E/I evidence",
+        "id": "Low; mixed E/I evidence"
+      },
+      "sources_label": {
+        "zh-HK": "參考資料",
+        "zh-CN": "参考资料",
+        "ja": "参考資料",
+        "ko": "Sources",
+        "en": "Sources",
+        "th": "Sources",
+        "id": "Sources"
+      },
+      "sources": [
+        {
+          "title": "官方「100のコト」自介影片",
+          "url": "https://www.youtube.com/watch?v=MUqzZBwKd4M"
+        },
+        {
+          "title": "「100のコト」粉絲文字整理（非官方）",
+          "url": "https://ameblo.jp/nyan-naka213/entry-12982634270.html"
+        },
+        {
+          "title": "週プレ 22期同期座談會",
+          "url": "https://wpb.shueisha.co.jp/gravure/news/20260928-132972/"
+        },
+        {
+          "title": "AKB官方人物介紹",
+          "url": "https://note.com/akb48_beyond/n/n29154886745a"
+        },
+        {
+          "title": "BUBKA 首次握手會報導",
+          "url": "https://www.idol-culture.jp/geinou/227496/"
+        }
+      ]
+    },
+    "54": {
+      "title": {
+        "zh-HK": "【本人公開的 INFP】",
+        "zh-CN": "【本人公开的 INFP】",
+        "ja": "【本人公表のINFP】",
+        "ko": "【Self-Reported INFP】",
+        "en": "【Self-Reported INFP】",
+        "th": "【Self-Reported INFP】",
+        "id": "【Self-Reported INFP】"
+      },
+      "analysis": {
+        "zh-HK": "AKB 官方文章的個人介紹欄列出衣澄的 MBTI 為 INFP，因此此處保留她公開的類型。同期訪問形容她初見時較安靜，熟絡後則明朗、容易交談。網站各軸分數只是顯示和配對用的近中線編碼，不是獨立測驗結果。",
+        "zh-CN": "AKB 官方文章的个人介绍栏列出衣澄的 MBTI 为 INFP，因此此处保留她公开的类型。同期访谈形容她初见时较安静，熟络后则开朗、容易交谈。网站各轴分数只是显示和配对用的近中线编码，不是独立测验结果。",
+        "ja": "AKB公式記事のプロフィール欄に、衣澄さんのMBTIはINFPと掲載されています。その公表タイプを反映しました。同期へのインタビューでは、初対面ではおとなしく見えたものの、親しくなると明るく話しやすいと紹介されています。サイトの各軸数値は表示・相性計算用の目安で、独立した検査結果ではありません。",
+        "ko": "An official AKB article lists Izumi’s MBTI as INFP, so the site reflects that disclosed type. A cohort interview describes her as quiet at first but bright and easy to talk with once familiar. The site’s axis values are midpoint-leaning encodings for display and matching, not independent test results.",
+        "en": "An official AKB article lists Izumi’s MBTI as INFP, so the site reflects that disclosed type. A cohort interview describes her as quiet at first but bright and easy to talk with once familiar. The site’s axis values are midpoint-leaning encodings for display and matching, not independent test results.",
+        "th": "An official AKB article lists Izumi’s MBTI as INFP, so the site reflects that disclosed type. A cohort interview describes her as quiet at first but bright and easy to talk with once familiar. The site’s axis values are midpoint-leaning encodings for display and matching, not independent test results.",
+        "id": "An official AKB article lists Izumi’s MBTI as INFP, so the site reflects that disclosed type. A cohort interview describes her as quiet at first but bright and easy to talk with once familiar. The site’s axis values are midpoint-leaning encodings for display and matching, not independent test results."
+      },
+      "confidence_label": {
+        "zh-HK": "資料狀態",
+        "zh-CN": "资料状态",
+        "ja": "情報の扱い",
+        "ko": "Evidence status",
+        "en": "Evidence status",
+        "th": "Evidence status",
+        "id": "Evidence status"
+      },
+      "confidence": {
+        "zh-HK": "官方文章列出本人 MBTI；分數為網站估值",
+        "zh-CN": "官方文章列出本人 MBTI；分数为网站估值",
+        "ja": "公式記事に本人MBTIを掲載。数値はサイト推定",
+        "ko": "Official article lists her MBTI; numeric scores are site estimates",
+        "en": "Official article lists her MBTI; numeric scores are site estimates",
+        "th": "Official article lists her MBTI; numeric scores are site estimates",
+        "id": "Official article lists her MBTI; numeric scores are site estimates"
+      },
+      "sources_label": {
+        "zh-HK": "參考資料",
+        "zh-CN": "参考资料",
+        "ja": "参考資料",
+        "ko": "Sources",
+        "en": "Sources",
+        "th": "Sources",
+        "id": "Sources"
+      },
+      "sources": [
+        {
+          "title": "AKB官方記事：前田衣澄のプロフィール",
+          "url": "https://note.com/akb48_official/n/nc6a47141b902"
+        },
+        {
+          "title": "官方「100のコト」自介影片",
+          "url": "https://www.youtube.com/watch?v=c2pneueAatY"
+        },
+        {
+          "title": "週プレ 22期同期座談會",
+          "url": "https://wpb.shueisha.co.jp/gravure/news/20260928-132972/"
+        },
+        {
+          "title": "Pure Links 粉絲向評價",
+          "url": "https://pure-links.net/archives/1451"
+        },
+        {
+          "title": "BUBKA 首次握手會報導",
+          "url": "https://www.idol-culture.jp/geinou/227496/"
+        }
+      ]
+    },
+    "55": {
+      "title": {
+        "zh-HK": "【偏內向、接近中線的暫定推斷】",
+        "zh-CN": "【偏内向、接近中线的暂定推断】",
+        "ja": "【中間に近い内向寄りの暫定推定】",
+        "ko": "【Near-Balanced, Tentative Introverted Lean】",
+        "en": "【Near-Balanced, Tentative Introverted Lean】",
+        "th": "【Near-Balanced, Tentative Introverted Lean】",
+        "id": "【Near-Balanced, Tentative Introverted Lean】"
+      },
+      "analysis": {
+        "zh-HK": "利乃明自稱「熱中型」，訪問中也形容自己慢慢來、有時忙於自己的事；同期和媒體則提到她跳舞時投入而有力量。舞台能量不能直接等同社交外向，現階段 E=47，INFP／ENFP 幾乎五五波，整體信心很低。N/F/P只是比較用暫定值，並非本人公布的 MBTI。",
+        "zh-CN": "利乃明自称“热中型”，访谈中也形容自己慢慢来、有时忙于自己的事；同期和媒体则提到她跳舞时投入而有力量。舞台能量不能直接等同社交外向，现阶段 E=47，INFP／ENFP 几乎五五开，整体信心很低。N/F/P 只是比较用暂定值，并非本人公布的 MBTI。",
+        "ja": "利乃明さんは自分を「熱中型」と表現し、マイペースで自分のことで手いっぱいになることもあると話しています。一方、同期や記事はダンス中の集中力と力強さを伝えています。舞台上のエネルギーだけでは外向性を判断できないためE=47とし、INFP／ENFPはほぼ五分、全体の確度はかなり低くしています。N/F/Pは比較用の仮置きで、本人公表のMBTIではありません。",
+        "ko": "Rinoa calls herself someone who gets absorbed in things and says she moves at her own pace. Cohort and media accounts also describe her focused, powerful dancing. Stage energy alone does not establish social extroversion, so E=47 gives only a very slight I lean; INFP/ENFP is nearly even and overall confidence is very low. N/F/P is held only for comparison, not self-reported.",
+        "en": "Rinoa calls herself someone who gets absorbed in things and says she moves at her own pace. Cohort and media accounts also describe her focused, powerful dancing. Stage energy alone does not establish social extroversion, so E=47 gives only a very slight I lean; INFP/ENFP is nearly even and overall confidence is very low. N/F/P is held only for comparison, not self-reported.",
+        "th": "Rinoa calls herself someone who gets absorbed in things and says she moves at her own pace. Cohort and media accounts also describe her focused, powerful dancing. Stage energy alone does not establish social extroversion, so E=47 gives only a very slight I lean; INFP/ENFP is nearly even and overall confidence is very low. N/F/P is held only for comparison, not self-reported.",
+        "id": "Rinoa calls herself someone who gets absorbed in things and says she moves at her own pace. Cohort and media accounts also describe her focused, powerful dancing. Stage energy alone does not establish social extroversion, so E=47 gives only a very slight I lean; INFP/ENFP is nearly even and overall confidence is very low. N/F/P is held only for comparison, not self-reported."
+      },
+      "confidenceLabel": {
+        "zh-HK": "推斷信心",
+        "zh-CN": "推断信心",
+        "ja": "推定の確度",
+        "ko": "Estimate confidence",
+        "en": "Estimate confidence",
+        "th": "Estimate confidence",
+        "id": "Estimate confidence"
+      },
+      "confidence": {
+        "zh-HK": "很低；I/E 接近五五波",
+        "zh-CN": "很低；I/E 接近五五开",
+        "ja": "かなり低い。I/Eはほぼ五分",
+        "ko": "Very low; I/E is nearly even",
+        "en": "Very low; I/E is nearly even",
+        "th": "Very low; I/E is nearly even",
+        "id": "Very low; I/E is nearly even"
+      },
+      "sources_label": {
+        "zh-HK": "參考資料",
+        "zh-CN": "参考资料",
+        "ja": "参考資料",
+        "ko": "Sources",
+        "en": "Sources",
+        "th": "Sources",
+        "id": "Sources"
+      },
+      "sources": [
+        {
+          "title": "官方「100のコト」自介影片",
+          "url": "https://www.youtube.com/watch?v=nI7aH8y7rIA"
+        },
+        {
+          "title": "BUBKA お披露目記者訪問",
+          "url": "https://www.idol-culture.jp/geinou/226764/"
+        },
+        {
+          "title": "週プレ 22期同期座談會",
+          "url": "https://wpb.shueisha.co.jp/gravure/news/20260928-132972/"
+        },
+        {
+          "title": "BUBKA 首次握手會報導",
+          "url": "https://www.idol-culture.jp/geinou/227496/"
+        }
+      ]
+    },
     "01": {
       "title": {
         "zh-HK": "【劇場體制的理性守護者】",
