@@ -501,6 +501,14 @@ function renderMainDisplay(member, titleLabel) {
     const mLang = i18nData.members_analysis[member.id];
     const ui = i18nData.ui;
     const cb = `?v=${new Date().getTime()}`;
+    const titleText = mLang.title[currentLang] || mLang.title.en || '';
+    const analysisText = mLang.analysis[currentLang] || mLang.analysis.en || '';
+    const confidenceHtml = mLang.confidence
+        ? '<p style="margin:10px 0 0; font-size:12px; color:#666;"><strong>' + (mLang.confidence_label[currentLang] || mLang.confidence_label.en || 'Estimate confidence') + ':</strong> ' + (mLang.confidence[currentLang] || mLang.confidence.en || '') + '</p>'
+        : '';
+    const sourcesHtml = Array.isArray(mLang.sources) && mLang.sources.length
+        ? '<div style="text-align:left; margin-top:12px; font-size:12px; color:#555;"><strong>' + (mLang.sources_label[currentLang] || mLang.sources_label.en || 'Sources') + '</strong><ul style="margin:5px 0 0; padding-left:20px;">' + mLang.sources.map(source => '<li><a href="' + source.url + '" target="_blank" rel="noopener noreferrer">' + source.title + '</a></li>').join('') + '</ul></div>'
+        : '';
 
     return `
         <div style="font-size: 18px; font-weight:bold; margin-bottom: 15px; color: var(--cyber-pink);">${titleLabel}</div>
@@ -515,7 +523,7 @@ function renderMainDisplay(member, titleLabel) {
             ${ui.compatibility_label[currentLang] || ''} <span class="comp-score" style="margin-left:5px;">0.0%</span>
         </p>
         
-        <div class="dark-badge" style="font-size: 14px; padding: 8px 15px;">${mLang.title[currentLang]}</div>
+        <div class="dark-badge" style="font-size: 14px; padding: 8px 15px;">${titleText}</div>
         
         <div class="export-only" style="display: none; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 20px;">
             <div style="background: #fdf2f7; color: #d63384; padding: 8px; border-radius: 8px; font-size: 13px; font-weight: bold;">${getDimDetail(member.diffs.E, 'E', true)}</div>
@@ -532,8 +540,10 @@ function renderMainDisplay(member, titleLabel) {
         </div>
 
         <div id="deep-analysis-box" style="text-align: left; background: rgba(255, 20, 147, 0.05); border-left: 4px solid var(--cyber-pink); border-radius: 4px; padding: 15px; font-size: 14px; color: #444; line-height: 1.6;">
-            <strong>${ui.deep_analysis_label[currentLang]}</strong><br>${mLang.analysis[currentLang]}
+            <strong>${ui.deep_analysis_label[currentLang]}</strong><br>${analysisText}
         </div>
+        ${confidenceHtml}
+        ${sourcesHtml}
     `;
 }
 
